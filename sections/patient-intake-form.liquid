@@ -1052,6 +1052,9 @@
       this.updateDisplay();
       this.bindEvents();
       this.restoreFormData();
+    }
+
+    bindEvents() {
       console.log('🔗 Binding events...');
       
       // Next button
@@ -1059,7 +1062,15 @@
         console.log('👉 Next button clicked');
         this.nextStep();
       });
-      {
+      
+      // Back button
+      this.btnBack.addEventListener('click', () => {
+        console.log('👈 Back button clicked');
+        this.prevStep();
+      });
+      
+      // Form submit
+      this.form.addEventListener('submit', (e) => {
         console.log('📤 Form submit triggered');
         this.handleSubmit(e);
       });
@@ -1068,19 +1079,7 @@
       this.form.addEventListener('input', () => {
         console.log('💾 Auto-saving to session...');
         this.saveToSession();
-      }
-        this.prevStep();
-      }
-      this.btnNext.addEventListener('click', () => this.nextStep());
-      
-      // Back button
-      this.btnBack.addEventListener('click', () => this.prevStep());
-      
-      // Form submit
-      this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-      
-      // Save to session on input
-      this.form.addEventListener('input', () => this.saveToSession());
+      });
       
       // Click on completed steps to navigate
       this.stepItems.forEach(stepItem => {
@@ -1118,6 +1117,18 @@
             const parent = input.closest('.radio-option, .radio-card');
             if (parent) {
               parent.classList.toggle('selected', input.checked);
+            }
+          });
+        } else if (e.target.type === 'checkbox') {
+          const parent = e.target.closest('.checkbox-option, .checkbox-standalone');
+          if (parent) {
+            parent.classList.toggle('selected', e.target.checked);
+          }
+        }
+      });
+    }
+
+    nextStep() {
       console.log('➡️ Attempting to move to next step from step', this.currentStep);
       
       if (!this.validateCurrentStep()) {
@@ -1149,6 +1160,17 @@
           console.log('⏭️ Skipping step 5, moving to step 6');
         } else {
           this.currentStep++;
+        }
+      } else {
+        this.currentStep++;
+      }
+      
+      console.log('📍 New step:', this.currentStep);
+      this.updateDisplay();
+      this.scrollToTop();
+    }
+
+    prevStep() {
       console.log('⬅️ Moving back from step', this.currentStep);
       
       // Check conditional logic for back navigation
@@ -1287,6 +1309,11 @@
           isValid = false;
           console.log(`    ❌ Field "${fieldName}" is invalid`);
         } else {
+          console.log(`    ✅ Field "${fieldName}" is valid`);
+        }
+      });
+      
+      console.log(isValid ? '✅ Overall validation PASSED' : '❌ Overall validation FAILED');
       return isValid;
     }
 
@@ -1316,12 +1343,7 @@
 
     updateDisplay() {
       console.log('🔄 Updating display for step', this.currentStep);
-      p = targetStep;
-      this.updateDisplay();
-      this.scrollToTop();
-    }
-
-    updateDisplay() {
+      
       // Update steps visibility
       this.steps.forEach((step, index) => {
         step.classList.toggle('active', parseInt(step.dataset.step) === this.currentStep);
