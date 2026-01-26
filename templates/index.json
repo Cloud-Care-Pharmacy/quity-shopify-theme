@@ -245,6 +245,82 @@
         "lazy": true
       }
     },
+    "service_3a8Uqf": {
+      "type": "service",
+      "blocks": {
+        "service_pVBLkB": {
+          "type": "service",
+          "settings": {
+            "bgblock": "#ffffff",
+            "title": "1. Create your account",
+            "description": "Get started by registering your patient account.",
+            "icon": ""
+          }
+        },
+        "service_iBV8mL": {
+          "type": "service",
+          "settings": {
+            "bgblock": "#ffffff",
+            "title": "2. Online Assessment",
+            "description": "Answer a few questions about your smoking and medical history.",
+            "icon": ""
+          }
+        },
+        "service_C4Mh6z": {
+          "type": "service",
+          "settings": {
+            "bgblock": "#ffffff",
+            "title": "3. Get Notified",
+            "description": "Our medical team will notify you via email once the assessment has been reviewed*.",
+            "icon": ""
+          }
+        },
+        "service_Gh6GAV": {
+          "type": "service",
+          "settings": {
+            "bgblock": "#ffffff",
+            "title": "Express Delivery",
+            "description": "Access the pharmacy portal and order your therapy. Express delivery Australia-wide. (Free shipping on orders over $150.)",
+            "icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "service_pVBLkB",
+        "service_iBV8mL",
+        "service_C4Mh6z",
+        "service_Gh6GAV"
+      ],
+      "name": "Services",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Sub Title Top",
+        "title": "How Quity Works",
+        "des": "",
+        "align-heading": "center",
+        "rows": "1",
+        "show": 4,
+        "paddingbox": "0px 0px 0px 0px",
+        "iconcolor": "#222222",
+        "titlecolor": "#222222",
+        "subcolor": "#999999",
+        "color_border": "transparent",
+        "size": 50,
+        "service_heading": "h5",
+        "layout": "style-1",
+        "enable_carousel": true,
+        "arrows": false,
+        "draggable": true,
+        "dots": true,
+        "infinite": true,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
     "line_mLXGmb": {
       "type": "line",
       "name": "Divider",
@@ -830,6 +906,7 @@
   "order": [
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_image_with_text_24_c3iyWm",
+    "service_3a8Uqf",
     "line_mLXGmb",
     "image_content_WHeiYm",
     "line_ADUkzH",
