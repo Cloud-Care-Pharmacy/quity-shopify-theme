@@ -245,6 +245,19 @@
         "lazy": true
       }
     },
+    "line_mLXGmb": {
+      "type": "line",
+      "name": "Divider",
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 40px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
+      }
+    },
     "image_content_6_LfJjx9": {
       "type": "image-content-6",
       "blocks": {
@@ -663,6 +676,7 @@
   "order": [
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_image_with_text_24_c3iyWm",
+    "line_mLXGmb",
     "image_content_6_LfJjx9",
     "07954675-bad5-4a16-8ffa-2392279b713d",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
