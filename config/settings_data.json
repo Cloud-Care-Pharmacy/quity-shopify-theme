@@ -600,7 +600,7 @@
           "7b190f33-76f8-4625-b588-eafdb8c9772b": {
             "type": "image",
             "settings": {
-              "image": "shopify://shop_images/FLORA-FastMed-5528845d.png",
+              "image": "shopify://shop_images/spenser-sembrat-N0lVJakXzls-unsplash.jpg",
               "alignment": "center center",
               "text_alignment": "center center",
               "bgwrap": "#f8ede7",
@@ -629,43 +629,10 @@
               "bg_button_hover_2": "#ff6f2e",
               "color_button_hover_2": "#ffffff"
             }
-          },
-          "57fbd2ee-62ca-482f-a017-4a435f4fdb87": {
-            "type": "image",
-            "settings": {
-              "alignment": "center center",
-              "text_alignment": "right center",
-              "bgwrap": "#f8ede7",
-              "show_overlay": false,
-              "gradient_overlay": false,
-              "bg_overlay": "#000000",
-              "opacity_overlay": 0.4,
-              "slide_toptitle": "Discover Your Style",
-              "slide_toptitle_color": "#e35353",
-              "slide_title": "Unleash the Latest Trends<br> with {{name}}.",
-              "slide_title_color": "#000000",
-              "subheading": "Step into the world of fashion and redefine your wardrobe<br> with our exclusive collection.",
-              "subheading_color": "#000000",
-              "button_label": "Shop Now",
-              "button_link": "#",
-              "stylebtns": "btn-theme",
-              "bg_button": "#000000",
-              "color_button": "#ffffff",
-              "bg_button_hover": "#e35353",
-              "color_button_hover": "#ffffff",
-              "button_label_2": "",
-              "button_link_2": "",
-              "stylebtns_2": "btn-theme",
-              "bg_button_2": "#000000",
-              "color_button_2": "#ffffff",
-              "bg_button_hover_2": "#ff6f2e",
-              "color_button_hover_2": "#ffffff"
-            }
           }
         },
         "block_order": [
-          "7b190f33-76f8-4625-b588-eafdb8c9772b",
-          "57fbd2ee-62ca-482f-a017-4a435f4fdb87"
+          "7b190f33-76f8-4625-b588-eafdb8c9772b"
         ],
         "settings": {
           "enable_slideshow": true,
