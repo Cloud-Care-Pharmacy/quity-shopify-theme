@@ -1344,14 +1344,13 @@
         }
       });
       
+      console.log('✓ Progress updated - Completed steps:', Array.from(this.completedSteps));
+      
       // Scroll to current step in mobile view
       const currentStepItem = this.querySelector(`.step-item[data-step="${this.currentStep}"]`);
       if (currentStepItem && window.innerWidth <= 768) {
         currentStepItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
-      const progress = (this.currentStep / this.totalSteps) * 100;
-      this.progressBar.style.width = `${progress}%`;
-      this.stepText.textContent = `Step ${this.currentStep} of ${this.totalSteps}`;
       
       // Update buttons
       this.btnBack.disabled = this.currentStep === 1;
@@ -1359,26 +1358,100 @@
       if (this.currentStep === 6) {
         this.btnNext.style.display = 'none';
         this.btnSubmit.style.display = 'inline-block';
+        console.log('🏁 Final step - showing submit button');
       } else {
         this.btnNext.style.display = 'inline-block';
         this.btnSubmit.style.display = 'none';
       }
-    }console.log('✓ Progress updated - Completed steps:', Array.from(this.completedSteps));
-      
-      
+    }
 
     handleSubmit(e) {
       e.preventDefault();
+      console.log('📝 Form submission started');
       
       if (!this.validateCurrentStep()) {
+        console.log('❌ Final step validation failed');
         return;
       }
       
+      console.log('✅ Final step validation passed');
+      
       // Collect all form data
-      const formData = new FormData(this.form);{
+      const formData = new FormData(this.form);
+      const data = {};
+      
+      for (let [key, value] of formData.entries()) {
+        if (key === 'quitMethods') {
+          if (!data[key]) data[key] = [];
+          data[key].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+      
+      // Store in sessionStorage
+      sessionStorage.setItem('patientIntakeFormData', JSON.stringify(data));
+      console.log('💾 Form data saved to sessionStorage');
+      
+      // Log to console (for testing without API)
+      console.log('📋 FORM SUBMITTED SUCCESSFULLY!');
+      console.log('📊 Complete form data:', data);
+      console.table(data);
+      
+      // Show success message
+      this.form.style.display = 'none';
+      this.querySelector('.progress-indicator').style.display = 'none';
+      this.querySelector('.form-navigation').style.display = 'none';
+      this.successMessage.classList.add('show');
+      
+      console.log('🎉 Success message displayed');
+      this.scrollToTop();
+    }
+
+    saveToSession() {
+      const formData = new FormData(this.form);
+      const data = {};
+      
+      for (let [key, value] of formData.entries()) {
+        if (key === 'quitMethods') {
+          if (!data[key]) data[key] = [];
+          data[key].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+      
+      data.currentStep = this.currentStep;
+      data.completedSteps = Array.from(this.completedSteps);
+      sessionStorage.setItem('patientIntakeFormProgress', JSON.stringify(data));
+      console.log('💾 Progress saved - Step:', this.currentStep, '| Completed:', Array.from(this.completedSteps));
+    }
+
+    loadFromSession() {
+      const saved = sessionStorage.getItem('patientIntakeFormProgress');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          this.formData = data;
+          if (data.currentStep) {
+            this.currentStep = data.currentStep;
+          }
+          if (data.completedSteps && Array.isArray(data.completedSteps)) {
+            this.completedSteps = new Set(data.completedSteps);
+          }
+          console.log('📂 Loaded from session - Step:', this.currentStep, '| Completed:', Array.from(this.completedSteps));
+        } catch (e) {
+          console.error('❌ Error loading saved progress:', e);
+        }
+      } else {
+        console.log('📂 No saved progress found');
+      }
+    }
+
+    restoreFormData() {
+      if (Object.keys(this.formData).length === 0) {
         console.log('📄 No form data to restore');
         return;
-        console.log('🏁 Final step - showing submit button');
       }
       
       console.log('📝 Restoring form data...');
@@ -1414,72 +1487,7 @@
         }
       });
       
-      console.log('✅ Form data restored'   if (data.completedSteps && Array.isArray(data.completedSteps)) {
-            this.completedSteps = new Set(data.completedSteps)
-      const formData = new FormData(this.form);
-      const data = {};
-      
-      for (let [key, value] of formData.entries()) {
-        if (key === 'quitMethods') {
-          if (!data[key]) data[key] = [];
-          data[key].push(value);
-        } else {
-          data[key] = value;
-        }
-      }
-      
-      data.currentStep = this.currentStep;
-      sessionStorage.setItem('patientIntakeFormProgress', JSON.stringify(data));
-    }
-
-    loadFromSession() {
-      const saved = sessionStorage.getItem('patientIntakeFormProgress');
-      if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          this.formData = data;
-          if (data.currentStep) {
-            this.currentStep = data.currentStep;
-          }
-        } catch (e) {
-          console.error('Error loading saved progress:', e);
-        }
-      }
-    }
-
-    restoreFormData() {
-      if (Object.keys(this.formData).length === 0) return;
-      
-      Object.keys(this.formData).forEach(key => {
-        if (key === 'currentStep') return;
-        
-        const elements = this.form.elements[key];
-        if (!elements) return;
-        
-        if (key === 'quitMethods' && Array.isArray(this.formData[key])) {
-          this.formData[key].forEach(value => {
-            const checkbox = this.form.querySelector(`input[name="${key}"][value="${value}"]`);
-            if (checkbox) {
-              checkbox.checked = true;
-              const parent = checkbox.closest('.checkbox-option');
-              if (parent) parent.classList.add('selected');
-            }
-          });
-        } else if (elements.type === 'radio') {
-          const radio = this.form.querySelector(`input[name="${key}"][value="${this.formData[key]}"]`);
-          if (radio) {
-            radio.checked = true;
-            const parent = radio.closest('.radio-option, .radio-card');
-            if (parent) parent.classList.add('selected');
-          }
-        } else if (elements.type === 'checkbox') {
-          elements.checked = this.formData[key] === 'on' || this.formData[key] === true;
-          const parent = elements.closest('.checkbox-standalone');
-          if (parent && elements.checked) parent.classList.add('selected');
-        } else {
-          elements.value = this.formData[key];
-        }
-      });
+      console.log('✅ Form data restored');
     }
 
     scrollToTop() {
