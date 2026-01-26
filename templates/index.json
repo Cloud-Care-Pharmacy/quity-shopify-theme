@@ -245,69 +245,48 @@
         "lazy": true
       }
     },
-    "4f3d9b61-ed06-493b-93a3-91ea869f8a19": {
-      "type": "advanced-content",
+    "image_content_6_LfJjx9": {
+      "type": "image-content-6",
       "blocks": {
-        "f5003b5a-0108-43e3-afc8-c1b381bb1b59": {
-          "type": "html",
+        "image_block_FicYWp": {
+          "type": "image_block",
           "settings": {
-            "width": "50%",
-            "title": "Unlock Beauty Deals <br>You Can't Resist.",
-            "color_title": "#222222",
-            "sub": "Exclusive Offer Alert!",
-            "color_sub": "#e35353",
-            "code": "",
-            "color_des": "#000000",
-            "button_text": "",
-            "link_button": "",
-            "align": "center",
-            "box_align": "center",
-            "text_align": "center"
+            "w_image": 25,
+            "pos_image": 50,
+            "e_image": "right",
+            "image": "shopify://shop_images/shutterstock_2501980087.jpg",
+            "image2": "shopify://shop_images/shutterstock_2526260051_1.jpg",
+            "enable_video": false,
+            "text_circle": "Fashion2 style store"
           }
         },
-        "c6ed78dd-3ee3-4ce5-b4a2-b251735d0627": {
-          "type": "html",
+        "text_block_mz9CJD": {
+          "type": "text_block",
           "settings": {
-            "width": "50%",
-            "title": "Your Beauty Favorites at<br> Unbeatable Prices",
-            "color_title": "#000000",
-            "sub": "Exclusive Offer Inside!",
-            "color_sub": "#e35353",
-            "code": "",
-            "color_des": "#000000",
-            "button_text": "",
-            "link_button": "",
-            "align": "auto",
-            "box_align": "center",
-            "text_align": "center"
+            "bgtext": "#ffffff",
+            "subtitle": "Sub Title",
+            "title": "Connect with an expert doctor.24-hour response, 7 days a week.",
+            "size_text": "h3",
+            "text": "<p>Our TGA-approved doctors specialise in nicotine cessation and are dedicated to supporting your journey to become smoke-free. We understand quitting is challenging and requires personalised care. After reviewing your smoking history, your doctor will contact you to discuss your specific needs and create a tailored treatment plan designed to give you the best chance of long-term success.</p>",
+            "answer_content": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button": "discover now",
+            "link": "",
+            "align": "left"
           }
         }
       },
       "block_order": [
-        "f5003b5a-0108-43e3-afc8-c1b381bb1b59",
-        "c6ed78dd-3ee3-4ce5-b4a2-b251735d0627"
+        "image_block_FicYWp",
+        "text_block_mz9CJD"
       ],
-      "custom_css": [
-        ".advand-html-image-sub img {max-width: 100%;}"
-      ],
+      "name": "Image (Video) with text",
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "padding_custom": 15,
-        "text_color": "rgba(0,0,0,0)",
         "bgsection": "#ffffff",
-        "rangebg": 0,
-        "bgbefore": "rgba(0,0,0,0)",
-        "e_size": "auto",
-        "e_repeat": "no-repeat",
-        "e_position": "center center",
-        "zindex": "0",
-        "title_top": "",
-        "title": "",
-        "des": "",
-        "align-heading": "center",
-        "padding": true,
-        "col_center": false,
+        "size": "50-50",
+        "enable_padding": true,
+        "align_center": true,
         "paddingsection": "0px 0px 0px 0px",
         "paddingmobile": "40px 0px 40px 0px",
         "marginsection": "0px 0px 0px 0px",
@@ -316,6 +295,7 @@
     },
     "07954675-bad5-4a16-8ffa-2392279b713d": {
       "type": "featured-products",
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -683,7 +663,7 @@
   "order": [
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_image_with_text_24_c3iyWm",
-    "4f3d9b61-ed06-493b-93a3-91ea869f8a19",
+    "image_content_6_LfJjx9",
     "07954675-bad5-4a16-8ffa-2392279b713d",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
     "35f6d573-7da7-4f43-8a21-df8b5494d08f",
