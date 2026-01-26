@@ -306,28 +306,17 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
-    "07954675-bad5-4a16-8ffa-2392279b713d": {
-      "type": "featured-products",
-      "disabled": true,
+    "line_ADUkzH": {
+      "type": "line",
+      "name": "Divider",
       "settings": {
         "animation": "",
-        "setwidth": "container",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 40px 0px",
         "bgsection": "#ffffff",
-        "title_top": "Top Picks for Fashion-Forward Shoppers",
-        "title": "Best Selling",
-        "des": "",
-        "align-heading": "center",
-        "collection": "jewellery",
-        "enable_creative": false,
-        "padding": true,
-        "colgrid": "col-lg-4",
-        "rows": 3,
-        "txtbutton": "show all",
-        "urlbtn": "",
-        "paddingsection": "80px 0px 0px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
       }
     },
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1": {
@@ -782,7 +771,7 @@
     "ss_image_with_text_24_c3iyWm",
     "line_mLXGmb",
     "image_content_WHeiYm",
-    "07954675-bad5-4a16-8ffa-2392279b713d",
+    "line_ADUkzH",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
     "35f6d573-7da7-4f43-8a21-df8b5494d08f",
     "923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a",
