@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "patient-intake-form",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
