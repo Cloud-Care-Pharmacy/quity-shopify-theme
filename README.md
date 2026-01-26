@@ -1,0 +1,1 @@
+# quity-shopify-theme
