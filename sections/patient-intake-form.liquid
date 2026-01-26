@@ -200,40 +200,64 @@
     color: var(--g-color-heading);
   }
 
-  .form-group {
-    margin-bottom: 25px;
+  .field.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
   }
 
-  .form-group label {
+  .field.form-group label {
     display: block;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #333;
+    color: var(--g-color-heading);
+    position: static;
+    transform: none;
+    background: transparent;
+    pointer-events: auto;
   }
 
-  .form-group label.required::after {
-    content: "*";
+  .field.form-group label.required::after {
+    content: " *";
     color: #dc3545;
-    margin-left: 4px;
   }
 
-  .form-control {
+  .field__input.form-control,
+  select.form-control,
+  textarea.form-control {
     width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--g-input-border);
+    padding: 0 1rem;
     border-radius: var(--g-input-radius);
-    font-size: 14px;
-    transition: border-color 0.2s;
-  }
-
-  .form-control:focus {
+    background: var(--g-input-bg);
+    border: 1px solid var(--g-input-border);
     outline: none;
-    border-color: var(--g-main);
+    box-shadow: none;
+    color: var(--g-color-heading);
+    height: var(--g-input-height);
+    line-height: var(--g-input-height);
+    transition: border-color 0.2s;
+    font-size: 14px;
   }
 
-  .form-control.error {
+  .field__input.form-control:active,
+  .field__input.form-control:focus,
+  select.form-control:active,
+  select.form-control:focus,
+  textarea.form-control:active,
+  textarea.form-control:focus {
+    border-color: var(--g-color-heading);
+    box-shadow: 0 0 0 1px rgb(var(--g-color-heading-rgb)) inset;
+  }
+
+  .field__input.form-control.error,
+  select.form-control.error,
+  textarea.form-control.error {
     border-color: #dc3545;
+  }
+
+  .field__input.form-control::placeholder,
+  textarea.form-control::placeholder {
+    color: rgba(var(--g-color-heading-rgb), 0.5);
   }
 
   .error-message {
@@ -356,23 +380,42 @@
     align-items: center;
     margin-top: 40px;
     padding-top: 30px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--g-input-border);
+  }
+
+  .btn-back,
+  .btn-next,
+  .btn-submit {
+    padding: var(--g-padding-ver-btn) var(--g-padding-hoz-btn);
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-transform: var(--g-text-transform-btn);
+    font-size: var(--g-font-size-btn);
+    line-height: 1;
+    font-weight: var(--g-font-weight-btn);
+    font-family: var(--g-font-family_btn);
+    letter-spacing: var(--g-font-spacing-btn);
+    border-radius: var(--g-font-radius-btn);
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+    z-index: 1;
   }
 
   .btn-back {
-    padding: 12px 30px;
-    background: transparent;
-    border: 2px solid #ddd;
-    border-radius: var(--g-font-radius-btn);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    background-color: transparent;
+    border: 1px solid var(--g-input-border);
+    color: var(--g-color-heading);
   }
 
   .btn-back:hover {
-    border-color: #999;
-    background: #f8f9fa;
+    border-color: var(--g-main);
+    color: var(--g-main);
   }
 
   .btn-back:disabled {
@@ -383,21 +426,39 @@
 
   .btn-next,
   .btn-submit {
-    padding: 12px 40px;
-    background: var(--g-cta-button);
+    background-color: var(--g-cta-button);
+    border: 1px solid var(--g-cta-text);
     color: var(--g-cta-text);
-    border: none;
-    border-radius: var(--g-font-radius-btn);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+  }
+
+  .btn-next:before,
+  .btn-submit:before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: var(--g-main-2);
+    width: 120%;
+    height: 110%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: rotate3d(0,0,1,4deg) translate3d(-1em,108%,0);
+    transform-origin: 0% 100%;
+    will-change: transform;
+    z-index: -1;
+    transition: transform 0.2s cubic-bezier(.17,.67,.83,.67);
   }
 
   .btn-next:hover,
   .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--g-main-2);
+    color: #fff;
+  }
+
+  .btn-next:hover:before,
+  .btn-submit:hover:before {
+    transform: rotate3d(0,0,1,0) translateZ(0);
   }
 
   .btn-next:disabled,
@@ -408,13 +469,15 @@
   }
 
   textarea.form-control {
-    min-height: 120px;
+    min-height: 100px;
+    line-height: 28px;
     resize: vertical;
+    padding: 0.75rem 1rem;
   }
 
   .helper-text {
     font-size: 13px;
-    color: #666;
+    color: rgba(var(--g-color-heading-rgb), 0.6);
     margin-bottom: 10px;
     line-height: 1.5;
   }
@@ -560,25 +623,25 @@
             <div class="form-step active" data-step="1">
               <h2 class="step-title">About You</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="firstName" class="required">First name</label>
-                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                <input type="text" id="firstName" name="firstName" class="field__input form-control" required>
                 <div class="error-message">Please enter your first name</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="lastName" class="required">Last name</label>
-                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                <input type="text" id="lastName" name="lastName" class="field__input form-control" required>
                 <div class="error-message">Please enter your last name</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="email" class="required">Email</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="field__input form-control" required>
                 <div class="error-message">Please enter a valid email address</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Date of birth</label>
                 <div class="dob-group">
                   <select id="dobDay" name="dobDay" class="form-control" required>
@@ -615,7 +678,7 @@
                 <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="gender" class="required">Gender</label>
                 <select id="gender" name="gender" class="form-control" required>
                   <option value="">Select gender</option>
@@ -628,25 +691,25 @@
                 <div class="error-message">Please select your gender</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="streetAddress" class="required">Street Address</label>
-                <input type="text" id="streetAddress" name="streetAddress" class="form-control" required>
+                <input type="text" id="streetAddress" name="streetAddress" class="field__input form-control" required>
                 <div class="error-message">Please enter your street address</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="city" class="required">City/Town</label>
-                <input type="text" id="city" name="city" class="form-control" required>
+                <input type="text" id="city" name="city" class="field__input form-control" required>
                 <div class="error-message">Please enter your city/town</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="postcode" class="required">Postcode</label>
-                <input type="text" id="postcode" name="postcode" class="form-control" required>
+                <input type="text" id="postcode" name="postcode" class="field__input form-control" required>
                 <div class="error-message">Please enter your postcode</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="country" class="required">Country</label>
                 <select id="country" name="country" class="form-control" required>
                   <option value="Australia">Australia</option>
@@ -658,9 +721,9 @@
                 <div class="error-message">Please select your country</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="mobile" class="required">Mobile number</label>
-                <input type="tel" id="mobile" name="mobile" class="form-control" placeholder="+61" required>
+                <input type="tel" id="mobile" name="mobile" class="field__input form-control" placeholder="+61" required>
                 <div class="error-message">Please enter your mobile number</div>
               </div>
             </div>
@@ -669,7 +732,7 @@
             <div class="form-step" data-step="2">
               <h2 class="step-title">Smoking Status</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Which best describes you?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="never-smoked">
@@ -689,7 +752,7 @@
             <div class="form-step" data-step="3">
               <h2 class="step-title">Smoking History</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">When you were smoking at your heaviest, how many cigarettes did you smoke per day?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="fewer-than-5">
@@ -716,7 +779,7 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">How many years have you smoked in total?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="5-or-fewer">
@@ -743,7 +806,7 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">What method(s) have you previously tried to assist you in quitting? (please tick all that apply)</label>
                 <div class="checkbox-group">
                   <div class="checkbox-option" data-value="cold-turkey">
@@ -786,7 +849,7 @@
                 <div class="error-message">Please select at least one method</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">How long ago was your last cigarette?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="today">
@@ -822,7 +885,7 @@
             <div class="form-step" data-step="4">
               <h2 class="step-title">Vaping Status</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Have you ever vaped?</label>
                 <div class="radio-cards">
                   <div class="radio-card" data-value="yes">
@@ -842,7 +905,7 @@
             <div class="form-step" data-step="5">
               <h2 class="step-title">Vaping History</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Which vaping method has worked best for you?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="pods">
@@ -865,19 +928,19 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="vapingStrength" class="required">What is the minimum strength that has been effective to avoid smoking?</label>
-                <input type="text" id="vapingStrength" name="vapingStrength" class="form-control" placeholder="e.g., 20mg/ml" required>
+                <input type="text" id="vapingStrength" name="vapingStrength" class="field__input form-control" placeholder="e.g., 20mg/ml" required>
                 <div class="error-message">Please enter the minimum effective strength</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="vapingVolume" class="required">How many mL's of liquid do you estimate that you use per day?</label>
-                <input type="text" id="vapingVolume" name="vapingVolume" class="form-control" placeholder="e.g., 5ml" required>
+                <input type="text" id="vapingVolume" name="vapingVolume" class="field__input form-control" placeholder="e.g., 5ml" required>
                 <div class="error-message">Please enter the volume you use per day</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="vapingNotes">Is there anything else you would like to add about your vaping?</label>
                 <textarea id="vapingNotes" name="vapingNotes" class="form-control" placeholder="Any additional information..."></textarea>
               </div>
@@ -887,12 +950,12 @@
             <div class="form-step" data-step="6">
               <h2 class="step-title">Medical History</h2>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="medicalIllnesses">Please list below any significant medical illnesses, such as diabetes, cancer, asthma, COPD/emphysema or psychiatric disorders.</label>
                 <textarea id="medicalIllnesses" name="medicalIllnesses" class="form-control" placeholder="List any significant medical conditions..."></textarea>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Have you had a stroke, heart attack, irregular heartbeat, uncontrolled hypertension or angina in the past month?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="yes">
@@ -907,7 +970,7 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label class="required">Are you breastfeeding, pregnant, or planning to become pregnant within the next 12 months?</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="yes">
@@ -922,18 +985,18 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="forwardEmail">Email</label>
                 <div class="helper-text">Your documents will be securely emailed to you, and no one else, unless you request otherwise. If you would like us to also forward your prescription to a pharmacy, supplier or friend/carer, please enter their email address.</div>
-                <input type="email" id="forwardEmail" name="forwardEmail" class="form-control" placeholder="Optional forwarding email">
+                <input type="email" id="forwardEmail" name="forwardEmail" class="field__input form-control" placeholder="Optional forwarding email">
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <label for="additionalNotes">Is there anything else you would like to mention before proceeding?</label>
                 <textarea id="additionalNotes" name="additionalNotes" class="form-control" placeholder="Any additional information..."></textarea>
               </div>
 
-              <div class="form-group">
+              <div class="field form-group">
                 <div class="safety-info">
                   Complete abstinence from smoking and vaping is the safest option for your health. Nicotine is addictive, and the long-term risks of vaping are unknown. Currently no nicotine vaping products have been approved by the TGA, and the safety of these products have not yet been thoroughly assessed. Quit Clinics, or its doctors, cannot guarantee the safety of any vaping product. In order to minimise risk of harms, only short-term use of e-cigarettes is recommended, and dual use (vaping plus smoking) needs to be avoided.
                 </div>
@@ -1114,7 +1177,7 @@
       currentStepElement.querySelectorAll('.error-message').forEach(msg => {
         msg.classList.remove('show');
       });
-      currentStepElement.querySelectorAll('.form-control').forEach(field => {
+      currentStepElement.querySelectorAll('.field__input, .form-control').forEach(field => {
         field.classList.remove('error');
       });
       
@@ -1126,13 +1189,13 @@
           const isChecked = Array.from(radioGroup).some(radio => radio.checked);
           if (!isChecked) {
             fieldValid = false;
-            const errorMsg = field.closest('.form-group').querySelector('.error-message');
+            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.type === 'checkbox' && field.name === 'safetyAcknowledgment') {
           if (!field.checked) {
             fieldValid = false;
-            const errorMsg = field.closest('.form-group').querySelector('.error-message');
+            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.name === 'quitMethods') {
@@ -1140,18 +1203,18 @@
           const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
           if (!isAnyChecked) {
             fieldValid = false;
-            const errorMsg = field.closest('.form-group').querySelector('.error-message');
+            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.value.trim() === '') {
           fieldValid = false;
           field.classList.add('error');
-          const errorMsg = field.closest('.form-group').querySelector('.error-message');
+          const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
           if (errorMsg) errorMsg.classList.add('show');
         } else if (field.type === 'email' && !this.isValidEmail(field.value)) {
           fieldValid = false;
           field.classList.add('error');
-          const errorMsg = field.closest('.form-group').querySelector('.error-message');
+          const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
           if (errorMsg) errorMsg.classList.add('show');
         }
         
@@ -1168,7 +1231,7 @@
               this.form.elements['dobDay'].classList.add('error');
               this.form.elements['dobMonth'].classList.add('error');
               this.form.elements['dobYear'].classList.add('error');
-              const errorMsg = field.closest('.form-group').querySelector('.error-message');
+              const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
               if (errorMsg) errorMsg.classList.add('show');
             }
           }
