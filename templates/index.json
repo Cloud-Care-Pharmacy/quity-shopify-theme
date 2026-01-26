@@ -553,8 +553,111 @@
         "marginsection": "0px 0px 0px 0px"
       }
     },
+    "faq_accordion_fUqgWP": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_yAJy4d": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do I get started?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_XFYRfr": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Can I use a prescription I already have?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_4Qbd83": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What happens if I am not eligible for a prescription?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_4UF7Xh": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How much is delivery?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_Q6q7Cg": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Do you offer returns or refunds?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_LWamWW": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Am I eligible for nicotine prescriptions?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_MX6HK6": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How long will it take to get a prescription?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_ijmh7q": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Can I use a prescription if I have the QR code?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        },
+        "faq_LwpYeA": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How much are the medications I will be prescribed?",
+            "faq_des": "<p>Answer Description</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_yAJy4d",
+        "faq_XFYRfr",
+        "faq_4Qbd83",
+        "faq_4UF7Xh",
+        "faq_Q6q7Cg",
+        "faq_LWamWW",
+        "faq_MX6HK6",
+        "faq_ijmh7q",
+        "faq_LwpYeA"
+      ],
+      "name": "Faqs Accordion",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "Sub Title Top",
+        "title": "Frequently Asked Questions",
+        "des": "We understand navigating this can feel overwhelming. Discover more about how to get started, our step-by-step process, therapies available and much more",
+        "align-heading": "center",
+        "title_size": "h4",
+        "e_first_open": false,
+        "e_reverse": true,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
     "3e04d8d0-b36c-4e9e-8f16-6987ee712faa": {
       "type": "featured-articles",
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -648,6 +751,7 @@
         "f52bcd79-edc2-4215-9816-d4d2ffbd4a60",
         "975035b5-e5af-441d-9cfd-0add0b5bf531"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container-fluid",
@@ -683,6 +787,7 @@
     "35f6d573-7da7-4f43-8a21-df8b5494d08f",
     "923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a",
     "85150b71-1648-4e2b-bd81-d70d49df23c6",
+    "faq_accordion_fUqgWP",
     "3e04d8d0-b36c-4e9e-8f16-6987ee712faa",
     "3fbc3961-b3b3-483b-9070-76e53c90c3c9"
   ]
