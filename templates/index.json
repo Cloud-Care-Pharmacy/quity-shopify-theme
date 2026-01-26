@@ -258,46 +258,46 @@
         "wborder": "1px"
       }
     },
-    "image_content_6_LfJjx9": {
-      "type": "image-content-6",
+    "image_content_WHeiYm": {
+      "type": "image-content",
       "blocks": {
-        "image_block_FicYWp": {
-          "type": "image_block",
-          "settings": {
-            "w_image": 25,
-            "pos_image": 50,
-            "e_image": "right",
-            "image": "shopify://shop_images/shutterstock_2501980087.jpg",
-            "image2": "shopify://shop_images/shutterstock_2526260051_1.jpg",
-            "enable_video": false,
-            "text_circle": "Fashion2 style store"
-          }
-        },
-        "text_block_mz9CJD": {
+        "text_block_zRhfaq": {
           "type": "text_block",
           "settings": {
+            "width": "100%",
             "bgtext": "#ffffff",
-            "subtitle": "Sub Title",
-            "title": "Connect with an expert doctor.24-hour response, 7 days a week.",
-            "size_text": "h3",
+            "title_color": "rgba(0,0,0,0)",
+            "subtitle": "",
+            "title": "Connect with an expert doctor. 24 hour response, <br>7 days a week.",
+            "size_text": "h2",
             "text": "<p>Our TGA-approved doctors specialise in nicotine cessation and are dedicated to supporting your journey to become smoke-free. We understand quitting is challenging and requires personalised care. After reviewing your smoking history, your doctor will contact you to discuss your specific needs and create a tailored treatment plan designed to give you the best chance of long-term success.</p>",
             "answer_content": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "style_btn": "btn-underline btn-underline-white",
             "button": "discover now",
             "link": "",
+            "enable_padding": true,
             "align": "left"
+          }
+        },
+        "image_block_iarXHj": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2501980087.jpg"
           }
         }
       },
       "block_order": [
-        "image_block_FicYWp",
-        "text_block_mz9CJD"
+        "text_block_zRhfaq",
+        "image_block_iarXHj"
       ],
-      "name": "Image (Video) with text",
+      "name": "Image with text",
       "settings": {
         "animation": "",
         "setwidth": "container",
         "bgsection": "#ffffff",
-        "size": "50-50",
+        "rangebg": 0,
+        "bgbefore": "transparent",
+        "bg_pos": "left",
         "enable_padding": true,
         "align_center": true,
         "paddingsection": "0px 0px 0px 0px",
@@ -781,7 +781,7 @@
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_image_with_text_24_c3iyWm",
     "line_mLXGmb",
-    "image_content_6_LfJjx9",
+    "image_content_WHeiYm",
     "07954675-bad5-4a16-8ffa-2392279b713d",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
     "35f6d573-7da7-4f43-8a21-df8b5494d08f",
