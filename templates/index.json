@@ -269,6 +269,7 @@
       "block_order": [
         "645724bc-4a56-42af-881b-f7cad3818ba7"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -278,8 +279,9 @@
         "marginmobile": "0px 0px 0px 0px",
         "zindex": "0",
         "bgsection": "#ffffff",
+        "bg_section": "shopify://shop_images/joey-nicotra-OONWuexopHs-unsplash.jpg",
         "subtop": "Exclusive Offer Just for You!",
-        "banner_title": "Unveil Your Radiance with<br> Irresistible Deals.",
+        "banner_title": "Unveil Your Radiance with Irresistible Deals.",
         "color_title": "#000000",
         "des_banner": "",
         "color_des": "#000000",
@@ -324,6 +326,7 @@
         "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-2",
         "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-3"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
