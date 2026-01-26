@@ -1,0 +1,451 @@
+{
+  "sections": {
+    "hero-section": {
+      "type": "parallax-banner",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f5f8fa",
+        "image_height": "650px",
+        "image_height_mb": "500px",
+        "image": "",
+        "image_mb": "",
+        "overlay": true,
+        "overlay_opacity": 30,
+        "title_top": "",
+        "title": "Quit Smoking with Professional Support",
+        "des": "<p>Get expert guidance and proven treatments to help you quit smoking for good. Speak with accredited doctors and access ongoing support throughout your journey.</p>",
+        "align_content": "left",
+        "vertical_alignment": "center",
+        "text_color": "#1a1a1a",
+        "show_btn": true,
+        "link_btn": "/pages/contact",
+        "text_btn": "Book a Consultation",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "trust-indicators": {
+      "type": "service-2",
+      "blocks": {
+        "trust-1": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Expert Doctors",
+            "des": "<p>Accredited healthcare professionals</p>"
+          }
+        },
+        "trust-2": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Proven Methods",
+            "des": "<p>Evidence-based treatments</p>"
+          }
+        },
+        "trust-3": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Ongoing Support",
+            "des": "<p>Continuous care throughout your journey</p>"
+          }
+        }
+      },
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "style": "1",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "column": "3",
+        "paddingsection": "60px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "doctor-expert-section": {
+      "type": "image-content-1",
+      "blocks": {
+        "doctor-image": {
+          "type": "image_block",
+          "settings": {
+            "image": "",
+            "link": "",
+            "use_video": false,
+            "video_link": "",
+            "custom_liquid": ""
+          }
+        },
+        "doctor-content": {
+          "type": "text_block",
+          "settings": {
+            "subtitle": "Expert Care",
+            "title": "Speak with an Experienced and Expert-Accredited Doctor",
+            "des": "<h4>We're here for you during your quitting journey</h4><p>Our team of experienced healthcare professionals specializes in smoking cessation. With years of expertise and proven methods, we provide personalized support to help you overcome nicotine addiction.</p><p>Every journey is unique, and our doctors take the time to understand your specific challenges and create a tailored treatment plan that works for you.</p><p>We combine medical expertise with compassionate care to give you the best chance of success in your quit journey.</p>",
+            "show_btn": true,
+            "link_btn": "/pages/about",
+            "text_btn": "Learn More About Our Doctors",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "doctor-image",
+        "doctor-content"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f5f8fa",
+        "image_align": "left",
+        "vertical_alignment": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "phone-consultation-section": {
+      "type": "image-content-2",
+      "blocks": {
+        "consultation-content": {
+          "type": "text_block",
+          "settings": {
+            "subtitle": "Convenient & Affordable",
+            "title": "Affordable Phone Consultations & Ongoing Support",
+            "des": "<ul><li>✓ Private telehealth consultations from the comfort of your home</li><li>✓ Personalized treatment plans tailored to your needs</li><li>✓ Access to prescription medications when appropriate</li><li>✓ Ongoing support and follow-up consultations</li><li>✓ Evidence-based strategies and behavioral support</li></ul>",
+            "show_btn": true,
+            "link_btn": "/pages/services",
+            "text_btn": "Learn More",
+            "custom_liquid": ""
+          }
+        },
+        "consultation-image": {
+          "type": "image_block",
+          "settings": {
+            "image": "",
+            "link": "",
+            "use_video": false,
+            "video_link": "",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "consultation-content",
+        "consultation-image"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "image_align": "right",
+        "vertical_alignment": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "benefits-section": {
+      "type": "service-2",
+      "blocks": {
+        "benefit-immediate": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Immediate",
+            "des": "<p><strong>Within 20 minutes:</strong> Heart rate and blood pressure drop to normal levels.</p><p><strong>Within 12 hours:</strong> Carbon monoxide levels in your blood return to normal.</p><p><strong>Within 24 hours:</strong> Your risk of heart attack begins to decrease.</p>"
+          }
+        },
+        "benefit-short-term": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Short Term",
+            "des": "<p><strong>2 weeks - 3 months:</strong> Circulation improves and lung function increases.</p><p><strong>1-9 months:</strong> Coughing and shortness of breath decrease. Your lungs start to repair themselves.</p><p><strong>Energy levels:</strong> You'll notice increased energy and improved sense of taste and smell.</p>"
+          }
+        },
+        "benefit-long-term": {
+          "type": "service",
+          "settings": {
+            "icon": "",
+            "image": "",
+            "title": "Long Term",
+            "des": "<p><strong>1 year:</strong> Risk of heart disease is cut in half compared to a smoker.</p><p><strong>5-10 years:</strong> Stroke risk reduced to that of a non-smoker.</p><p><strong>10-15 years:</strong> Cancer risk drops significantly, and overall health greatly improves.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-immediate",
+        "benefit-short-term",
+        "benefit-long-term"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f0f7f4",
+        "style": "1",
+        "title_top": "Your Health Journey",
+        "title": "Quit Smoking with Quity and Your Health Will Improve Over Time",
+        "des": "<p>Every moment without cigarettes is a step toward better health. Here's what you can expect:</p>",
+        "align-heading": "center",
+        "column": "3",
+        "paddingsection": "80px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "benefits-cta": {
+      "type": "text-content",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f0f7f4",
+        "heading_sub": "",
+        "heading": "",
+        "des": "",
+        "image": "",
+        "show_btn": true,
+        "link_btn": "/pages/health-benefits",
+        "text_btn": "Learn More About Health Benefits",
+        "paddingsection": "0px 0px 80px 0px",
+        "paddingmobile": "0px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "prescription-section": {
+      "type": "image-content-3",
+      "blocks": {
+        "prescription-image": {
+          "type": "image_block",
+          "settings": {
+            "image": "",
+            "link": "",
+            "use_video": false,
+            "video_link": "",
+            "custom_liquid": ""
+          }
+        },
+        "prescription-content": {
+          "type": "text_block",
+          "settings": {
+            "subtitle": "Fast & Convenient",
+            "title": "Don't Wait! Prescriptions Issued within 24-48hrs",
+            "des": "<p>After your consultation, our doctors can issue prescriptions for smoking cessation medications when clinically appropriate. You'll receive your prescription quickly so you can start your quit journey without delay.</p><p>We work with leading pharmacies across Australia to ensure you have convenient access to your medications. Our team will guide you through the entire process, from consultation to prescription pickup.</p><p>Medications may include nicotine replacement therapy, prescription treatments, and other evidence-based options tailored to your specific needs and medical history.</p>",
+            "show_btn": true,
+            "link_btn": "/pages/prescriptions",
+            "text_btn": "Learn About Treatment Options",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "prescription-image",
+        "prescription-content"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "image_align": "left",
+        "vertical_alignment": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "calculator-section": {
+      "type": "advanced-content",
+      "blocks": {
+        "calculator-image": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"calculator-image-wrapper\" style=\"background: linear-gradient(135deg, rgba(26,26,26,0.8), rgba(173,44,52,0.7)), url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800') center/cover; min-height: 500px; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px;\"><div style=\"text-align: center; padding: 40px;\"></div></div>",
+            "width": "50%"
+          }
+        },
+        "calculator-form": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"savings-calculator\" style=\"background: #1a1a1a; color: white; padding: 60px 40px; border-radius: 8px;\">\n  <h2 style=\"color: white; margin-bottom: 10px; font-size: 36px;\">Improve Your Wealth</h2>\n  <p style=\"color: #ccc; margin-bottom: 30px; font-size: 18px;\">Quitting smoking will save you thousands</p>\n  \n  <div style=\"margin-bottom: 25px;\">\n    <label style=\"display: block; margin-bottom: 8px; color: #ccc;\">Cigarettes per day</label>\n    <input type=\"number\" id=\"cigs-per-day\" value=\"20\" min=\"1\" max=\"60\" style=\"width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #444; background: #2a2a2a; color: white; font-size: 16px;\">\n  </div>\n  \n  <div style=\"margin-bottom: 25px;\">\n    <label style=\"display: block; margin-bottom: 8px; color: #ccc;\">Price per pack (20 cigarettes)</label>\n    <input type=\"number\" id=\"price-per-pack\" value=\"40\" min=\"1\" max=\"100\" step=\"0.50\" style=\"width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #444; background: #2a2a2a; color: white; font-size: 16px;\">\n  </div>\n  \n  <button onclick=\"calculateSavings()\" style=\"width: 100%; padding: 15px; background: #ad2c34; color: white; border: none; border-radius: 4px; font-size: 18px; font-weight: bold; cursor: pointer; margin-bottom: 30px;\">Calculate Savings</button>\n  \n  <div id=\"results\" style=\"display: none;\">\n    <h3 style=\"color: #ad2c34; margin-bottom: 20px; font-size: 24px;\">Your Potential Savings:</h3>\n    <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 20px;\">\n      <div style=\"background: #2a2a2a; padding: 20px; border-radius: 8px; text-align: center;\">\n        <div style=\"font-size: 32px; font-weight: bold; color: #4ade80; margin-bottom: 5px;\" id=\"daily-savings\">$0</div>\n        <div style=\"color: #999; font-size: 14px;\">Daily</div>\n      </div>\n      <div style=\"background: #2a2a2a; padding: 20px; border-radius: 8px; text-align: center;\">\n        <div style=\"font-size: 32px; font-weight: bold; color: #4ade80; margin-bottom: 5px;\" id=\"weekly-savings\">$0</div>\n        <div style=\"color: #999; font-size: 14px;\">Weekly</div>\n      </div>\n      <div style=\"background: #2a2a2a; padding: 20px; border-radius: 8px; text-align: center;\">\n        <div style=\"font-size: 32px; font-weight: bold; color: #4ade80; margin-bottom: 5px;\" id=\"monthly-savings\">$0</div>\n        <div style=\"color: #999; font-size: 14px;\">Monthly</div>\n      </div>\n      <div style=\"background: #2a2a2a; padding: 20px; border-radius: 8px; text-align: center;\">\n        <div style=\"font-size: 32px; font-weight: bold; color: #4ade80; margin-bottom: 5px;\" id=\"yearly-savings\">$0</div>\n        <div style=\"color: #999; font-size: 14px;\">Yearly</div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<script>\nfunction calculateSavings() {\n  const cigsPerDay = parseFloat(document.getElementById('cigs-per-day').value) || 0;\n  const pricePerPack = parseFloat(document.getElementById('price-per-pack').value) || 0;\n  \n  const dailyCost = (cigsPerDay / 20) * pricePerPack;\n  const weeklySavings = dailyCost * 7;\n  const monthlySavings = dailyCost * 30;\n  const yearlySavings = dailyCost * 365;\n  \n  document.getElementById('daily-savings').textContent = '$' + dailyCost.toFixed(2);\n  document.getElementById('weekly-savings').textContent = '$' + weeklySavings.toFixed(2);\n  document.getElementById('monthly-savings').textContent = '$' + monthlySavings.toFixed(2);\n  document.getElementById('yearly-savings').textContent = '$' + yearlySavings.toFixed(0);\n  \n  document.getElementById('results').style.display = 'block';\n}\n</script>",
+            "width": "50%"
+          }
+        }
+      },
+      "block_order": [
+        "calculator-image",
+        "calculator-form"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#1a1a1a",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "testimonials-section": {
+      "type": "testimonial-1",
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "content": "After 30 years of smoking, I finally quit with the help of Quity. The doctors were understanding and supportive, and the treatment plan they created for me actually worked. I've been smoke-free for 8 months now and feel better than ever.",
+            "avatar": "",
+            "name": "John Markham",
+            "address": "Sydney, NSW"
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "content": "The convenience of phone consultations made all the difference. I was nervous about quitting, but my doctor explained everything clearly and gave me the confidence I needed. The ongoing support has been invaluable to my success.",
+            "avatar": "",
+            "name": "Esmeralda Lewis",
+            "address": "Melbourne, VIC"
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "content": "As a healthcare professional myself, I was impressed by the evidence-based approach and personalized care. Quity provided me with the tools and support to finally overcome my nicotine addiction. Highly recommended for anyone serious about quitting.",
+            "avatar": "",
+            "name": "Dr. Sarah Chen",
+            "address": "Brisbane, QLD"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "style": "1",
+        "title_top": "Success Stories",
+        "title": "Real People, Real Results",
+        "des": "<p>Hear from those who have successfully quit smoking with Quity's help</p>",
+        "align-heading": "center",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "blog-articles-section": {
+      "type": "featured-articles",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f5f8fa",
+        "title_top": "Latest Articles",
+        "title": "Helpful Resources & Expert Advice",
+        "des": "<p>Explore our collection of articles on smoking cessation, health benefits, and support strategies</p>",
+        "align-heading": "center",
+        "blogname": "news",
+        "style": "1",
+        "show_date": true,
+        "show_author": false,
+        "show_comment": false,
+        "show_tags": true,
+        "show_des": true,
+        "show_btn_readmore": true,
+        "paddingsection": "80px 0px 60px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "blog-cta": {
+      "type": "text-content",
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f5f8fa",
+        "heading_sub": "",
+        "heading": "",
+        "des": "",
+        "image": "",
+        "show_btn": true,
+        "link_btn": "/blogs/news",
+        "text_btn": "View All Articles",
+        "paddingsection": "0px 0px 80px 0px",
+        "paddingmobile": "0px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "final-cta-section": {
+      "type": "banner-2-col",
+      "blocks": {
+        "cta-content": {
+          "type": "html",
+          "settings": {
+            "code": "<div style=\"text-align: center; padding: 60px 20px;\">\n  <h2 style=\"font-size: 48px; margin-bottom: 20px; color: #1a1a1a;\">We're Here to Help</h2>\n  <p style=\"font-size: 20px; color: #666; margin-bottom: 15px; max-width: 700px; margin-left: auto; margin-right: auto;\">Take the first step toward a smoke-free life. Our team of expert doctors is ready to support you on your journey to better health.</p>\n  <p style=\"font-size: 18px; color: #666; margin-bottom: 30px;\">Every quit journey is unique. Let us help you find the right path forward.</p>\n  \n  <div style=\"margin-bottom: 30px;\">\n    <a href=\"/pages/contact\" class=\"btn-theme\" style=\"display: inline-block; padding: 18px 40px; background: #ad2c34; color: white; text-decoration: none; border-radius: 4px; font-size: 18px; font-weight: bold; margin: 10px;\">Schedule a Consultation</a>\n  </div>\n  \n  <div style=\"margin-top: 40px; padding-top: 30px; border-top: 1px solid #e0e0e0;\">\n    <p style=\"color: #666; margin-bottom: 15px; font-size: 16px;\"><strong>Need more information?</strong></p>\n    <p style=\"color: #666; margin-bottom: 8px;\">📧 Email: <a href=\"mailto:support@quity.com.au\" style=\"color: #ad2c34;\">support@quity.com.au</a></p>\n    <p style=\"color: #666; margin-bottom: 8px;\">📞 Phone: <a href=\"tel:1300QUITY\" style=\"color: #ad2c34;\">1300 QUITY</a></p>\n    <p style=\"color: #666; margin-top: 20px;\">\n      <a href=\"/pages/faq\" style=\"color: #ad2c34; margin: 0 15px;\">Frequently Asked Questions</a> | \n      <a href=\"/pages/how-it-works\" style=\"color: #ad2c34; margin: 0 15px;\">How It Works</a> | \n      <a href=\"/pages/contact\" style=\"color: #ad2c34; margin: 0 15px;\">Contact Us</a>\n    </p>\n  </div>\n</div>",
+            "width": "100%"
+          }
+        }
+      },
+      "block_order": [
+        "cta-content"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "hero-section",
+    "trust-indicators",
+    "doctor-expert-section",
+    "phone-consultation-section",
+    "benefits-section",
+    "benefits-cta",
+    "prescription-section",
+    "calculator-section",
+    "testimonials-section",
+    "blog-articles-section",
+    "blog-cta",
+    "final-cta-section"
+  ]
+}
