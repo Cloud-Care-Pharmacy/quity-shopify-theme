@@ -1045,14 +1045,32 @@
     }
 
     init() {
+      console.log('🔧 PatientIntakeForm initialized');
+      console.log('📊 Current step:', this.currentStep);
+      console.log('📝 Total steps:', this.totalSteps);
       this.loadFromSession();
       this.updateDisplay();
       this.bindEvents();
       this.restoreFormData();
-    }
-
-    bindEvents() {
+      console.log('🔗 Binding events...');
+      
       // Next button
+      this.btnNext.addEventListener('click', () => {
+        console.log('👉 Next button clicked');
+        this.nextStep();
+      });
+      {
+        console.log('📤 Form submit triggered');
+        this.handleSubmit(e);
+      });
+      
+      // Save to session on input
+      this.form.addEventListener('input', () => {
+        console.log('💾 Auto-saving to session...');
+        this.saveToSession();
+      }
+        this.prevStep();
+      }
       this.btnNext.addEventListener('click', () => this.nextStep());
       
       // Back button
@@ -1100,56 +1118,45 @@
             const parent = input.closest('.radio-option, .radio-card');
             if (parent) {
               parent.classList.toggle('selected', input.checked);
-            }
-          });
-        } else if (e.target.type === 'checkbox') {
-          const parent = e.target.closest('.checkbox-option, .checkbox-standalone');
-          if (parent) {
-            parent.classList.toggle('selected', e.target.checked);
-          }
-        }
-        
-        this.saveToSession();
-      });
-    }
-
-    nextStep() {
+      console.log('➡️ Attempting to move to next step from step', this.currentStep);
+      
       if (!this.validateCurrentStep()) {
+        console.log('❌ Validation failed for step', this.currentStep);
         return;
       }
       
+      console.log('✅ Validation passed for step', this.currentStep);
+      
       // Mark current step as completed
       this.completedSteps.add(this.currentStep);
+      console.log('✓ Completed steps:', Array.from(this.completedSteps));
       
       // Check conditional logic
       if (this.currentStep === 2) {
         const smokingStatus = this.form.elements['smokingStatus'].value;
+        console.log('🚬 Smoking status:', smokingStatus);
         if (smokingStatus === 'never-smoked') {
           this.currentStep = 4; // Skip step 3
+          console.log('⏭️ Skipping step 3, moving to step 4');
         } else {
           this.currentStep++;
         }
       } else if (this.currentStep === 4) {
         const vapingStatus = this.form.elements['vapingStatus'].value;
+        console.log('💨 Vaping status:', vapingStatus);
         if (vapingStatus === 'no') {
           this.currentStep = 6; // Skip step 5
+          console.log('⏭️ Skipping step 5, moving to step 6');
         } else {
           this.currentStep++;
-        }
-      } else {
-        this.currentStep++;
-      }
+      console.log('⬅️ Moving back from step', this.currentStep);
       
-      this.updateDisplay();
-      this.scrollToTop();
-    }
-
-    prevStep() {
       // Check conditional logic for back navigation
       if (this.currentStep === 4) {
         const smokingStatus = this.form.elements['smokingStatus']?.value;
         if (smokingStatus === 'never-smoked') {
           this.currentStep = 2; // Skip step 3
+          console.log('⏮️ Skipping step 3, moving to step 2');
         } else {
           this.currentStep--;
         }
@@ -1157,6 +1164,7 @@
         const vapingStatus = this.form.elements['vapingStatus']?.value;
         if (vapingStatus === 'no') {
           this.currentStep = 4; // Skip step 5
+          console.log('⏮️ Skipping step 5, moving to step 4');
         } else {
           this.currentStep--;
         }
@@ -1164,14 +1172,19 @@
         this.currentStep--;
       }
       
+      console.log('📍 New step:', this.currentStep);
       this.updateDisplay();
       this.scrollToTop();
     }
 
     validateCurrentStep() {
+      console.log('🔍 Validating step', this.currentStep);
+      
       const currentStepElement = this.querySelector(`.form-step[data-step="${this.currentStep}"]`);
       const requiredFields = currentStepElement.querySelectorAll('[required]');
       let isValid = true;
+      
+      console.log('📋 Found', requiredFields.length, 'required fields');
       
       // Clear previous errors
       currentStepElement.querySelectorAll('.error-message').forEach(msg => {
@@ -1181,46 +1194,71 @@
         field.classList.remove('error');
       });
       
-      requiredFields.forEach(field => {
+      requiredFields.forEach((field, index) => {
         let fieldValid = true;
+        const fieldName = field.name || field.id;
+        
+        console.log(`  Field ${index + 1}: ${fieldName} (${field.type})`);
         
         if (field.type === 'radio') {
           const radioGroup = currentStepElement.querySelectorAll(`input[name="${field.name}"]`);
           const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+          console.log(`    ⚪ Radio group checked:`, isChecked);
           if (!isChecked) {
             fieldValid = false;
             const formGroup = field.closest('.field') || field.closest('.form-group');
             const errorMsg = formGroup?.querySelector('.error-message');
-            if (errorMsg) errorMsg.classList.add('show');
+            if (errorMsg) {
+              errorMsg.classList.add('show');
+              console.log('    ❌ Error message shown');
+            }
           }
         } else if (field.type === 'checkbox' && field.name === 'safetyAcknowledgment') {
+          console.log(`    ☑️ Checkbox checked:`, field.checked);
           if (!field.checked) {
             fieldValid = false;
             const formGroup = field.closest('.field') || field.closest('.form-group');
             const errorMsg = formGroup?.querySelector('.error-message');
-            if (errorMsg) errorMsg.classList.add('show');
+            if (errorMsg) {
+              errorMsg.classList.add('show');
+              console.log('    ❌ Error message shown');
+            }
           }
         } else if (field.name === 'quitMethods') {
           const checkboxes = currentStepElement.querySelectorAll('input[name="quitMethods"]');
           const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+          console.log(`    ☑️ At least one checkbox checked:`, isAnyChecked);
           if (!isAnyChecked) {
             fieldValid = false;
             const formGroup = field.closest('.field') || field.closest('.form-group');
             const errorMsg = formGroup?.querySelector('.error-message');
-            if (errorMsg) errorMsg.classList.add('show');
+            if (errorMsg) {
+              errorMsg.classList.add('show');
+              console.log('    ❌ Error message shown');
+            }
           }
         } else if (field.value.trim() === '') {
+          console.log(`    ⚠️ Field is empty`);
           fieldValid = false;
           field.classList.add('error');
           const formGroup = field.closest('.field') || field.closest('.form-group');
           const errorMsg = formGroup?.querySelector('.error-message');
-          if (errorMsg) errorMsg.classList.add('show');
+          if (errorMsg) {
+            errorMsg.classList.add('show');
+            console.log('    ❌ Error message shown');
+          }
         } else if (field.type === 'email' && !this.isValidEmail(field.value)) {
+          console.log(`    ⚠️ Invalid email format:`, field.value);
           fieldValid = false;
           field.classList.add('error');
           const formGroup = field.closest('.field') || field.closest('.form-group');
           const errorMsg = formGroup?.querySelector('.error-message');
-          if (errorMsg) errorMsg.classList.add('show');
+          if (errorMsg) {
+            errorMsg.classList.add('show');
+            console.log('    ❌ Error message shown');
+          }
+        } else {
+          console.log(`    ✅ Field valid, value:`, field.value.substring(0, 20) + (field.value.length > 20 ? '...' : ''));
         }
         
         // Special validation for date of birth
@@ -1231,7 +1269,9 @@
           
           if (day && month && year) {
             const age = this.calculateAge(year, month, day);
+            console.log(`    🎂 Age calculated:`, age);
             if (age < 18) {
+              console.log(`    ❌ Age validation failed: under 18`);
               fieldValid = false;
               this.form.elements['dobDay'].classList.add('error');
               this.form.elements['dobMonth'].classList.add('error');
@@ -1245,9 +1285,8 @@
         
         if (!fieldValid) {
           isValid = false;
-        }
-      });
-      
+          console.log(`    ❌ Field "${fieldName}" is invalid`);
+        } else {
       return isValid;
     }
 
@@ -1265,8 +1304,19 @@
         age--;
       }
       
+      return age;
+    }
+
     navigateToStep(targetStep) {
+      console.log('🎯 Navigating to step', targetStep, 'from step', this.currentStep);
       this.currentStep = targetStep;
+      this.updateDisplay();
+      this.scrollToTop();
+    }
+
+    updateDisplay() {
+      console.log('🔄 Updating display for step', this.currentStep);
+      p = targetStep;
       this.updateDisplay();
       this.scrollToTop();
     }
@@ -1313,7 +1363,9 @@
         this.btnNext.style.display = 'inline-block';
         this.btnSubmit.style.display = 'none';
       }
-    }
+    }console.log('✓ Progress updated - Completed steps:', Array.from(this.completedSteps));
+      
+      
 
     handleSubmit(e) {
       e.preventDefault();
@@ -1323,38 +1375,46 @@
       }
       
       // Collect all form data
-      const formData = new FormData(this.form);
-      const data = {};
-      
-      for (let [key, value] of formData.entries()) {
-        if (key === 'quitMethods') {
-          if (!data[key]) data[key] = [];
-          data[key].push(value);
-        } else {
-          data[key] = value;
-        }
+      const formData = new FormData(this.form);{
+        console.log('📄 No form data to restore');
+        return;
+        console.log('🏁 Final step - showing submit button');
       }
       
-      // Store in sessionStorage
-      sessionStorage.setItem('patientIntakeFormData', JSON.stringify(data));
+      console.log('📝 Restoring form data...');
       
-      // Log to console (for testing without API)
-      console.log('Form submitted successfully!');
-      console.log('Form data:', data);
-      data.completedSteps = Array.from(this.completedSteps);
-      sessionStorage.setItem('patientIntakeFormProgress', JSON.stringify(data));
-    }
-
-    loadFromSession() {
-      const saved = sessionStorage.getItem('patientIntakeFormProgress');
-      if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          this.formData = data;
-          if (data.currentStep) {
-            this.currentStep = data.currentStep;
+      Object.keys(this.formData).forEach(key => {
+        if (key === 'currentStep' || key === 'completedSteps') return;
+        
+        const elements = this.form.elements[key];
+        if (!elements) return;
+        
+        if (key === 'quitMethods' && Array.isArray(this.formData[key])) {
+          this.formData[key].forEach(value => {
+            const checkbox = this.form.querySelector(`input[name="${key}"][value="${value}"]`);
+            if (checkbox) {
+              checkbox.checked = true;
+              const parent = checkbox.closest('.checkbox-option');
+              if (parent) parent.classList.add('selected');
+            }
+          });
+        } else if (elements.type === 'radio') {
+          const radio = this.form.querySelector(`input[name="${key}"][value="${this.formData[key]}"]`);
+          if (radio) {
+            radio.checked = true;
+            const parent = radio.closest('.radio-option, .radio-card');
+            if (parent) parent.classList.add('selected');
           }
-          if (data.completedSteps && Array.isArray(data.completedSteps)) {
+        } else if (elements.type === 'checkbox') {
+          elements.checked = this.formData[key] === 'on' || this.formData[key] === true;
+          const parent = elements.closest('.checkbox-standalone');
+          if (parent && elements.checked) parent.classList.add('selected');
+        } else {
+          elements.value = this.formData[key];
+        }
+      });
+      
+      console.log('✅ Form data restored'   if (data.completedSteps && Array.isArray(data.completedSteps)) {
             this.completedSteps = new Set(data.completedSteps)
       const formData = new FormData(this.form);
       const data = {};
