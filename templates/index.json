@@ -16,7 +16,6 @@
           "type": "collection",
           "settings": {
             "collection": "frontpage",
-            "image": "shopify://shop_images/men.jpg",
             "icon": ""
           }
         },
@@ -24,7 +23,6 @@
           "type": "collection",
           "settings": {
             "collection": "women",
-            "image": "shopify://shop_images/women.jpg",
             "icon": ""
           }
         },
@@ -32,7 +30,6 @@
           "type": "collection",
           "settings": {
             "collection": "jewellery",
-            "image": "shopify://shop_images/accessories.jpg",
             "icon": ""
           }
         },
@@ -40,7 +37,6 @@
           "type": "collection",
           "settings": {
             "collection": "outerwear",
-            "image": "shopify://shop_images/outerwear.jpg",
             "icon": ""
           }
         },
@@ -48,7 +44,6 @@
           "type": "collection",
           "settings": {
             "collection": "shoes",
-            "image": "shopify://shop_images/shoes.jpg",
             "icon": ""
           }
         },
@@ -56,7 +51,6 @@
           "type": "collection",
           "settings": {
             "collection": "glasses",
-            "image": "shopify://shop_images/glasses.jpg",
             "icon": ""
           }
         }
@@ -69,6 +63,7 @@
         "da799991-c205-4b0b-b14c-7454b5dd99cd",
         "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-1"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -104,7 +99,6 @@
           "type": "html",
           "settings": {
             "width": "50%",
-            "image_sub": "shopify://shop_images/filler2.jpg",
             "title": "Unlock Beauty Deals <br>You Can't Resist.",
             "color_title": "#222222",
             "sub": "Exclusive Offer Alert!",
@@ -122,7 +116,6 @@
           "type": "html",
           "settings": {
             "width": "50%",
-            "image_sub": "shopify://shop_images/filler1.jpg",
             "title": "Your Beauty Favorites at<br> Unbeatable Prices",
             "color_title": "#000000",
             "sub": "Exclusive Offer Inside!",
@@ -198,7 +191,6 @@
           "type": "banner",
           "settings": {
             "width": "6",
-            "image": "shopify://shop_images/offer-banner1_cd5ff0a4-83f8-4855-b0ca-254ffafee564.jpg",
             "subtitle": "Seasonal Style Sensations",
             "color_sub": "#000000",
             "title": "Unwrap the Hottest <br>Trends of the Yea",
@@ -220,7 +212,6 @@
           "type": "banner",
           "settings": {
             "width": "6",
-            "image": "shopify://shop_images/offer-banner2_1e89c27a-54d6-49ae-ac26-6415cb2b5f64.jpg",
             "subtitle": "Elevate Your Style Game",
             "color_sub": "#000000",
             "title": "Discover the Latest<br> in Fashion",
@@ -287,7 +278,6 @@
         "marginmobile": "0px 0px 0px 0px",
         "zindex": "0",
         "bgsection": "#ffffff",
-        "bg_section": "shopify://shop_images/filler3.jpg",
         "subtop": "Exclusive Offer Just for You!",
         "banner_title": "Unveil Your Radiance with<br> Irresistible Deals.",
         "color_title": "#000000",
@@ -400,7 +390,6 @@
         "setwidth": "container",
         "bgsection": "#ffffff",
         "parrallax_enable": true,
-        "image": "shopify://shop_images/filler4.jpg",
         "height_section": "650",
         "height_section_mobile": "450",
         "align": "center",
@@ -454,56 +443,48 @@
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-0": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta1.jpg",
             "link": ""
           }
         },
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-1": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta2.jpg",
             "link": ""
           }
         },
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-2": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta3.jpg",
             "link": ""
           }
         },
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-3": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta4.jpg",
             "link": ""
           }
         },
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-4": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta5.jpg",
             "link": ""
           }
         },
         "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-5": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta6.jpg",
             "link": ""
           }
         },
         "f52bcd79-edc2-4215-9816-d4d2ffbd4a60": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta7.jpg",
             "link": ""
           }
         },
         "975035b5-e5af-441d-9cfd-0add0b5bf531": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/insta8.jpg",
             "link": ""
           }
         }
