@@ -312,7 +312,7 @@
       "settings": {
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 40px 0px",
+        "marginsection": "40px 0px 40px 0px",
         "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
