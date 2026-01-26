@@ -1189,13 +1189,15 @@
           const isChecked = Array.from(radioGroup).some(radio => radio.checked);
           if (!isChecked) {
             fieldValid = false;
-            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+            const formGroup = field.closest('.field') || field.closest('.form-group');
+            const errorMsg = formGroup?.querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.type === 'checkbox' && field.name === 'safetyAcknowledgment') {
           if (!field.checked) {
             fieldValid = false;
-            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+            const formGroup = field.closest('.field') || field.closest('.form-group');
+            const errorMsg = formGroup?.querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.name === 'quitMethods') {
@@ -1203,18 +1205,21 @@
           const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
           if (!isAnyChecked) {
             fieldValid = false;
-            const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+            const formGroup = field.closest('.field') || field.closest('.form-group');
+            const errorMsg = formGroup?.querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
           }
         } else if (field.value.trim() === '') {
           fieldValid = false;
           field.classList.add('error');
-          const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+          const formGroup = field.closest('.field') || field.closest('.form-group');
+          const errorMsg = formGroup?.querySelector('.error-message');
           if (errorMsg) errorMsg.classList.add('show');
         } else if (field.type === 'email' && !this.isValidEmail(field.value)) {
           fieldValid = false;
           field.classList.add('error');
-          const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+          const formGroup = field.closest('.field') || field.closest('.form-group');
+          const errorMsg = formGroup?.querySelector('.error-message');
           if (errorMsg) errorMsg.classList.add('show');
         }
         
@@ -1231,7 +1236,8 @@
               this.form.elements['dobDay'].classList.add('error');
               this.form.elements['dobMonth'].classList.add('error');
               this.form.elements['dobYear'].classList.add('error');
-              const errorMsg = field.closest('.field.form-group').querySelector('.error-message');
+              const formGroup = field.closest('.field') || field.closest('.form-group');
+              const errorMsg = formGroup?.querySelector('.error-message');
               if (errorMsg) errorMsg.classList.add('show');
             }
           }
