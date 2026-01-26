@@ -59,24 +59,19 @@
     position: relative;
   }
 
+  /* Completed steps: Green circle with white number */
   .step-item.completed .step-circle {
-    background: var(--g-main);
-    border-color: var(--g-main);
+    background: #588157;
+    border-color: #588157;
     color: #fff;
   }
 
-  .step-item.completed .step-circle::after {
-    content: '✓';
-    position: absolute;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
+  /* Current step: Black circle with white number */
   .step-item.current .step-circle {
+    background: var(--g-main);
     border-color: var(--g-main);
-    border-width: 3px;
-    color: var(--g-main);
-    box-shadow: 0 0 0 4px rgba(var(--g-main-rgb), 0.1);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
     transform: scale(1.1);
   }
 
