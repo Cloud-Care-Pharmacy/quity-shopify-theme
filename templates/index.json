@@ -639,7 +639,7 @@
         "e_size": "auto",
         "e_repeat": "no-repeat",
         "e_pos": "center center",
-        "title_top": "Sub Title Top",
+        "title_top": "",
         "title": "Frequently Asked Questions",
         "des": "We understand navigating this can feel overwhelming. Discover more about how to get started, our step-by-step process, therapies available and much more",
         "align-heading": "center",
@@ -651,7 +651,7 @@
         "e_right": false,
         "paddingsection": "0px 0px 0px 0px",
         "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
+        "marginsection": "40px 0px 40px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
     },
