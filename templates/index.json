@@ -98,7 +98,7 @@
         "heading_wDcTQ3": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>How it works</h2>",
+            "heading": "",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 48,
@@ -113,7 +113,7 @@
         "text_hK4Pxj": {
           "type": "text",
           "settings": {
-            "text": "<p>Get started with your prescription in three simple ways.</p>",
+            "text": "",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 18,
@@ -188,7 +188,7 @@
         "item_EQPYiE",
         "item_zpbfMV"
       ],
-      "name": "How it works",
+      "name": "Services",
       "settings": {
         "layout": "image_content",
         "image_item_width": 45,
@@ -204,7 +204,7 @@
         "progress_bar_width": 2,
         "image_item_ratio": "portrait",
         "image_item_ratio_mobile": "landscape",
-        "image_item_radius": 0,
+        "image_item_radius": 30,
         "image_item_border_thickness": 0,
         "item_heading_custom": false,
         "item_heading_font": "josefin_sans_n4",
@@ -243,6 +243,19 @@
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
+      }
+    },
+    "line_ADUkzH": {
+      "type": "line",
+      "name": "Divider",
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "40px 0px 40px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
       }
     },
     "service_3a8Uqf": {
@@ -382,7 +395,7 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
-    "line_ADUkzH": {
+    "line_i4G6m7": {
       "type": "line",
       "name": "Divider",
       "settings": {
@@ -906,10 +919,11 @@
   "order": [
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_image_with_text_24_c3iyWm",
+    "line_ADUkzH",
     "service_3a8Uqf",
     "line_mLXGmb",
     "image_content_WHeiYm",
-    "line_ADUkzH",
+    "line_i4G6m7",
     "image_content_yXyYMk",
     "line_gBQeiW",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
