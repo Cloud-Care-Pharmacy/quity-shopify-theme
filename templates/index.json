@@ -319,6 +319,67 @@
         "wborder": "1px"
       }
     },
+    "image_content_yXyYMk": {
+      "type": "image-content",
+      "blocks": {
+        "image_block_TgrL9c": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify://shop_images/FLORA-FastMed-0a38bdc4.png"
+          }
+        },
+        "text_block_NmWe7K": {
+          "type": "text_block",
+          "settings": {
+            "width": "100%",
+            "bgtext": "#ffffff",
+            "title_color": "rgba(0,0,0,0)",
+            "subtitle": "",
+            "title": "Get Your Nicotine Vape Prescription Online. Fast, Private, No Hassle.",
+            "size_text": "h2",
+            "text": "<p>Quity makes quitting smoking easier with online access to TGA-approved doctors from home. Our straightforward process covers application, medical review, and if approved, access to prescribed products.\nNo subscriptions. No hidden costs. Only pay for products and delivery. You'll save money compared to buying cigarettes. Free shipping on orders over $150, or express delivery reaching 85% of Australia next business day.\nThousands of Australians have already begun their smoke-free journey with Quity. Start yours today and take the first step towards better health.</p>",
+            "answer_content": "",
+            "style_btn": "btn-underline btn-underline-white",
+            "button": "discover now",
+            "link": "",
+            "enable_padding": true,
+            "align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_TgrL9c",
+        "text_block_NmWe7K"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "rangebg": 0,
+        "bgbefore": "transparent",
+        "bg_pos": "left",
+        "enable_padding": true,
+        "align_center": true,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "line_gBQeiW": {
+      "type": "line",
+      "name": "Divider",
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "40px 0px 40px 0px",
+        "bgsection": "#ffffff",
+        "setwidth": "container",
+        "bgborder": "#dddddd",
+        "wborder": "1px"
+      }
+    },
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1": {
       "type": "grid-banner",
       "blocks": {
@@ -772,6 +833,8 @@
     "line_mLXGmb",
     "image_content_WHeiYm",
     "line_ADUkzH",
+    "image_content_yXyYMk",
+    "line_gBQeiW",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
     "35f6d573-7da7-4f43-8a21-df8b5494d08f",
     "923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a",
