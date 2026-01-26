@@ -1,0 +1,557 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "430d67f1-2a0b-4500-81eb-2bd7276f92ad": {
+      "type": "featured-collections-1",
+      "blocks": {
+        "0b74bde9-fb76-4d98-aaae-fc807e6f171f": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "image": "shopify://shop_images/men.jpg",
+            "icon": ""
+          }
+        },
+        "13aba3f0-7305-4cc6-959e-23f07d16c852": {
+          "type": "collection",
+          "settings": {
+            "collection": "women",
+            "image": "shopify://shop_images/women.jpg",
+            "icon": ""
+          }
+        },
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "jewellery",
+            "image": "shopify://shop_images/accessories.jpg",
+            "icon": ""
+          }
+        },
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "outerwear",
+            "image": "shopify://shop_images/outerwear.jpg",
+            "icon": ""
+          }
+        },
+        "da799991-c205-4b0b-b14c-7454b5dd99cd": {
+          "type": "collection",
+          "settings": {
+            "collection": "shoes",
+            "image": "shopify://shop_images/shoes.jpg",
+            "icon": ""
+          }
+        },
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "glasses",
+            "image": "shopify://shop_images/glasses.jpg",
+            "icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "0b74bde9-fb76-4d98-aaae-fc807e6f171f",
+        "13aba3f0-7305-4cc6-959e-23f07d16c852",
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-2",
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-0",
+        "da799991-c205-4b0b-b14c-7454b5dd99cd",
+        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-1"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Our Exclusive Collections",
+        "title": "Shop By Categories",
+        "des": "",
+        "align-heading": "center",
+        "size_image": "square",
+        "style_item": "top",
+        "rows": "1",
+        "show": 5,
+        "radius": 50,
+        "space": 15,
+        "size_text": "h4",
+        "show_count": false,
+        "button_text": "",
+        "enable_carousel": true,
+        "arrows": false,
+        "draggable": true,
+        "dots": false,
+        "infinite": true,
+        "paddingsection": "80px 0px 40px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "4f3d9b61-ed06-493b-93a3-91ea869f8a19": {
+      "type": "advanced-content",
+      "blocks": {
+        "f5003b5a-0108-43e3-afc8-c1b381bb1b59": {
+          "type": "html",
+          "settings": {
+            "width": "50%",
+            "image_sub": "shopify://shop_images/filler2.jpg",
+            "title": "Unlock Beauty Deals <br>You Can't Resist.",
+            "color_title": "#222222",
+            "sub": "Exclusive Offer Alert!",
+            "color_sub": "#e35353",
+            "code": "",
+            "color_des": "#000000",
+            "button_text": "",
+            "link_button": "",
+            "align": "center",
+            "box_align": "center",
+            "text_align": "center"
+          }
+        },
+        "c6ed78dd-3ee3-4ce5-b4a2-b251735d0627": {
+          "type": "html",
+          "settings": {
+            "width": "50%",
+            "image_sub": "shopify://shop_images/filler1.jpg",
+            "title": "Your Beauty Favorites at<br> Unbeatable Prices",
+            "color_title": "#000000",
+            "sub": "Exclusive Offer Inside!",
+            "color_sub": "#e35353",
+            "code": "",
+            "color_des": "#000000",
+            "button_text": "",
+            "link_button": "",
+            "align": "auto",
+            "box_align": "center",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": [
+        "f5003b5a-0108-43e3-afc8-c1b381bb1b59",
+        "c6ed78dd-3ee3-4ce5-b4a2-b251735d0627"
+      ],
+      "custom_css": [
+        ".advand-html-image-sub img {max-width: 100%;}"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "padding_custom": 15,
+        "text_color": "rgba(0,0,0,0)",
+        "bgsection": "#ffffff",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_position": "center center",
+        "zindex": "0",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "padding": true,
+        "col_center": false,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "07954675-bad5-4a16-8ffa-2392279b713d": {
+      "type": "featured-products",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Top Picks for Fashion-Forward Shoppers",
+        "title": "Best Selling",
+        "des": "",
+        "align-heading": "center",
+        "collection": "jewellery",
+        "enable_creative": false,
+        "padding": true,
+        "colgrid": "col-lg-4",
+        "rows": 3,
+        "txtbutton": "show all",
+        "urlbtn": "",
+        "paddingsection": "80px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1": {
+      "type": "grid-banner",
+      "blocks": {
+        "template--16458105913475__78a84a3d-79cc-4e91-87bc-c68dcffe3bf1-banner-1": {
+          "type": "banner",
+          "settings": {
+            "width": "6",
+            "image": "shopify://shop_images/offer-banner1_cd5ff0a4-83f8-4855-b0ca-254ffafee564.jpg",
+            "subtitle": "Seasonal Style Sensations",
+            "color_sub": "#000000",
+            "title": "Unwrap the Hottest <br>Trends of the Yea",
+            "color_title": "#000000",
+            "size_text": "h2",
+            "description": "Get ready for a wardrobe makeover like no other.",
+            "bg_color": "#ffffff",
+            "colordef": "#ffffff",
+            "opacity_bg": 0,
+            "style_btn": "btn-underline btn-underline-white",
+            "button_text": "View more",
+            "button_link": "",
+            "vertical": "mid",
+            "horizontal": "left",
+            "text_align": "left"
+          }
+        },
+        "template--16458105913475__78a84a3d-79cc-4e91-87bc-c68dcffe3bf1-banner-2": {
+          "type": "banner",
+          "settings": {
+            "width": "6",
+            "image": "shopify://shop_images/offer-banner2_1e89c27a-54d6-49ae-ac26-6415cb2b5f64.jpg",
+            "subtitle": "Elevate Your Style Game",
+            "color_sub": "#000000",
+            "title": "Discover the Latest<br> in Fashion",
+            "color_title": "#000000",
+            "size_text": "h2",
+            "description": "Unleash your inner fashionista with __name__.",
+            "bg_color": "#ffffff",
+            "colordef": "#ffffff",
+            "opacity_bg": 0,
+            "style_btn": "btn-underline btn-underline-white",
+            "button_text": "View more",
+            "button_link": "",
+            "vertical": "mid",
+            "horizontal": "right",
+            "text_align": "right"
+          }
+        }
+      },
+      "block_order": [
+        "template--16458105913475__78a84a3d-79cc-4e91-87bc-c68dcffe3bf1-banner-1",
+        "template--16458105913475__78a84a3d-79cc-4e91-87bc-c68dcffe3bf1-banner-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "no_gutter": false,
+        "show_overlay": true,
+        "gradient_overlay": true,
+        "bg_overlay": "#000000",
+        "opacity_overlay": 0.1,
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "35f6d573-7da7-4f43-8a21-df8b5494d08f": {
+      "type": "banner-singer",
+      "blocks": {
+        "645724bc-4a56-42af-881b-f7cad3818ba7": {
+          "type": "product",
+          "settings": {
+            "product": "cashmere-knit-cardigan",
+            "top": 30,
+            "left": 60
+          }
+        }
+      },
+      "block_order": [
+        "645724bc-4a56-42af-881b-f7cad3818ba7"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "paddingsection": "120px 0px 120px 0px",
+        "paddingmobile": "60px 0px 60px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "zindex": "0",
+        "bgsection": "#ffffff",
+        "bg_section": "shopify://shop_images/filler3.jpg",
+        "subtop": "Exclusive Offer Just for You!",
+        "banner_title": "Unveil Your Radiance with<br> Irresistible Deals.",
+        "color_title": "#000000",
+        "des_banner": "",
+        "color_des": "#000000",
+        "countdown": "2024/06/01",
+        "text_link": "",
+        "link": "",
+        "color_link": "#000000",
+        "color_btn": "#000000",
+        "border_btn": "#000000",
+        "bg_btn": "rgba(0,0,0,0)",
+        "text_align": "left",
+        "item_align": "center"
+      }
+    },
+    "923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a": {
+      "type": "product-tab",
+      "blocks": {
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-1": {
+          "type": "collection",
+          "settings": {
+            "title": "Featured",
+            "collection": "frontpage"
+          }
+        },
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-2": {
+          "type": "collection",
+          "settings": {
+            "title": "New Arrival",
+            "collection": "women"
+          }
+        },
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-3": {
+          "type": "collection",
+          "settings": {
+            "title": "Best Seller",
+            "collection": "bags"
+          }
+        }
+      },
+      "block_order": [
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-1",
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-2",
+        "template--16458105913475__923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a-collection-3"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Stay Ahead of the Fashion Curve",
+        "title": "Trending Products",
+        "des": "",
+        "align-heading": "center",
+        "style_tab": "line-right",
+        "enable_carousel": true,
+        "arrows": false,
+        "draggable": true,
+        "dots": true,
+        "infinite": true,
+        "rows": "2",
+        "spaceBetween": 30,
+        "limit": 10,
+        "show": 4,
+        "paddingsection": "80px 0px 80px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "85150b71-1648-4e2b-bd81-d70d49df23c6": {
+      "type": "parallax-banner",
+      "blocks": {
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-sub_title-1": {
+          "type": "sub_title",
+          "settings": {
+            "subtitle": "Style Redefined"
+          }
+        },
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-heading-1": {
+          "type": "heading",
+          "settings": {
+            "title": "Explore the Latest Fashion Trends at __name__!",
+            "size_text": "h2"
+          }
+        },
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-paragraph-1": {
+          "type": "paragraph",
+          "settings": {
+            "subtext": "Indulge in the art of fashion with __name__. Discover a world of <br>sophistication and timeless elegance."
+          }
+        },
+        "d25e3cc3-5189-4941-afb3-60cd6a556bfd": {
+          "type": "button",
+          "settings": {
+            "button": "discover now",
+            "link": "#",
+            "style_btn": "btn-theme"
+          }
+        }
+      },
+      "block_order": [
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-sub_title-1",
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-heading-1",
+        "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-paragraph-1",
+        "d25e3cc3-5189-4941-afb3-60cd6a556bfd"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "parrallax_enable": true,
+        "image": "shopify://shop_images/filler4.jpg",
+        "height_section": "650",
+        "height_section_mobile": "450",
+        "align": "center",
+        "position_text": "mid-center",
+        "bg_box": "#ffffff",
+        "opacity_bgbox": 0.7,
+        "title_color": "#222222",
+        "bg_overlay": "#000000",
+        "gradient_bg": "",
+        "opacity_bg_overlay": 0.1,
+        "paddingsection": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px"
+      }
+    },
+    "3e04d8d0-b36c-4e9e-8f16-6987ee712faa": {
+      "type": "featured-articles",
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "Explore Our Latest Fashion Insights",
+        "title": "Blog posts",
+        "des": "",
+        "align-heading": "center",
+        "blog": "news",
+        "item_style": "blog-1",
+        "enable_btn_blog": true,
+        "enable_btn_line": false,
+        "enable_date": true,
+        "enable_tag": true,
+        "enable_author": true,
+        "enable_comment": true,
+        "enable_short": true,
+        "image_size": "auto",
+        "arrows": false,
+        "draggable": true,
+        "dots": false,
+        "infinite": true,
+        "rows": "1",
+        "limit": 5,
+        "show": 3,
+        "paddingsection": "80px 0px 30px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "3fbc3961-b3b3-483b-9070-76e53c90c3c9": {
+      "type": "brand-carousel",
+      "blocks": {
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-0": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta1.jpg",
+            "link": ""
+          }
+        },
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta2.jpg",
+            "link": ""
+          }
+        },
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta3.jpg",
+            "link": ""
+          }
+        },
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta4.jpg",
+            "link": ""
+          }
+        },
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta5.jpg",
+            "link": ""
+          }
+        },
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-5": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta6.jpg",
+            "link": ""
+          }
+        },
+        "f52bcd79-edc2-4215-9816-d4d2ffbd4a60": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta7.jpg",
+            "link": ""
+          }
+        },
+        "975035b5-e5af-441d-9cfd-0add0b5bf531": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/insta8.jpg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-0",
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-1",
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-2",
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-3",
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-4",
+        "template--19803510538560__3fbc3961-b3b3-483b-9070-76e53c90c3c9-1688611842d27b152a-5",
+        "f52bcd79-edc2-4215-9816-d4d2ffbd4a60",
+        "975035b5-e5af-441d-9cfd-0add0b5bf531"
+      ],
+      "settings": {
+        "animation": "",
+        "setwidth": "container-fluid",
+        "bgsection": "#ffffff",
+        "title_top": "",
+        "title": "Follow Us",
+        "des": "<span style=\"color:#e35353;\">@Rosyz_Fashion_Store</span>",
+        "align-heading": "center",
+        "grayscale": false,
+        "arrows": false,
+        "draggable": true,
+        "dots": false,
+        "infinite": true,
+        "width_image": 100,
+        "slidestoshow": 6,
+        "slidescroll": 1,
+        "pd_items": 2,
+        "rows": "1",
+        "paddingsection": "0px 0px 80px 0px",
+        "paddingmobile": "50px 0px 50px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
+    "4f3d9b61-ed06-493b-93a3-91ea869f8a19",
+    "07954675-bad5-4a16-8ffa-2392279b713d",
+    "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
+    "35f6d573-7da7-4f43-8a21-df8b5494d08f",
+    "923a1a2f-ebd1-4351-a13c-fad4ebcf6f4a",
+    "85150b71-1648-4e2b-bd81-d70d49df23c6",
+    "3e04d8d0-b36c-4e9e-8f16-6987ee712faa",
+    "3fbc3961-b3b3-483b-9070-76e53c90c3c9"
+  ]
+}
