@@ -92,6 +92,159 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
+    "ss_image_with_text_24_c3iyWm": {
+      "type": "ss-image-with-text-24",
+      "blocks": {
+        "heading_wDcTQ3": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>How it works</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 48,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_hK4Pxj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this text to share information about your brand with your customers.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "button_LLbzCz": {
+          "type": "button",
+          "settings": {
+            "button": "Shop now",
+            "button_url": "",
+            "open_in_new_tab": false,
+            "button_style": "outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 16,
+            "button_size_mobile": 16,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 32,
+            "button_padding_horizontal_mobile": 32,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 24,
+            "button_mt_mobile": 16,
+            "use_shadow": false,
+            "button_color": "#121212",
+            "button_hover_color": "#121212",
+            "button_bg_color": "#F7F7F7",
+            "button_bg_hover_color": "#FFFFFF",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        },
+        "item_iUnYta": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/humberto-chavez-FVh_yqLR9eA-unsplash.jpg",
+            "heading": "<h3>Apply for 12 Month Prescription</h3>",
+            "text": "<p>Apply for your 12-month prescription and get doctor approval within 24 hours. Once approved, shop our range with free express delivery on your first order.</p>"
+          }
+        },
+        "item_EQPYiE": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2463472719.jpg",
+            "heading": "<h3>Upload an Existing E-Script</h3>",
+            "text": "<p>Upload your existing E-Script (with QR code or token number) for free pharmacy approval, then shop our range with discreet delivery.</p>"
+          }
+        },
+        "item_zpbfMV": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_2475092539.jpg",
+            "heading": "<h3>Register Your Interest for a Call</h3>",
+            "text": "<p>Contact us via our support page and our team will respond as soon as possible to help with any request.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wDcTQ3",
+        "text_hK4Pxj",
+        "button_LLbzCz",
+        "item_iUnYta",
+        "item_EQPYiE",
+        "item_zpbfMV"
+      ],
+      "name": "How it works",
+      "settings": {
+        "layout": "image_content",
+        "image_item_width": 50,
+        "layout_gap": 60,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "features_advanced": false,
+        "items_mt": 40,
+        "items_mt_mobile": 20,
+        "items_gap": 40,
+        "item_padding_horizontal": 24,
+        "item_padding_horizontal_mobile": 0,
+        "progress_bar_width": 2,
+        "image_item_ratio": "portrait",
+        "image_item_ratio_mobile": "landscape",
+        "image_item_radius": 0,
+        "image_item_border_thickness": 0,
+        "item_heading_custom": false,
+        "item_heading_font": "josefin_sans_n4",
+        "item_heading_size": 24,
+        "item_heading_size_mobile": 20,
+        "item_heading_advanced": false,
+        "item_heading_height": 130,
+        "item_heading_mt": 0,
+        "item_text_custom": false,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 18,
+        "item_text_size_mobile": 18,
+        "item_text_advanced": false,
+        "item_text_height": 150,
+        "item_text_mt": 12,
+        "item_text_mt_mobile": 12,
+        "text_hide_on_mobile": false,
+        "item_heading_color": "#121212",
+        "item_text_color": "#121212",
+        "progress_bar_bg": "#121212",
+        "image_item_border_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#FFFFFF",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
     "4f3d9b61-ed06-493b-93a3-91ea869f8a19": {
       "type": "advanced-content",
       "blocks": {
@@ -529,6 +682,7 @@
   },
   "order": [
     "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
+    "ss_image_with_text_24_c3iyWm",
     "4f3d9b61-ed06-493b-93a3-91ea869f8a19",
     "07954675-bad5-4a16-8ffa-2392279b713d",
     "78a84a3d-79cc-4e91-87bc-c68dcffe3bf1",
