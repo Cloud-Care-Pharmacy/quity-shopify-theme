@@ -348,7 +348,7 @@
           "settings": {
             "image": "shopify://shop_images/humberto-chavez-FVh_yqLR9eA-unsplash.jpg",
             "heading": "<h3>Apply for 12 Month Prescription</h3>",
-            "text": "<p>Apply for your 12-month prescription and get doctor approval within 24 hours. Once approved, shop our range with free express delivery on your first order.</p>"
+            "text": "<p>Beginning your journey with us is straightforward. Set up your account and submit your application for an annual prescription through your personal dashboard. A qualified Australian physician will assess your request within one day and notify you by both SMS and email. Upon approval, browse our product selection and receive complimentary express shipping with your initial purchase.</p>"
           }
         },
         "item_EQPYiE": {
@@ -356,7 +356,7 @@
           "settings": {
             "image": "shopify://shop_images/shutterstock_2463472719.jpg",
             "heading": "<h3>Upload an Existing E-Script</h3>",
-            "text": "<p>Upload your existing E-Script (with QR code or token number) for free pharmacy approval, then shop our range with discreet delivery.</p>"
+            "text": "<p>Do you currently possess a valid E-Script containing a QR code or token number? Register for an account and submit your prescription free of charge. Our licensed pharmacists will verify and authorize legitimate E-Script submissions, giving you access to our comprehensive product range with discreet home delivery.</p><p></p>"
           }
         },
         "item_zpbfMV": {
@@ -364,7 +364,7 @@
           "settings": {
             "image": "shopify://shop_images/shutterstock_2475092539.jpg",
             "heading": "<h3>Register Your Interest for a Call</h3>",
-            "text": "<p>Contact us via our support page and our team will respond as soon as possible to help with any request.</p>"
+            "text": "<p>Need clarification about our offerings or have specific inquiries? Complete our enquiry form available through the support section, and a member of our team will reach out promptly to address your needs and answer your questions.</p>"
           }
         }
       },
