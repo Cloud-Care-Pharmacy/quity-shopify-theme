@@ -9,89 +9,6 @@
  */
 {
   "sections": {
-    "430d67f1-2a0b-4500-81eb-2bd7276f92ad": {
-      "type": "featured-collections-1",
-      "blocks": {
-        "0b74bde9-fb76-4d98-aaae-fc807e6f171f": {
-          "type": "collection",
-          "settings": {
-            "collection": "frontpage",
-            "icon": ""
-          }
-        },
-        "13aba3f0-7305-4cc6-959e-23f07d16c852": {
-          "type": "collection",
-          "settings": {
-            "collection": "women",
-            "icon": ""
-          }
-        },
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "jewellery",
-            "icon": ""
-          }
-        },
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-0": {
-          "type": "collection",
-          "settings": {
-            "collection": "outerwear",
-            "icon": ""
-          }
-        },
-        "da799991-c205-4b0b-b14c-7454b5dd99cd": {
-          "type": "collection",
-          "settings": {
-            "collection": "shoes",
-            "icon": ""
-          }
-        },
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "glasses",
-            "icon": ""
-          }
-        }
-      },
-      "block_order": [
-        "0b74bde9-fb76-4d98-aaae-fc807e6f171f",
-        "13aba3f0-7305-4cc6-959e-23f07d16c852",
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-2",
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-0",
-        "da799991-c205-4b0b-b14c-7454b5dd99cd",
-        "template--19803510538560__430d67f1-2a0b-4500-81eb-2bd7276f92ad-1688610004822568a8-1"
-      ],
-      "disabled": true,
-      "settings": {
-        "animation": "",
-        "setwidth": "container",
-        "bgsection": "#ffffff",
-        "title_top": "Our Exclusive Collections",
-        "title": "Shop By Categories",
-        "des": "",
-        "align-heading": "center",
-        "size_image": "square",
-        "style_item": "top",
-        "rows": "1",
-        "show": 5,
-        "radius": 50,
-        "space": 15,
-        "size_text": "h4",
-        "show_count": false,
-        "button_text": "",
-        "enable_carousel": true,
-        "arrows": false,
-        "draggable": true,
-        "dots": false,
-        "infinite": true,
-        "paddingsection": "80px 0px 40px 0px",
-        "paddingmobile": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
-      }
-    },
     "ss_hero_pro_h4mnMh": {
       "type": "ss-hero-pro",
       "blocks": {
@@ -369,8 +286,8 @@
           "type": "heading",
           "settings": {
             "heading": "",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
+            "heading_custom": true,
+            "heading_font": "jost_n4",
             "heading_size": 48,
             "heading_size_mobile": 32,
             "heading_advanced": false,
@@ -476,24 +393,24 @@
         "image_item_ratio_mobile": "landscape",
         "image_item_radius": 30,
         "image_item_border_thickness": 0,
-        "item_heading_custom": false,
-        "item_heading_font": "josefin_sans_n4",
+        "item_heading_custom": true,
+        "item_heading_font": "jost_n4",
         "item_heading_size": 24,
         "item_heading_size_mobile": 20,
         "item_heading_advanced": false,
         "item_heading_height": 130,
         "item_heading_mt": 0,
-        "item_text_custom": false,
-        "item_text_font": "josefin_sans_n4",
-        "item_text_size": 18,
+        "item_text_custom": true,
+        "item_text_font": "jost_n4",
+        "item_text_size": 16,
         "item_text_size_mobile": 18,
         "item_text_advanced": false,
         "item_text_height": 150,
         "item_text_mt": 12,
         "item_text_mt_mobile": 12,
         "text_hide_on_mobile": false,
-        "item_heading_color": "#121212",
-        "item_text_color": "#121212",
+        "item_heading_color": "#343a40",
+        "item_text_color": "#737171",
         "progress_bar_bg": "#121212",
         "image_item_border_color": "#121212",
         "background_style": "solid",
@@ -1187,7 +1104,6 @@
     }
   },
   "order": [
-    "430d67f1-2a0b-4500-81eb-2bd7276f92ad",
     "ss_hero_pro_h4mnMh",
     "ss_image_with_text_24_c3iyWm",
     "line_ADUkzH",
