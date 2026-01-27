@@ -128,19 +128,19 @@
               {%- if block.settings.title != blank -%}
               <h5 class="mt-0 mb-3 font-weight-bold text-capitalize {{ service_heading }}" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
               {%- endif -%}
-              <div class="media align-items-center">
+              <div class="mb-3">
                 {% if block.settings.image_icon == blank  %}
-                  <span class="mr-4 iconx8 service-icon-box" style="color:{{ section.settings.iconcolor }};">
+                  <span class="iconx8 service-icon-box d-inline-flex" style="color:{{ section.settings.iconcolor }};">
                     {{ block.settings.icon | default: '[[ Icon ]]' }}
                   </span>
                 {% endif %}
                 {% if block.settings.image_icon != blank %}
-                  <span class="mr-4 service-image-box">
+                  <span class="service-image-box d-inline-block">
                     <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
                   </span>
                 {% endif %}
-                <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
               </div>
+              <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
             </div>
           </div>
           {%- when 'style-2' -%}
@@ -158,17 +158,17 @@
               {%- if block.settings.title != blank -%}
                 <h5 class="mt-0 mb-3 {{ service_heading }} text-capitalize" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
               {%- endif -%}
-              <div style="color:{{ section.settings.subcolor }}; margin-bottom: 20px;">{{ block.settings.description }}</div>
               {% if block.settings.image_icon == blank  %}
-                <div class="iconx8" style="color:{{ section.settings.iconcolor }};">
+                <div class="mb-3 iconx8" style="color:{{ section.settings.iconcolor }};">
                   {{ block.settings.icon | default: '[[ Icon ]]' }}
                 </div>
               {% endif %}
               {% if block.settings.image_icon != blank %}
-                <div>
+                <div class="mb-3">
                   <img src="{{ block.settings.image_icon | image_url: width: 100 }}" alt="" style="max-width: 80px;">
                 </div>
               {% endif %}
+              <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
             </div>
           </div>
           {%- endcase -%}
