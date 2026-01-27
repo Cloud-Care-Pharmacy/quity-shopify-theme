@@ -33,7 +33,7 @@
             "caption_padding_horizontal_mobile": 12,
             "caption_padding_vertical": 6,
             "caption_padding_vertical_mobile": 6,
-            "caption_color": "#414141",
+            "caption_color": "#e35353",
             "caption_bg_color": "#ffffff",
             "caption_border_color": "#ffffff"
           }
@@ -80,9 +80,9 @@
             "review_padding_horizontal_mobile": 12,
             "review_padding_vertical": 8,
             "review_padding_vertical_mobile": 8,
-            "review_color": "#ffffff",
+            "review_color": "#7d8618",
             "review_bg_color": "#ffffff",
-            "review_border_color": "#ffffff",
+            "review_border_color": "rgba(0,0,0,0)",
             "stars_color": "#ffffff",
             "stars_bg_color": "#00b67a",
             "stars_bg_half_color": "#dddddd"
