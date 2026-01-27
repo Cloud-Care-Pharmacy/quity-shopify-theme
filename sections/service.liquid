@@ -136,7 +136,7 @@
                 {% endif %}
                 {% if block.settings.image_icon != blank %}
                   <span class="service-image-box d-inline-block">
-                    <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
+                    <img src="{{ block.settings.image_icon | image_url: width: 150 }}" alt="" style="max-width: 80px; height: auto;">
                   </span>
                 {% endif %}
               </div>
@@ -165,7 +165,7 @@
               {% endif %}
               {% if block.settings.image_icon != blank %}
                 <div class="mb-3">
-                  <img src="{{ block.settings.image_icon | image_url: width: 100 }}" alt="" style="max-width: 80px;">
+                  <img src="{{ block.settings.image_icon | image_url: width: 150 }}" alt="" style="max-width: 80px; height: auto;">
                 </div>
               {% endif %}
               <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
