@@ -40,7 +40,7 @@
     background-color: {{ section.settings.step_badge_color }};
     color: {{ section.settings.step_text_color }};
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: {{ section.settings.step_badge_radius }}px;
     font-size: 14px;
     font-weight: 600;
     display: inline-block;
@@ -124,21 +124,21 @@
                 {% endif %}
               </div>
             {% endif %}
-            <div class="media align-items-center">
-              {% if block.settings.image_icon == blank  %}
-                <span class="mr-4 iconx8 service-icon-box" style="color:{{ section.settings.iconcolor }};">
-                  {{ block.settings.icon | default: '[[ Icon ]]' }}
-                </span>
-              {% endif %}
-              {% if block.settings.image_icon != blank %}
-                <span class="mr-4 service-image-box">
-                  <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
-                </span>
-              {% endif %}
-              <div class="media-body">
-                {%- if block.settings.title != blank -%}
-                <h5 class="mt-0 mb-1 font-weight-bold text-capitalize {{ service_heading }}" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
-                {%- endif -%}
+            <div class="media-body">
+              {%- if block.settings.title != blank -%}
+              <h5 class="mt-0 mb-3 font-weight-bold text-capitalize {{ service_heading }}" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
+              {%- endif -%}
+              <div class="media align-items-center">
+                {% if block.settings.image_icon == blank  %}
+                  <span class="mr-4 iconx8 service-icon-box" style="color:{{ section.settings.iconcolor }};">
+                    {{ block.settings.icon | default: '[[ Icon ]]' }}
+                  </span>
+                {% endif %}
+                {% if block.settings.image_icon != blank %}
+                  <span class="mr-4 service-image-box">
+                    <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
+                  </span>
+                {% endif %}
                 <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
               </div>
             </div>
@@ -155,20 +155,20 @@
                   {% endif %}
                 </div>
               {% endif %}
+              {%- if block.settings.title != blank -%}
+                <h5 class="mt-0 mb-3 {{ service_heading }} text-capitalize" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
+              {%- endif -%}
+              <div style="color:{{ section.settings.subcolor }}; margin-bottom: 20px;">{{ block.settings.description }}</div>
               {% if block.settings.image_icon == blank  %}
-                <div class="mb-4 iconx8" style="color:{{ section.settings.iconcolor }};">
+                <div class="iconx8" style="color:{{ section.settings.iconcolor }};">
                   {{ block.settings.icon | default: '[[ Icon ]]' }}
                 </div>
               {% endif %}
               {% if block.settings.image_icon != blank %}
-                <div class="mb-4">
+                <div>
                   <img src="{{ block.settings.image_icon | image_url: width: 100 }}" alt="" style="max-width: 80px;">
                 </div>
               {% endif %}
-              {%- if block.settings.title != blank -%}
-                <h5 class="mt-0 mb-2 {{ service_heading }} text-capitalize" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
-              {%- endif -%}
-              <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
             </div>
           </div>
           {%- endcase -%}
@@ -473,6 +473,16 @@
       "id": "step_text_color",
       "label": "Step Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "step_badge_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Step Badge Border Radius",
+      "default": 20
     },
     {
       "type": "header",
