@@ -22,15 +22,41 @@
     justify-content: center;
   }
   .customstyle{{ section.id }} .service-1{
-    border-radius: 5px;
-   
+    border-radius: {{ section.settings.box_border_radius }}px;
+    padding: 30px;
+    min-height: 200px;
   }
   .customstyle{{ section.id }} .services-item:hover .service-icon-box{
     border-style: solid;
     border-color: #000;
   }
   .customstyle{{ section.id }} .service-2 .media-body{
-    max-width: 240px;
+    border-radius: {{ section.settings.box_border_radius }}px;
+    padding: 30px;
+    min-height: 300px;
+    position: relative;
+  }
+  .customstyle{{ section.id }} .step-badge{
+    background-color: {{ section.settings.step_badge_color }};
+    color: {{ section.settings.step_text_color }};
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+  }
+  .customstyle{{ section.id }} .service-box{
+    border-radius: {{ section.settings.box_border_radius }}px;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .customstyle{{ section.id }} .service-box:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   }
   
   @media (min-width:1200px){
@@ -88,30 +114,57 @@
         <div data-aos="{{ section.settings.animation }}"  data-aos-delay="{{ forloop.index | times: 100 }}">
           {%- case section.settings.layout -%}
           {%- when 'style-1' -%}
-          <div class="media service-1 text-left align-items-center" style="background-color:{{ block.settings.bgblock }};">
-            {% if block.settings.image_icon == blank  %}
-              <span class=" mr-4 iconx8 service-icon-box" style="color:{{ section.settings.iconcolor }};">
-                {{ block.settings.icon | default: '[[ Icon ]]' }}
-              </span>
+          <div class="service-box service-1 text-left" style="background-color:{{ block.settings.bgblock }};">
+            {% if section.settings.show_step_numbers %}
+              <div class="step-badge">
+                {% if block.settings.step_number_text != blank %}
+                  {{ block.settings.step_number_text }}
+                {% else %}
+                  Step {{ forloop.index }}
+                {% endif %}
+              </div>
             {% endif %}
-            {% if block.settings.image_icon != blank %}
-              <span class="mr-4 service-image-box">
-                <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
-              </span>
-            {% endif %}
-            <div class="media-body">
-              {%- if block.settings.title != blank -%}
-              <h5 class="mt-0 mb-1 font-weight-bold text-capitalize {{ service_heading }}" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
-              {%- endif -%}
-              <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
+            <div class="media align-items-center">
+              {% if block.settings.image_icon == blank  %}
+                <span class="mr-4 iconx8 service-icon-box" style="color:{{ section.settings.iconcolor }};">
+                  {{ block.settings.icon | default: '[[ Icon ]]' }}
+                </span>
+              {% endif %}
+              {% if block.settings.image_icon != blank %}
+                <span class="mr-4 service-image-box">
+                  <img src="{{ block.settings.image_icon | image_url: width: 1920 }}" alt="">
+                </span>
+              {% endif %}
+              <div class="media-body">
+                {%- if block.settings.title != blank -%}
+                <h5 class="mt-0 mb-1 font-weight-bold text-capitalize {{ service_heading }}" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
+                {%- endif -%}
+                <div style="color:{{ section.settings.subcolor }};">{{ block.settings.description }}</div>
+              </div>
             </div>
           </div>
           {%- when 'style-2' -%}
-          <div class="media service-2 text-center justify-content-center">
+          <div class="service-box text-center">
             <div class="media-body" style="background-color:{{ block.settings.bgblock }};">
+              {% if section.settings.show_step_numbers %}
+                <div class="step-badge">
+                  {% if block.settings.step_number_text != blank %}
+                    {{ block.settings.step_number_text }}
+                  {% else %}
+                    Step {{ forloop.index }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if block.settings.image_icon == blank  %}
                 <div class="mb-4 iconx8" style="color:{{ section.settings.iconcolor }};">
-                {{ block.settings.icon | default: '[[ Icon ]]' }}
-              </div>
+                  {{ block.settings.icon | default: '[[ Icon ]]' }}
+                </div>
+              {% endif %}
+              {% if block.settings.image_icon != blank %}
+                <div class="mb-4">
+                  <img src="{{ block.settings.image_icon | image_url: width: 100 }}" alt="" style="max-width: 80px;">
+                </div>
+              {% endif %}
               {%- if block.settings.title != blank -%}
                 <h5 class="mt-0 mb-2 {{ service_heading }} text-capitalize" style="color:{{ section.settings.titlecolor }};">{{ block.settings.title }}</h5>
               {%- endif -%}
@@ -400,6 +453,42 @@
       "default": 50
     },
     {
+      "type": "header",
+      "content": "Step Numbers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_step_numbers",
+      "label": "Show Step Numbers",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "step_badge_color",
+      "label": "Step Badge Color",
+      "default": "#8BC34A"
+    },
+    {
+      "type": "color",
+      "id": "step_text_color",
+      "label": "Step Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Box Styling"
+    },
+    {
+      "type": "range",
+      "id": "box_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Box Border Radius",
+      "default": 20
+    },
+    {
       "type": "select",
       "id": "service_heading",
       "label": "Heading Item",
@@ -516,6 +605,12 @@
           "id": "bgblock",
           "label": "Background Block",
           "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "step_number_text",
+          "label": "Step Number Text (optional)",
+          "info": "Leave blank to auto-number (Step 1, Step 2, etc.)"
         },
         {
           "id": "title",
