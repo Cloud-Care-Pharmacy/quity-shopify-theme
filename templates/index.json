@@ -434,6 +434,7 @@
     },
     "line_ADUkzH": {
       "type": "line",
+      "disabled": true,
       "name": "Divider",
       "settings": {
         "animation": "",
@@ -492,12 +493,12 @@
         "service_Gh6GAV"
       ],
       "custom_css": [
-        "h3 {color: #FFF;}"
+        "h3 {color: #fff;}"
       ],
       "name": "How it works",
       "settings": {
         "animation": "",
-        "setwidth": "container",
+        "setwidth": "full",
         "bgsection": "#222222",
         "title_top": "",
         "title": "How Quity Works",
@@ -520,12 +521,13 @@
         "infinite": true,
         "paddingsection": "0px 0px 0px 0px",
         "paddingmobile": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 00px 0px",
+        "marginsection": "0px 0px 40px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
     },
     "line_mLXGmb": {
       "type": "line",
+      "disabled": true,
       "name": "Divider",
       "settings": {
         "animation": "",
