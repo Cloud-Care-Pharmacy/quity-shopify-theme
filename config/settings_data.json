@@ -635,7 +635,7 @@
           "7b190f33-76f8-4625-b588-eafdb8c9772b"
         ],
         "settings": {
-          "enable_slideshow": true,
+          "enable_slideshow": false,
           "setwidthout": "full",
           "slideshow_height_adapt": "full",
           "slideshow_height_mobile": "500",
