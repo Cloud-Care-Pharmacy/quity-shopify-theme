@@ -451,7 +451,7 @@
         "service_pVBLkB": {
           "type": "service",
           "settings": {
-            "bgblock": "#bcc4cd",
+            "bgblock": "#222222",
             "title": "1. Create your account",
             "description": "Get started by registering your patient account.",
             "icon": ""
@@ -460,7 +460,7 @@
         "service_iBV8mL": {
           "type": "service",
           "settings": {
-            "bgblock": "#bcc4cd",
+            "bgblock": "#222222",
             "title": "2. Online Assessment",
             "description": "Answer a few questions about your smoking and medical history.",
             "icon": ""
@@ -469,7 +469,7 @@
         "service_C4Mh6z": {
           "type": "service",
           "settings": {
-            "bgblock": "#bcc4cd",
+            "bgblock": "#222222",
             "title": "3. Get Notified",
             "description": "Our medical team will notify you via email once the assessment has been reviewed*.",
             "icon": ""
@@ -478,7 +478,7 @@
         "service_Gh6GAV": {
           "type": "service",
           "settings": {
-            "bgblock": "#bcc4cd",
+            "bgblock": "#222222",
             "title": "Express Delivery",
             "description": "Access the pharmacy portal and order your therapy. Express delivery Australia-wide. (Free shipping on orders over $150.)",
             "icon": ""
@@ -495,7 +495,7 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#bcc4cd",
+        "bgsection": "#222222",
         "title_top": "",
         "title": "How Quity Works",
         "des": "",
@@ -503,8 +503,8 @@
         "rows": "1",
         "show": 4,
         "paddingbox": "20px 0px 20px 0px",
-        "iconcolor": "#222222",
-        "titlecolor": "#222222",
+        "iconcolor": "#ffffff",
+        "titlecolor": "#ffffff",
         "subcolor": "#999999",
         "color_border": "rgba(0,0,0,0)",
         "size": 50,
@@ -860,6 +860,7 @@
         "template--16458105913475__85150b71-1648-4e2b-bd81-d70d49df23c6-paragraph-1",
         "d25e3cc3-5189-4941-afb3-60cd6a556bfd"
       ],
+      "disabled": true,
       "settings": {
         "animation": "",
         "setwidth": "container",
