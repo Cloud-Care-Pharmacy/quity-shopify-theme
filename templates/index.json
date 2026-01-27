@@ -451,7 +451,7 @@
         "service_pVBLkB": {
           "type": "service",
           "settings": {
-            "bgblock": "#ffffff",
+            "bgblock": "#bcc4cd",
             "title": "1. Create your account",
             "description": "Get started by registering your patient account.",
             "icon": ""
@@ -460,7 +460,7 @@
         "service_iBV8mL": {
           "type": "service",
           "settings": {
-            "bgblock": "#ffffff",
+            "bgblock": "#bcc4cd",
             "title": "2. Online Assessment",
             "description": "Answer a few questions about your smoking and medical history.",
             "icon": ""
@@ -469,7 +469,7 @@
         "service_C4Mh6z": {
           "type": "service",
           "settings": {
-            "bgblock": "#ffffff",
+            "bgblock": "#bcc4cd",
             "title": "3. Get Notified",
             "description": "Our medical team will notify you via email once the assessment has been reviewed*.",
             "icon": ""
@@ -478,7 +478,7 @@
         "service_Gh6GAV": {
           "type": "service",
           "settings": {
-            "bgblock": "#ffffff",
+            "bgblock": "#bcc4cd",
             "title": "Express Delivery",
             "description": "Access the pharmacy portal and order your therapy. Express delivery Australia-wide. (Free shipping on orders over $150.)",
             "icon": ""
@@ -495,14 +495,14 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#ffffff",
+        "bgsection": "#bcc4cd",
         "title_top": "",
         "title": "How Quity Works",
         "des": "",
         "align-heading": "center",
         "rows": "1",
         "show": 4,
-        "paddingbox": "0px 0px 0px 0px",
+        "paddingbox": "20px 0px 20px 0px",
         "iconcolor": "#222222",
         "titlecolor": "#222222",
         "subcolor": "#999999",
@@ -516,8 +516,8 @@
         "dots": true,
         "infinite": true,
         "paddingsection": "0px 0px 0px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
-        "marginsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 00px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
     },
@@ -527,7 +527,7 @@
       "settings": {
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
-        "marginsection": "0px 0px 40px 0px",
+        "marginsection": "40px 0px 40px 0px",
         "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
