@@ -568,8 +568,8 @@
             "text": "<p>Our TGA-approved doctors specialise in nicotine cessation and are dedicated to supporting your journey to become smoke-free. We understand quitting is challenging and requires personalised care. After reviewing your smoking history, your doctor will contact you to discuss your specific needs and create a tailored treatment plan designed to give you the best chance of long-term success.</p>",
             "answer_content": "",
             "style_btn": "btn-underline btn-underline-white",
-            "button": "discover now",
-            "link": "",
+            "button": "Apply now",
+            "link": "#",
             "enable_padding": true,
             "align": "left"
           }
@@ -585,7 +585,7 @@
         "text_block_zRhfaq",
         "image_block_iarXHj"
       ],
-      "name": "Image with text",
+      "name": "Text Block (24H Doctors)",
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -646,7 +646,7 @@
         "image_block_TgrL9c",
         "text_block_NmWe7K"
       ],
-      "name": "Image with text",
+      "name": "Text Block (Get it Fast)",
       "settings": {
         "animation": "",
         "setwidth": "container",
@@ -985,7 +985,7 @@
         "e_size": "auto",
         "e_repeat": "no-repeat",
         "e_pos": "center center",
-        "title_top": "",
+        "title_top": "Let us help you",
         "title": "Frequently Asked Questions",
         "des": "We understand navigating this can feel overwhelming. Discover more about how to get started, our step-by-step process, therapies available and much more",
         "align-heading": "center",
