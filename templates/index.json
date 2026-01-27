@@ -41,7 +41,7 @@
         "heading_4AQxW4": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Quit smoking & </p><p>Nicotine Vaping clinic.</p>",
+            "heading": "<p>Quit Smoking & </p><p>Nicotine Vaping Clinic.</p>",
             "heading_custom": true,
             "heading_font": "jost_n4",
             "heading_accent_font": "jost_n4",
@@ -69,7 +69,7 @@
             "review_size_mobile": 12,
             "review_advanced": true,
             "review_height": 130,
-            "review_mt": 10,
+            "review_mt": 16,
             "review_mt_mobile": 0,
             "background": true,
             "review_bg_opacity": 0.3,
