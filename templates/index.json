@@ -116,7 +116,7 @@
             "caption_padding_horizontal_mobile": 12,
             "caption_padding_vertical": 6,
             "caption_padding_vertical_mobile": 6,
-            "caption_color": "#FFFFFF",
+            "caption_color": "#414141",
             "caption_bg_color": "#FFFFFF",
             "caption_border_color": "#FFFFFF"
           }
@@ -134,7 +134,7 @@
             "heading_height": 100,
             "heading_mt": 8,
             "heading_mt_mobile": 8,
-            "heading_color": "#FFFFFF",
+            "heading_color": "#ffffff",
             "heading_accent_color": "#343a40"
           }
         },
@@ -303,7 +303,7 @@
         "button_Rm7aUp",
         "verified_R6PYcG"
       ],
-      "name": "SS - Hero pro 💎",
+      "name": "Hero",
       "settings": {
         "hero_height": "full_screen",
         "hero_fixed_height": 600,
@@ -342,7 +342,7 @@
         "layout_bg_type": "video",
         "bg_video": "shopify://files/videos/shutterstock_1097870513.mov",
         "bg_overlay": 0.2,
-        "bg_overlay_color": "#121212",
+        "bg_overlay_color": "#343a40",
         "background_style": "solid",
         "background_color": "#121212",
         "background_gradient": "radial-gradient(rgba(30, 30, 36, 1), rgba(5, 5, 5, 1) 100%)",
