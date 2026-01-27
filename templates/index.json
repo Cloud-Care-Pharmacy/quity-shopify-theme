@@ -98,10 +98,10 @@
         "caption_EdALxA": {
           "type": "caption",
           "settings": {
-            "caption": "<p>Caption</p>",
-            "caption_custom": false,
-            "caption_font": "josefin_sans_n4",
-            "caption_size": 12,
+            "caption": "<p>Australia’s leading</p>",
+            "caption_custom": true,
+            "caption_font": "jost_n4",
+            "caption_size": 20,
             "caption_size_mobile": 12,
             "caption_advanced": false,
             "caption_height": 130,
@@ -124,18 +124,18 @@
         "heading_4AQxW4": {
           "type": "heading",
           "settings": {
-            "heading": "<h1>Hero <strong>pro</strong></h1>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_accent_font": "playfair_n4",
-            "heading_size": 56,
+            "heading": "<p>Quit smoking & </p><p>Nicotine Vaping clinic.</p>",
+            "heading_custom": true,
+            "heading_font": "jost_n4",
+            "heading_accent_font": "jost_n4",
+            "heading_size": 46,
             "heading_size_mobile": 36,
-            "heading_advanced": false,
-            "heading_height": 130,
+            "heading_advanced": true,
+            "heading_height": 100,
             "heading_mt": 8,
             "heading_mt_mobile": 8,
             "heading_color": "#FFFFFF",
-            "heading_accent_color": "#AFAFAF"
+            "heading_accent_color": "#343a40"
           }
         },
         "review_8p7gmR": {
@@ -145,14 +145,14 @@
             "stars_size": 16,
             "stars_size_mobile": 14,
             "stars_gap": 2,
-            "review": "<p>Rated 4.9/5 by 5,000+ reviews</p>",
+            "review": "<p>Rated 4.8/5 by 100+ reviews</p>",
             "review_custom": false,
             "review_font": "josefin_sans_n4",
             "review_size": 14,
             "review_size_mobile": 12,
-            "review_advanced": false,
+            "review_advanced": true,
             "review_height": 130,
-            "review_mt": 0,
+            "review_mt": 10,
             "review_mt_mobile": 0,
             "background": true,
             "review_bg_opacity": 0.3,
@@ -174,9 +174,9 @@
         "text_DC9pfW": {
           "type": "text",
           "settings": {
-            "text": "<p>Tell your story</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
+            "text": "<p>Quity helps adult Australians quit smoking with legal, regulated nicotine products.</p>",
+            "text_custom": true,
+            "text_font": "jost_n4",
             "text_size": 18,
             "text_size_mobile": 14,
             "text_advanced": false,
@@ -189,28 +189,28 @@
         "feature_MW8TQQ": {
           "type": "feature",
           "settings": {
-            "icon": "pin_tack",
-            "text": "Feature text"
+            "icon": "shield_check",
+            "text": "Australian Certified"
           }
         },
         "feature_YcwrTp": {
           "type": "feature",
           "settings": {
-            "icon": "pin_tack",
-            "text": "Feature text"
+            "icon": "heart_hand",
+            "text": "Free to Apply"
           }
         },
         "feature_BP6YGU": {
           "type": "feature",
           "settings": {
-            "icon": "pin_tack",
-            "text": "Feature text"
+            "icon": "target",
+            "text": "Quick Approval"
           }
         },
         "button_k366Kc": {
           "type": "button",
           "settings": {
-            "button": "Shop now",
+            "button": "Apply for prescription",
             "url": "",
             "open_in_new_tab": false,
             "button_style": "non_outline",
@@ -239,16 +239,48 @@
             "button_shadow_color": "#000000"
           }
         },
+        "button_Rm7aUp": {
+          "type": "button",
+          "settings": {
+            "button": "Shop Chemist",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "non_outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 40,
+            "button_padding_horizontal_mobile": 32,
+            "button_padding_vertical": 20,
+            "button_padding_vertical_mobile": 20,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 24,
+            "button_mt_mobile": 24,
+            "button_custom_styling": true,
+            "button_full_width_mobile": true,
+            "button_color": "#343a40",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#ffffff",
+            "button_bg_hover_color": "#2d2d2d",
+            "button_border_color": "#1a1a1a",
+            "button_border_hover_color": "#1a1a1a",
+            "button_shadow_color": "#000000"
+          }
+        },
         "verified_R6PYcG": {
           "type": "verified",
           "settings": {
             "icon_size": 16,
             "icon_size_mobile": 16,
-            "icon": "shield_check",
-            "text": "<p>30-Day Money-Back Guarantee</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 14,
+            "icon": "star_sparkle",
+            "text": "<p>Licensed Under TGA Regulations</p>",
+            "text_custom": true,
+            "text_font": "jost_n4",
+            "text_size": 16,
             "text_size_mobile": 14,
             "text_advanced": false,
             "text_height": 150,
@@ -268,6 +300,7 @@
         "feature_YcwrTp",
         "feature_BP6YGU",
         "button_k366Kc",
+        "button_Rm7aUp",
         "verified_R6PYcG"
       ],
       "name": "SS - Hero pro 💎",
