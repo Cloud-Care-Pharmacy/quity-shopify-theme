@@ -507,7 +507,7 @@
       "name": "How it works",
       "settings": {
         "animation": "",
-        "setwidth": "full",
+        "setwidth": "container",
         "bgsection": "#222222",
         "title_top": "",
         "title": "How Quity Works",
