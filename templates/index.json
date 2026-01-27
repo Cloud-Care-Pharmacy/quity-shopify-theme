@@ -316,7 +316,7 @@
         "button_LLbzCz": {
           "type": "button",
           "settings": {
-            "button": "Shop now",
+            "button": "Apply for Prescription",
             "button_url": "",
             "open_in_new_tab": false,
             "button_style": "outline",
@@ -379,7 +379,7 @@
       "name": "Services",
       "settings": {
         "layout": "image_content",
-        "image_item_width": 45,
+        "image_item_width": 40,
         "layout_gap": 60,
         "content_align": "left",
         "content_align_mobile": "center",
