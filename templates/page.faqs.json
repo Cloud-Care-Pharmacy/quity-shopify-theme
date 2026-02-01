@@ -1,1 +1,470 @@
-{"sections":{"main":{"type":"main-page","settings":{}},"9ad78513-f48a-4eed-affd-30f6d370be1c":{"type":"faq-accordion","blocks":{"template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-0":{"type":"faq","settings":{"faq_title":"How do I make a purchase?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}},"template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-1":{"type":"faq","settings":{"faq_title":"How do I know if my order is confirmed?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}},"template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-2":{"type":"faq","settings":{"faq_title":"Can I change my shipping address after my order is placed?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}}},"block_order":["template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-0","template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-1","template--16736981942590__9ad78513-f48a-4eed-affd-30f6d370be1c-1666772143a4c26d1e-2"],"settings":{"animation":"","setwidth":"container","bgsection":"#ffffff","e_size":"auto","e_repeat":"no-repeat","e_pos":"center center","title_top":"","title":"Orders","des":"Below are some of are common questions about orders","align-heading":"center","title_size":"h5","e_first_open":false,"e_reverse":true,"e_small":true,"left_html":"","e_right":false,"paddingsection":"48px 0px 60px 0px","paddingmobile":"40px 0px 40px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}},"062df5dc-f552-45ec-89c4-08fb863777b7":{"type":"faq-accordion","blocks":{"template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-0":{"type":"faq","settings":{"faq_title":"Do you ship internationally?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}},"template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-1":{"type":"faq","settings":{"faq_title":"When will my order be shipped?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}},"template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-2":{"type":"faq","settings":{"faq_title":"What is your return policy?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}},"c3fd023b-88d4-4be1-b635-a8d461da7f4c":{"type":"faq","settings":{"faq_title":"How long will it take until I receive my order?","faq_des":"<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"}}},"block_order":["template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-0","template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-1","template--16736981942590__062df5dc-f552-45ec-89c4-08fb863777b7-1666772143a4c26d1e-2","c3fd023b-88d4-4be1-b635-a8d461da7f4c"],"settings":{"animation":"","setwidth":"container","bgsection":"#ffffff","e_size":"auto","e_repeat":"no-repeat","e_pos":"center center","title_top":"","title":"Shipping & Returns","des":"Below are some common questions about shipping, returns, and exchanges","align-heading":"center","title_size":"h5","e_first_open":false,"e_reverse":true,"e_small":true,"left_html":"","e_right":false,"paddingsection":"0px 0px 80px 0px","paddingmobile":"40px 0px 40px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}},"ab3330a7-4065-4a18-8aaf-98b208189122":{"type":"advanced-content","blocks":{"template--16736981942590__ab3330a7-4065-4a18-8aaf-98b208189122-1666772898b0d88a48-0":{"type":"html","settings":{"width":"100%","title":"Have a project in mind? Let’s talk.","color_title":"#000","sub":"Advand sub","color_sub":"#000","code":"<div class=\"text-center\">\n<h3>Didn't find your answer?<\/h3>\n<p>Don't hestitate to contact us<\/p>\n<a href=\"\/pages\/contact-us\" class=\"btn btn-theme mt-3\"> Contact us<\/a>\n<\/div>","color_des":"#000","button_text":"","link_button":"","align":"auto","box_align":"center","text_align":"center"}}},"block_order":["template--16736981942590__ab3330a7-4065-4a18-8aaf-98b208189122-1666772898b0d88a48-0"],"settings":{"animation":"","setwidth":"container","text_color":"rgba(0,0,0,0)","bgsection":"#ffffff","rangebg":0,"bgbefore":"rgba(0,0,0,0)","e_size":"auto","e_repeat":"no-repeat","e_position":"center center","zindex":"0","title_top":"","title":"","des":"","align-heading":"center","padding":true,"col_center":false,"paddingsection":"0px 0px 80px 0px","paddingmobile":"0px 0px 60px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}}},"order":["main","9ad78513-f48a-4eed-affd-30f6d370be1c","062df5dc-f552-45ec-89c4-08fb863777b7","ab3330a7-4065-4a18-8aaf-98b208189122"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "section-facts": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-facts-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What are the risks of smoking?",
+            "faq_des": "<p>Globally, one in ten deaths are related to smoking and in Australia, over 20,000 people die each year due to smoking. Over 40% of lung diseases in Australia are caused by smoking, as well as over 20% of cancers, and over 10% of heart disease. If you're a smoker, you have roughly a 50/50 chance of dying from a smoking related cause.</p>"
+          }
+        },
+        "faq-facts-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How many people smoke?",
+            "faq_des": "<p>Around 1 in 8 Australians smoke daily, while 6 in 10 have never smoked. Smoking rates in Australia have steadily declined over the past 30 years, due to better public health awareness, smoking becoming less socially acceptable, and the price of cigarettes increasing. Unfortunately though, this decline in smoking rates has stalled, hovering between 10-15% of adults.</p>"
+          }
+        },
+        "faq-facts-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What is nicotine and why is it addictive?",
+            "faq_des": "<p>Nicotine is a naturally occurring chemical found in tobacco plants. When inhaled through smoking, it reaches the brain within seconds and triggers the release of dopamine, creating feelings of pleasure and reward. This rapid reward cycle makes nicotine highly addictive. Over time, your brain becomes dependent on nicotine to feel normal, which is why quitting can be so challenging.</p>"
+          }
+        },
+        "faq-facts-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What are the benefits of quitting smoking?",
+            "faq_des": "<p>The benefits of quitting smoking begin almost immediately. Within 20 minutes, your heart rate drops. Within 12 hours, carbon monoxide levels in your blood return to normal. Within 2-12 weeks, your circulation improves and lung function increases. Within 1-9 months, coughing and shortness of breath decrease. After 1 year, your risk of heart disease is half that of a smoker. After 10 years, your risk of lung cancer is about half that of a smoker.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-facts-1", "faq-facts-2", "faq-facts-3", "faq-facts-4"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "The Facts You Need to Know",
+        "des": "Knowledge is power. Learn more about smoking and its risks.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-motivation": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-motivation-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Why should I quit smoking?",
+            "faq_des": "<p>Quitting smoking is one of the best things you can do for your health. Beyond reducing your risk of serious diseases like cancer, heart disease, and stroke, you'll also notice immediate improvements in your daily life. Your sense of taste and smell will improve, you'll have more energy, and you'll save significant money. For many people, the motivation to quit often comes from wanting to be healthier for their family and loved ones.</p>"
+          }
+        },
+        "faq-motivation-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How does quitting improve my health?",
+            "faq_des": "<p>Your body begins to heal almost immediately after you quit. Blood pressure and pulse rate return to normal within minutes. Carbon monoxide levels in your blood drop within hours. Your risk of heart attack begins to decrease within days. Lung function starts to improve within weeks. Over months and years, your risk of stroke, heart disease, and various cancers continues to decrease significantly.</p>"
+          }
+        },
+        "faq-motivation-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What are my chances of successfully quitting?",
+            "faq_des": "<p>Your chances of quitting successfully improve significantly with the right support and treatment. Studies show that using nicotine replacement therapy (NRT) or vaping as a quit aid can double or even triple your chances of success compared to going \"cold turkey.\" Combining these with professional support and counseling further increases your likelihood of quitting for good. Many people try multiple times before quitting successfully - don't give up!</p>"
+          }
+        },
+        "faq-motivation-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How can I help a friend or family member quit?",
+            "faq_des": "<p>Be supportive and understanding - quitting is difficult. Avoid nagging or criticizing. Offer practical help like joining them for walks or other activities that distract from cravings. Learn about their quit plan and help them stick to it. Celebrate their milestones, even small ones. Be patient during setbacks and encourage them to try again. Let them know you believe in them and are there to support them throughout their journey.</p>"
+          }
+        },
+        "faq-motivation-5": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What if I start smoking again after quitting?",
+            "faq_des": "<p>A slip or relapse doesn't mean you've failed - it's a normal part of the quitting process for many people. The important thing is to not give up. Learn from what triggered the slip and use that knowledge to strengthen your quit plan. Many successful quitters tried multiple times before finally quitting for good. Reach out for support, whether from healthcare professionals, quit services, or friends and family.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-motivation-1", "faq-motivation-2", "faq-motivation-3", "faq-motivation-4", "faq-motivation-5"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f8f9fa",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Motivation",
+        "des": "Stay motivated on your journey to quit smoking.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-cravings": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-cravings-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How long do nicotine cravings last?",
+            "faq_des": "<p>Individual cravings typically last only 3-5 minutes, though they can feel much longer. The intensity and frequency of cravings usually peak in the first few days after quitting, then gradually decrease over the following weeks. Most physical withdrawal symptoms subside within 2-4 weeks. However, occasional cravings can occur months or even years after quitting, especially in situations you previously associated with smoking.</p>"
+          }
+        },
+        "faq-cravings-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What helps with nicotine cravings?",
+            "faq_des": "<p>Several strategies can help manage cravings: Use nicotine replacement therapy (patches, gum, lozenges, or vapes) to reduce withdrawal symptoms. Practice deep breathing exercises. Drink water or chew sugar-free gum. Keep your hands busy with a stress ball or fidget toy. Go for a short walk or do light exercise. Avoid triggers when possible, especially in the early days. Remind yourself that the craving will pass and each one you overcome makes you stronger.</p>"
+          }
+        },
+        "faq-cravings-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What are common nicotine withdrawal symptoms?",
+            "faq_des": "<p>Common withdrawal symptoms include irritability, anxiety, difficulty concentrating, increased appetite, sleep disturbances, and of course, cravings. You might also experience headaches, constipation, and feeling restless. These symptoms are temporary and usually peak within the first week of quitting. Nicotine replacement therapies can significantly reduce these symptoms, making the quitting process more manageable.</p>"
+          }
+        },
+        "faq-cravings-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Should I change my routine when quitting?",
+            "faq_des": "<p>Yes, changing your routine can be very helpful. Smoking is often linked to specific habits and situations - like having a cigarette with morning coffee or after meals. Breaking these associations can reduce triggers. Try drinking tea instead of coffee, taking a different route to work, or going for a walk after meals. Create new, healthy routines to replace the old smoking-related ones.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-cravings-1", "faq-cravings-2", "faq-cravings-3", "faq-cravings-4"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Cravings",
+        "des": "Understanding and managing nicotine cravings.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-vaping-basics": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-vaping-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What is vaping?",
+            "faq_des": "<p>Vaping involves using an electronic device (often called an e-cigarette or vape) to heat a liquid that typically contains nicotine, producing a vapor that you inhale. Unlike traditional cigarettes, there's no combustion involved, which means you're not inhaling smoke or the thousands of harmful chemicals produced by burning tobacco. Vaping can deliver nicotine to help manage cravings while avoiding many of the most harmful aspects of smoking.</p>"
+          }
+        },
+        "faq-vaping-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Is vaping safer than smoking?",
+            "faq_des": "<p>While not completely risk-free, vaping is significantly less harmful than smoking traditional cigarettes. Public health bodies, including the Royal College of Physicians, estimate that vaping is at least 95% less harmful than smoking. This is because vapes don't burn tobacco and therefore don't produce tar or carbon monoxide - two of the most harmful elements in tobacco smoke. Vaping is recommended as a quit aid for adult smokers who have been unable to quit through other methods.</p>"
+          }
+        },
+        "faq-vaping-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How much does vaping cost compared to smoking?",
+            "faq_des": "<p>Vaping is significantly cheaper than smoking. While there's an initial investment in a device, the ongoing cost of e-liquid is much lower than buying cigarettes, especially in Australia where cigarette prices are among the highest in the world. A pack-a-day smoker could save thousands of dollars per year by switching to vaping.</p>"
+          }
+        },
+        "faq-vaping-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What nicotine strength should I use?",
+            "faq_des": "<p>The right nicotine strength depends on how much you smoke. Heavy smokers (20+ cigarettes per day) often start with higher nicotine strengths, while lighter smokers may do well with lower strengths. Our pharmacists can help you choose the appropriate strength based on your smoking history and needs. Many people gradually reduce their nicotine strength over time as they work toward becoming nicotine-free.</p>"
+          }
+        },
+        "faq-vaping-5": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Does vaping help you quit smoking?",
+            "faq_des": "<p>Yes, research shows that vaping can be an effective quit smoking aid. Studies have found that vaping is more effective than traditional nicotine replacement therapies like patches and gum for some people. It addresses both the nicotine addiction and the behavioral aspects of smoking (the hand-to-mouth action, the ritual). Many former smokers have successfully quit using vaping as a stepping stone.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-vaping-1", "faq-vaping-2", "faq-vaping-3", "faq-vaping-4", "faq-vaping-5"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f8f9fa",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Vaping Basics",
+        "des": "Everything you need to know about vaping as a quit smoking aid.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-prescriptions": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-prescription-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Do I need a prescription for nicotine vapes in Australia?",
+            "faq_des": "<p>Yes, since October 2021, you need a valid prescription from a doctor to legally purchase nicotine-containing vaping products in Australia. This applies to both imported products and those sold domestically. Our pharmacy can help you access nicotine vaping products once you have a valid prescription from your healthcare provider.</p>"
+          }
+        },
+        "faq-prescription-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do I get a prescription for nicotine vapes?",
+            "faq_des": "<p>You can get a prescription for nicotine vaping products from your regular GP or through a telehealth consultation. Your doctor will assess whether vaping is an appropriate quit smoking aid for you based on your health history and previous quit attempts. Once you have your prescription, you can purchase nicotine vaping products from authorized pharmacies like ours.</p>"
+          }
+        },
+        "faq-prescription-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Can I travel with my prescription nicotine vape?",
+            "faq_des": "<p>When traveling within Australia, you can carry your prescription nicotine products with you. It's advisable to carry a copy of your prescription or a letter from your doctor. For international travel, regulations vary significantly by country. Some countries have strict bans on vaping products. Always research the laws of your destination country before traveling with nicotine vaping products.</p>"
+          }
+        },
+        "faq-prescription-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How long is a nicotine vape prescription valid?",
+            "faq_des": "<p>In Australia, nicotine vape prescriptions are typically valid for 12 months from the date of issue. However, the prescription may specify a limited number of repeats or quantities. You'll need to consult with your prescribing doctor for renewals. Our pharmacy can help you understand your prescription details and when you might need a renewal.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-prescription-1", "faq-prescription-2", "faq-prescription-3", "faq-prescription-4"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Prescriptions & Legal Information",
+        "des": "Understanding the prescription requirements for nicotine vaping products.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-nicotine-pouches": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-pouches-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What are nicotine pouches?",
+            "faq_des": "<p>Nicotine pouches are small, white pouches containing nicotine and other ingredients that you place between your gum and lip. They provide a tobacco-free and smoke-free way to consume nicotine. Unlike traditional tobacco pouches (snus), nicotine pouches don't contain tobacco leaf - the nicotine is typically derived from tobacco but is added in purified form.</p>"
+          }
+        },
+        "faq-pouches-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do nicotine pouches work?",
+            "faq_des": "<p>When you place a nicotine pouch between your gum and lip, the nicotine is absorbed through the lining of your mouth into your bloodstream. The nicotine release typically begins within a few minutes and can last for 20-60 minutes depending on the product. You don't need to chew or spit - simply place it and let it work.</p>"
+          }
+        },
+        "faq-pouches-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Are nicotine pouches safer than smoking?",
+            "faq_des": "<p>Yes, nicotine pouches are significantly less harmful than smoking because they don't involve combustion or inhalation. They don't produce tar, carbon monoxide, or the thousands of other harmful chemicals found in cigarette smoke. Like other nicotine replacement products, they can be a useful tool for people trying to quit smoking.</p>"
+          }
+        },
+        "faq-pouches-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "Do I need a prescription for nicotine pouches?",
+            "faq_des": "<p>In Australia, nicotine pouches are classified as a therapeutic good and require a prescription, similar to nicotine vaping products. You'll need a valid prescription from your doctor to purchase nicotine pouches from a pharmacy. Our team can help you understand the process and access the products you need.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-pouches-1", "faq-pouches-2", "faq-pouches-3", "faq-pouches-4"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#f8f9fa",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Nicotine Pouches",
+        "des": "Learn about nicotine pouches as a quit smoking alternative.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-orders": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq-orders-1": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do I place an order?",
+            "faq_des": "<p>To place an order, first ensure you have a valid prescription for nicotine products. Create an account on our website, upload or send us your prescription, and once verified, you can browse and purchase products. Our pharmacy team reviews all prescriptions to ensure compliance and will reach out if we need any additional information.</p>"
+          }
+        },
+        "faq-orders-2": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How long does shipping take?",
+            "faq_des": "<p>We typically dispatch orders within 1-2 business days of prescription verification. Delivery times vary depending on your location - metro areas usually receive orders within 2-4 business days, while regional and remote areas may take 5-7 business days. You'll receive tracking information once your order is dispatched.</p>"
+          }
+        },
+        "faq-orders-3": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "What is your returns policy?",
+            "faq_des": "<p>Due to the nature of pharmaceutical products, we cannot accept returns on opened products. However, if you receive a damaged or incorrect item, please contact us within 48 hours of receiving your order and we'll arrange a replacement or refund. Unopened products in original packaging may be returned within 14 days for a refund.</p>"
+          }
+        },
+        "faq-orders-4": {
+          "type": "faq",
+          "settings": {
+            "faq_title": "How do I track my order?",
+            "faq_des": "<p>Once your order is dispatched, you'll receive an email with tracking information. You can also log into your account on our website to view your order status and tracking details. If you have any questions about your order, please don't hesitate to contact our customer service team.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-orders-1", "faq-orders-2", "faq-orders-3", "faq-orders-4"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
+        "title_top": "",
+        "title": "Orders & Shipping",
+        "des": "Common questions about ordering and delivery.",
+        "align-heading": "left",
+        "title_size": "h5",
+        "e_first_open": false,
+        "e_reverse": false,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
+        "paddingsection": "60px 0px 40px 0px",
+        "paddingmobile": "40px 0px 30px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
+    "section-contact": {
+      "type": "advanced-content",
+      "blocks": {
+        "contact-block": {
+          "type": "html",
+          "settings": {
+            "width": "100%",
+            "title": "",
+            "color_title": "#000",
+            "sub": "",
+            "color_sub": "#000",
+            "code": "<div class=\"text-center\">\n<h3>Didn't find your answer?</h3>\n<p>Our team is here to help you with any questions about quitting smoking or our products.</p>\n<a href=\"/pages/contact-us\" class=\"btn btn-theme mt-3\">Contact Us</a>\n</div>",
+            "color_des": "#000",
+            "button_text": "",
+            "link_button": "",
+            "align": "auto",
+            "box_align": "center",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": ["contact-block"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "text_color": "rgba(0,0,0,0)",
+        "bgsection": "#f8f9fa",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_position": "center center",
+        "zindex": "0",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "padding": true,
+        "col_center": false,
+        "paddingsection": "60px 0px 80px 0px",
+        "paddingmobile": "40px 0px 60px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section-facts",
+    "section-motivation",
+    "section-cravings",
+    "section-vaping-basics",
+    "section-prescriptions",
+    "section-nicotine-pouches",
+    "section-orders",
+    "section-contact"
+  ]
+}
