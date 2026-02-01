@@ -362,7 +362,7 @@ class PatientIntakeForm extends HTMLElement {
     }
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     console.log('📝 Form submission started');
     
@@ -375,33 +375,173 @@ class PatientIntakeForm extends HTMLElement {
     
     // Collect all form data
     const formData = new FormData(this.form);
-    const data = {};
+    const rawData = {};
     
     for (let [key, value] of formData.entries()) {
       if (key === 'quitMethods') {
-        if (!data[key]) data[key] = [];
-        data[key].push(value);
+        if (!rawData[key]) rawData[key] = [];
+        rawData[key].push(value);
       } else {
-        data[key] = value;
+        rawData[key] = value;
       }
     }
     
-    // Store in sessionStorage
-    sessionStorage.setItem('patientIntakeFormData', JSON.stringify(data));
-    console.log('💾 Form data saved to sessionStorage');
+    // Store in sessionStorage as backup
+    sessionStorage.setItem('patientIntakeFormData', JSON.stringify(rawData));
+    console.log('💾 Form data saved to sessionStorage as backup');
     
-    // Log to console (for testing without API)
-    console.log('📋 FORM SUBMITTED SUCCESSFULLY!');
-    console.log('📊 Complete form data:', data);
-    console.table(data);
+    // Transform data to match Halaxy API expectations
+    const data = this.transformFormData(rawData);
+    console.log('📊 Transformed form data:', data);
     
-    // Show success message
+    // Show loading state
+    this.setLoadingState(true);
+    
+    try {
+      const response = await fetch('/apps/halaxy/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      console.log('📥 API response:', result);
+      
+      if (result.success) {
+        console.log('🎉 Form submitted successfully to Halaxy!');
+        console.log('👤 Patient ID:', result.patientId);
+        console.log('📋 Clinical Note ID:', result.clinicalNoteId);
+        
+        // Clear session storage on success
+        sessionStorage.removeItem('patientIntakeFormData');
+        sessionStorage.removeItem('patientIntakeFormProgress');
+        
+        // Show success message
+        this.showSuccessMessage(result.patientId);
+      } else {
+        console.error('❌ Submission failed:', result.error);
+        this.showErrorMessage(result.error || 'Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('❌ Network error:', error);
+      this.showErrorMessage('Network error. Please check your connection and try again.');
+    } finally {
+      this.setLoadingState(false);
+    }
+  }
+
+  transformFormData(rawData) {
+    // Map smoking status values to API expectations
+    const smokingStatusMap = {
+      'current-or-ex': 'current',
+      'never-smoked': 'never'
+    };
+    
+    // Map cigarettes per day values
+    const cigarettesMap = {
+      'less-than-10': '1-10',
+      '10-20': '10-20',
+      '20-30': '20+',
+      'more-than-30': '20+'
+    };
+    
+    // Map years smoked values
+    const yearsMap = {
+      'less-than-1': '<1',
+      '1-5': '1-5',
+      '5-10': '5-10',
+      '10-20': '10+',
+      'more-than-20': '10+'
+    };
+    
+    return {
+      firstName: rawData.firstName || '',
+      lastName: rawData.lastName || '',
+      email: rawData.email || '',
+      dobDay: rawData.dobDay || '',
+      dobMonth: rawData.dobMonth || '',
+      dobYear: rawData.dobYear || '',
+      gender: rawData.gender || '',
+      streetAddress: rawData.streetAddress || '',
+      city: rawData.city || '',
+      postcode: rawData.postcode || '',
+      country: rawData.country || 'Australia',
+      mobile: rawData.mobile || '',
+      smokingStatus: smokingStatusMap[rawData.smokingStatus] || rawData.smokingStatus || '',
+      cigarettesPerDay: cigarettesMap[rawData.cigarettesPerDay] || rawData.cigarettesPerDay || '',
+      yearsSmoked: yearsMap[rawData.yearsSmoked] || rawData.yearsSmoked || '',
+      quitMethods: rawData.quitMethods || [],
+      lastCigarette: rawData.lastCigarette || '',
+      vapingStatus: rawData.vapingStatus || '',
+      vapingMethod: rawData.vapingMethod || '',
+      vapingStrength: rawData.vapingStrength || '',
+      vapingVolume: rawData.vapingVolume || '',
+      vapingNotes: rawData.vapingNotes || '',
+      medicalIllnesses: rawData.medicalIllnesses || '',
+      cardiovascular: rawData.cardiovascular || '',
+      pregnancy: rawData.pregnancy || '',
+      forwardEmail: rawData.forwardEmail || '',
+      additionalNotes: rawData.additionalNotes || '',
+      safetyAcknowledgment: rawData.safetyAcknowledgment === 'on' ? 'yes' : 'no'
+    };
+  }
+
+  setLoadingState(isLoading) {
+    if (isLoading) {
+      this.btnSubmit.disabled = true;
+      this.btnSubmit.dataset.originalText = this.btnSubmit.textContent;
+      this.btnSubmit.textContent = 'Submitting...';
+      this.btnSubmit.classList.add('loading');
+      this.btnBack.disabled = true;
+    } else {
+      this.btnSubmit.disabled = false;
+      this.btnSubmit.textContent = this.btnSubmit.dataset.originalText || 'Submit';
+      this.btnSubmit.classList.remove('loading');
+      this.btnBack.disabled = false;
+    }
+  }
+
+  showSuccessMessage(patientId) {
     this.form.style.display = 'none';
     this.querySelector('.progress-indicator').style.display = 'none';
     this.querySelector('.form-navigation').style.display = 'none';
-    this.successMessage.classList.add('show');
     
+    // Add patient ID to success message if available
+    if (patientId) {
+      const successContent = this.successMessage.querySelector('.success-content, p');
+      if (successContent) {
+        successContent.innerHTML += `<br><small>Reference ID: ${patientId}</small>`;
+      }
+    }
+    
+    this.successMessage.classList.add('show');
     console.log('🎉 Success message displayed');
+    this.scrollToTop();
+  }
+
+  showErrorMessage(message) {
+    // Check if error container exists, if not create one
+    let errorContainer = this.querySelector('.form-error-message');
+    if (!errorContainer) {
+      errorContainer = document.createElement('div');
+      errorContainer.className = 'form-error-message';
+      errorContainer.style.cssText = 'background: #fee2e2; border: 1px solid #ef4444; color: #dc2626; padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center;';
+      this.form.insertBefore(errorContainer, this.form.firstChild);
+    }
+    
+    errorContainer.innerHTML = `
+      <strong>⚠️ Submission Error</strong>
+      <p style="margin: 8px 0 0 0;">${message}</p>
+    `;
+    errorContainer.style.display = 'block';
+    
+    // Auto-hide after 10 seconds
+    setTimeout(() => {
+      errorContainer.style.display = 'none';
+    }, 10000);
+    
     this.scrollToTop();
   }
 
