@@ -2381,7 +2381,7 @@
           "0c325a8d-bfb1-450c-a284-90ce9f9f9ee5": {
             "type": "menu",
             "settings": {
-              "link_list": "footer-1",
+              "link_list": "information",
               "width": "16%"
             }
           },
@@ -2395,7 +2395,7 @@
           "d788fcab-be74-4356-8d04-0370b7dc6128": {
             "type": "menu",
             "settings": {
-              "link_list": "customer-account-main-menu",
+              "link_list": "quick-links",
               "width": "16%"
             }
           },
