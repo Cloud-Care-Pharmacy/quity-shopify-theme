@@ -406,7 +406,28 @@ class PatientIntakeForm extends HTMLElement {
         body: JSON.stringify(data)
       });
       
-      const result = await response.json();
+      // Check if response is OK before parsing JSON
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorResult = await response.json();
+          throw new Error(errorResult.error || `Server error: ${response.status}`);
+        } else {
+          // Non-JSON response (e.g., HTML error page)
+          console.error('❌ Server returned non-JSON response:', response.status);
+          throw new Error(`Service unavailable (${response.status}). Please try again later.`);
+        }
+      }
+      
+      // Parse successful response
+      let result;
+      try {
+        result = await response.json();
+      } catch (parseError) {
+        console.error('❌ Failed to parse response as JSON:', parseError);
+        throw new Error('Invalid response from server. Please try again.');
+      }
+      
       console.log('📥 API response:', result);
       
       if (result.success) {
@@ -425,8 +446,8 @@ class PatientIntakeForm extends HTMLElement {
         this.showErrorMessage(result.error || 'Submission failed. Please try again.');
       }
     } catch (error) {
-      console.error('❌ Network error:', error);
-      this.showErrorMessage('Network error. Please check your connection and try again.');
+      console.error('❌ Submission error:', error);
+      this.showErrorMessage(error.message || 'Network error. Please check your connection and try again.');
     } finally {
       this.setLoadingState(false);
     }
