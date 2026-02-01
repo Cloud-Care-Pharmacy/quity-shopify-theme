@@ -128,7 +128,7 @@
           "type": "button",
           "settings": {
             "button": "Apply for prescription",
-            "url": "",
+            "url": "shopify://pages/questionnaire",
             "open_in_new_tab": false,
             "button_style": "non_outline",
             "button_custom": false,
