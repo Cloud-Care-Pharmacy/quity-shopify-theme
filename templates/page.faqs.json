@@ -4,6 +4,51 @@
       "type": "main-page",
       "settings": {}
     },
+    "section-navigation": {
+      "type": "advanced-content",
+      "blocks": {
+        "nav-block": {
+          "type": "html",
+          "settings": {
+            "width": "100%",
+            "title": "",
+            "color_title": "#000",
+            "sub": "",
+            "color_sub": "#000",
+            "code": "<div style=\"background-color: #f8f9fa; border-radius: 8px; padding: 30px 40px; margin-bottom: 20px;\">\n<h4 style=\"margin-bottom: 20px; font-weight: 600;\">Quick Navigation</h4>\n<div style=\"display: flex; flex-wrap: wrap; gap: 0;\">\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#section-facts\" style=\"color: #007bff; text-decoration: none;\">1. The Facts You Need to Know</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-motivation\" style=\"color: #007bff; text-decoration: none;\">2. Motivation</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-cravings\" style=\"color: #007bff; text-decoration: none;\">3. Cravings</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-vaping-basics\" style=\"color: #007bff; text-decoration: none;\">4. Vaping Basics</a></p>\n</div>\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#section-prescriptions\" style=\"color: #007bff; text-decoration: none;\">5. Prescriptions & Legal Information</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-nicotine-pouches\" style=\"color: #007bff; text-decoration: none;\">6. Nicotine Pouches</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-orders\" style=\"color: #007bff; text-decoration: none;\">7. Orders & Shipping</a></p>\n</div>\n</div>\n</div>",
+            "color_des": "#000",
+            "button_text": "",
+            "link_button": "",
+            "align": "auto",
+            "box_align": "center",
+            "text_align": "left"
+          }
+        }
+      },
+      "block_order": ["nav-block"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "text_color": "rgba(0,0,0,0)",
+        "bgsection": "#ffffff",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_position": "center center",
+        "zindex": "0",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "padding": true,
+        "col_center": false,
+        "paddingsection": "40px 0px 20px 0px",
+        "paddingmobile": "30px 0px 10px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
     "section-facts": {
       "type": "faq-accordion",
       "blocks": {
@@ -458,6 +503,7 @@
   },
   "order": [
     "main",
+    "section-navigation",
     "section-facts",
     "section-motivation",
     "section-cravings",
