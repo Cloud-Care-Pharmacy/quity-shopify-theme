@@ -160,7 +160,7 @@
           "type": "button",
           "settings": {
             "button": "Shop Chemist",
-            "url": "",
+            "url": "https://quity.com.au/collections/all",
             "open_in_new_tab": false,
             "button_style": "non_outline",
             "button_custom": false,
