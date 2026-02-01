@@ -1,0 +1,396 @@
+<!-- privacy-policy.liquid -->
+<style>
+  .privacy-policy-section {
+    padding: {{ section.settings.paddingsection }};
+  }
+  @media (max-width: 767px) {
+    .privacy-policy-section {
+      padding: {{ section.settings.paddingmobile }};
+    }
+  }
+  .privacy-policy-section {
+    background-color: {{ section.settings.bgsection }};
+  }
+  .privacy-policy__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .privacy-policy__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .privacy-policy__title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: {{ section.settings.title_color }};
+  }
+  .privacy-policy__updated {
+    color: {{ section.settings.text_color }};
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+  .privacy-policy__section {
+    margin-bottom: 35px;
+  }
+  .privacy-policy__section-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+    font-weight: 600;
+  }
+  .privacy-policy__text {
+    color: {{ section.settings.text_color }};
+    line-height: 1.8;
+  }
+  .privacy-policy__text p {
+    margin-bottom: 15px;
+  }
+  .privacy-policy__text ul,
+  .privacy-policy__text ol {
+    margin-bottom: 15px;
+    padding-left: 25px;
+  }
+  .privacy-policy__text li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .privacy-policy__contact {
+    background: {{ section.settings.contact_bg }};
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+  }
+  .privacy-policy__contact-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+  }
+  .privacy-policy__toc {
+    background: #f8f9fa;
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .privacy-policy__toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .privacy-policy__toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+  }
+  @media (max-width: 767px) {
+    .privacy-policy__toc ul {
+      columns: 1;
+    }
+  }
+  .privacy-policy__toc li {
+    margin-bottom: 8px;
+  }
+  .privacy-policy__toc a {
+    color: {{ section.settings.link_color }};
+    text-decoration: none;
+  }
+  .privacy-policy__toc a:hover {
+    text-decoration: underline;
+  }
+  .privacy-policy__text a {
+    color: {{ section.settings.link_color }};
+  }
+</style>
+
+<section class="privacy-policy-section" data-aos="{{ section.settings.animation }}">
+  <div class="{{ section.settings.setwidth }}">
+    <div class="privacy-policy__content">
+      
+      <div class="privacy-policy__header">
+        <h1 class="privacy-policy__title">{{ section.settings.page_title }}</h1>
+        <p class="privacy-policy__updated">{{ section.settings.last_updated }}</p>
+      </div>
+
+      {%- if section.settings.show_toc -%}
+      <div class="privacy-policy__toc">
+        <h3 class="privacy-policy__toc-title">{{ section.settings.toc_title }}</h3>
+        <ul>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'section' -%}
+              <li><a href="#privacy-section-{{ forloop.index }}">{{ block.settings.section_title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+
+      {%- if section.settings.intro_text != blank -%}
+      <div class="privacy-policy__section">
+        <div class="privacy-policy__text rte">
+          {{ section.settings.intro_text }}
+        </div>
+      </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'section' -%}
+            <div class="privacy-policy__section" id="privacy-section-{{ forloop.index }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.section_title != blank -%}
+                <h2 class="privacy-policy__section-title">{{ block.settings.section_title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.section_content != blank -%}
+                <div class="privacy-policy__text rte">
+                  {{ block.settings.section_content }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'contact_box' -%}
+            <div class="privacy-policy__contact" {{ block.shopify_attributes }}>
+              {%- if block.settings.contact_title != blank -%}
+                <h3 class="privacy-policy__contact-title">{{ block.settings.contact_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.contact_content != blank -%}
+                <div class="privacy-policy__text rte">
+                  {{ block.settings.contact_content }}
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Privacy Policy",
+  "class": "privacy-policy-wrapper",
+  "settings": [
+    {
+      "type": "select",
+      "id": "animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade Up" }
+      ],
+      "default": "fade-up",
+      "label": "Animation"
+    },
+    {
+      "type": "select",
+      "id": "setwidth",
+      "label": "Container Width",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "container-fluid", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bgsection",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "contact_bg",
+      "label": "Contact Box Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last Updated Text",
+      "default": "Last Updated: February 2026"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "Show Table of Contents",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "Table of Contents Title",
+      "default": "Quick Navigation"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introduction Text",
+      "default": "<p>At Quity, safeguarding your personal information is fundamental to how we operate. This Privacy Policy explains our practices regarding the collection, use, storage, and protection of your data when you interact with our services.</p>"
+    },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Section Padding (Desktop)",
+      "default": "60px 0px 80px 0px"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Section Padding (Mobile)",
+      "default": "40px 0px 60px 0px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Policy Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title"
+        },
+        {
+          "type": "richtext",
+          "id": "section_content",
+          "label": "Section Content",
+          "default": "<p>Add your policy content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "contact_box",
+      "name": "Contact Box",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Contact Title",
+          "default": "Questions About This Policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "contact_content",
+          "label": "Contact Content",
+          "default": "<p>If you have any questions or concerns about our privacy practices, please reach out to our team.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Privacy Policy",
+      "blocks": [
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Information We Gather",
+            "section_content": "<p>When you engage with Quity's services, we may collect various types of information to provide you with the best possible experience:</p><ul><li><strong>Identity Details:</strong> Your name, date of birth, and government-issued identification when required for healthcare services</li><li><strong>Contact Information:</strong> Email address, phone number, and residential address for communication and delivery purposes</li><li><strong>Health-Related Data:</strong> Medical history, current medications, allergies, and other health information necessary to provide appropriate pharmaceutical care</li><li><strong>Transaction Records:</strong> Purchase history, payment information, and billing details</li><li><strong>Technical Data:</strong> Device information, browser type, IP address, and usage patterns when you visit our website</li><li><strong>Communication Records:</strong> Records of your interactions with our customer support team</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "How We Utilise Your Information",
+            "section_content": "<p>Your information enables us to deliver and improve our services in the following ways:</p><ul><li><strong>Healthcare Delivery:</strong> Processing prescriptions, conducting consultations, and providing pharmaceutical advice tailored to your needs</li><li><strong>Order Fulfilment:</strong> Managing your purchases, arranging delivery, and handling returns or exchanges</li><li><strong>Account Administration:</strong> Maintaining your account, verifying your identity, and ensuring account security</li><li><strong>Service Enhancement:</strong> Analysing usage patterns to improve our website, products, and customer experience</li><li><strong>Regulatory Compliance:</strong> Meeting legal obligations including healthcare regulations, record-keeping requirements, and reporting duties</li><li><strong>Communication:</strong> Sending important updates about your orders, appointments, or changes to our services</li><li><strong>Marketing:</strong> With your consent, sharing information about new products, services, or promotions that may interest you</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Legal Grounds for Processing",
+            "section_content": "<p>We process your personal information based on the following legal foundations:</p><ul><li><strong>Contractual Necessity:</strong> Processing required to fulfil our service agreement with you</li><li><strong>Legal Obligations:</strong> Processing necessary to comply with healthcare laws, tax regulations, and other legal requirements</li><li><strong>Legitimate Interests:</strong> Processing that supports our business operations while respecting your rights and interests</li><li><strong>Consent:</strong> Where you have given explicit permission, particularly for marketing communications and certain data uses</li><li><strong>Vital Interests:</strong> In rare circumstances, processing necessary to protect someone's life or health</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Information Sharing Practices",
+            "section_content": "<p>We take a careful approach to sharing your information and only do so when necessary:</p><ul><li><strong>Healthcare Providers:</strong> Sharing relevant medical information with doctors, specialists, or other healthcare professionals involved in your care</li><li><strong>Service Partners:</strong> Working with trusted third parties who assist with payment processing, delivery logistics, and IT services</li><li><strong>Regulatory Authorities:</strong> Disclosing information when required by healthcare regulators, law enforcement, or other government bodies</li><li><strong>Professional Advisors:</strong> Sharing with legal, accounting, or insurance professionals when necessary</li><li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale, your information may be transferred as part of that transaction</li></ul><p>We never sell your personal information to third parties for their marketing purposes.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Data Protection Measures",
+            "section_content": "<p>Protecting your information is a top priority at Quity. We employ comprehensive security measures including:</p><ul><li><strong>Encryption:</strong> Using industry-standard encryption protocols to protect data during transmission and storage</li><li><strong>Access Controls:</strong> Implementing strict access restrictions so only authorised personnel can view sensitive information</li><li><strong>Regular Audits:</strong> Conducting periodic security assessments and vulnerability testing</li><li><strong>Staff Training:</strong> Ensuring all team members understand their privacy and security responsibilities</li><li><strong>Secure Infrastructure:</strong> Hosting data on secure servers with robust physical and digital protections</li><li><strong>Incident Response:</strong> Maintaining procedures to quickly address any potential security breaches</li></ul><p>While we implement strong safeguards, no system is completely impenetrable. We encourage you to use strong passwords and protect your login credentials.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Data Retention Period",
+            "section_content": "<p>We retain your personal information for as long as necessary to fulfil the purposes outlined in this policy, unless a longer retention period is required by law.</p><ul><li><strong>Active Accounts:</strong> We keep your information while your account remains active and for a reasonable period afterward</li><li><strong>Healthcare Records:</strong> Medical and prescription records are retained in accordance with healthcare regulations, typically for a minimum of seven years</li><li><strong>Transaction Data:</strong> Financial records are kept for the period required by tax and accounting regulations</li><li><strong>Marketing Preferences:</strong> We maintain records of your communication preferences until you update them</li></ul><p>When information is no longer needed, we securely delete or anonymise it in accordance with our data retention procedures.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Your Privacy Rights",
+            "section_content": "<p>You have several rights regarding your personal information:</p><ul><li><strong>Access:</strong> Request a copy of the personal information we hold about you</li><li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete information</li><li><strong>Deletion:</strong> Request removal of your personal information, subject to legal requirements</li><li><strong>Restriction:</strong> Ask us to limit how we use your information in certain circumstances</li><li><strong>Portability:</strong> Receive your data in a structured, commonly used format</li><li><strong>Objection:</strong> Object to certain types of processing, including direct marketing</li><li><strong>Withdraw Consent:</strong> Where processing is based on consent, you may withdraw it at any time</li></ul><p>To exercise any of these rights, please contact our privacy team using the details provided below. We will respond to your request within the timeframe required by applicable law.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Cookies and Tracking Technologies",
+            "section_content": "<p>Our website uses cookies and similar technologies to enhance your browsing experience:</p><ul><li><strong>Essential Cookies:</strong> Required for basic website functionality, such as maintaining your shopping cart and login session</li><li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site so we can make improvements</li><li><strong>Preference Cookies:</strong> Remember your settings and choices for a more personalised experience</li><li><strong>Marketing Cookies:</strong> Used to deliver relevant advertisements and measure campaign effectiveness</li></ul><p>You can manage your cookie preferences through your browser settings. Note that disabling certain cookies may affect website functionality.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Third-Party Services",
+            "section_content": "<p>Our website may contain links to external sites or integrate with third-party services. These include:</p><ul><li>Payment processors for secure transactions</li><li>Delivery partners for order fulfilment</li><li>Analytics providers to measure website performance</li><li>Social media platforms for sharing content</li></ul><p>These third parties have their own privacy policies, and we encourage you to review them. We are not responsible for the privacy practices of external websites or services.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Children's Privacy",
+            "section_content": "<p>Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you believe we have inadvertently collected information from a minor, please contact us immediately so we can take appropriate action.</p><p>For prescription services involving minors, a parent or legal guardian must provide consent and manage the account on the child's behalf.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Updates to This Policy",
+            "section_content": "<p>We may update this Privacy Policy periodically to reflect changes in our practices, technology, legal requirements, or other factors. When we make significant changes, we will:</p><ul><li>Update the \"Last Updated\" date at the top of this page</li><li>Notify you via email or through a prominent notice on our website</li><li>Where required by law, obtain your consent to material changes</li></ul><p>We encourage you to review this policy regularly to stay informed about how we protect your information.</p>"
+          }
+        },
+        {
+          "type": "contact_box",
+          "settings": {
+            "contact_title": "Get in Touch About Privacy Matters",
+            "contact_content": "<p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, our team is here to help.</p><p><strong>Email:</strong> privacy@quity.com.au<br><strong>Phone:</strong> 1300 QUITY (1300 784 89)<br><strong>Post:</strong> Privacy Officer, Quity, [Your Address]</p><p>We aim to respond to all privacy-related enquiries within 5 business days.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

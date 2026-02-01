@@ -1,0 +1,429 @@
+<!-- refund-policy.liquid -->
+<style>
+  .refund-policy-section {
+    padding: {{ section.settings.paddingsection }};
+  }
+  @media (max-width: 767px) {
+    .refund-policy-section {
+      padding: {{ section.settings.paddingmobile }};
+    }
+  }
+  .refund-policy-section {
+    background-color: {{ section.settings.bgsection }};
+  }
+  .refund-policy__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .refund-policy__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .refund-policy__title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: {{ section.settings.title_color }};
+  }
+  .refund-policy__updated {
+    color: {{ section.settings.text_color }};
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+  .refund-policy__section {
+    margin-bottom: 35px;
+  }
+  .refund-policy__section-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+    font-weight: 600;
+  }
+  .refund-policy__text {
+    color: {{ section.settings.text_color }};
+    line-height: 1.8;
+  }
+  .refund-policy__text p {
+    margin-bottom: 15px;
+  }
+  .refund-policy__text ul,
+  .refund-policy__text ol {
+    margin-bottom: 15px;
+    padding-left: 25px;
+  }
+  .refund-policy__text li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .refund-policy__highlight-box {
+    background: {{ section.settings.highlight_bg }};
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin: 25px 0;
+    border-left: 4px solid {{ section.settings.accent_color }};
+  }
+  .refund-policy__highlight-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: {{ section.settings.title_color }};
+  }
+  .refund-policy__contact {
+    background: {{ section.settings.contact_bg }};
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+  }
+  .refund-policy__contact-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+  }
+  .refund-policy__toc {
+    background: #f8f9fa;
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .refund-policy__toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .refund-policy__toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+  }
+  @media (max-width: 767px) {
+    .refund-policy__toc ul {
+      columns: 1;
+    }
+  }
+  .refund-policy__toc li {
+    margin-bottom: 8px;
+  }
+  .refund-policy__toc a {
+    color: {{ section.settings.link_color }};
+    text-decoration: none;
+  }
+  .refund-policy__toc a:hover {
+    text-decoration: underline;
+  }
+  .refund-policy__text a {
+    color: {{ section.settings.link_color }};
+  }
+</style>
+
+<section class="refund-policy-section" data-aos="{{ section.settings.animation }}">
+  <div class="{{ section.settings.setwidth }}">
+    <div class="refund-policy__content">
+      
+      <div class="refund-policy__header">
+        <h1 class="refund-policy__title">{{ section.settings.page_title }}</h1>
+        <p class="refund-policy__updated">{{ section.settings.last_updated }}</p>
+      </div>
+
+      {%- if section.settings.show_toc -%}
+      <div class="refund-policy__toc">
+        <h3 class="refund-policy__toc-title">{{ section.settings.toc_title }}</h3>
+        <ul>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'section' -%}
+              <li><a href="#refund-section-{{ forloop.index }}">{{ block.settings.section_title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+
+      {%- if section.settings.intro_text != blank -%}
+      <div class="refund-policy__section">
+        <div class="refund-policy__text rte">
+          {{ section.settings.intro_text }}
+        </div>
+      </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'section' -%}
+            <div class="refund-policy__section" id="refund-section-{{ forloop.index }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.section_title != blank -%}
+                <h2 class="refund-policy__section-title">{{ block.settings.section_title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.section_content != blank -%}
+                <div class="refund-policy__text rte">
+                  {{ block.settings.section_content }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'highlight_box' -%}
+            <div class="refund-policy__highlight-box" {{ block.shopify_attributes }}>
+              {%- if block.settings.highlight_title != blank -%}
+                <h3 class="refund-policy__highlight-title">{{ block.settings.highlight_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.highlight_content != blank -%}
+                <div class="refund-policy__text rte">
+                  {{ block.settings.highlight_content }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'contact_box' -%}
+            <div class="refund-policy__contact" {{ block.shopify_attributes }}>
+              {%- if block.settings.contact_title != blank -%}
+                <h3 class="refund-policy__contact-title">{{ block.settings.contact_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.contact_content != blank -%}
+                <div class="refund-policy__text rte">
+                  {{ block.settings.contact_content }}
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Refund Policy",
+  "class": "refund-policy-wrapper",
+  "settings": [
+    {
+      "type": "select",
+      "id": "animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade Up" }
+      ],
+      "default": "fade-up",
+      "label": "Animation"
+    },
+    {
+      "type": "select",
+      "id": "setwidth",
+      "label": "Container Width",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "container-fluid", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bgsection",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg",
+      "label": "Highlight Box Background",
+      "default": "#f0f7ff"
+    },
+    {
+      "type": "color",
+      "id": "contact_bg",
+      "label": "Contact Box Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Refund & Returns Policy"
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last Updated Text",
+      "default": "Last Updated: February 2026"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "Show Table of Contents",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "Table of Contents Title",
+      "default": "Quick Navigation"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introduction Text",
+      "default": "<p>At Quity, we are dedicated to delivering exceptional products and services to our customers. We understand that occasionally issues may arise with your order, and we are here to help resolve them. Please review our refund and returns policy below to understand your options.</p>"
+    },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Section Padding (Desktop)",
+      "default": "60px 0px 80px 0px"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Section Padding (Mobile)",
+      "default": "40px 0px 60px 0px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Policy Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title"
+        },
+        {
+          "type": "richtext",
+          "id": "section_content",
+          "label": "Section Content",
+          "default": "<p>Add your policy content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "highlight_box",
+      "name": "Highlight Box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "highlight_title",
+          "label": "Highlight Title",
+          "default": "Important Notice"
+        },
+        {
+          "type": "richtext",
+          "id": "highlight_content",
+          "label": "Highlight Content",
+          "default": "<p>Key information to highlight.</p>"
+        }
+      ]
+    },
+    {
+      "type": "contact_box",
+      "name": "Contact Box",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Contact Title",
+          "default": "Need Assistance?"
+        },
+        {
+          "type": "richtext",
+          "id": "contact_content",
+          "label": "Contact Content",
+          "default": "<p>If you have any questions about our refund policy, please reach out to our customer support team.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refund Policy",
+      "blocks": [
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Product Guarantee",
+            "section_content": "<p>All products purchased from Quity are covered by a 90-day quality guarantee from the date of delivery. This guarantee applies to items that remain unused and in their original sealed packaging from the manufacturer.</p><ul><li><strong>Coverage Period:</strong> The guarantee begins on the day your order is delivered and extends for 90 days</li><li><strong>Condition Requirements:</strong> Products must be unopened, unused, and in their original manufacturer's packaging</li><li><strong>Shipping Responsibility:</strong> Customers are responsible for return shipping costs to our facility. Quity will cover the cost of sending any replacement items to you</li><li><strong>Packaging Condition:</strong> We reserve the right to decline returns if the product or its packaging shows signs of damage or tampering</li></ul><p>Please note that shipping costs incurred for the original order are not refundable or creditable.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Receiving Incorrect Items",
+            "section_content": "<p>We take great care in preparing and verifying every order, but mistakes can occasionally happen. If you receive an item that differs from what you ordered, here is how we will make it right:</p><ul><li><strong>Notification Timeframe:</strong> Please contact us within 14 days of receiving your delivery if there is a discrepancy with your order</li><li><strong>Required Information:</strong> When reaching out, please provide your order number, a description of the incorrect item, and photographic evidence where possible</li><li><strong>Resolution Process:</strong> Once we verify the error, we will arrange for you to return the incorrect item and send the correct product at no additional cost</li><li><strong>Late Claims:</strong> Unfortunately, we cannot honour claims submitted after the 14-day window has passed</li></ul><p>Our customer service team is committed to resolving any order discrepancies promptly and fairly.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Damaged or Defective Products",
+            "section_content": "<p>If your order arrives damaged during transit or contains a defective product, we want to resolve the issue as quickly as possible:</p><ul><li><strong>Reporting Period:</strong> Notify our team within 14 days of receiving the damaged or defective item</li><li><strong>Documentation Required:</strong> Please include your order number, a detailed description of the damage or defect, and clear photographs showing the issue</li><li><strong>Return Address:</strong> Defective or damaged items should be returned to our designated facility address, which our customer service team will provide</li><li><strong>Replacement or Refund:</strong> Upon receiving and inspecting the returned item, we will send a replacement product or issue an appropriate refund</li></ul><p>Claims submitted after the 14-day reporting window may not be eligible for resolution.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Returns and Exchanges",
+            "section_content": "<p>We accept returns and exchanges for eligible products under the following conditions:</p><ul><li><strong>Eligibility:</strong> New, unopened devices and accessories in their original packaging may be returned within 14 days of delivery</li><li><strong>Condition Requirements:</strong> Items must be unused, undamaged, and include all original packaging, manuals, and accessories</li><li><strong>Inspection Process:</strong> All returns are inspected upon receipt. We reserve the right to decline returns if items show signs of use, damage, or missing components</li><li><strong>Non-Returnable Items:</strong> Due to health and safety regulations, prescription medications and dispensed pharmaceutical products cannot be returned or exchanged once they have been dispensed</li></ul><p>To initiate a return or exchange, please contact our customer service team who will guide you through the process.</p>"
+          }
+        },
+        {
+          "type": "highlight_box",
+          "settings": {
+            "highlight_title": "Important: Prescription Medications",
+            "highlight_content": "<p>As a registered pharmacy, we are bound by strict regulations regarding the handling of prescription medications. Once a prescription medicine has been dispensed and dispatched, it cannot be returned, exchanged, or refunded due to Therapeutic Goods Administration (TGA) requirements and patient safety considerations.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Change of Mind",
+            "section_content": "<p>We understand that sometimes preferences change after placing an order. Please be aware of our policy regarding change of mind returns:</p><ul><li><strong>General Policy:</strong> We do not provide refunds for purchases where you have simply changed your mind about the product</li><li><strong>Price Matching:</strong> We are unable to offer refunds or adjustments if you find the same product at a lower price elsewhere after your purchase</li><li><strong>Order Cancellation:</strong> If you wish to cancel an order, please contact us immediately. Orders that have already been processed or dispatched may not be eligible for cancellation</li></ul><p>We encourage customers to carefully review their orders before completing the checkout process.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "Refund Processing",
+            "section_content": "<p>When a refund is approved, here is what you can expect:</p><ul><li><strong>Processing Time:</strong> Refunds are typically processed within 5-7 business days after we receive and inspect the returned item</li><li><strong>Refund Method:</strong> Refunds will be issued to the original payment method used for the purchase</li><li><strong>Bank Processing:</strong> Please allow an additional 3-5 business days for the refund to appear in your account, depending on your financial institution</li><li><strong>Partial Refunds:</strong> In some cases, partial refunds may be issued if items are returned in a condition that differs from the original state</li></ul><p>You will receive an email confirmation once your refund has been processed.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "How to Submit a Request",
+            "section_content": "<p>To submit a warranty claim, return request, or report an issue with your order, please follow these steps:</p><ol><li><strong>Gather Information:</strong> Have your order number, the product details, and any relevant photos ready</li><li><strong>Contact Us:</strong> Reach out to our customer service team via email or phone with the details of your request</li><li><strong>Receive Instructions:</strong> Our team will review your request and provide specific instructions for your situation</li><li><strong>Ship Your Return:</strong> If applicable, send the item to our returns address using a tracked shipping method</li><li><strong>Resolution:</strong> Once we receive and inspect the item, we will process your replacement or refund accordingly</li></ol><p>We aim to respond to all enquiries within 1-2 business days.</p>"
+          }
+        },
+        {
+          "type": "contact_box",
+          "settings": {
+            "contact_title": "Need Help with a Return or Refund?",
+            "contact_content": "<p>Our customer support team is here to assist you with any questions or concerns about our refund and returns policy.</p><p><strong>Email:</strong> support@quity.com.au<br><strong>Phone:</strong> 1300 QUITY (1300 784 89)<br><strong>Hours:</strong> Monday to Friday, 9:00 AM - 5:00 PM AEST</p><p>When contacting us about a return or refund, please have your order number ready for faster assistance.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

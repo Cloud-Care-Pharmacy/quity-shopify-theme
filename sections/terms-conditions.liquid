@@ -1,0 +1,539 @@
+<!-- terms-conditions.liquid -->
+<style>
+  .terms-conditions-section {
+    padding: {{ section.settings.paddingsection }};
+  }
+  @media (max-width: 767px) {
+    .terms-conditions-section {
+      padding: {{ section.settings.paddingmobile }};
+    }
+  }
+  .terms-conditions-section {
+    background-color: {{ section.settings.bgsection }};
+  }
+  .terms-conditions__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .terms-conditions__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .terms-conditions__title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: {{ section.settings.title_color }};
+  }
+  .terms-conditions__updated {
+    color: {{ section.settings.text_color }};
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+  .terms-conditions__section {
+    margin-bottom: 35px;
+  }
+  .terms-conditions__section-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+    font-weight: 600;
+  }
+  .terms-conditions__subsection-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: {{ section.settings.title_color }};
+    font-weight: 500;
+  }
+  .terms-conditions__text {
+    color: {{ section.settings.text_color }};
+    line-height: 1.8;
+  }
+  .terms-conditions__text p {
+    margin-bottom: 15px;
+  }
+  .terms-conditions__text ul,
+  .terms-conditions__text ol {
+    margin-bottom: 15px;
+    padding-left: 25px;
+  }
+  .terms-conditions__text li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .terms-conditions__highlight-box {
+    background: {{ section.settings.highlight_bg }};
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin: 25px 0;
+    border-left: 4px solid {{ section.settings.accent_color }};
+  }
+  .terms-conditions__contact {
+    background: {{ section.settings.contact_bg }};
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+  }
+  .terms-conditions__contact-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: {{ section.settings.title_color }};
+  }
+  .terms-conditions__toc {
+    background: #f8f9fa;
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .terms-conditions__toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .terms-conditions__toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+  }
+  @media (max-width: 767px) {
+    .terms-conditions__toc ul {
+      columns: 1;
+    }
+  }
+  .terms-conditions__toc li {
+    margin-bottom: 8px;
+  }
+  .terms-conditions__toc a {
+    color: {{ section.settings.link_color }};
+    text-decoration: none;
+  }
+  .terms-conditions__toc a:hover {
+    text-decoration: underline;
+  }
+  .terms-conditions__text a {
+    color: {{ section.settings.link_color }};
+  }
+  .terms-conditions__numbered-list {
+    counter-reset: item;
+    list-style: none;
+    padding-left: 0;
+  }
+  .terms-conditions__numbered-list > li {
+    counter-increment: item;
+    margin-bottom: 12px;
+    padding-left: 35px;
+    position: relative;
+  }
+  .terms-conditions__numbered-list > li::before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    color: {{ section.settings.accent_color }};
+  }
+</style>
+
+<section class="terms-conditions-section" data-aos="{{ section.settings.animation }}">
+  <div class="{{ section.settings.setwidth }}">
+    <div class="terms-conditions__content">
+      
+      <div class="terms-conditions__header">
+        <h1 class="terms-conditions__title">{{ section.settings.page_title }}</h1>
+        <p class="terms-conditions__updated">{{ section.settings.last_updated }}</p>
+      </div>
+
+      {%- if section.settings.show_toc -%}
+      <div class="terms-conditions__toc">
+        <h3 class="terms-conditions__toc-title">{{ section.settings.toc_title }}</h3>
+        <ul>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'section' -%}
+              <li><a href="#terms-section-{{ forloop.index }}">{{ block.settings.section_title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+
+      {%- if section.settings.intro_text != blank -%}
+      <div class="terms-conditions__section">
+        <div class="terms-conditions__text rte">
+          {{ section.settings.intro_text }}
+        </div>
+      </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'section' -%}
+            <div class="terms-conditions__section" id="terms-section-{{ forloop.index }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.section_title != blank -%}
+                <h2 class="terms-conditions__section-title">{{ block.settings.section_title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.section_content != blank -%}
+                <div class="terms-conditions__text rte">
+                  {{ block.settings.section_content }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'highlight_box' -%}
+            <div class="terms-conditions__highlight-box" {{ block.shopify_attributes }}>
+              {%- if block.settings.highlight_title != blank -%}
+                <h3 class="terms-conditions__subsection-title" style="margin-top: 0;">{{ block.settings.highlight_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.highlight_content != blank -%}
+                <div class="terms-conditions__text rte">
+                  {{ block.settings.highlight_content }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- when 'contact_box' -%}
+            <div class="terms-conditions__contact" {{ block.shopify_attributes }}>
+              {%- if block.settings.contact_title != blank -%}
+                <h3 class="terms-conditions__contact-title">{{ block.settings.contact_title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.contact_content != blank -%}
+                <div class="terms-conditions__text rte">
+                  {{ block.settings.contact_content }}
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terms & Conditions",
+  "class": "terms-conditions-wrapper",
+  "settings": [
+    {
+      "type": "select",
+      "id": "animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade Up" }
+      ],
+      "default": "fade-up",
+      "label": "Animation"
+    },
+    {
+      "type": "select",
+      "id": "setwidth",
+      "label": "Container Width",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "container-fluid", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bgsection",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#0066cc"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg",
+      "label": "Highlight Box Background",
+      "default": "#f0f7ff"
+    },
+    {
+      "type": "color",
+      "id": "contact_bg",
+      "label": "Contact Box Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Terms & Conditions"
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last Updated Text",
+      "default": "Effective Date: February 2026"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toc",
+      "label": "Show Table of Contents",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "toc_title",
+      "label": "Table of Contents Title",
+      "default": "Quick Navigation"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Introduction Text",
+      "default": "<p>Welcome to Quity. These Terms and Conditions govern your access to and use of our website, platform, and services. By accessing or using our services, you acknowledge that you have read, understood, and agree to be bound by these terms. If you do not agree with any part of these terms, please discontinue use of our services immediately.</p>"
+    },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Section Padding (Desktop)",
+      "default": "60px 0px 80px 0px"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Section Padding (Mobile)",
+      "default": "40px 0px 60px 0px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "section",
+      "name": "Terms Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title"
+        },
+        {
+          "type": "richtext",
+          "id": "section_content",
+          "label": "Section Content",
+          "default": "<p>Add your terms content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "highlight_box",
+      "name": "Highlight Box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "highlight_title",
+          "label": "Highlight Title",
+          "default": "Important Notice"
+        },
+        {
+          "type": "richtext",
+          "id": "highlight_content",
+          "label": "Highlight Content",
+          "default": "<p>Add important highlighted content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "contact_box",
+      "name": "Contact Box",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Contact Title",
+          "default": "Questions About These Terms?"
+        },
+        {
+          "type": "richtext",
+          "id": "contact_content",
+          "label": "Contact Content",
+          "default": "<p>If you have any questions or concerns about these Terms and Conditions, please reach out to our team.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terms & Conditions",
+      "blocks": [
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "1. About Quity",
+            "section_content": "<p>Quity is an Australian digital health platform operated by Quity Pty Ltd (ABN [Your ABN]). Our platform provides:</p><ul><li>Online telehealth consultations connecting patients with registered Australian healthcare practitioners</li><li>Electronic prescription services for eligible patients</li><li>An online pharmacy service for the dispensing and delivery of prescribed medications</li><li>Health information resources and support tools</li></ul><p>Our mission is to make quality healthcare more accessible by bridging the gap between patients, medical professionals, and pharmaceutical services through a secure digital environment.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "2. Agreement to Terms",
+            "section_content": "<p>By creating an account, making a purchase, booking a consultation, or otherwise using our platform, you confirm that:</p><ul><li>You are at least 18 years of age and legally capable of entering into binding agreements</li><li>You have read and accept these Terms and Conditions in their entirety</li><li>You have reviewed and accept our <a href=\"/pages/privacy-policy\">Privacy Policy</a></li><li>If acting on behalf of another person (such as a dependent), you have legal authority to do so</li><li>All information you provide to us is truthful, accurate, and complete</li></ul><p>We reserve the right to modify these terms at any time. Continued use of our services following any changes constitutes your acceptance of the revised terms. We encourage you to review this page periodically for updates.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "3. Eligibility Requirements",
+            "section_content": "<p>To use Quity's services, you must meet the following criteria:</p><ul><li><strong>Age Requirement:</strong> You must be 18 years or older. Services for minors require a parent or legal guardian to manage the account and provide consent</li><li><strong>Residency:</strong> You must be located within Australia when accessing telehealth consultations</li><li><strong>Valid Identification:</strong> You may be required to verify your identity using government-issued identification</li><li><strong>Accurate Health Information:</strong> You must provide complete and truthful medical history and health information</li></ul><p>We reserve the right to refuse service or terminate accounts if eligibility requirements are not met or if false information is provided.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "4. Account Registration and Security",
+            "section_content": "<p>When you create an account with Quity, you agree to the following responsibilities:</p><ul><li><strong>Accurate Information:</strong> Provide truthful and current personal details, including your full legal name, date of birth, contact information, and Medicare details where applicable</li><li><strong>Account Security:</strong> Keep your login credentials confidential and do not share access with others</li><li><strong>Sole Responsibility:</strong> You are responsible for all activities that occur under your account</li><li><strong>Immediate Notification:</strong> Alert us promptly at support@quity.com.au if you suspect unauthorised access to your account</li><li><strong>Profile Updates:</strong> Keep your account information current, particularly your contact details and medical information</li></ul><p>Providing false or misleading information, or using another person's identity, may result in immediate account termination and may be reported to relevant authorities.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "5. Telehealth Consultations",
+            "section_content": "<p>Quity facilitates telehealth consultations between patients and registered Australian medical practitioners. By using our consultation services, you understand and agree that:</p><ul><li><strong>Independent Practitioners:</strong> Healthcare providers accessible through our platform are independent practitioners, not employees of Quity</li><li><strong>Clinical Judgment:</strong> All medical decisions, including whether to issue prescriptions, remain at the sole discretion of the consulting practitioner</li><li><strong>No Guarantee of Prescriptions:</strong> A consultation does not guarantee that a prescription will be issued. Practitioners will only prescribe medication when clinically appropriate</li><li><strong>Accurate Disclosure:</strong> You must provide complete and accurate information about your health, including current medications, allergies, and medical conditions</li><li><strong>Emergency Situations:</strong> Our telehealth service is not suitable for medical emergencies. If you experience a medical emergency, call 000 immediately</li><li><strong>Supplementary Care:</strong> Telehealth consultations complement, but do not replace, the relationship with your regular general practitioner</li></ul>"
+          }
+        },
+        {
+          "type": "highlight_box",
+          "settings": {
+            "highlight_title": "Medical Disclaimer",
+            "highlight_content": "<p>Quity does not provide medical advice, diagnosis, or treatment. All clinical services are delivered by independent, registered healthcare practitioners. The information on our website is for general informational purposes only and should not substitute professional medical advice. Always seek guidance from qualified healthcare providers regarding medical conditions.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "6. Prescriptions and Electronic Scripts",
+            "section_content": "<p>When a healthcare practitioner issues a prescription through our platform:</p><ul><li>Prescriptions are issued as electronic scripts (eScripts) where applicable and permitted by law</li><li>Prescriptions remain valid only for the duration specified by the prescribing practitioner</li><li>You authorise the sharing of your prescription with our partner pharmacy for dispensing purposes</li><li>Certain medications may not be available through telehealth services due to regulatory requirements</li><li>Prescription medications will only be dispensed upon verification of a valid prescription</li></ul><p>It is your responsibility to inform your regular GP about any medications prescribed through our service to ensure coordinated care.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "7. Pharmacy Services and Products",
+            "section_content": "<p>Quity partners with registered Australian pharmacies to dispense and deliver prescription medications. Our pharmacy services operate under the following conditions:</p><ul><li><strong>Licensed Pharmacies:</strong> All medications are dispensed by pharmacies registered with the Australian Health Practitioner Regulation Agency (AHPRA)</li><li><strong>Prescription Verification:</strong> Prescription medications require a valid prescription from a registered practitioner</li><li><strong>Product Availability:</strong> While we strive to maintain stock availability, certain products may be temporarily unavailable. We will notify you of any substitutions or delays</li><li><strong>Storage and Handling:</strong> Medications are stored and handled according to TGA guidelines and manufacturer specifications</li><li><strong>Product Information:</strong> Always read the Consumer Medicine Information (CMI) provided with your medication and follow the directions of your healthcare provider</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "8. Pricing, Payment, and Billing",
+            "section_content": "<p>All prices displayed on our platform are in Australian Dollars (AUD) and include GST where applicable. Our pricing and payment terms include:</p><ul><li><strong>Consultation Fees:</strong> Fees for telehealth consultations are payable at the time of booking. Medicare rebates may apply for eligible consultations</li><li><strong>Product Prices:</strong> Medication and product prices are subject to change without prior notice. The price at checkout is the price you pay</li><li><strong>Delivery Charges:</strong> Shipping fees are calculated at checkout based on your location and delivery preference</li><li><strong>Payment Methods:</strong> We accept major credit cards, debit cards, and other payment methods as displayed at checkout</li><li><strong>Payment Processing:</strong> Payments are processed through secure third-party payment gateways. By making a purchase, you agree to their terms of service</li></ul><p>If payment is declined or cannot be processed, we reserve the right to withhold services or products until payment is successfully received.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "9. Delivery and Shipping",
+            "section_content": "<p>We deliver prescription and non-prescription products throughout Australia subject to the following terms:</p><ul><li><strong>Delivery Timeframes:</strong> Estimated delivery times are provided at checkout. While we aim to meet these estimates, delays may occur due to factors beyond our control</li><li><strong>Accurate Address:</strong> You are responsible for providing correct delivery details. Additional charges may apply for redelivery due to incorrect addresses</li><li><strong>Signature Requirements:</strong> Certain medications may require signature upon delivery to verify receipt</li><li><strong>Delivery Partners:</strong> We use third-party courier services for deliveries. Their terms and conditions apply to the delivery process</li><li><strong>Non-Delivery:</strong> If a delivery cannot be completed, the package may be held at a collection point. Uncollected packages may be returned to us</li></ul><p>We are not liable for delays caused by courier services, incorrect delivery information, or recipient unavailability.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "10. Cancellations, Refunds, and Returns",
+            "section_content": "<p>Our refund and cancellation policies are designed to balance patient needs with regulatory requirements:</p><p><strong>Consultation Cancellations:</strong></p><ul><li>Cancellations made more than 24 hours before a scheduled consultation may receive a full refund</li><li>Cancellations within 24 hours of a scheduled consultation may incur a cancellation fee</li><li>Failure to attend a booked consultation without notice is not eligible for a refund</li></ul><p><strong>Medication Returns:</strong></p><ul><li>Due to health and safety regulations, prescription medications cannot be returned or refunded once dispensed</li><li>If you receive damaged or incorrect medication, contact us within 48 hours for resolution</li></ul><p><strong>Non-Prescription Products:</strong></p><ul><li>Unopened, non-prescription products may be returned within 14 days for a refund</li><li>Items must be in original packaging and unused condition</li></ul><p>For all refund enquiries, please contact support@quity.com.au with your order details.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "11. User Conduct and Responsibilities",
+            "section_content": "<p>When using Quity's platform and services, you agree to:</p><ul><li>Provide accurate, complete, and current information at all times</li><li>Use the services only for lawful purposes and in accordance with these terms</li><li>Respect healthcare providers and staff, and refrain from abusive, threatening, or inappropriate conduct</li><li>Not attempt to obtain prescriptions through deception or misrepresentation</li><li>Not share, sell, or transfer your account access or any prescribed medications to others</li><li>Not attempt to circumvent platform security or access systems without authorisation</li><li>Not use automated systems, bots, or scrapers to access our platform</li><li>Comply with all applicable Australian laws and regulations</li></ul><p>Violation of these conduct requirements may result in immediate account suspension or termination.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "12. Intellectual Property Rights",
+            "section_content": "<p>All content on the Quity platform, including but not limited to text, graphics, logos, images, software, and design elements, is the property of Quity or its licensors and is protected by Australian and international intellectual property laws.</p><ul><li>You may not reproduce, distribute, modify, or create derivative works from any content without our express written permission</li><li>The Quity name, logo, and all related marks are trademarks of Quity Pty Ltd</li><li>Limited personal use of content for non-commercial purposes is permitted, provided attribution is maintained</li><li>Any feedback, suggestions, or ideas you provide may be used by Quity without obligation to you</li></ul><p>Unauthorised use of our intellectual property may result in legal action.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "13. Privacy and Data Protection",
+            "section_content": "<p>Your privacy is important to us. Our collection, use, and protection of your personal and health information is governed by our <a href=\"/pages/privacy-policy\">Privacy Policy</a>, which forms part of these terms.</p><p>Key points include:</p><ul><li>We collect personal and health information necessary to provide our services</li><li>Your information is stored securely and handled in compliance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles</li><li>Health records are maintained in accordance with applicable healthcare regulations</li><li>We do not sell your personal information to third parties</li><li>Information may be shared with healthcare providers, pharmacies, and service partners as necessary to deliver our services</li></ul><p>By using our services, you consent to the collection and use of your information as described in our Privacy Policy.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "14. Limitation of Liability",
+            "section_content": "<p>To the fullest extent permitted by law:</p><ul><li><strong>Service Provision:</strong> Quity acts as a platform connecting patients with healthcare providers and pharmacies. We are not responsible for clinical decisions made by practitioners or the actions of third-party service providers</li><li><strong>No Warranties:</strong> Our services are provided \"as is\" without warranties of any kind, whether express or implied</li><li><strong>Limitation of Damages:</strong> Quity shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services</li><li><strong>Maximum Liability:</strong> Our total liability for any claims arising from your use of services shall not exceed the amount paid by you for those specific services</li><li><strong>Third-Party Actions:</strong> We are not liable for the actions, errors, or omissions of independent healthcare providers, pharmacies, courier services, or other third parties</li></ul><p>Nothing in these terms excludes or limits liability that cannot be excluded or limited under Australian Consumer Law.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "15. Indemnification",
+            "section_content": "<p>You agree to defend, indemnify, and hold harmless Quity, its directors, officers, employees, contractors, and agents from and against any claims, damages, costs, liabilities, and expenses (including reasonable legal fees) arising from:</p><ul><li>Your use or misuse of our services</li><li>Your violation of these Terms and Conditions</li><li>Your provision of false, misleading, or incomplete information</li><li>Your infringement of any third-party rights</li><li>Any harm caused by your failure to follow medical advice or misuse of prescribed medications</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "16. Service Availability and Modifications",
+            "section_content": "<p>We strive to maintain continuous service availability, however:</p><ul><li><strong>Maintenance:</strong> We may temporarily suspend services for maintenance, updates, or improvements</li><li><strong>Modifications:</strong> We reserve the right to modify, update, or discontinue any aspect of our services without prior notice</li><li><strong>Technical Issues:</strong> We are not liable for service interruptions due to technical failures, cyberattacks, or circumstances beyond our control</li><li><strong>Third-Party Services:</strong> Our platform may integrate with third-party services. We are not responsible for their availability or performance</li></ul><p>We will make reasonable efforts to notify users of significant service changes where possible.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "17. Force Majeure",
+            "section_content": "<p>Quity shall not be held liable for any delay or failure to perform obligations under these terms due to circumstances beyond our reasonable control, including but not limited to:</p><ul><li>Natural disasters, fires, floods, earthquakes, or extreme weather events</li><li>Pandemics, epidemics, or public health emergencies</li><li>War, terrorism, civil unrest, or government actions</li><li>Industrial disputes, strikes, or labour shortages</li><li>Utility failures, including power outages or telecommunications disruptions</li><li>Supply chain disruptions or shortages of materials</li></ul><p>In such circumstances, affected obligations will be suspended for the duration of the force majeure event.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "18. Account Termination",
+            "section_content": "<p>Either party may terminate this agreement:</p><ul><li><strong>User Termination:</strong> You may close your account at any time by contacting support@quity.com.au. Closure does not affect any pending orders or consultations</li><li><strong>Quity Termination:</strong> We may suspend or terminate your account immediately if we believe you have violated these terms, engaged in fraudulent activity, or posed a risk to others</li><li><strong>Effect of Termination:</strong> Upon termination, your right to access services ceases, though certain provisions of these terms survive termination</li><li><strong>Data Retention:</strong> We may retain your information as required by law or for legitimate business purposes, as outlined in our Privacy Policy</li></ul>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "19. Dispute Resolution",
+            "section_content": "<p>If you have a dispute or complaint regarding our services:</p><ol><li><strong>Contact Us:</strong> First, reach out to our customer support team at support@quity.com.au. Many issues can be resolved directly</li><li><strong>Formal Complaint:</strong> If not resolved, submit a formal written complaint. We will acknowledge receipt within 5 business days and aim to resolve matters within 30 days</li><li><strong>External Resolution:</strong> If you remain unsatisfied, you may escalate to relevant regulatory bodies or external dispute resolution schemes</li><li><strong>Governing Law:</strong> These terms are governed by the laws of Australia. Any legal proceedings shall be brought in the courts of [Your State]</li></ol><p>We are committed to resolving disputes fairly and efficiently.</p>"
+          }
+        },
+        {
+          "type": "section",
+          "settings": {
+            "section_title": "20. General Provisions",
+            "section_content": "<p>The following general provisions apply to these terms:</p><ul><li><strong>Entire Agreement:</strong> These terms, together with our Privacy Policy and any other policies referenced herein, constitute the entire agreement between you and Quity</li><li><strong>Severability:</strong> If any provision of these terms is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect</li><li><strong>Waiver:</strong> Our failure to enforce any right or provision does not constitute a waiver of that right or provision</li><li><strong>Assignment:</strong> You may not assign or transfer your rights under these terms without our written consent. We may assign our rights to any affiliate or successor</li><li><strong>No Partnership:</strong> Nothing in these terms creates a partnership, joint venture, employment, or agency relationship between you and Quity</li><li><strong>Notices:</strong> We may provide notices to you via email, through your account, or by posting on our website</li></ul>"
+          }
+        },
+        {
+          "type": "contact_box",
+          "settings": {
+            "contact_title": "Contact Us",
+            "contact_content": "<p>If you have any questions, concerns, or feedback regarding these Terms and Conditions, we encourage you to reach out to our team.</p><p><strong>Email:</strong> support@quity.com.au<br><strong>Phone:</strong> 1300 QUITY (1300 784 89)<br><strong>Mail:</strong> Quity Pty Ltd, [Your Business Address]</p><p>Our support team is available Monday to Friday, 9am to 5pm AEST, and aims to respond to all enquiries within 2 business days.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

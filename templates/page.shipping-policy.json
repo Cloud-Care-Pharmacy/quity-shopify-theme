@@ -1,0 +1,120 @@
+{
+  "sections": {
+    "main": {
+      "type": "shipping-policy",
+      "blocks": {
+        "section_1": {
+          "type": "section",
+          "settings": {
+            "section_title": "Delivery Options & Timeframes",
+            "section_content": "<p>We offer several delivery options to suit your needs. Shipping methods and estimated delivery times are displayed at checkout based on your location.</p><ul><li><strong>Standard Delivery:</strong> Typically 3-7 business days depending on your location within Australia</li><li><strong>Express Delivery:</strong> 1-3 business days for metro areas, available for eligible orders</li><li><strong>Same Day Delivery:</strong> Available in select metropolitan areas for orders placed before 11:00 AM AEST</li></ul><p>Please note that delivery timeframes commence from when your order is dispatched from our pharmacy, not from when you placed your order. Prescription items may require additional processing time for pharmacist review.</p>"
+          }
+        },
+        "section_2": {
+          "type": "section",
+          "settings": {
+            "section_title": "Order Processing",
+            "section_content": "<p>Our team works diligently to process and dispatch orders promptly:</p><ul><li><strong>Order Cut-off:</strong> Orders placed before 12:00 PM AEST on business days are typically processed and dispatched the same day</li><li><strong>Prescription Verification:</strong> Orders containing prescription medications require verification by our registered pharmacists, which may add processing time</li><li><strong>Business Days:</strong> We dispatch orders Monday to Friday, excluding public holidays</li><li><strong>Order Confirmation:</strong> You will receive an email confirmation once your order has been placed and another when it has been dispatched</li></ul>"
+          }
+        },
+        "section_3": {
+          "type": "section",
+          "settings": {
+            "section_title": "Delivery Costs",
+            "section_content": "<p>Shipping costs are calculated at checkout based on your delivery location and chosen shipping method:</p><ul><li><strong>Free Standard Shipping:</strong> Available on orders over a specified value (details shown at checkout)</li><li><strong>Standard Shipping:</strong> Flat rate for orders under the free shipping threshold</li><li><strong>Express Shipping:</strong> Premium rate for faster delivery</li><li><strong>Regional & Remote Areas:</strong> Additional charges may apply for deliveries to regional and remote locations</li></ul><p>We partner with trusted Australian courier services to ensure your healthcare products arrive safely and on time.</p>"
+          }
+        },
+        "section_4": {
+          "type": "section",
+          "settings": {
+            "section_title": "Tracking Your Order",
+            "section_content": "<p>Stay informed about your delivery with our tracking service:</p><ul><li><strong>Tracking Number:</strong> Once your order is dispatched, you will receive an email containing your tracking number</li><li><strong>Track Online:</strong> Use the tracking number on the carrier's website to monitor your delivery status</li><li><strong>Delivery Notifications:</strong> Our carriers provide SMS and email notifications regarding your delivery progress</li><li><strong>Authority to Leave:</strong> During checkout, you can specify whether the courier may leave parcels in a safe place if you are not home</li></ul>"
+          }
+        },
+        "section_5": {
+          "type": "section",
+          "settings": {
+            "section_title": "Delivery Address Requirements",
+            "section_content": "<p>To ensure successful delivery of your order:</p><ul><li><strong>Accurate Information:</strong> Please double-check that your delivery address is complete and accurate before confirming your order</li><li><strong>Address Changes:</strong> If you need to change your delivery address after ordering, contact us immediately before your order is dispatched. Once dispatched, address changes must be arranged directly with the courier using your tracking number</li><li><strong>PO Box Deliveries:</strong> Standard postal items can be delivered to PO Boxes; however, express courier services typically require a physical street address</li><li><strong>Business Addresses:</strong> For workplace deliveries, please include any relevant floor or department details</li></ul>"
+          }
+        },
+        "section_6": {
+          "type": "section",
+          "settings": {
+            "section_title": "Signature on Delivery",
+            "section_content": "<p>Certain orders may require a signature upon delivery:</p><ul><li><strong>Prescription Medications:</strong> Depending on the medication type, a signature may be required to confirm safe receipt</li><li><strong>High-Value Orders:</strong> Orders above a certain value may be sent with signature required</li><li><strong>Authority to Leave:</strong> If you have provided authority to leave, the courier may leave your parcel in a secure location without requiring a signature</li><li><strong>Missed Delivery:</strong> If you are not available and a signature is required, a card will be left with instructions for redelivery or collection</li></ul>"
+          }
+        },
+        "section_7": {
+          "type": "section",
+          "settings": {
+            "section_title": "Delivery Issues",
+            "section_content": "<p>We strive to ensure every delivery goes smoothly, but occasionally issues may arise:</p><ul><li><strong>Delayed Deliveries:</strong> While we cannot control courier delays, we work closely with our delivery partners to resolve any issues. Please allow a few extra days during peak periods before contacting us</li><li><strong>Damaged Parcels:</strong> If your parcel arrives damaged, please photograph the damage and contact us immediately. Do not dispose of the packaging</li><li><strong>Lost Parcels:</strong> If your tracking shows delivered but you have not received your order, check with neighbours and any safe places before contacting us</li><li><strong>Failed Deliveries:</strong> If a delivery attempt fails and your parcel is returned to us, we will contact you to arrange redelivery. Please note that redelivery may incur additional shipping charges</li></ul>"
+          }
+        },
+        "section_8": {
+          "type": "section",
+          "settings": {
+            "section_title": "Temperature-Sensitive Products",
+            "section_content": "<p>Some healthcare products require temperature-controlled handling:</p><ul><li><strong>Cold Chain Items:</strong> Products requiring refrigeration are packaged with appropriate cooling materials to maintain temperature during transit</li><li><strong>Delivery Timing:</strong> We schedule dispatch of temperature-sensitive items to minimise transit time</li><li><strong>Receiving Cold Items:</strong> Please collect or arrange collection of these items promptly upon delivery and refrigerate immediately</li><li><strong>Seasonal Considerations:</strong> During warmer months, we may adjust dispatch schedules to ensure product integrity</li></ul>"
+          }
+        },
+        "section_9": {
+          "type": "section",
+          "settings": {
+            "section_title": "Regional & Remote Deliveries",
+            "section_content": "<p>We deliver to all areas across Australia, including regional and remote locations:</p><ul><li><strong>Extended Timeframes:</strong> Deliveries to regional and remote areas may take longer than metropolitan deliveries</li><li><strong>Additional Charges:</strong> Some locations may incur additional delivery fees, which will be displayed at checkout</li><li><strong>Alternative Collection:</strong> In some remote areas, parcels may be held at a local post office or parcel locker for collection</li></ul><p>We are committed to making healthcare accessible to all Australians, regardless of location.</p>"
+          }
+        },
+        "section_10": {
+          "type": "section",
+          "settings": {
+            "section_title": "International Shipping",
+            "section_content": "<p>Currently, Quity only ships within Australia. We are unable to dispatch orders to international addresses due to:</p><ul><li>Regulatory requirements for pharmaceutical products</li><li>Prescription medication restrictions</li><li>Temperature control requirements during extended transit</li></ul><p>If you are an Australian customer temporarily overseas, please contact us to discuss alternative arrangements.</p>"
+          }
+        },
+        "contact_1": {
+          "type": "contact_box",
+          "settings": {
+            "contact_title": "Need Help With Your Delivery?",
+            "contact_content": "<p>Our customer care team is here to assist with any shipping or delivery enquiries.</p><p><strong>Email:</strong> support@quity.com.au<br><strong>Phone:</strong> 1300 QUITY (1300 784 89)<br><strong>Hours:</strong> Monday to Friday, 9:00 AM - 5:00 PM AEST</p><p>For urgent delivery matters, please include your order number when contacting us.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "section_1",
+        "section_2",
+        "section_3",
+        "section_4",
+        "section_5",
+        "section_6",
+        "section_7",
+        "section_8",
+        "section_9",
+        "section_10",
+        "contact_1"
+      ],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_color": "#222222",
+        "text_color": "#555555",
+        "link_color": "#0066cc",
+        "accent_color": "#4CAF50",
+        "info_box_bg": "#f0f7f0",
+        "contact_bg": "#f5f5f5",
+        "page_title": "Shipping & Delivery Policy",
+        "last_updated": "Last Updated: February 2026",
+        "show_toc": true,
+        "toc_title": "Quick Navigation",
+        "intro_text": "<p>At Quity, we understand that receiving your healthcare products promptly is essential to your wellbeing. We are committed to ensuring your orders are dispatched efficiently and delivered to you as quickly as possible. This policy outlines our shipping practices, delivery options, and what you can expect when ordering from us.</p>",
+        "paddingsection": "60px 0px 80px 0px",
+        "paddingmobile": "40px 0px 60px 0px"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
