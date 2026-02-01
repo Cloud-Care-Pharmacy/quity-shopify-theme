@@ -2388,14 +2388,14 @@
           "02938bc4-37e0-4199-a42d-5120a9cb648f": {
             "type": "menu",
             "settings": {
-              "link_list": "",
+              "link_list": "footer-1",
               "width": "16%"
             }
           },
           "d788fcab-be74-4356-8d04-0370b7dc6128": {
             "type": "menu",
             "settings": {
-              "link_list": "",
+              "link_list": "customer-account-main-menu",
               "width": "16%"
             }
           },
