@@ -4,6 +4,51 @@
       "type": "main-page",
       "settings": {}
     },
+    "section-header": {
+      "type": "advanced-content",
+      "blocks": {
+        "header-block": {
+          "type": "html",
+          "settings": {
+            "width": "100%",
+            "title": "",
+            "color_title": "#000",
+            "sub": "",
+            "color_sub": "#000",
+            "code": "<div style=\"text-align: center; padding: 20px 0;\">\n<h1 style=\"font-size: 2.5rem; font-weight: 400; margin-bottom: 10px;\">FAQs</h1>\n<p style=\"color: #666; font-size: 1rem;\">Knowledge is power. Learn more about quitting smoking and our services.</p>\n</div>",
+            "color_des": "#000",
+            "button_text": "",
+            "link_button": "",
+            "align": "auto",
+            "box_align": "center",
+            "text_align": "center"
+          }
+        }
+      },
+      "block_order": ["header-block"],
+      "settings": {
+        "animation": "fade-up",
+        "setwidth": "container",
+        "text_color": "rgba(0,0,0,0)",
+        "bgsection": "#ffffff",
+        "rangebg": 0,
+        "bgbefore": "rgba(0,0,0,0)",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_position": "center center",
+        "zindex": "0",
+        "title_top": "",
+        "title": "",
+        "des": "",
+        "align-heading": "center",
+        "padding": true,
+        "col_center": false,
+        "paddingsection": "40px 0px 0px 0px",
+        "paddingmobile": "30px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    },
     "section-navigation": {
       "type": "advanced-content",
       "blocks": {
@@ -15,7 +60,7 @@
             "color_title": "#000",
             "sub": "",
             "color_sub": "#000",
-            "code": "<div style=\"background-color: #f8f9fa; border-radius: 8px; padding: 30px 40px; margin-bottom: 20px;\">\n<h4 style=\"margin-bottom: 20px; font-weight: 600;\">Quick Navigation</h4>\n<div style=\"display: flex; flex-wrap: wrap; gap: 0;\">\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#section-facts\" style=\"color: #007bff; text-decoration: none;\">1. The Facts You Need to Know</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-motivation\" style=\"color: #007bff; text-decoration: none;\">2. Motivation</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-cravings\" style=\"color: #007bff; text-decoration: none;\">3. Cravings</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-vaping-basics\" style=\"color: #007bff; text-decoration: none;\">4. Vaping Basics</a></p>\n</div>\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#section-prescriptions\" style=\"color: #007bff; text-decoration: none;\">5. Prescriptions & Legal Information</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-nicotine-pouches\" style=\"color: #007bff; text-decoration: none;\">6. Nicotine Pouches</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#section-orders\" style=\"color: #007bff; text-decoration: none;\">7. Orders & Shipping</a></p>\n</div>\n</div>\n</div>",
+            "code": "<div style=\"background-color: #f8f9fa; border-radius: 8px; padding: 30px 40px; margin-bottom: 20px;\">\n<h4 style=\"margin-bottom: 20px; font-weight: 600;\">Quick Navigation</h4>\n<div style=\"display: flex; flex-wrap: wrap; gap: 0;\">\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#facts\" style=\"color: #007bff; text-decoration: none;\">1. The Facts You Need to Know</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#motivation\" style=\"color: #007bff; text-decoration: none;\">2. Motivation</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#cravings\" style=\"color: #007bff; text-decoration: none;\">3. Cravings</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#vaping\" style=\"color: #007bff; text-decoration: none;\">4. Vaping Basics</a></p>\n</div>\n<div style=\"flex: 1; min-width: 280px;\">\n<p style=\"margin: 8px 0;\"><a href=\"#prescriptions\" style=\"color: #007bff; text-decoration: none;\">5. Prescriptions & Legal Information</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#pouches\" style=\"color: #007bff; text-decoration: none;\">6. Nicotine Pouches</a></p>\n<p style=\"margin: 8px 0;\"><a href=\"#orders\" style=\"color: #007bff; text-decoration: none;\">7. Orders & Shipping</a></p>\n</div>\n</div>\n</div>",
             "color_des": "#000",
             "button_text": "",
             "link_button": "",
@@ -102,7 +147,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "facts"
       }
     },
     "section-motivation": {
@@ -165,7 +211,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "motivation"
       }
     },
     "section-cravings": {
@@ -221,7 +268,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "cravings"
       }
     },
     "section-vaping-basics": {
@@ -284,7 +332,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "vaping"
       }
     },
     "section-prescriptions": {
@@ -340,7 +389,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "prescriptions"
       }
     },
     "section-nicotine-pouches": {
@@ -396,7 +446,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "pouches"
       }
     },
     "section-orders": {
@@ -452,7 +503,8 @@
         "paddingsection": "60px 0px 40px 0px",
         "paddingmobile": "40px 0px 30px 0px",
         "marginsection": "0px 0px 0px 0px",
-        "marginmobile": "0px 0px 0px 0px"
+        "marginmobile": "0px 0px 0px 0px",
+        "anchor_id": "orders"
       }
     },
     "section-contact": {
@@ -503,6 +555,7 @@
   },
   "order": [
     "main",
+    "section-header",
     "section-navigation",
     "section-facts",
     "section-motivation",

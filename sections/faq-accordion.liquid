@@ -52,7 +52,8 @@
       padding-bottom: 1.5rem;
     }
 </style>
-  <section class="customstyle{{ section.id }}  lazyload " 
+  <section class="customstyle{{ section.id }}  lazyload" 
+  {% if section.settings.anchor_id != blank %}id="{{ section.settings.anchor_id }}"{% endif %}
   data-aos="{{ section.settings.animation }}"  
   data-bgset="{% render 'bgset', image: section.settings.image_bg %}"
   data-sizes="auto"
@@ -138,6 +139,12 @@
   "name": "Faqs Accordion",
   "class": "index-section",
   "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Used for navigation links (e.g., 'facts' for #facts)"
+    },
     {
       "type": "select",
       "id": "animation",
