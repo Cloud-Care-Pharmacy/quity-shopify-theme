@@ -905,64 +905,64 @@
         "faq_yAJy4d": {
           "type": "faq",
           "settings": {
-            "faq_title": "How do I get started?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "What's the first step to begin?",
+            "faq_des": "<p>If you don't have a Quity account yet, simply click the 'Get Started' button in the menu. This will give you access to the patient portal where you can request a prescription or upload your existing one. Visit our How It Works page for more details.</p>"
           }
         },
         "faq_XFYRfr": {
           "type": "faq",
           "settings": {
-            "faq_title": "Can I use a prescription I already have?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "Can I submit an existing prescription?",
+            "faq_des": "<p>Yes, after creating your account you can upload an image of your current valid prescription. Our pharmacists will verify it before granting access to our product range.</p>"
           }
         },
         "faq_4Qbd83": {
           "type": "faq",
           "settings": {
-            "faq_title": "What happens if I am not eligible for a prescription?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "What if I'm not approved for a prescription?",
+            "faq_des": "<p>If you're not eligible for treatment options, our team will contact you and arrange a refund of any applicable consultation costs.</p>"
           }
         },
         "faq_4UF7Xh": {
           "type": "faq",
           "settings": {
-            "faq_title": "How much is delivery?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "What are the shipping costs?",
+            "faq_des": "<p>We provide free delivery for all orders over $150. For orders under $150, we offer $10 flat standard shipping or $15 flat express shipping anywhere in Australia.</p>"
           }
         },
         "faq_Q6q7Cg": {
           "type": "faq",
           "settings": {
-            "faq_title": "Do you offer returns or refunds?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "What is your returns and refunds policy?",
+            "faq_des": "<p>As we supply medication, we cannot offer returns or refunds for change of mind. If your product is faulty or damaged, please contact our support team to discuss available options.</p>"
           }
         },
         "faq_LWamWW": {
           "type": "faq",
           "settings": {
-            "faq_title": "Am I eligible for nicotine prescriptions?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "Who determines if I qualify for nicotine therapy?",
+            "faq_des": "<p>An independent Australian prescribing doctor reviews your application and determines if you qualify for a nicotine prescription based on your medical history and circumstances.</p>"
           }
         },
         "faq_MX6HK6": {
           "type": "faq",
           "settings": {
-            "faq_title": "How long will it take to get a prescription?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "How quickly can I receive my prescription?",
+            "faq_des": "<p>An independent Australian doctor will review your application. Our goal is to have this completed within 24 hours.</p>"
           }
         },
         "faq_ijmh7q": {
           "type": "faq",
           "settings": {
-            "faq_title": "Can I use a prescription if I have the QR code?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "Do you accept prescriptions with a QR code?",
+            "faq_des": "<p>Yes, we can dispense products using the QR code from your valid prescription.</p>"
           }
         },
         "faq_LwpYeA": {
           "type": "faq",
           "settings": {
-            "faq_title": "How much are the medications I will be prescribed?",
-            "faq_des": "<p>Answer Description</p>"
+            "faq_title": "What is the price range for prescribed products?",
+            "faq_des": "<p>Our goal is to offer a wide range of TGA compliant products at various competitive price points to suit all patients and budgets.</p>"
           }
         }
       },
