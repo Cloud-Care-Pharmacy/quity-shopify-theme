@@ -1,4 +1,3 @@
-{%- if customer -%}
 {%- if section.settings.enable -%}
 <section class="product-notification" data-time="{{ section.settings.duration | times: 1000 }}">
   <span  title="Close" class="close-notifi">{% render 'icon-close-solid' %}</span>
@@ -27,7 +26,6 @@
     {%- endfor -%}
   </div>
 </section>
-{%- endif -%}
 {%- endif -%}
 {% schema %}
 {
@@ -110,7 +108,5 @@
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
-
-{% endstyle %}
 
 {% endstyle %}
