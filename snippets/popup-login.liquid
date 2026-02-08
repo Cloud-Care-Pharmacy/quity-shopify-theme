@@ -13,12 +13,12 @@
           <div id="CustomerLoginForm" class="form-vertical">
             {%- form 'customer_login' -%}
             <h3 class="mb-3">{{ 'customer.login.title' | t }}</h3>
-            <p class="mb-5">{{ 'layout.customer.sub_login' | t }} </p>
             <p class="mb-4" style="font-size: 14px; color: #666;">A valid prescription is required to browse and purchase products. Please log in or create an account to continue.</p>
+            <p class="mb-5">{{ 'layout.customer.sub_login' | t }} </p>
             {{ form.errors | default_errors }}
             
             <div class="form-group mb-4">
-              <input type="email" name="customer[email]" id="CustomerEmail" class="form-control {% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
+              <input type="email" name="customer[email]" id="CustomerEmail" class="form-control {% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off">
               <label for="CustomerEmail" class="label--hidden">{{ 'customer.login.email' | t }}</label>
             </div>
             {%- if form.password_needed -%}

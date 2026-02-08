@@ -1,3 +1,9 @@
+<div class="section-header text-center" style="background-color: #f9f9f9; padding: 50px 20px 40px;">
+  <div class="page-width">
+    <h1 class="section-title-1 mb-2" style="font-size: 48px; font-weight: 400;">{{ 'customer.login.title' | t }}</h1>
+    <div class="font-family-2 des-header txt-body-70 mb-0" style="font-size: 16px; color: rgba(0,0,0,0.5);">A valid prescription is required to browse and purchase products. Please log in or create an account to continue.</div>
+  </div>
+</div>
 <div class="page-width py-5">
   <div class="grid">
 
@@ -11,12 +17,10 @@
         <div id="CustomerLoginForm" class="form-vertical">
           {%- form 'customer_login' -%}
 
-          <h1 class="h3 mb-3">{{ 'customer.login.title' | t }}</h1>
           <p class="mb-5">{{ 'layout.customer.sub_login' | t }} </p>
-          <p class="mb-4" style="font-size: 14px; color: #666;">A valid prescription is required to browse and purchase products. Please log in or create an account to continue.</p>
           {{ form.errors | default_errors }}
           <div class="form-group">
-            <input  class="form-control" type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
+            <input  class="form-control" type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off">
             <label for="CustomerEmail" class="label--hidden">{{ 'customer.login.email' | t }}</label>
           </div>
           {%- if form.password_needed -%}
