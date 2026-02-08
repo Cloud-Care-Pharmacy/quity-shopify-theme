@@ -32,15 +32,6 @@
   top: 120px;
 }
 
-.account-sidebar__logo {
-  margin-bottom: 30px;
-}
-
-.account-sidebar__logo img {
-  max-width: 160px;
-  height: auto;
-}
-
 .account-sidebar__nav {
   list-style: none;
   padding: 0;
@@ -528,10 +519,6 @@
     gap: 8px;
   }
 
-  .account-sidebar__logo {
-    margin-bottom: 16px;
-  }
-
   .account-top-row {
     grid-template-columns: 1fr;
   }
@@ -591,10 +578,6 @@
   .account-sidebar__nav li a {
     font-size: calc(var(--g-font-size) - 3px);
     padding: 6px 10px;
-  }
-
-  .account-sidebar__logo img {
-    max-width: 120px;
   }
 }
 
