@@ -55,6 +55,27 @@
 {%- render 'block-compare' -%}
 {%- if template != 'customers/login' -%}
 {% render 'popup-login' -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Force login modal open via jQuery/Bootstrap, bypassing any Shopify interception
+    var loginTriggers = document.querySelectorAll('.js-open-login, [data-target="#jsLogin"]');
+    loginTriggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Close mobile drawer if open
+        var drawer = document.querySelector('.js-drawer-open-left');
+        if (drawer) {
+          document.documentElement.classList.remove('js-drawer-open', 'js-drawer-open-left');
+        }
+        // Open modal via jQuery Bootstrap
+        if (typeof jQuery !== 'undefined') {
+          jQuery('#jsLogin').modal('show');
+        }
+      }, true);
+    });
+  });
+</script>
 {%- endif -%}
 {% schema %}
 {
