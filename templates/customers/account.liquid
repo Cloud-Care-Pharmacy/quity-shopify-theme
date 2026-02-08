@@ -108,8 +108,8 @@
               <h3>Spread the Tabuu</h3>
               <p>Give your friends <span class="credit-highlight">$10 credit</span> and receive <span class="credit-highlight">$10 credit</span> when they make their first purchase over $50.</p>
             </div>
-            <a href="/pages/refer-a-friend" class="account-referral__action" style="text-decoration:none;color:#fff;">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <a href="/pages/refer-a-friend" class="account-referral__action" style="text-decoration:none;color:inherit;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
               <span>Refer a Friend</span>
             </a>
           </div>
@@ -131,8 +131,8 @@
             <h3>Orders</h3>
             <p>{{ customer.orders_count }} Orders</p>
             <div class="stat-actions">
-              <a href="/account" class="btn-solid-dark">View Orders</a>
-              <a href="/pages/auto-delivery" class="btn-solid-dark">Manage Auto-Delivery</a>
+              <a href="/account" class="btn-theme btn-sm">View Orders</a>
+              <a href="/pages/auto-delivery" class="btn-theme btn-sm">Manage Auto-Delivery</a>
             </div>
           </div>
 
@@ -140,17 +140,17 @@
             <h3>Script Status</h3>
             {%- if customer.tags contains 'approved' -%}
               <div class="status-indicator">
-                <span class="status-dot" style="background: #5a6b2f;"></span>
+                <span class="status-dot" style="background: var(--g-main);"></span>
                 Approved
               </div>
             {%- elsif customer.tags contains 'pending' -%}
               <div class="status-indicator">
-                <span class="status-dot" style="background: #e6a817;"></span>
+                <span class="status-dot" style="background: var(--g-alert);"></span>
                 Under Review
               </div>
             {%- elsif customer.tags contains 'expired' -%}
               <div class="status-indicator">
-                <span class="status-dot" style="background: #c0392b;"></span>
+                <span class="status-dot" style="background: var(--color-error);"></span>
                 Expired
               </div>
             {%- else -%}
@@ -240,7 +240,7 @@
                   </li>
                 {%- endfor -%}
               {%- else -%}
-                <li><p style="font-size:14px;color:#666;">No resources available yet.</p></li>
+                <li><p class="txt-body-60">No resources available yet.</p></li>
               {%- endif -%}
             </ul>
           </div>
@@ -253,8 +253,8 @@
             <p>To edit, update or create new primary addresses, use the button provided.</p>
           </div>
           <div class="account-addresses__actions">
-            <a href="/account/addresses" class="btn-solid-dark">Add your Primary Address</a>
-            <a href="/account/addresses" class="btn-solid-dark">Add your Billing Address</a>
+            <a href="/account/addresses" class="btn-theme">Add your Primary Address</a>
+            <a href="/account/addresses" class="btn-theme">Add your Billing Address</a>
           </div>
         </div>
 
