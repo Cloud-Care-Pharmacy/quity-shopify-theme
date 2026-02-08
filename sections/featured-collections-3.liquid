@@ -1,4 +1,5 @@
 <!-- featured-collections-3.liquid -->
+{%- if customer -%}
 {%- liquid
   assign stylecol = section.settings.stylecollection
   assign hex2rgb_hex = section.settings.bg_overlay
@@ -678,5 +679,6 @@
     }
   ]
 }
+{%- endif -%}
 {% endschema %}
       

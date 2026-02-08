@@ -1,3 +1,4 @@
+{%- if customer -%}
 <style>
   .qv-content{text-align:left}.rtl .qv-content{text-align:right}#qv-product-images{margin:0 0 24px;min-height: 400px;opacity: 0;transition: opacity 0.1s ease-in;}#jsQuickview .option-selection{margin-bottom:8px}#jsQuickview select.option{width: calc(100% - 120px);}#jsQuickview span.option{min-width:120px;display:inline-block;text-transform:capitalize;margin-bottom:6px;}#jsQuickview .slick-dots{bottom:20px}#jsQuickview .slick-dots li button:before{font-size:35px;color:#000;transition:all ease .3s}#jsQuickview .qv-product-price{display:inline-block;margin:0}#jsQuickview .qv-product-price .money{color:{{ settings.color_primary }}}#jsQuickview .qv-add-button{display: inline-block; float: left; margin-left: 20px; width: calc(100% - 120px);}#jsQuickview .qv-product-description{max-height:180px;overflow:hidden;position:relative;}#jsQuickview .qv-product-description:after{position:absolute;content:"";width:100%;left:0;bottom:0;background:#fff}.rtl #jsQuickview .qv-product-description:after{right:0;left:auto}.qv-add-to-cart .quantity{height:40px;display:inline-block;width:100px;float:left}.qv-add-to-cart .quantity span{display:none}.qv-quantity{height:50px;width:100%;text-align:center;}
   #qv-product-images .slick-prev{left: 20px;}#qv-product-images .slick-next{right: 20px;}
@@ -151,3 +152,4 @@
     </div>
   </div>
 </div>
+{%- endif -%}

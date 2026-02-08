@@ -1,4 +1,5 @@
 <!-- product-tab.liquid  -->
+{%- if customer -%}
 
 {%-liquid
   assign enable_carousel = section.settings.enable_carousel
@@ -469,4 +470,5 @@
     }
   ]
 }
+{%- endif -%}
 {% endschema %}

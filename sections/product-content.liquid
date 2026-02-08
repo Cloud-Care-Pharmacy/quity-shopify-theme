@@ -1,4 +1,6 @@
 <!-- product-content.liquid -->
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 {%- liquid
     assign validRelated = 'col-12'
     assign left_size = 'col-md-6 col-12'
@@ -386,4 +388,5 @@
     }
   ]
 }
+{%- endif -%}
 {% endschema %}

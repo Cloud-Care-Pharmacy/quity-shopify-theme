@@ -1,4 +1,5 @@
 <!-- product-list-2.liquid -->
+{%- if customer -%}
 <div class="customstyle{{ section.id }}" data-aos="{{ section.settings.animation }}">
     {%- render 'style-section' -%}
   <div class="{{ section.settings.setwidth }}">
@@ -382,4 +383,5 @@
     }
   ]
 }
+{%- endif -%}
 {% endschema %}

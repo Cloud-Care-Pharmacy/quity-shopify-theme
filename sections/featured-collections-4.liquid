@@ -1,5 +1,6 @@
 
 <!-- collection-collection-4.liquid -->
+{%- if customer -%}
 {%- style -%}
     .collection-list{{ section.id }}{
       background:{{ section.settings.bgsection }};
@@ -362,4 +363,5 @@
     }
   ]
 }
+{%- endif -%}
 {% endschema %}

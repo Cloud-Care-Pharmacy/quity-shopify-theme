@@ -59,7 +59,7 @@
     </div>
     {%- endif -%}
 
-    {% if enable_menu_product %}
+    {% if enable_menu_product and customer %}
       <div class="mega-col col" style="max-width:{{ menu_product_width }}%;flex:0 0 {{ menu_product_width }}%;">    
         <div class="row">
           {% for i in (1..6) %}
