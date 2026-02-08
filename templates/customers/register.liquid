@@ -1,62 +1,41 @@
 <!-- customers/register.liquid -->
 <style>
   .register-hero {
-    background-color: {{ settings.color_header_bg | default: '#282828' }};
+    background-color: {{ settings.color_body_bg | default: '#ffffff' }};
     min-height: 600px;
     position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
-  }
-  .register-hero::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    right: -15%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .register-hero::after {
-    content: '';
-    position: absolute;
-    bottom: -25%;
-    left: -8%;
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
-    border-radius: 50%;
   }
   .register-hero-inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
-    position: relative;
-    z-index: 1;
     padding: 60px 0;
   }
   .register-left {
     flex: 1;
     min-width: 300px;
     padding-right: 60px;
-    color: {{ settings.color_header_links | default: '#ffffff' }};
+    color: {{ settings.color_body_headings | default: '#222222' }};
   }
   .register-left h1 {
     font-size: 42px;
     font-weight: 400;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     letter-spacing: -0.5px;
     line-height: 1.2;
     font-family: var(--g-heading-font-family, inherit);
+    color: {{ settings.color_body_headings | default: '#222222' }};
   }
   .register-left .register-subtitle {
     font-size: 16px;
-    color: rgba(255,255,255,0.6);
+    color: {{ settings.color_body_text | default: '#414141' }};
     margin-bottom: 36px;
     line-height: 1.7;
     font-family: var(--g-body-font-family, inherit);
+    opacity: 0.7;
   }
   .register-benefits {
     list-style: none;
@@ -69,8 +48,8 @@
     gap: 14px;
     padding: 14px 0;
     font-size: 15px;
-    color: rgba(255,255,255,0.85);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: {{ settings.color_body_text | default: '#414141' }};
+    border-bottom: 1px solid rgba(0,0,0,0.06);
     font-family: var(--g-body-font-family, inherit);
   }
   .register-benefits li:last-child {
@@ -80,7 +59,7 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
+    background: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,7 +69,7 @@
     width: 18px;
     height: 18px;
     fill: none;
-    stroke: rgba(255,255,255,0.7);
+    stroke: {{ settings.color_body_headings | default: '#222222' }};
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -101,10 +80,8 @@
     max-width: 480px;
   }
   .register-card {
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #f9f9f9;
+    border: 1px solid rgba(0,0,0,0.06);
     border-radius: 16px;
     padding: 40px 36px;
   }
@@ -112,29 +89,28 @@
     margin-bottom: 16px;
   }
   .register-card .form-control {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 10px;
-    color: #fff;
+    color: {{ settings.color_body_headings | default: '#222222' }};
     padding: 14px 18px;
     font-size: 15px;
     font-family: var(--g-body-font-family, inherit);
     transition: all 0.2s ease;
   }
   .register-card .form-control::placeholder {
-    color: rgba(255,255,255,0.45);
+    color: rgba(0,0,0,0.35);
   }
   .register-card .form-control:focus {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.3);
-    box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+    border-color: {{ settings.color_body_headings | default: '#222222' }};
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
     outline: none;
   }
   .register-card .btn-register {
     width: 100%;
     padding: 14px;
-    background: {{ settings.color_header_links | default: '#ffffff' }};
-    color: {{ settings.color_header_bg | default: '#282828' }};
+    background: {{ settings.color_body_headings | default: '#222222' }};
+    color: {{ settings.color_body_bg | default: '#ffffff' }};
     border: none;
     border-radius: 10px;
     font-size: 15px;
@@ -147,23 +123,24 @@
     letter-spacing: 1px;
   }
   .register-card .btn-register:hover {
-    opacity: 0.9;
+    opacity: 0.85;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   }
   .register-card .register-footer {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-    color: rgba(255,255,255,0.5);
+    color: {{ settings.color_body_text | default: '#414141' }};
     font-family: var(--g-body-font-family, inherit);
+    opacity: 0.6;
   }
   .register-card .register-footer a {
-    color: rgba(255,255,255,0.8);
+    color: {{ settings.color_body_headings | default: '#222222' }};
     text-decoration: underline;
   }
   .register-card .register-footer a:hover {
-    color: #fff;
+    opacity: 0.7;
   }
   @media (max-width: 768px) {
     .register-hero { min-height: auto; }
@@ -179,32 +156,32 @@
   <div class="page-width">
     <div class="register-hero-inner">
       <div class="register-left">
-        <h1>Create Your<br>Account</h1>
-        <p class="register-subtitle">A valid prescription is required to browse and purchase products. Register to get started with your pharmacy journey.</p>
+        <h1>Get Started<br>With Us</h1>
+        <p class="register-subtitle">Create your account to access our full range of pharmacy services. A valid prescription is needed to browse and purchase products.</p>
         <ul class="register-benefits">
           <li>
             <span class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
             </span>
-            Upload or Submit Prescriptions
+            Verified Prescription Management
           </li>
           <li>
             <span class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>
             </span>
-            Order &amp; Refill Medications
+            Fast &amp; Convenient Ordering
           </li>
           <li>
             <span class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </span>
-            Secure &amp; Confidential
+            Your Privacy, Fully Protected
           </li>
           <li>
             <span class="benefit-icon">
               <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </span>
-            Ongoing Patient Support
+            Dedicated Care Team
           </li>
         </ul>
       </div>
