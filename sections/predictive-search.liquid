@@ -1,5 +1,4 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-{%- if customer -%}
 {%- if predictive_search.performed -%}
   <div id="predictive-search-results">
     {%- if predictive_search.resources.products.size > 0 -%} 
@@ -61,5 +60,4 @@
     )
   </span>
  
-{%- endif -%}
 {%- endif -%}

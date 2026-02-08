@@ -32,7 +32,7 @@
             <p>
               <button type="submit" class="btn btn-theme gradient-theme w-100">{{ 'customer.login.sign_in' | t }}</button>
             </p>
-            <p class="pt-2"><span class="d-inline-block pr-2">{{ 'layout.customer.question_account' | t }} </span><a href="/account/register">{{ 'layout.customer.create_account' | t }}</a></p>
+            <p class="pt-2"><span class="d-inline-block pr-2">{{ 'layout.customer.question_account' | t }} </span>{{ 'layout.customer.create_account' | t | customer_register_link }}</p>
             
             
             {%- endform -%}

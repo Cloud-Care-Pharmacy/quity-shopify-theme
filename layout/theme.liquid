@@ -44,7 +44,6 @@
     {%- render 'social-meta-tags' -%}
     {%- render 'header-css' -%}
       <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-      <script>window.customerLoggedIn = {{ customer | default: false | json }};</script>
     {{ content_for_header }}
   </head>
   <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} body-theme {% if settings.productpage == 'product-2' or settings.productpage == 'product-6' or settings.productpage == 'product-7' %} product-hide-breadcrumb {% endif %}">
