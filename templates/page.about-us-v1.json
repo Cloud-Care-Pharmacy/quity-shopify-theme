@@ -16,24 +16,6 @@
     "48c5c18c-53bf-4f82-abbf-f4337a519412": {
       "type": "advanced-content",
       "blocks": {
-        "0ea90661-42f5-43cb-83e6-3ad276fdd2eb": {
-          "type": "html",
-          "disabled": true,
-          "settings": {
-            "width": "25%",
-            "title": "",
-            "color_title": "#000000",
-            "sub": "",
-            "color_sub": "#000000",
-            "code": "",
-            "color_des": "#000000",
-            "button_text": "",
-            "link_button": "",
-            "align": "auto",
-            "box_align": "center",
-            "text_align": "center"
-          }
-        },
         "template--16716887458110__48c5c18c-53bf-4f82-abbf-f4337a519412-1666666078ae83ec5b-0": {
           "type": "html",
           "settings": {
@@ -67,7 +49,6 @@
         }
       },
       "block_order": [
-        "0ea90661-42f5-43cb-83e6-3ad276fdd2eb",
         "template--16716887458110__48c5c18c-53bf-4f82-abbf-f4337a519412-1666666078ae83ec5b-0",
         "9371ef64-03df-4080-90d0-af26051ab827"
       ],
