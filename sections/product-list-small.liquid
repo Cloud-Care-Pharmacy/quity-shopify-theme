@@ -1,4 +1,5 @@
 <!-- advanced-content.liquid -->
+{%- if customer -%}
 <style>
   .customstyle{{ section.id }}{
     position: relative;
@@ -145,6 +146,7 @@
   </div>
 </section>
 
+{%- endif -%}
 {% schema %}
 {
   "name": "Product list Small",

@@ -1,4 +1,6 @@
 <!-- product-template-5.liquid -->
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 <style>
   .modal-backdrop.show{
     display:none !important;
@@ -1119,3 +1121,4 @@
     unavailable: {{ 'products.product.unavailable' | t | json }}
   }
 </script>
+{%- endif -%}

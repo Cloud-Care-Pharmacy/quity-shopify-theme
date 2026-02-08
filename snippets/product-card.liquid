@@ -1,3 +1,4 @@
+{%- if customer -%}
 {%- comment -%} image {%- endcomment -%}
 {%- capture image_product -%}
   {%- assign image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
@@ -710,3 +711,4 @@
 
 
 {%- endcase -%}
+{%- endif -%}

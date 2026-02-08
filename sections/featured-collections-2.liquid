@@ -1,4 +1,5 @@
 <!-- featured-collection-2.liquid -->
+{%- if customer -%}
 {%- liquid
     assign colortext = section.settings.colortext
     assign imagecol1 = section.settings.image1 
@@ -210,6 +211,7 @@ data-aos="{{ section.settings.animation }}"
   </div>
 </section>
 
+{%- endif -%}
 {% schema %}
 {
   "name": "Collection list Creative",

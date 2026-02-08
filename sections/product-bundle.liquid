@@ -1,3 +1,5 @@
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 {%- assign listProduct = product.metafields.custom.frequently_bought_together.value -%}
 {%- assign limit = section.settings.limit_bundle -%}
 {% if  listProduct != blank %}
@@ -234,6 +236,7 @@ data-section-type="bundleproduct" >
 </div>
 {% endif %}
 
+{%- endif -%}
 {% schema %}
   {
     "name": "Frequently Bought",

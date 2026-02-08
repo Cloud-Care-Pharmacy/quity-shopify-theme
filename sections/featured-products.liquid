@@ -1,4 +1,5 @@
 <!-- featured-products.liquid -->
+{%- if customer -%}
 <div class="customstyle{{ section.id }} " >
   {%- render 'style-section' -%}
   <div class="{{ section.settings.setwidth }}">
@@ -36,6 +37,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 {% schema %}
 {
   "name": "Product Grid",

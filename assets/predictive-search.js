@@ -28,6 +28,11 @@ class PredictiveSearch extends HTMLElement {
   }
 
   onChange() {
+    if (!window.customerLoggedIn) {
+      this.close(true);
+      return;
+    }
+
     const searchTerm = this.getQuery();
 
     if (!searchTerm.length) {

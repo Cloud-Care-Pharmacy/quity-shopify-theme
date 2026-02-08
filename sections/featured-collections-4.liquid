@@ -1,5 +1,6 @@
 
 <!-- collection-collection-4.liquid -->
+{%- if customer -%}
 {%- style -%}
     .collection-list{{ section.id }}{
       background:{{ section.settings.bgsection }};
@@ -105,6 +106,7 @@
   }
   {%- endfor -%}
 </style>
+{%- endif -%}
 {% schema %}
 {
   "name": "Collection list Grid",

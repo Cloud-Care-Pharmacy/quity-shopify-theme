@@ -1,3 +1,4 @@
+{%- if customer -%}
 {%- if product.metafields.info.upsell != blank -%}
 {%- assign upsellHandle = product.metafields.info.upsell | strip -%}
 {%- assign productUpsell = all_products[upsellHandle] -%}
@@ -28,4 +29,5 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 {%- endif -%}

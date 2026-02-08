@@ -1,3 +1,5 @@
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 {%- liquid  
   assign checkImg = section.settings.show_collection_image
   assign colorH = section.settings.image_text_color
@@ -178,6 +180,7 @@
         {%- endfor -%}
     </ul>
   </div>
+{%- endif -%}
 {%- endif -%}
 {% schema %}
 {

@@ -1,3 +1,5 @@
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 {{ 'ion.rangeSlider.min.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
@@ -268,6 +270,7 @@
 </div>
 
 
+{%- endif -%}
 {% schema %}
 {
   "name": "Search",
