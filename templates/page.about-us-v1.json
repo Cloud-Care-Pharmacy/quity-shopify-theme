@@ -56,7 +56,7 @@
           "settings": {
             "width": "50%",
             "align": "center",
-            "image": "shopify://shop_images/women.jpg",
+            "image": "shopify://shop_images/shutterstock_2731041127_1.jpg",
             "width_image": 100,
             "image_link": "",
             "enable_top": false,
@@ -101,11 +101,10 @@
         "template--16716887458110__d72bcc8c-88fe-4415-96f0-06511b070083-16666725974cf35e4d-0": {
           "type": "image_block",
           "settings": {
-            "w_image": 39,
+            "w_image": 32,
             "pos_image": 49,
             "e_image": "right",
-            "image": "shopify://shop_images/spring-5.jpg",
-            "image2": "shopify://shop_images/insta6.jpg",
+            "image": "shopify://shop_images/shutterstock_1767385805.jpg",
             "enable_video": false,
             "text_circle": "",
             "video_url": ""
@@ -150,36 +149,40 @@
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
+            "step_number_text": "",
             "title": "Registered Practitioners",
             "description": "All our healthcare professionals are Australian-registered and experienced in smoking cessation.",
-            "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z\" fill=\"currentColor\"/></svg>"
+            "icon": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z\" fill=\"currentColor\"></path></svg>"
           }
         },
         "template--16716887458110__895c09e5-5c6d-4c4d-8492-727381e40aa0-1666672032c2184576-1": {
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
+            "step_number_text": "",
             "title": "Fast Response Times",
             "description": "Medical assessments reviewed within 24 hours, 7 days a week — because motivation shouldn't have to wait.",
-            "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z\" fill=\"currentColor\"/></svg>"
+            "icon": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z\" fill=\"currentColor\"></path></svg>"
           }
         },
         "template--16716887458110__895c09e5-5c6d-4c4d-8492-727381e40aa0-1666672032c2184576-2": {
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
+            "step_number_text": "",
             "title": "Express Delivery",
             "description": "Approved treatments shipped promptly to your door — anywhere in Australia.",
-            "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z\" fill=\"currentColor\"/></svg>"
+            "icon": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z\" fill=\"currentColor\"></path></svg>"
           }
         },
         "template--16716887458110__895c09e5-5c6d-4c4d-8492-727381e40aa0-1666672032c2184576-3": {
           "type": "service",
           "settings": {
             "bgblock": "rgba(0,0,0,0)",
+            "step_number_text": "",
             "title": "TGA-Compliant Products",
             "description": "Every product we supply meets Australian TGO 110 safety and quality standards.",
-            "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z\" fill=\"currentColor\"/></svg>"
+            "icon": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z\" fill=\"currentColor\"></path></svg>"
           }
         }
       },
@@ -205,6 +208,11 @@
         "subcolor": "#666666",
         "color_border": "rgba(0,0,0,0)",
         "size": 60,
+        "show_step_numbers": false,
+        "step_badge_color": "#8bc34a",
+        "step_text_color": "#ffffff",
+        "step_badge_radius": 20,
+        "box_border_radius": 20,
         "service_heading": "h5",
         "layout": "style-2",
         "enable_carousel": false,
@@ -278,7 +286,7 @@
             "subtitle": "Evidence-Based Approach",
             "title": "How Our Service Works",
             "size_text": "h3",
-            "text": "<div class=\"pr-lg-5 mr-lg-4\">\n<p>At Quity, we follow a structured, clinician-led process designed to give you the best chance of success. Our team of Australian-registered doctors and pharmacists stay current with both domestic and international research on smoking cessation — so the advice you receive is grounded in the latest evidence.</p>\n<ul style=\"list-style: none; padding: 0; margin-top: 20px;\">\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\"><strong style=\"color: #333;\">1. Register & Assess</strong> — Create your account and complete a secure online health assessment covering your smoking history and medical background.</li>\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\"><strong style=\"color: #333;\">2. Clinical Review</strong> — An Australian-registered practitioner reviews your assessment and determines the most appropriate treatment pathway.</li>\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\"><strong style=\"color: #333;\">3. Treatment & Support</strong> — Receive your approved therapy with express delivery and ongoing clinical support throughout your quit journey.</li>\n</ul>\n</div>",
+            "text": "<div class=\"pr-lg-5 mr-lg-4\">\n<p>At Quity, we follow a structured, clinician-led process designed to give you the best chance of success. Our team of Australian-registered doctors and pharmacists stay current with both domestic and international research on smoking cessation — so the advice you receive is grounded in the latest evidence.</p>\n<ul style=\"list-style: none; padding: 0; margin-top: 20px;\">\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\">\n<strong style=\"color: #333;\">1. Register &amp; Assess</strong> — Create your account and complete a secure online health assessment covering your smoking history and medical background.</li>\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\">\n<strong style=\"color: #333;\">2. Clinical Review</strong> — An Australian-registered practitioner reviews your assessment and determines the most appropriate treatment pathway.</li>\n<li style=\"margin-bottom: 12px; padding-left: 25px; position: relative;\">\n<strong style=\"color: #333;\">3. Treatment &amp; Support</strong> — Receive your approved therapy with express delivery and ongoing clinical support throughout your quit journey.</li>\n</ul>\n</div>",
             "answer_content": "",
             "style_btn": "btn-underline btn-underline-white",
             "button": "",
@@ -290,7 +298,7 @@
         "template--16716887458110__24a28133-2e01-4361-8b00-ad164f72336f-1666686767d1a98887-0": {
           "type": "image_block",
           "settings": {
-            "image": "shopify://shop_images/filler.png"
+            "image": "shopify://shop_images/shutterstock_311657405.jpg"
           }
         }
       },
@@ -306,7 +314,7 @@
         "bgbefore": "rgba(0,0,0,0)",
         "bg_pos": "left",
         "enable_padding": true,
-        "align_center": false,
+        "align_center": true,
         "paddingsection": "80px 0px 80px 0px",
         "paddingmobile": "60px 0px 60px 0px",
         "marginsection": "0px 0px 0px 0px",
@@ -444,12 +452,23 @@
         "faq-5"
       ],
       "settings": {
+        "anchor_id": "",
         "animation": "fade-up",
+        "setwidth": "container",
         "bgsection": "#ffffff",
+        "e_size": "auto",
+        "e_repeat": "no-repeat",
+        "e_pos": "center center",
         "title_top": "",
         "title": "Frequently Asked Questions",
         "des": "Have questions about our service? Find answers to the most common queries below.",
         "align-heading": "center",
+        "title_size": "h4",
+        "e_first_open": false,
+        "e_reverse": true,
+        "e_small": true,
+        "left_html": "",
+        "e_right": false,
         "paddingsection": "80px 0px 80px 0px",
         "paddingmobile": "40px 0px 40px 0px",
         "marginsection": "0px 0px 0px 0px",
