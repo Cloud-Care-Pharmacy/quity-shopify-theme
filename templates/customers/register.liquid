@@ -1,39 +1,242 @@
 <!-- customers/register.liquid -->
-<div class="page-width py-5">
-  <div class="grid">
-    <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
-      <div class="content-block text-center">
-        <h1 class="h3 mb-3">{{ 'customer.register.title' | t }}</h1>
-        <p class="mb-5">{{ 'customer.register.sub_title' | t }}</p>
-        <div class="form-vertical text-center">
-          {%- form 'create_customer' -%}
-          {{ form.errors | default_errors }}
-          <div class="form-group">
-            
-            <input class="form-control" type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autofocus>
-            <label for="FirstName" class="label--hidden">{{ 'customer.register.first_name' | t }}</label>
+<style>
+  .register-hero {
+    background-color: {{ settings.color_header_bg | default: '#282828' }};
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .register-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .register-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -25%;
+    left: -8%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .register-hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 60px 0;
+  }
+  .register-left {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 60px;
+    color: {{ settings.color_header_links | default: '#ffffff' }};
+  }
+  .register-left h1 {
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    font-family: var(--g-heading-font-family, inherit);
+  }
+  .register-left .register-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 36px;
+    line-height: 1.7;
+    font-family: var(--g-body-font-family, inherit);
+  }
+  .register-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .register-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-family: var(--g-body-font-family, inherit);
+  }
+  .register-benefits li:last-child {
+    border-bottom: none;
+  }
+  .register-benefits .benefit-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .register-benefits .benefit-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: rgba(255,255,255,0.7);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .register-right {
+    flex: 1;
+    min-width: 340px;
+    max-width: 480px;
+  }
+  .register-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px 36px;
+  }
+  .register-card .form-group {
+    margin-bottom: 16px;
+  }
+  .register-card .form-control {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    color: #fff;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: var(--g-body-font-family, inherit);
+    transition: all 0.2s ease;
+  }
+  .register-card .form-control::placeholder {
+    color: rgba(255,255,255,0.45);
+  }
+  .register-card .form-control:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+    outline: none;
+  }
+  .register-card .btn-register {
+    width: 100%;
+    padding: 14px;
+    background: {{ settings.color_header_links | default: '#ffffff' }};
+    color: {{ settings.color_header_bg | default: '#282828' }};
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: var(--g-body-font-family, inherit);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .register-card .btn-register:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .register-card .register-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    font-family: var(--g-body-font-family, inherit);
+  }
+  .register-card .register-footer a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: underline;
+  }
+  .register-card .register-footer a:hover {
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .register-hero { min-height: auto; }
+    .register-hero-inner { padding: 40px 0; }
+    .register-left { padding-right: 0; margin-bottom: 40px; }
+    .register-left h1 { font-size: 32px; }
+    .register-right { max-width: 100%; }
+    .register-card { padding: 30px 24px; }
+  }
+</style>
+
+<section class="register-hero">
+  <div class="page-width">
+    <div class="register-hero-inner">
+      <div class="register-left">
+        <h1>Create Your<br>Account</h1>
+        <p class="register-subtitle">A valid prescription is required to browse and purchase products. Register to get started with your pharmacy journey.</p>
+        <ul class="register-benefits">
+          <li>
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            </span>
+            Upload or Submit Prescriptions
+          </li>
+          <li>
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>
+            </span>
+            Order &amp; Refill Medications
+          </li>
+          <li>
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            Secure &amp; Confidential
+          </li>
+          <li>
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            Ongoing Patient Support
+          </li>
+        </ul>
+      </div>
+      <div class="register-right">
+        <div class="register-card">
+          <div class="form-vertical">
+            {%- form 'create_customer' -%}
+            {{ form.errors | default_errors }}
+            <div class="form-group">
+              <input class="form-control" type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+              <label for="FirstName" class="label--hidden">{{ 'customer.register.first_name' | t }}</label>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+              <label for="LastName" class="label--hidden">{{ 'customer.register.last_name' | t }}</label>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="email" name="customer[email]" id="Email" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+              <label for="Email" class="label--hidden">{{ 'customer.register.email' | t }}</label>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" name="customer[password]" id="CreatePassword" placeholder="{{ 'customer.register.password' | t }}">
+              <label for="CreatePassword" class="label--hidden">{{ 'customer.register.password' | t }}</label>
+            </div>
+            <button type="submit" class="btn-register">{{ 'customer.register.submit' | t }}</button>
+            <div class="register-footer">
+              <span>{{ 'customer.register.already' | t }}</span> <a href="/account/login">{{ 'customer.register.login' | t }}</a>
+            </div>
+            {%- endform -%}
           </div>
-          <div class="form-group">
-            <input class="form-control" type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
-            <label for="LastName" class="label--hidden">{{ 'customer.register.last_name' | t }}</label>
-          </div>
-          <div class="form-group">
-            <input class="form-control" type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
-            <label for="Email" class="label--hidden">{{ 'customer.register.email' | t }}</label>
-          </div>
-          <div class="form-group">
-            <input class="form-control" type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} input--error{% endif %}" placeholder="{{ 'customer.register.password' | t }}">
-            <label for="CreatePassword" class="label--hidden">{{ 'customer.register.password' | t }}</label>
-          </div>
-          <p>
-            <button type="submit"  class="btn btn-theme gradien-theme mt-4 w-100">{{ 'customer.register.submit' | t }}</button>
-          </p>
-          <p class="pt-2">
-            <span class="d-inline-block mr-2">{{ 'customer.register.already' | t }}</span><a href="/account/login">{{ 'customer.register.login' | t }}</a>
-          </p>
-          {%- endform -%}
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
