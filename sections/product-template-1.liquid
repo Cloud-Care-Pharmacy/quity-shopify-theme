@@ -1,4 +1,6 @@
 <!-- product-template-1.liquid -->
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'photoswipe.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'photoswipe-ui-default.min.js' | asset_url }}" defer="defer"></script>
@@ -1995,3 +1997,4 @@ initPhotoSwipeFromDOM('.my-gallery');
     unavailable: {{ 'products.product.unavailable' | t | json }}
   }
 </script>
+{%- endif -%}

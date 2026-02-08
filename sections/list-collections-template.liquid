@@ -1,4 +1,6 @@
 <!-- list-collections-template.liquid -->
+{%- render 'customer-gate', redirect: true -%}
+{%- if customer -%}
 <style>
    .main-content {
     padding:0;
@@ -200,6 +202,7 @@ endif
 
 
 
+{%- endif -%}
 {% schema %}
 {
   "name": "Collections list page",

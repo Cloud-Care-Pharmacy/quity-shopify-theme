@@ -1,3 +1,4 @@
+{%- if customer -%}
 {%- if section.settings.enable -%}
 <style>
   .js-recently-view-button{position:fixed;z-index:1;background-size:contain;background-position:center;bottom:calc(3vh + 60px);right:4vh;width:50px;height:50px;line-height:50px;text-align:center;cursor:pointer;display:block;border:1px solid;border-radius:50%;overflow:hidden;opacity:0;visibility:hidden;transition:all ease .3s}.js-recently-view-button.active{opacity:1;visibility:visible}@media (max-width:767px){.js-recently-view-button{bottom:3vh;right:3vh}}
@@ -15,6 +16,7 @@
 
 {%- endif -%}
 
+{%- endif -%}
 {% schema %}
 {
   "name": "Recently Viewed",

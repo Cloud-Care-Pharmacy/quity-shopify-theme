@@ -1,0 +1,53 @@
+{%- comment -%}
+  Customer Gate Snippet
+  ---------------------
+  Include this snippet at the top of any section or template that should
+  only be accessible to logged-in customers.
+
+  When a guest visits a gated page, they are redirected to the login page
+  with a return_url so they land back on the intended page after logging in.
+
+  Usage:
+    {% render 'customer-gate' %}
+    ... rest of the section content ...
+    {% render 'customer-gate-end' %}
+
+  Or for redirect-only (product/collection pages):
+    {% render 'customer-gate', redirect: true %}
+{%- endcomment -%}
+
+{%- unless customer -%}
+  {%- if redirect -%}
+    {%- assign login_url = '/account/login?return_url=' | append: request.path -%}
+    <style>
+      .customer-gate-redirect { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        min-height: 60vh;
+        text-align: center;
+        font-family: var(--g-body-font-family, inherit);
+      }
+      .customer-gate-redirect p {
+        font-size: 16px;
+        color: rgba(var(--color-body-text-rgb, 0,0,0), 0.7);
+      }
+      .customer-gate-redirect a {
+        color: var(--color-primary, #000);
+        text-decoration: underline;
+      }
+    </style>
+    <div class="customer-gate-redirect">
+      <div>
+        <p>{{ 'customer.login.title' | t | default: 'Please log in to view this page.' }}</p>
+        <p><a href="{{ login_url }}">{{ 'customer.login.sign_in' | t | default: 'Log in' }}</a></p>
+      </div>
+    </div>
+    <script>
+      (function() {
+        window.location.replace('{{ login_url }}');
+      })();
+    </script>
+    <meta http-equiv="refresh" content="0;url={{ login_url }}">
+  {%- endif -%}
+{%- endunless -%}
