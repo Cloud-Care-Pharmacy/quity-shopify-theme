@@ -13,6 +13,7 @@
 
           <h1 class="h3 mb-3">{{ 'customer.login.title' | t }}</h1>
           <p class="mb-5">{{ 'layout.customer.sub_login' | t }} </p>
+          <p class="mb-4" style="font-size: 14px; color: #666;">A valid prescription is required to browse and purchase products. Please log in or create an account to continue.</p>
           {{ form.errors | default_errors }}
           <div class="form-group">
             <input  class="form-control" type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
