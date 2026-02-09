@@ -238,13 +238,15 @@
 
         <!-- Addresses Section -->
         <div class="account-card account-addresses">
-          <div class="account-addresses__info">
-            <h3>Your Addresses</h3>
-            <p>To edit, update or create new primary addresses, use the button provided.</p>
-          </div>
-          <div class="account-addresses__actions">
-            <a href="/account/addresses" class="btn-theme">Add your Primary Address</a>
-            <a href="/account/addresses" class="btn-theme">Add your Billing Address</a>
+          <div class="account-addresses-top">
+            <div class="account-addresses__info">
+              <h3>Your Addresses</h3>
+              <p>To edit, update or create new primary addresses, use the button provided.</p>
+            </div>
+            <div class="account-addresses__actions">
+              <a href="/account/addresses" class="btn-theme">Add your Primary Address</a>
+              <a href="/account/addresses" class="btn-theme">Add your Billing Address</a>
+            </div>
           </div>
           {%- if customer.default_address -%}
             <div class="account-address-display">

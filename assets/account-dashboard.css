@@ -433,6 +433,12 @@
 /* ---- Addresses Section ---- */
 .account-addresses {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.account-addresses-top {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--g-gutter);
@@ -464,7 +470,6 @@
 
 /* ---- Address Display ---- */
 .account-address-display {
-  margin-top: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -539,7 +544,7 @@
     align-items: center;
   }
 
-  .account-addresses {
+  .account-addresses-top {
     flex-direction: column;
     text-align: center;
     align-items: center;
