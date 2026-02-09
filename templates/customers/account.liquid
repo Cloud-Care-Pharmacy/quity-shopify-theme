@@ -246,10 +246,7 @@
             <a href="/account/addresses" class="btn-theme">Add your Primary Address</a>
             <a href="/account/addresses" class="btn-theme">Add your Billing Address</a>
           </div>
-        </div>
-
-        {%- if customer.default_address -%}
-          <div class="account-card">
+          {%- if customer.default_address -%}
             <div class="account-address-display">
               <div class="account-address-block">
                 <h4>Primary Address</h4>
@@ -262,8 +259,8 @@
                 </div>
               {%- endif -%}
             </div>
-          </div>
-        {%- endif -%}
+          {%- endif -%}
+        </div>
 
       </div>
       <!-- /account-main -->
