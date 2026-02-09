@@ -464,18 +464,16 @@
 
 /* ---- Address Display ---- */
 .account-address-display {
-  margin-top: 16px;
-  display: flex;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .account-address-block {
   background: rgba(var(--g-color-heading-rgb), 0.05);
   border-radius: var(--g-input-radius);
   padding: 16px 20px;
-  flex: 1;
-  min-width: 200px;
 }
 
 .account-address-block h4 {
@@ -553,6 +551,10 @@
 
   .account-addresses__actions {
     justify-content: center;
+  }
+
+  .account-address-display {
+    grid-template-columns: 1fr;
   }
 }
 
