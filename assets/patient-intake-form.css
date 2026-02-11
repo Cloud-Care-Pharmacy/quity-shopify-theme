@@ -516,41 +516,54 @@ textarea.form-control {
 
 /* Section separators */
 .section-separator {
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--g-input-border), transparent);
-  margin: 35px 0;
+  margin: 40px 0 28px;
   position: relative;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--g-color-heading-rgb), 0.08), transparent);
 }
 
 .section-separator.with-label {
-  text-align: center;
-  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 44px 0 28px;
   height: auto;
+  background: none;
+}
+
+.section-separator.with-label::before,
+.section-separator.with-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
 }
 
 .section-separator.with-label::before {
-  content: attr(data-label);
-  display: inline-block;
-  background: var(--color-body, #fff);
-  padding: 0 20px;
-  color: rgba(var(--g-color-heading-rgb), 0.5);
-  font-size: calc(var(--g-font-size) - 1px);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  top: -1px;
+  background: linear-gradient(to right, transparent, rgba(var(--g-color-heading-rgb), 0.12));
 }
 
 .section-separator.with-label::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--g-input-border);
-  z-index: -1;
+  background: linear-gradient(to left, transparent, rgba(var(--g-color-heading-rgb), 0.12));
+}
+
+.section-separator .sep-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(var(--g-color-heading-rgb), 0.55);
+  background: rgba(var(--g-color-heading-rgb), 0.03);
+  border: 1px solid rgba(var(--g-color-heading-rgb), 0.08);
+  border-radius: 100px;
+  white-space: nowrap;
+  order: 2;
+  margin: 0 16px;
+  line-height: 1;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .safety-info {
