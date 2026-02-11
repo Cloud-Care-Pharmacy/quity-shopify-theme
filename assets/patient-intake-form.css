@@ -9,7 +9,7 @@
 .steps-list {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   padding: 0;
   margin: 0;
@@ -20,8 +20,8 @@
   content: '';
   position: absolute;
   top: 20px;
-  left: 0;
-  right: 0;
+  left: calc(100% / 12);
+  right: calc(100% / 12);
   height: 2px;
   background: var(--g-input-border);
   z-index: 0;
@@ -71,7 +71,10 @@
   border-color: var(--g-main);
   color: #fff;
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
+  width: 44px;
+  height: 44px;
+  margin-top: -2px;
+  font-size: 17px;
 }
 
 .step-name {
