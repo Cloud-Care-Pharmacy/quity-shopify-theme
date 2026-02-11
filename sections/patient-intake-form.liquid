@@ -63,9 +63,25 @@
 
           <!-- Success Message -->
           <div class="success-message" id="successMessage">
-            <h2>✓ Thank You!</h2>
-            <p>Your questionnaire has been completed successfully.</p>
-            <p>Your responses have been saved.</p>
+            <div class="success-message__inner">
+              <div class="success-message__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <h1 class="success-message__heading">
+                <span class="success-message__heading-primary">Thank</span>
+                <span class="success-message__heading-accent">You!</span>
+              </h1>
+              <p class="success-message__text">Your questionnaire has been completed successfully.</p>
+              <p class="success-message__text success-message__ref" id="successRef"></p>
+              <p class="success-message__text success-message__saved">Your responses have been saved.</p>
+              <div class="success-message__actions">
+                <a href="/" class="btn-theme">Back to Home</a>
+                <a href="/account" class="btn-outline">My Account</a>
+              </div>
+            </div>
           </div>
 
           <!-- Form -->

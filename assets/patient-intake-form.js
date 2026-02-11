@@ -558,9 +558,9 @@ class PatientIntakeForm extends HTMLElement {
     
     // Add patient ID to success message if available
     if (patientId) {
-      const successContent = this.successMessage.querySelector('.success-content, p');
-      if (successContent) {
-        successContent.innerHTML += `<br><small>Reference ID: ${patientId}</small>`;
+      const refEl = this.successMessage.querySelector('#successRef');
+      if (refEl) {
+        refEl.textContent = 'Reference ID: ' + patientId;
       }
     }
     

@@ -615,26 +615,78 @@ textarea.form-control {
   font-weight: var(--g-font-weight-body, 400);
 }
 
+/* ============================================================
+   Success Message — Thank-you state
+   Mirrors the customer-gate pattern for visual consistency.
+   ============================================================ */
 .success-message {
   display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh;
+  padding: 60px var(--g-hgutter, 15px);
   text-align: center;
-  padding: 40px 20px;
 }
 
 .success-message.show {
-  display: block;
+  display: flex;
 }
 
-.success-message h2 {
+.success-message__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.success-message__icon {
+  margin-bottom: 24px;
   color: var(--g-main);
-  font-size: var(--g-h2-font-size);
+}
+
+.success-message__icon svg {
+  width: 56px;
+  height: 56px;
+}
+
+.success-message__heading {
+  font-family: var(--g-font-1);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.4;
+  margin: 0 0 15px;
+  color: var(--g-color-heading, #222222);
+}
+
+.success-message__heading-accent {
+  color: var(--g-main-2, #e35353);
+  margin-left: 6px;
+}
+
+.success-message__text {
+  font-family: var(--g-font-2);
+  font-size: var(--g-font-size, 15px);
+  font-weight: var(--g-font-weight-body, 400);
+  line-height: var(--g-body-lineheight, 1.6);
+  color: var(--color-body-text, #414141);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.success-message__ref {
+  font-size: calc(var(--g-font-size, 15px) - 1px);
+  color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.55);
   margin-bottom: 20px;
 }
 
-.success-message p {
-  font-size: calc(var(--g-font-size) + 2px);
-  color: var(--color-body-text);
-  margin-bottom: 10px;
+.success-message__saved {
+  margin-bottom: 30px;
+}
+
+.success-message__actions {
+  display: flex;
+  gap: var(--g-hgutter, 15px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 @media (max-width: 768px) {
@@ -656,5 +708,25 @@ textarea.form-control {
   .btn-next,
   .btn-submit {
     width: 100%;
+  }
+
+  .success-message {
+    min-height: 45vh;
+    padding: 40px var(--g-hgutter, 15px);
+  }
+
+  .success-message__heading {
+    font-size: calc(46px * 0.65);
+  }
+
+  .success-message__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .success-message__actions .btn-theme,
+  .success-message__actions .btn-outline {
+    width: 100%;
+    max-width: 240px;
   }
 }
