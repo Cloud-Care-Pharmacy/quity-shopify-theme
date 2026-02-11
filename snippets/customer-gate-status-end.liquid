@@ -1,0 +1,13 @@
+{%- comment -%}
+  Customer Gate Status End Snippet
+  --------------------------------
+  Closes the hidden wrapper opened by customer-gate-status.liquid
+  for non-approved customers. Must be rendered after content_for_layout
+  on gated pages.
+{%- endcomment -%}
+
+{%- assign customer_status = customer.metafields.customer.status | strip -%}
+
+{%- unless customer_status == 'Approved' -%}
+  </div>{%- comment -%} Close the display:none wrapper {%- endcomment -%}
+{%- endunless -%}

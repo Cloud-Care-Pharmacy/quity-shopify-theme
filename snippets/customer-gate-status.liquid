@@ -1,0 +1,82 @@
+{%- comment -%}
+  Customer Gate Status Snippet
+  ----------------------------
+  Checks the customer.metafields.customer.status metafield and renders
+  a blocking message for non-approved customers on gated pages.
+
+  Statuses:
+    - "Approved"  → content renders normally
+    - "Pending"   → "Verifying your profile" message
+    - "Declined"  → "Access Denied" message
+    - "Expired"   → "Access Denied" message
+    - blank/nil   → treated as "Pending" (new customer awaiting review)
+
+  Usage in theme.liquid (on gated templates only):
+    {% render 'customer-gate-status' %}
+    {{ content_for_layout }}
+{%- endcomment -%}
+
+{%- assign customer_status = customer.metafields.customer.status | strip -%}
+
+{%- if customer_status == 'Approved' -%}
+  {%- comment -%} Customer is approved — do nothing, content renders normally {%- endcomment -%}
+
+{%- elsif customer_status == 'Declined' or customer_status == 'Expired' -%}
+  {%- comment -%} Access Denied — Declined or Expired {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="customer-gate customer-gate--denied">
+    <div class="customer-gate__inner">
+      <h1 class="customer-gate__heading">
+        <span class="customer-gate__heading-primary">Access</span>
+        <span class="customer-gate__heading-accent">
+          {%- if customer_status == 'Expired' -%}Expired{%- else -%}Denied{%- endif -%}
+        </span>
+      </h1>
+      <p class="customer-gate__message">
+        {%- if customer_status == 'Expired' -%}
+          Your account access has expired. Please contact support to renew your prescription and regain access.
+        {%- else -%}
+          This content is visible to Authorised Patients only. Please contact us if you believe you should have access.
+        {%- endif -%}
+      </p>
+      <div class="customer-gate__actions">
+        <a href="/pages/contact" class="customer-gate__btn">Support</a>
+        <a href="/" class="customer-gate__btn">Head Home</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- else -%}
+  {%- comment -%} Pending or blank (new customer awaiting review) {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="customer-gate customer-gate--pending">
+    <div class="customer-gate__inner">
+      <div class="customer-gate__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <h1 class="customer-gate__heading">
+        <span class="customer-gate__heading-primary">Verification</span>
+        <span class="customer-gate__heading-accent">In Progress</span>
+      </h1>
+      <p class="customer-gate__message">
+        We are currently verifying your profile. Once approved, you'll have full access to our pharmacy products. You'll receive an email and text notification once the review is complete.
+      </p>
+      <div class="customer-gate__actions">
+        <a href="/pages/contact" class="customer-gate__btn">Support</a>
+        <a href="/" class="customer-gate__btn">Head Home</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- endif -%}

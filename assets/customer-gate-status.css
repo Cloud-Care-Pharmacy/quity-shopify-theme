@@ -1,0 +1,155 @@
+/* ============================================================
+   Customer Gate Status — Blocked State UI
+   ============================================================ */
+
+/* --- Shared layout --- */
+.customer-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 65vh;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.customer-gate__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* --- Access Denied (Declined / Expired) --- */
+.customer-gate--denied {
+  background-color: #5C6B3C;
+  color: #fff;
+}
+
+.customer-gate--denied .customer-gate__heading-primary {
+  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.customer-gate--denied .customer-gate__heading-accent {
+  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 800;
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: #a3b56a;
+  margin-left: 10px;
+}
+
+.customer-gate--denied .customer-gate__message {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+/* --- Verification In Progress (Pending / blank) --- */
+.customer-gate--pending {
+  background-color: #f5f3ee;
+  color: #333;
+}
+
+.customer-gate--pending .customer-gate__icon {
+  margin-bottom: 20px;
+  color: #5C6B3C;
+}
+
+.customer-gate--pending .customer-gate__heading-primary {
+  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  color: #333;
+}
+
+.customer-gate--pending .customer-gate__heading-accent {
+  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 800;
+  font-style: italic;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  color: #5C6B3C;
+  margin-left: 10px;
+}
+
+.customer-gate--pending .customer-gate__message {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(51, 51, 51, 0.8);
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+/* --- Buttons (shared) --- */
+.customer-gate__heading {
+  margin: 0 0 8px;
+}
+
+.customer-gate__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.customer-gate__btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+/* Denied variant buttons */
+.customer-gate--denied .customer-gate__btn {
+  background-color: #f5f3ee;
+  color: #3d4f2f;
+  border: none;
+}
+
+.customer-gate--denied .customer-gate__btn:hover {
+  background-color: #fff;
+  color: #2a3820;
+  transform: translateY(-1px);
+}
+
+/* Pending variant buttons */
+.customer-gate--pending .customer-gate__btn {
+  background-color: #5C6B3C;
+  color: #fff;
+  border: none;
+}
+
+.customer-gate--pending .customer-gate__btn:hover {
+  background-color: #4a5730;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 749px) {
+  .customer-gate {
+    min-height: 55vh;
+    padding: 40px 16px;
+  }
+
+  .customer-gate__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .customer-gate__btn {
+    width: 100%;
+    max-width: 240px;
+    text-align: center;
+  }
+}

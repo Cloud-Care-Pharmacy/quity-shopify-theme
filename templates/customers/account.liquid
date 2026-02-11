@@ -128,17 +128,23 @@
 
           <div class="account-card account-stat-card">
             <h3>Script Status</h3>
-            {%- if customer.tags contains 'approved' -%}
+            {%- assign customer_status = customer.metafields.customer.status | strip -%}
+            {%- if customer_status == 'Approved' -%}
               <div class="status-indicator">
                 <span class="status-dot" style="background: var(--g-main);"></span>
                 Approved
               </div>
-            {%- elsif customer.tags contains 'pending' -%}
+            {%- elsif customer_status == 'Pending' -%}
               <div class="status-indicator">
                 <span class="status-dot" style="background: var(--g-alert);"></span>
                 Under Review
               </div>
-            {%- elsif customer.tags contains 'expired' -%}
+            {%- elsif customer_status == 'Declined' -%}
+              <div class="status-indicator">
+                <span class="status-dot" style="background: var(--color-error);"></span>
+                Declined
+              </div>
+            {%- elsif customer_status == 'Expired' -%}
               <div class="status-indicator">
                 <span class="status-dot" style="background: var(--color-error);"></span>
                 Expired
