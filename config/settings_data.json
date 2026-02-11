@@ -159,12 +159,7 @@
     "input_round": 5,
     "cartdraw": true,
     "e_notecart": true,
-    "product_list": [
-      "elegant-evening-gown",
-      "classic-mens-oxford-shirt",
-      "leather-biker-jacket",
-      "cozy-knit-sweater"
-    ],
+    "product_list": [],
     "product_gift": "gift-wrapping",
     "coupon_code_enable": true,
     "coupon_code_title": "List Coupon",
@@ -2131,6 +2126,7 @@
         "blocks": {
           "a2730c80-674d-41f6-9f75-d2dea64fcd6b": {
             "type": "menu-banner",
+            "disabled": true,
             "settings": {
               "menu_title": "",
               "menu_width": "container",
@@ -2161,6 +2157,7 @@
           },
           "281b36cf-b829-4a1c-a3a5-5a7c0a30225a": {
             "type": "menu-collection",
+            "disabled": true,
             "settings": {
               "menu_title": "shop",
               "menu_width": "container",
@@ -2179,6 +2176,7 @@
           },
           "9d3d821c-82a9-439a-b2db-6700a3c6685f": {
             "type": "menu-product",
+            "disabled": true,
             "settings": {
               "menu_title": "product",
               "menu_width": "container",
@@ -2195,6 +2193,7 @@
           },
           "0f4d122e-cf9d-4fbf-8082-85a6cb05155f": {
             "type": "menu-banner",
+            "disabled": true,
             "settings": {
               "menu_title": "",
               "menu_width": "container",
@@ -2225,6 +2224,7 @@
           },
           "96e8331c-f8e4-4b9d-802b-4a659893f052": {
             "type": "menu-banner-classic",
+            "disabled": true,
             "settings": {
               "menu_title": "blog",
               "menu_width": "container",
