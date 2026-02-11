@@ -442,7 +442,7 @@ class PatientIntakeForm extends HTMLElement {
     this.setLoadingState(true);
     
     try {
-      const response = await fetch('/apps/halaxy/submit', {
+      const response = await fetch('/apps/fastmeds/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
