@@ -311,8 +311,8 @@ textarea.form-control::placeholder {
   cursor: pointer;
 }
 
-.radio-option label,
-.checkbox-option label {
+.field.form-group .radio-option label,
+.field.form-group .checkbox-option label {
   margin: 0;
   cursor: pointer;
   flex: 1;
