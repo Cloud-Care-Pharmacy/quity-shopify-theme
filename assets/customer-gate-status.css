@@ -28,8 +28,7 @@
 }
 
 .customer-gate__heading-accent {
-  font-family: var(--g-font-3);
-  font-style: italic;
+  color: var(--g-main-2, #e35353);
   margin-left: 6px;
 }
 
