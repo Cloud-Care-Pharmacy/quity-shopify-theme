@@ -643,8 +643,9 @@ textarea.form-control {
 }
 
 .success-message__icon svg {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
 }
 
 .success-message__heading {
