@@ -66,6 +66,50 @@ class PatientIntakeForm extends HTMLElement {
       });
     });
     
+    // Quit methods mutual exclusivity: "not-tried" vs other options
+    this.form.addEventListener('change', (e) => {
+      if (e.target.name === 'quitMethods') {
+        const allQuitMethods = this.form.querySelectorAll('input[name="quitMethods"]');
+        if (e.target.value === 'not-tried' && e.target.checked) {
+          // Uncheck all others
+          allQuitMethods.forEach(cb => {
+            if (cb.value !== 'not-tried') {
+              cb.checked = false;
+              const parent = cb.closest('.checkbox-option');
+              if (parent) parent.classList.remove('selected');
+            }
+          });
+        } else if (e.target.value !== 'not-tried' && e.target.checked) {
+          // Uncheck "not-tried"
+          const notTried = this.form.querySelector('input[name="quitMethods"][value="not-tried"]');
+          if (notTried) {
+            notTried.checked = false;
+            const parent = notTried.closest('.checkbox-option');
+            if (parent) parent.classList.remove('selected');
+          }
+        }
+      }
+    });
+
+    // Medications conditional visibility
+    this.form.querySelectorAll('input[name="takesMedication"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const medicationsGroup = this.querySelector('#medicationsListGroup');
+        const medicationsTextarea = this.querySelector('#medicationsList');
+        if (radio.value === 'yes' && radio.checked) {
+          medicationsGroup.style.display = '';
+          medicationsTextarea.setAttribute('required', '');
+        } else if (radio.value === 'no' && radio.checked) {
+          medicationsGroup.style.display = 'none';
+          medicationsTextarea.removeAttribute('required');
+          medicationsTextarea.value = '';
+          medicationsTextarea.classList.remove('error');
+          const errorMsg = medicationsGroup.querySelector('.error-message');
+          if (errorMsg) errorMsg.classList.remove('show');
+        }
+      });
+    });
+
     // Radio/checkbox option styling
     this.querySelectorAll('.radio-option, .checkbox-option, .radio-card, .checkbox-standalone').forEach(option => {
       option.addEventListener('click', (e) => {
@@ -121,7 +165,7 @@ class PatientIntakeForm extends HTMLElement {
     if (this.currentStep === 2) {
       const smokingStatus = this.form.elements['smokingStatus'].value;
       console.log('🚬 Smoking status:', smokingStatus);
-      if (smokingStatus === 'never-smoked') {
+      if (smokingStatus === 'never-smoked-or-vaped') {
         this.currentStep = 4; // Skip step 3
         console.log('⏭️ Skipping step 3, moving to step 4');
       } else {
@@ -151,7 +195,7 @@ class PatientIntakeForm extends HTMLElement {
     // Check conditional logic for back navigation
     if (this.currentStep === 4) {
       const smokingStatus = this.form.elements['smokingStatus']?.value;
-      if (smokingStatus === 'never-smoked') {
+      if (smokingStatus === 'never-smoked-or-vaped') {
         this.currentStep = 2; // Skip step 3
         console.log('⏮️ Skipping step 3, moving to step 2');
       } else {
@@ -221,10 +265,10 @@ class PatientIntakeForm extends HTMLElement {
             console.log('    ❌ Error message shown');
           }
         }
-      } else if (field.name === 'quitMethods') {
-        const checkboxes = currentStepElement.querySelectorAll('input[name="quitMethods"]');
+      } else if (field.name === 'quitMethods' || field.name === 'quitMotivation') {
+        const checkboxes = currentStepElement.querySelectorAll(`input[name="${field.name}"]`);
         const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
-        console.log(`    ☑️ At least one checkbox checked:`, isAnyChecked);
+        console.log(`    ☑️ At least one ${field.name} checkbox checked:`, isAnyChecked);
         if (!isAnyChecked) {
           fieldValid = false;
           const formGroup = field.closest('.field') || field.closest('.form-group');
@@ -378,7 +422,7 @@ class PatientIntakeForm extends HTMLElement {
     const rawData = {};
     
     for (let [key, value] of formData.entries()) {
-      if (key === 'quitMethods') {
+      if (key === 'quitMethods' || key === 'quitMotivation') {
         if (!rawData[key]) rawData[key] = [];
         rawData[key].push(value);
       } else {
@@ -454,29 +498,6 @@ class PatientIntakeForm extends HTMLElement {
   }
 
   transformFormData(rawData) {
-    // Map smoking status values to API expectations
-    const smokingStatusMap = {
-      'current-or-ex': 'current',
-      'never-smoked': 'never'
-    };
-    
-    // Map cigarettes per day values
-    const cigarettesMap = {
-      'less-than-10': '1-10',
-      '10-20': '10-20',
-      '20-30': '20+',
-      'more-than-30': '20+'
-    };
-    
-    // Map years smoked values
-    const yearsMap = {
-      'less-than-1': '<1',
-      '1-5': '1-5',
-      '5-10': '5-10',
-      '10-20': '10+',
-      'more-than-20': '10+'
-    };
-    
     return {
       firstName: rawData.firstName || '',
       lastName: rawData.lastName || '',
@@ -490,17 +511,23 @@ class PatientIntakeForm extends HTMLElement {
       postcode: rawData.postcode || '',
       country: rawData.country || 'Australia',
       mobile: rawData.mobile || '',
-      smokingStatus: smokingStatusMap[rawData.smokingStatus] || rawData.smokingStatus || '',
-      cigarettesPerDay: cigarettesMap[rawData.cigarettesPerDay] || rawData.cigarettesPerDay || '',
-      yearsSmoked: yearsMap[rawData.yearsSmoked] || rawData.yearsSmoked || '',
+      smokingStatus: rawData.smokingStatus || '',
+      cigarettesPerDay: rawData.cigarettesPerDay || '',
+      yearsSmoked: rawData.yearsSmoked || '',
+      timesTriedQuitting: rawData.timesTriedQuitting || '',
+      quitMotivation: rawData.quitMotivation || [],
       quitMethods: rawData.quitMethods || [],
+      quitMethodExplanation: rawData.quitMethodExplanation || '',
       lastCigarette: rawData.lastCigarette || '',
       vapingStatus: rawData.vapingStatus || '',
       vapingMethod: rawData.vapingMethod || '',
       vapingStrength: rawData.vapingStrength || '',
       vapingVolume: rawData.vapingVolume || '',
       vapingNotes: rawData.vapingNotes || '',
+      hasMedicalConditions: rawData.hasMedicalConditions || '',
       medicalIllnesses: rawData.medicalIllnesses || '',
+      takesMedication: rawData.takesMedication || '',
+      medicationsList: rawData.medicationsList || '',
       cardiovascular: rawData.cardiovascular || '',
       pregnancy: rawData.pregnancy || '',
       forwardEmail: rawData.forwardEmail || '',
@@ -571,7 +598,7 @@ class PatientIntakeForm extends HTMLElement {
     const data = {};
     
     for (let [key, value] of formData.entries()) {
-      if (key === 'quitMethods') {
+      if (key === 'quitMethods' || key === 'quitMotivation') {
         if (!data[key]) data[key] = [];
         data[key].push(value);
       } else {
@@ -620,7 +647,7 @@ class PatientIntakeForm extends HTMLElement {
       const elements = this.form.elements[key];
       if (!elements) return;
       
-      if (key === 'quitMethods' && Array.isArray(this.formData[key])) {
+      if ((key === 'quitMethods' || key === 'quitMotivation') && Array.isArray(this.formData[key])) {
         this.formData[key].forEach(value => {
           const checkbox = this.form.querySelector(`input[name="${key}"][value="${value}"]`);
           if (checkbox) {
@@ -645,6 +672,17 @@ class PatientIntakeForm extends HTMLElement {
       }
     });
     
+    // Restore medications conditional visibility
+    const takesMedication = this.form.elements['takesMedication']?.value;
+    if (takesMedication === 'yes') {
+      const medicationsGroup = this.querySelector('#medicationsListGroup');
+      const medicationsTextarea = this.querySelector('#medicationsList');
+      if (medicationsGroup) {
+        medicationsGroup.style.display = '';
+        medicationsTextarea.setAttribute('required', '');
+      }
+    }
+
     console.log('✅ Form data restored');
   }
 
