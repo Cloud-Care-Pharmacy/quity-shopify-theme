@@ -316,7 +316,7 @@ textarea.form-control::placeholder {
   margin: 0;
   cursor: pointer;
   flex: 1;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .radio-cards {
