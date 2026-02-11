@@ -1,5 +1,6 @@
 /* ============================================================
    Customer Gate Status — Blocked State UI
+   Uses theme design tokens throughout for consistency.
    ============================================================ */
 
 /* --- Shared layout --- */
@@ -8,7 +9,7 @@
   align-items: center;
   justify-content: center;
   min-height: 65vh;
-  padding: 60px 20px;
+  padding: 60px var(--g-hgutter, 15px);
   text-align: center;
 }
 
@@ -17,129 +18,122 @@
   margin: 0 auto;
 }
 
-/* --- Access Denied (Declined / Expired) --- */
-.customer-gate--denied {
-  background-color: #5C6B3C;
-  color: #fff;
-}
-
-.customer-gate--denied .customer-gate__heading-primary {
-  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
-  font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  color: #fff;
-}
-
-.customer-gate--denied .customer-gate__heading-accent {
-  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
-  font-weight: 800;
-  font-style: italic;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  color: #a3b56a;
-  margin-left: 10px;
-}
-
-.customer-gate--denied .customer-gate__message {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  margin-top: 16px;
-  margin-bottom: 32px;
-}
-
-/* --- Verification In Progress (Pending / blank) --- */
-.customer-gate--pending {
-  background-color: #f5f3ee;
-  color: #333;
-}
-
-.customer-gate--pending .customer-gate__icon {
-  margin-bottom: 20px;
-  color: #5C6B3C;
-}
-
-.customer-gate--pending .customer-gate__heading-primary {
-  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
-  font-weight: 800;
-  font-size: clamp(1.8rem, 4.5vw, 3rem);
-  line-height: 1.1;
-  color: #333;
-}
-
-.customer-gate--pending .customer-gate__heading-accent {
-  font-family: var(--g-font-heading-family, 'Plus Jakarta Sans', sans-serif);
-  font-weight: 800;
-  font-style: italic;
-  font-size: clamp(1.8rem, 4.5vw, 3rem);
-  line-height: 1.1;
-  color: #5C6B3C;
-  margin-left: 10px;
-}
-
-.customer-gate--pending .customer-gate__message {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  line-height: 1.6;
-  color: rgba(51, 51, 51, 0.8);
-  margin-top: 16px;
-  margin-bottom: 32px;
-}
-
-/* --- Buttons (shared) --- */
+/* --- Heading --- */
 .customer-gate__heading {
-  margin: 0 0 8px;
+  font-family: var(--g-font-1);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.4;
+  margin: 0 0 15px;
 }
 
+.customer-gate__heading-accent {
+  font-family: var(--g-font-3);
+  font-style: italic;
+  margin-left: 6px;
+}
+
+/* --- Message text --- */
+.customer-gate__message {
+  font-family: var(--g-font-2);
+  font-size: var(--g-font-size, 15px);
+  font-weight: var(--g-font-weight-body, 400);
+  line-height: var(--g-body-lineheight, 1.6);
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+/* --- Icon (pending state) --- */
+.customer-gate__icon {
+  margin-bottom: 20px;
+}
+
+.customer-gate__icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* --- Actions --- */
 .customer-gate__actions {
   display: flex;
-  gap: 16px;
+  gap: var(--g-hgutter, 15px);
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.customer-gate__btn {
-  display: inline-block;
-  padding: 12px 32px;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-  cursor: pointer;
+/* ============================================================
+   Access Denied (Declined / Expired)
+   ============================================================ */
+.customer-gate--denied {
+  background-color: var(--g-main, #222222);
+  color: var(--color-content, #ffffff);
 }
 
-/* Denied variant buttons */
-.customer-gate--denied .customer-gate__btn {
-  background-color: #f5f3ee;
-  color: #3d4f2f;
-  border: none;
+.customer-gate--denied .customer-gate__heading {
+  color: var(--color-content, #ffffff);
 }
 
-.customer-gate--denied .customer-gate__btn:hover {
-  background-color: #fff;
-  color: #2a3820;
-  transform: translateY(-1px);
+.customer-gate--denied .customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
 }
 
-/* Pending variant buttons */
-.customer-gate--pending .customer-gate__btn {
-  background-color: #5C6B3C;
-  color: #fff;
-  border: none;
+.customer-gate--denied .customer-gate__message {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.customer-gate--pending .customer-gate__btn:hover {
-  background-color: #4a5730;
-  color: #fff;
-  transform: translateY(-1px);
+/* Denied buttons — use .btn-outline-white pattern */
+.customer-gate--denied .btn-outline {
+  border-color: var(--color-content, #ffffff);
+  color: var(--color-content, #ffffff);
 }
 
-/* --- Responsive --- */
+/* ============================================================
+   Verification In Progress (Pending / blank)
+   ============================================================ */
+.customer-gate--pending {
+  background-color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.05);
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--pending .customer-gate__heading {
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--pending .customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
+}
+
+.customer-gate--pending .customer-gate__icon {
+  color: var(--g-main, #222222);
+}
+
+.customer-gate--pending .customer-gate__message {
+  color: var(--color-body-text, #414141);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media screen and (max-width: 1199px) {
+  .customer-gate__heading {
+    font-size: calc(46px * 0.8);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .customer-gate__heading {
+    font-size: calc(46px * 0.7);
+  }
+}
+
 @media screen and (max-width: 749px) {
   .customer-gate {
     min-height: 55vh;
-    padding: 40px 16px;
+    padding: 40px var(--g-hgutter, 15px);
+  }
+
+  .customer-gate__heading {
+    font-size: calc(46px * 0.6);
   }
 
   .customer-gate__actions {
@@ -147,9 +141,9 @@
     align-items: center;
   }
 
-  .customer-gate__btn {
+  .customer-gate__actions .btn-theme,
+  .customer-gate__actions .btn-outline {
     width: 100%;
     max-width: 240px;
-    text-align: center;
   }
 }
