@@ -71,6 +71,7 @@
     "base_size_sup": 12,
     "letter_spacing_sub": 0.2,
     "main_linklist": "main-menu",
+    "enable_breadcrumb": false,
     "enable_post": false,
     "enable_article": false,
     "enable_collection": true,
