@@ -117,6 +117,7 @@
         },
         "9cd2d8a0-a8b4-46d7-b3a7-b1609af99285": {
           "type": "fakeviewer",
+          "disabled": true,
           "settings": {
             "fake_view_min": 12,
             "fake_view_max": 30,
