@@ -58,6 +58,7 @@
         },
         "11f6643a-6bb6-4db9-a512-9c0eefc8c3b8": {
           "type": "countdown",
+          "disabled": true,
           "settings": {
             "title_heading": "🔥 Sale ends in !"
           }
@@ -72,6 +73,7 @@
         },
         "2830007b-b9f5-4f33-86cf-680e0a91ca8d": {
           "type": "tabcustom",
+          "disabled": true,
           "settings": {
             "title_tab": "Shipping information",
             "icon": "truck",
@@ -81,6 +83,7 @@
         },
         "0a71f30d-dba2-4bca-a64d-c3cc2ed17e7d": {
           "type": "tabcustom",
+          "disabled": true,
           "settings": {
             "title_tab": "Care Guide",
             "icon": "leaf",
@@ -90,6 +93,7 @@
         },
         "8d4704f6-d81d-4390-9ec5-af58698bef51": {
           "type": "salepoint",
+          "disabled": true,
           "settings": {
             "icon": "leaf",
             "free_word": "55% Linen, 45% Rayon"
@@ -97,6 +101,7 @@
         },
         "b7034bf2-48fd-492f-a089-3169873730db": {
           "type": "salepoint",
+          "disabled": true,
           "settings": {
             "icon": "lock",
             "free_word": "Secure payment"
@@ -104,6 +109,7 @@
         },
         "13c388e5-8dd3-4462-9284-ec3f2c9aabc6": {
           "type": "salepoint",
+          "disabled": true,
           "settings": {
             "icon": "shield",
             "free_word": "2 Year Warranty"
@@ -129,6 +135,7 @@
         },
         "1be7473b-00b2-4ad9-a7c0-356b86de67a7": {
           "type": "shipping",
+          "disabled": true,
           "settings": {}
         },
         "83a6f5b6-88e4-4eb3-9899-a085ea9c58bd": {
@@ -174,6 +181,7 @@
         },
         "883720d7-3346-4495-85a0-add8b3d7a51f": {
           "type": "trust-badge",
+          "disabled": true,
           "settings": {
             "trust-heading": "Guarantee safe checkout",
             "width_image": 70
@@ -211,7 +219,7 @@
         "image_size": "portrait",
         "enable_video_looping": true,
         "stock_enable": true,
-        "sizeguide_enable": true,
+        "sizeguide_enable": false,
         "sizeguide_title": "Size Guide",
         "sizeguide_page": "sizeguide",
         "crosssell_title": "Cross selling",
