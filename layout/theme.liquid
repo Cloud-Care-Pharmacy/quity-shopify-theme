@@ -73,10 +73,13 @@
             {%- if settings.enable_animationscroll -%}
             </div>
           {% endif %}
+          {%- comment -%} Customer gate temporarily disabled for merchant review {%- endcomment -%}
           {%- assign is_gated_template = false -%}
+          {%- comment -%}
           {%- if template.name == 'collection' or template.name == 'product' or template.name == 'search' or template.name == 'list-collections' -%}
             {%- assign is_gated_template = true -%}
           {%- endif -%}
+          {%- endcomment -%}
           {%- if customer and is_gated_template -%}
             {%- render 'customer-gate-status' -%}
           {%- endif -%}
