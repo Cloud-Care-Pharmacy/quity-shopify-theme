@@ -121,6 +121,7 @@
         },
         "2cf20ef7-ba29-4dd5-8c98-df0b96ba3c5b": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "🔥  30 sold in last 18 hours",
             "text_style": "subtitle"
@@ -253,6 +254,7 @@
         },
         "b69a53cf-5bc1-4b18-add3-92af436f966c": {
           "type": "content",
+          "disabled": true,
           "settings": {
             "title_tab": "Material",
             "answer_content": "",
@@ -261,6 +263,7 @@
         },
         "147e9960-c5fe-44f4-8469-9583a9752a0a": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "title_tab": "Reviews"
           }
@@ -437,6 +440,7 @@
         "template--14684877652053__c5690cdb-c04d-45fd-9c6c-cfee011363ca-166585292003960893-2",
         "4273663e-a3ea-49a8-a7c1-c872309fc99c"
       ],
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
@@ -549,6 +553,7 @@
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-1",
         "template--14684877652053__bcb1cba3-80fc-49a2-a033-40cf0618e9c8-16659371170e440ef7-2"
       ],
+      "disabled": true,
       "settings": {
         "anchor_id": "",
         "animation": "",
@@ -575,6 +580,7 @@
     },
     "2882975a-3f6b-438d-9a02-bfeacf954e1a": {
       "type": "count-down",
+      "disabled": true,
       "settings": {
         "animation": "fade-up",
         "setwidth": "container",
