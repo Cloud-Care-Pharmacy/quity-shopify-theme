@@ -2,6 +2,8 @@
 <html class="no-js " lang="{{ shop.locale }}">
   <head>
     <meta charset="utf-8">
+    {%- comment -%} Login redirect temporarily disabled for merchant review {%- endcomment -%}
+    {%- comment -%}
     {%- unless customer -%}
       {%- if template.name == 'collection' or template.name == 'product' or template.name == 'search' or template.name == 'list-collections' -%}
         {%- assign gate_login_url = '/account/login?return_url=' | append: request.path -%}
@@ -9,6 +11,7 @@
         <meta http-equiv="refresh" content="0;url={{ gate_login_url }}">
       {%- endif -%}
     {%- endunless -%}
+    {%- endcomment -%}
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_header_bg }}">
