@@ -164,6 +164,11 @@
                 <div class="error-message">Please select your gender</div>
               </div>
 
+              <div class="field form-group">
+                <label for="medicareNumber">Medicare Card #</label>
+                <input type="text" id="medicareNumber" name="medicareNumber" class="field__input form-control" placeholder="e.g., 2123 45670 1">
+              </div>
+
               <div class="section-separator with-label"><span class="sep-label">Address</span></div>
 
               <div class="field form-group">
@@ -177,6 +182,21 @@
                   <label for="city" class="required">City/Town</label>
                   <input type="text" id="city" name="city" class="field__input form-control" required>
                   <div class="error-message">Please enter your city/town</div>
+                </div>
+
+                <div class="field form-group">
+                  <label for="state">State</label>
+                  <select id="state" name="state" class="form-control">
+                    <option value="">Select state</option>
+                    <option value="NSW">New South Wales</option>
+                    <option value="VIC">Victoria</option>
+                    <option value="QLD">Queensland</option>
+                    <option value="SA">South Australia</option>
+                    <option value="WA">Western Australia</option>
+                    <option value="TAS">Tasmania</option>
+                    <option value="NT">Northern Territory</option>
+                    <option value="ACT">Australian Capital Territory</option>
+                  </select>
                 </div>
 
                 <div class="field form-group">
