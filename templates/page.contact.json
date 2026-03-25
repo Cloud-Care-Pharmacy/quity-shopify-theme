@@ -79,7 +79,7 @@
             "bgblock": "rgba(0,0,0,0)",
             "step_number_text": "",
             "title": "Business Hours",
-            "description": "Monday - Friday: 9:00 AM - 5:00 PM AEST",
+            "description": "Monday - Friday: \n<br>9:00 AM - 5:00 PM AEST",
             "icon": "<i class=\"icon-check-circle\"></i>"
           }
         },
