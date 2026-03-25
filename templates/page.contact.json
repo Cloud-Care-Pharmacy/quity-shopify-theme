@@ -63,16 +63,6 @@
     "fb754d90-39ba-47df-8255-8b3096ae9437": {
       "type": "service",
       "blocks": {
-        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-0": {
-          "type": "service",
-          "settings": {
-            "bgblock": "rgba(0,0,0,0)",
-            "step_number_text": "",
-            "title": "Address",
-            "description": "Unit 1, 2 Pippabilly Pl,<br>\nUpper Coomera, Queensland, Australia",
-            "icon": "<i class=\"icon-placeholder\"></i>"
-          }
-        },
         "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-1": {
           "type": "service",
           "settings": {
@@ -105,7 +95,6 @@
         }
       },
       "block_order": [
-        "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-0",
         "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-1",
         "template--16736981025086__fb754d90-39ba-47df-8255-8b3096ae9437-16667679904d65e643-2",
         "d58418bf-4652-4e45-8cbb-19e0434944cf"
