@@ -163,6 +163,7 @@
     },
     "e47bb256-2659-485f-9896-382aaec96e87": {
       "type": "map",
+      "disabled": true,
       "settings": {
         "heading": "Our Location",
         "address": "<p>Unit 1, 2 Pippabilly Pl,<br/>Upper Coomera, Queensland, Australia</p><p>Mon - Fri: 9:00 AM - 5:00 PM AEST</p>",
