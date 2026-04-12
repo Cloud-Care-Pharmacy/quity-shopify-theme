@@ -15,36 +15,43 @@
         "section_1": {
           "type": "section",
           "settings": {
-            "section_title": "Information We Gather",
-            "section_content": "<p>When you engage with Quity's services, we may collect various types of information to provide you with the best possible experience:</p><ul><li><strong>Identity Details:</strong> Your name, date of birth, and government-issued identification when required for healthcare services</li><li><strong>Contact Information:</strong> Email address, phone number, and residential address for communication and delivery purposes</li><li><strong>Health-Related Data:</strong> Medical history, current medications, allergies, and other health information necessary to provide appropriate pharmaceutical care</li><li><strong>Transaction Records:</strong> Purchase history, payment information, and billing details</li><li><strong>Technical Data:</strong> Device information, browser type, IP address, and usage patterns when you visit our website</li><li><strong>Communication Records:</strong> Records of your interactions with our customer support team</li></ul>"
+            "section_title": "Information We Collect",
+            "section_content": "<p>When you engage with Quity's services, we may collect various types of personal information, being information we hold which is identifiable as being about you and has the meaning given to it in section 6 of the Privacy Act 1988 (Cth), which may include:</p><ul><li><strong>Identity Details:</strong> Your name, date of birth, and government-issued identification when required for healthcare services</li><li><strong>Contact Information:</strong> Email address, phone number, and residential address for communication and delivery purposes</li><li><strong>Health-Related Data:</strong> Medical history, current medications, allergies, and other health information necessary to provide appropriate pharmaceutical care (health information)</li></ul><p>In addition to personal information, we may also collect health information and the following information:</p><ul><li><strong>Transaction Records:</strong> Purchase history, payment information, and billing details</li><li><strong>Technical Data:</strong> Device information, browser type, IP address, and usage patterns when you visit our website</li><li><strong>Communication Records:</strong> Records of your interactions with our customer support team</li></ul>"
+          }
+        },
+        "section_1b": {
+          "type": "section",
+          "settings": {
+            "section_title": "Collection and Use of My Health Records Data",
+            "section_content": "<p>We may access your My Health Records\u2014a national digital health record system\u2014to provide healthcare services. We may collect health information, including shared health summaries, prescription details and medical history, as part of our healthcare services.</p><p>My Health Record data is stored and processed exclusively within Australia, in compliance with the <em>My Health Records Act 2012 (Cth)</em>. Your other personal and health information not accessed through My Health Records can be disclosed to, or stored with, third parties overseas, in accordance with this Privacy Policy. For the avoidance of doubt, information obtained from My Health Records is not disclosed, accessed or stored overseas.</p>"
           }
         },
         "section_2": {
           "type": "section",
           "settings": {
-            "section_title": "How We Utilise Your Information",
-            "section_content": "<p>Your information enables us to deliver and improve our services in the following ways:</p><ul><li><strong>Healthcare Delivery:</strong> Processing prescriptions, conducting consultations, and providing pharmaceutical advice tailored to your needs</li><li><strong>Order Fulfilment:</strong> Managing your purchases, arranging delivery, and handling returns or exchanges</li><li><strong>Account Administration:</strong> Maintaining your account, verifying your identity, and ensuring account security</li><li><strong>Service Enhancement:</strong> Analysing usage patterns to improve our website, products, and customer experience</li><li><strong>Regulatory Compliance:</strong> Meeting legal obligations including healthcare regulations, record-keeping requirements, and reporting duties</li><li><strong>Communication:</strong> Sending important updates about your orders, appointments, or changes to our services</li><li><strong>Marketing:</strong> With your consent, sharing information about new products, services, or promotions that may interest you</li></ul>"
+            "section_title": "How We Use Your Information",
+            "section_content": "<p>Your information enables us to deliver and improve our services in the following ways, including:</p><ul><li><strong>Healthcare Delivery:</strong> Processing prescriptions, conducting consultations, and providing pharmaceutical advice tailored to your needs</li><li><strong>Order Fulfilment:</strong> Managing your purchases, arranging delivery, and handling returns or exchanges</li><li><strong>Account Administration:</strong> Maintaining your account, verifying your identity, and ensuring account security</li><li><strong>Service Enhancement:</strong> Analysing usage patterns to improve our website, products, and customer experience</li><li><strong>Regulatory Compliance:</strong> Meeting legal obligations including healthcare regulations, record-keeping requirements, and reporting duties</li><li><strong>Communication:</strong> Sending important updates about your orders, appointments, or changes to our services</li><li><strong>Marketing:</strong> Sharing information about new products, services, or promotions that may interest you</li></ul>"
           }
         },
         "section_3": {
           "type": "section",
           "settings": {
             "section_title": "Legal Grounds for Processing",
-            "section_content": "<p>We process your personal information based on the following legal foundations:</p><ul><li><strong>Contractual Necessity:</strong> Processing required to fulfil our service agreement with you</li><li><strong>Legal Obligations:</strong> Processing necessary to comply with healthcare laws, tax regulations, and other legal requirements</li><li><strong>Legitimate Interests:</strong> Processing that supports our business operations while respecting your rights and interests</li><li><strong>Consent:</strong> Where you have given explicit permission, particularly for marketing communications and certain data uses</li><li><strong>Vital Interests:</strong> In rare circumstances, processing necessary to protect someone's life or health</li></ul>"
+            "section_content": "<p>We process your personal information based on the following legal foundations:</p><ul><li><strong>Contractual Necessity:</strong> Processing required to fulfil our service agreement with you</li><li><strong>Legal Obligations:</strong> Processing necessary to comply with healthcare laws, tax regulations, and other legal requirements</li><li><strong>Legitimate Interests:</strong> Processing that supports our business operations while respecting your rights and interests</li><li><strong>Consent:</strong> We will try to collect your personal information directly from you, unless it is unreasonable or impracticable to do so. We will only collect sensitive information (including health information) with your consent. We collect personal information through various means including our online forms, email and phone contact and review of your medical records</li><li><strong>Vital Interests:</strong> In rare circumstances, processing necessary to protect someone's life or health</li></ul>"
           }
         },
         "section_4": {
           "type": "section",
           "settings": {
-            "section_title": "Information Sharing Practices",
-            "section_content": "<p>We take a careful approach to sharing your information and only do so when necessary:</p><ul><li><strong>Healthcare Providers:</strong> Sharing relevant medical information with doctors, specialists, or other healthcare professionals involved in your care</li><li><strong>Service Partners:</strong> Working with trusted third parties who assist with payment processing, delivery logistics, and IT services</li><li><strong>Regulatory Authorities:</strong> Disclosing information when required by healthcare regulators, law enforcement, or other government bodies</li><li><strong>Professional Advisors:</strong> Sharing with legal, accounting, or insurance professionals when necessary</li><li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale, your information may be transferred as part of that transaction</li></ul><p>We never sell your personal information to third parties for their marketing purposes.</p>"
+            "section_title": "Disclosure of Your Personal Information",
+            "section_content": "<p>We take a careful approach to disclosing your information and only do so when necessary:</p><ul><li><strong>Healthcare Providers:</strong> Sharing relevant medical information with doctors, specialists, or other healthcare professionals involved in your care</li><li><strong>Service Partners:</strong> Working with trusted third parties who assist with payment processing, delivery logistics, and IT services</li><li><strong>Regulatory Authorities:</strong> Disclosing information when required by healthcare regulators, law enforcement, or other government bodies</li><li><strong>Professional Advisors:</strong> Sharing with legal, accounting, or insurance professionals when necessary</li><li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale, your information may be transferred as part of that transaction</li></ul><p>We never sell your personal information to third parties for their marketing purposes.</p>"
           }
         },
         "section_5": {
           "type": "section",
           "settings": {
             "section_title": "Data Protection Measures",
-            "section_content": "<p>Protecting your information is a top priority at Quity. We employ comprehensive security measures including:</p><ul><li><strong>Encryption:</strong> Using industry-standard encryption protocols to protect data during transmission and storage</li><li><strong>Access Controls:</strong> Implementing strict access restrictions so only authorised personnel can view sensitive information</li><li><strong>Regular Audits:</strong> Conducting periodic security assessments and vulnerability testing</li><li><strong>Staff Training:</strong> Ensuring all team members understand their privacy and security responsibilities</li><li><strong>Secure Infrastructure:</strong> Hosting data on secure servers with robust physical and digital protections</li><li><strong>Incident Response:</strong> Maintaining procedures to quickly address any potential security breaches</li></ul><p>While we implement strong safeguards, no system is completely impenetrable. We encourage you to use strong passwords and protect your login credentials.</p>"
+            "section_content": "<p>Protecting your information is a top priority at Quity. We employ comprehensive security measures including:</p><ul><li><strong>Encryption:</strong> Using industry-standard encryption protocols to protect data during transmission and storage</li><li><strong>Access Controls:</strong> Implementing strict access restrictions so only authorised personnel can view sensitive information</li><li><strong>Regular Audits:</strong> Conducting periodic security assessments and vulnerability testing</li><li><strong>Staff Training:</strong> Ensuring all team members understand their privacy and security responsibilities</li><li><strong>Secure Infrastructure:</strong> Hosting data on secure servers with robust physical and digital protections</li><li><strong>Incident Response:</strong> Maintaining procedures to quickly address any potential security breaches</li></ul><p>While we implement strong safeguards, no system is completely impenetrable. We encourage you to use strong passwords and protect your login credentials. We are not liable for any misuse or loss of, or unauthorised access to, personal information or health information where the security of information is not within our control.</p>"
           }
         },
         "section_6": {
@@ -52,6 +59,13 @@
           "settings": {
             "section_title": "Data Retention Period",
             "section_content": "<p>We retain your personal information for as long as necessary to fulfil the purposes outlined in this policy, unless a longer retention period is required by law.</p><ul><li><strong>Active Accounts:</strong> We keep your information while your account remains active and for a reasonable period afterward</li><li><strong>Healthcare Records:</strong> Medical and prescription records are retained in accordance with healthcare regulations, typically for a minimum of seven years</li><li><strong>Transaction Data:</strong> Financial records are kept for the period required by tax and accounting regulations</li><li><strong>Marketing Preferences:</strong> We maintain records of your communication preferences until you update them</li></ul><p>When information is no longer needed, we securely delete or anonymise it in accordance with our data retention procedures.</p>"
+          }
+        },
+        "section_6b": {
+          "type": "section",
+          "settings": {
+            "section_title": "Automated Decision Making Processes",
+            "section_content": "<p>We may use automated decision-making processes in certain circumstances, which involve computer programs that make decisions or perform tasks directly related to decision-making, using your personal and health information.</p><p>We may use such automated decision-making to, among other things, assess your eligibility for specific treatment programs based on your medical history and other health information, or prioritise appointment scheduling based on clinical urgency and patient data.</p><p>We use reasonable endeavours to ensure that these automated decision-making processes are designed to be fair, accurate and compliant with the Privacy Act and Australian Privacy Principles.</p>"
           }
         },
         "section_7": {
@@ -86,7 +100,7 @@
           "type": "section",
           "settings": {
             "section_title": "Updates to This Policy",
-            "section_content": "<p>We may update this Privacy Policy periodically to reflect changes in our practices, technology, legal requirements, or other factors. When we make significant changes, we will:</p><ul><li>Update the \"Last Updated\" date at the top of this page</li><li>Notify you via email or through a prominent notice on our website</li><li>Where required by law, obtain your consent to material changes</li></ul><p>We encourage you to review this policy regularly to stay informed about how we protect your information.</p>"
+            "section_content": "<p>We may update this Privacy Policy periodically and at our absolute discretion to reflect changes in our practices, technology, legal requirements, or other factors. When we make significant changes, we will:</p><ul><li>Update the \"Last Updated\" date at the top of this page</li><li>Notify you via email or through a prominent notice on our website</li><li>Where required by law, obtain your consent to material changes</li></ul><p>We encourage you to review this Privacy Policy regularly to stay informed about how we protect your information.</p>"
           }
         },
         "contact_1": {
@@ -99,11 +113,13 @@
       },
       "block_order": [
         "section_1",
+        "section_1b",
         "section_2",
         "section_3",
         "section_4",
         "section_5",
         "section_6",
+        "section_6b",
         "section_7",
         "section_8",
         "section_9",
@@ -120,10 +136,10 @@
         "link_color": "#0066cc",
         "contact_bg": "#f5f5f5",
         "page_title": "Privacy Policy",
-        "last_updated": "Last Updated: February 2026",
+        "last_updated": "Last Updated: April 2026",
         "show_toc": true,
         "toc_title": "Quick Navigation",
-        "intro_text": "<p>At Quity, safeguarding your personal information is fundamental to how we operate. This Privacy Policy explains our practices regarding the collection, use, storage, and protection of your data when you interact with our pharmacy and healthcare services. By using our website or services, you acknowledge that you have read and understood this policy.</p>",
+        "intro_text": "<p>At Quity Pty Ltd (Quity, we, us, our), safeguarding your personal information is fundamental to how we operate. This Privacy Policy explains our practices regarding the collection, use, storage, and protection of your personal information when you interact with our pharmacy and healthcare services (services). By using our website or services, you acknowledge that you have read, understood and agreed to this Privacy Policy.</p>",
         "paddingsection": "60px 0px 80px 0px",
         "paddingmobile": "40px 0px 60px 0px"
       }
