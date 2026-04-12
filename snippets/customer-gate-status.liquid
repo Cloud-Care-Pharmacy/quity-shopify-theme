@@ -16,6 +16,38 @@
     {{ content_for_layout }}
 {%- endcomment -%}
 
+{%- unless customer -%}
+  {%- comment -%} Not logged in — show login prompt and hide page content {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="customer-gate customer-gate--login">
+    <div class="customer-gate__inner">
+      <div class="customer-gate__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/>
+          <line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+      </div>
+      <h1 class="customer-gate__heading">
+        <span class="customer-gate__heading-primary">Account</span>
+        <span class="customer-gate__heading-accent">Required</span>
+      </h1>
+      <p class="customer-gate__message">
+        You need to be logged in to browse our products. Please log in or create an account to continue.
+      </p>
+      <div class="customer-gate__actions">
+        <a href="/account/login" class="btn-theme">Log In</a>
+        <a href="/account/register" class="btn-outline">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- else -%}
+
 {%- assign customer_status = customer.metafields.customer.status | strip -%}
 
 {%- if customer_status == 'Approved' -%}
@@ -80,3 +112,5 @@
   {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
 
 {%- endif -%}
+
+{%- endunless -%}

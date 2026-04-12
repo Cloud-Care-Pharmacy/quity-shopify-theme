@@ -6,8 +6,11 @@
   on gated pages.
 {%- endcomment -%}
 
-{%- assign customer_status = customer.metafields.customer.status | strip -%}
-
-{%- unless customer_status == 'Approved' -%}
-  </div>{%- comment -%} Close the display:none wrapper {%- endcomment -%}
+{%- unless customer -%}
+  </div>{%- comment -%} Close the display:none wrapper (not logged in) {%- endcomment -%}
+{%- else -%}
+  {%- assign customer_status = customer.metafields.customer.status | strip -%}
+  {%- unless customer_status == 'Approved' -%}
+    </div>{%- comment -%} Close the display:none wrapper {%- endcomment -%}
+  {%- endunless -%}
 {%- endunless -%}
