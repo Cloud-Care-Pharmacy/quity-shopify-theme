@@ -731,3 +731,18 @@ textarea.form-control {
     max-width: 240px;
   }
 }
+
+/* Medicare IRN field */
+.medicare-irn-row {
+  margin-top: -10px;
+}
+
+.irn-field {
+  max-width: 140px;
+}
+
+.irn-input {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 2px;
+}

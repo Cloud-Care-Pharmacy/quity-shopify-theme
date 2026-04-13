@@ -110,6 +110,36 @@ class PatientIntakeForm extends HTMLElement {
       });
     });
 
+    // Medicare IRN conditional visibility
+    const medicareInput = this.form.querySelector('#medicareNumber');
+    const irnGroup = this.querySelector('#medicareIRNGroup');
+    if (medicareInput && irnGroup) {
+      const toggleIRN = () => {
+        const hasValue = medicareInput.value.trim().length > 0;
+        irnGroup.style.display = hasValue ? '' : 'none';
+        if (!hasValue) {
+          const irnInput = this.form.querySelector('#medicareIRN');
+          if (irnInput) {
+            irnInput.value = '';
+            irnInput.classList.remove('error');
+            const errMsg = irnGroup.querySelector('.error-message');
+            if (errMsg) errMsg.classList.remove('show');
+          }
+        }
+      };
+      medicareInput.addEventListener('input', toggleIRN);
+      // Run on init in case value was restored from session
+      toggleIRN();
+    }
+
+    // Medicare IRN: restrict to digits 1-9 only
+    const irnInput = this.form.querySelector('#medicareIRN');
+    if (irnInput) {
+      irnInput.addEventListener('input', () => {
+        irnInput.value = irnInput.value.replace(/[^1-9]/g, '').slice(0, 1);
+      });
+    }
+
     // Radio/checkbox option styling
     this.querySelectorAll('.radio-option, .checkbox-option, .radio-card, .checkbox-standalone').forEach(option => {
       option.addEventListener('click', (e) => {
@@ -332,6 +362,20 @@ class PatientIntakeForm extends HTMLElement {
       }
     });
     
+    // Validate Medicare IRN if provided (step 1 only)
+    if (this.currentStep === 1) {
+      const irnField = this.form.querySelector('#medicareIRN');
+      if (irnField && irnField.value.trim() !== '') {
+        if (!/^[1-9]$/.test(irnField.value.trim())) {
+          isValid = false;
+          irnField.classList.add('error');
+          const irnGroup = irnField.closest('.form-group');
+          const errMsg = irnGroup?.querySelector('.error-message');
+          if (errMsg) errMsg.classList.add('show');
+        }
+      }
+    }
+
     console.log(isValid ? '✅ Overall validation PASSED' : '❌ Overall validation FAILED');
     return isValid;
   }
@@ -498,7 +542,7 @@ class PatientIntakeForm extends HTMLElement {
   }
 
   transformFormData(rawData) {
-    return {
+    const data = {
       firstName: rawData.firstName || '',
       lastName: rawData.lastName || '',
       email: rawData.email || '',
@@ -536,6 +580,14 @@ class PatientIntakeForm extends HTMLElement {
       additionalNotes: rawData.additionalNotes || '',
       safetyAcknowledgment: rawData.safetyAcknowledgment === 'on' ? 'yes' : 'no'
     };
+
+    // Only include medicareIRN if it is a valid digit 1-9
+    const irn = (rawData.medicareIRN || '').trim();
+    if (/^[1-9]$/.test(irn)) {
+      data.medicareIRN = irn;
+    }
+
+    return data;
   }
 
   setLoadingState(isLoading) {
@@ -683,6 +735,13 @@ class PatientIntakeForm extends HTMLElement {
         medicationsGroup.style.display = '';
         medicationsTextarea.setAttribute('required', '');
       }
+    }
+
+    // Restore Medicare IRN visibility
+    const medicareVal = this.form.elements['medicareNumber']?.value;
+    if (medicareVal && medicareVal.trim().length > 0) {
+      const irnGroup = this.querySelector('#medicareIRNGroup');
+      if (irnGroup) irnGroup.style.display = '';
     }
 
     console.log('✅ Form data restored');
