@@ -113,10 +113,12 @@ class PatientIntakeForm extends HTMLElement {
     // Medicare IRN conditional visibility
     const medicareInput = this.form.querySelector('#medicareNumber');
     const irnGroup = this.querySelector('#medicareIRNGroup');
+    const medicareRow = this.querySelector('.gender-medicare-row');
     if (medicareInput && irnGroup) {
       const toggleIRN = () => {
         const hasValue = medicareInput.value.trim().length > 0;
         irnGroup.style.display = hasValue ? '' : 'none';
+        if (medicareRow) medicareRow.classList.toggle('irn-visible', hasValue);
         if (!hasValue) {
           const irnInput = this.form.querySelector('#medicareIRN');
           if (irnInput) {
@@ -741,7 +743,9 @@ class PatientIntakeForm extends HTMLElement {
     const medicareVal = this.form.elements['medicareNumber']?.value;
     if (medicareVal && medicareVal.trim().length > 0) {
       const irnGroup = this.querySelector('#medicareIRNGroup');
+      const medicareRow = this.querySelector('.gender-medicare-row');
       if (irnGroup) irnGroup.style.display = '';
+      if (medicareRow) medicareRow.classList.add('irn-visible');
     }
 
     console.log('✅ Form data restored');

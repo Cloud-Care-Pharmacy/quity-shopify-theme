@@ -732,17 +732,33 @@ textarea.form-control {
   }
 }
 
-/* Medicare IRN field */
-.medicare-irn-row {
-  margin-top: -10px;
+/* Gender + Medicare + IRN row */
+.patient-intake-form .gender-medicare-row {
+  grid-template-columns: 1fr 1fr;
 }
 
-.irn-field {
-  max-width: 140px;
+.patient-intake-form .gender-medicare-row.irn-visible {
+  grid-template-columns: 1fr 1.2fr auto;
+}
+
+.patient-intake-form .gender-medicare-row .irn-field {
+  width: 90px;
+  min-width: 90px;
 }
 
 .irn-input {
   text-align: center;
   font-size: 18px;
   letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .patient-intake-form .gender-medicare-row,
+  .patient-intake-form .gender-medicare-row.irn-visible {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-intake-form .gender-medicare-row .irn-field {
+    width: 100%;
+  }
 }
