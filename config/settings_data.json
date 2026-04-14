@@ -2374,7 +2374,7 @@
             "settings": {
               "widthlogofooter": 130,
               "title": "Get in touch",
-              "text": "<ul style=\"line-height:1.6;\">\n    <li class=\"mb-4\">\n        <div>\n<span style=\"color:#fff;font-weight:500;\">T:</span> 1800 327 863</div>\n        <div>\n<span style=\"color:#fff;font-weight:500;\">E:</span> hello@quity.com.au</div>\n    </li>\n    <li style=\"color:#fff;font-weight:200;\">\n        526/368 Sussex St, Sydney NSW 2000\n    </li>\n</ul>",
+              "text": "<ul style=\"line-height:1.6;\">\n    <li class=\"mb-4\">\n        <div>\n<span style=\"color:#fff;font-weight:500;\">T:</span> 1800 327 863</div>\n        <div>\n<span style=\"color:#fff;font-weight:500;\">E:</span> hello@quity.com.au</div>\n    </li>\n    <li style=\"color:#fff;font-weight:200;\">\n        526/368 Sussex St,<br>\n        Sydney NSW 2000\n    </li>\n</ul>",
               "show_social": false,
               "width": "25%"
             }
