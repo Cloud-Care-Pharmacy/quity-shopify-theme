@@ -620,6 +620,7 @@ textarea.form-control {
   border: none;
   padding: 6px 0 0 0;
   background: none;
+  align-items: center;
 }
 
 .checkbox-standalone.idk-option:hover {
@@ -630,6 +631,10 @@ textarea.form-control {
 .checkbox-standalone.idk-option.selected {
   border-color: transparent;
   background: none;
+}
+
+.checkbox-standalone.idk-option input[type="checkbox"] {
+  margin-top: 0;
 }
 
 .checkbox-standalone.idk-option label {
