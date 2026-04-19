@@ -99,8 +99,6 @@ class PatientIntakeForm extends HTMLElement {
         const medicationsTextarea = this.querySelector('#medicationsList');
         if (radio.value === 'yes' && radio.checked) {
           medicationsGroup.style.display = '';
-          medicationsTextGroup.style.display = '';
-          medicationsTextarea.setAttribute('required', '');
         } else if (radio.value === 'no' && radio.checked) {
           medicationsGroup.style.display = 'none';
           medicationsTextGroup.style.display = 'none';
@@ -119,25 +117,21 @@ class PatientIntakeForm extends HTMLElement {
       });
     });
 
-    // High-risk medications: "none" mutual exclusivity
+    // High-risk medications "other" toggle — show/hide free-text
     this.form.addEventListener('change', (e) => {
-      if (e.target.name === 'highRiskMedications') {
-        const allHighRisk = this.form.querySelectorAll('input[name="highRiskMedications"]');
-        if (e.target.value === 'none' && e.target.checked) {
-          allHighRisk.forEach(cb => {
-            if (cb.value !== 'none') {
-              cb.checked = false;
-              const parent = cb.closest('.checkbox-option');
-              if (parent) parent.classList.remove('selected');
-            }
-          });
-        } else if (e.target.value !== 'none' && e.target.checked) {
-          const noneCb = this.form.querySelector('input[name="highRiskMedications"][value="none"]');
-          if (noneCb) {
-            noneCb.checked = false;
-            const parent = noneCb.closest('.checkbox-option');
-            if (parent) parent.classList.remove('selected');
-          }
+      if (e.target.name === 'highRiskMedications' && e.target.value === 'other') {
+        const medicationsTextGroup = this.querySelector('#medicationsTextGroup');
+        const medicationsTextarea = this.querySelector('#medicationsList');
+        if (e.target.checked) {
+          medicationsTextGroup.style.display = '';
+          medicationsTextarea.setAttribute('required', '');
+        } else {
+          medicationsTextGroup.style.display = 'none';
+          medicationsTextarea.removeAttribute('required');
+          medicationsTextarea.value = '';
+          medicationsTextarea.classList.remove('error');
+          const errMsg = medicationsTextGroup.querySelector('.error-message');
+          if (errMsg) errMsg.classList.remove('show');
         }
       }
     });
@@ -822,12 +816,16 @@ class PatientIntakeForm extends HTMLElement {
     const takesMedication = this.form.elements['takesMedication']?.value;
     if (takesMedication === 'yes') {
       const medicationsGroup = this.querySelector('#medicationsListGroup');
-      const medicationsTextGroup = this.querySelector('#medicationsTextGroup');
-      const medicationsTextarea = this.querySelector('#medicationsList');
       if (medicationsGroup) medicationsGroup.style.display = '';
-      if (medicationsTextGroup) {
-        medicationsTextGroup.style.display = '';
-        medicationsTextarea.setAttribute('required', '');
+      // Show free-text only if "other" is checked
+      const otherMedCb = this.form.querySelector('input[name="highRiskMedications"][value="other"]');
+      if (otherMedCb && otherMedCb.checked) {
+        const medicationsTextGroup = this.querySelector('#medicationsTextGroup');
+        const medicationsTextarea = this.querySelector('#medicationsList');
+        if (medicationsTextGroup) {
+          medicationsTextGroup.style.display = '';
+          medicationsTextarea.setAttribute('required', '');
+        }
       }
     }
 
