@@ -142,6 +142,10 @@ class PatientIntakeForm extends HTMLElement {
       });
     }
 
+    // "I don't know" checkboxes for vaping strength and volume
+    this.bindIdkCheckbox('idkVapingStrength', 'vapingStrength');
+    this.bindIdkCheckbox('idkVapingVolume', 'vapingVolume');
+
     // Radio/checkbox option styling
     this.querySelectorAll('.radio-option, .checkbox-option, .radio-card, .checkbox-standalone').forEach(option => {
       option.addEventListener('click', (e) => {
@@ -475,6 +479,12 @@ class PatientIntakeForm extends HTMLElement {
         rawData[key] = value;
       }
     }
+
+    // Capture disabled "I don't know" field values
+    ['vapingStrength', 'vapingVolume'].forEach(id => {
+      const el = this.form.querySelector('#' + id);
+      if (el && el.disabled) rawData[id] = el.value;
+    });
     
     // Store in sessionStorage as backup
     sessionStorage.setItem('patientIntakeFormData', JSON.stringify(rawData));
@@ -748,11 +758,50 @@ class PatientIntakeForm extends HTMLElement {
       if (medicareRow) medicareRow.classList.add('irn-visible');
     }
 
+    // Restore "I don't know" checkbox states for vaping fields
+    [['idkVapingStrength', 'vapingStrength'], ['idkVapingVolume', 'vapingVolume']].forEach(([cbId, inputId]) => {
+      const cb = this.form.querySelector('#' + cbId);
+      const input = this.form.querySelector('#' + inputId);
+      if (cb && input && input.value === "I don't know") {
+        cb.checked = true;
+        input.disabled = true;
+        const parent = cb.closest('.checkbox-standalone');
+        if (parent) parent.classList.add('selected');
+      }
+    });
+
     console.log('✅ Form data restored');
   }
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  bindIdkCheckbox(checkboxId, textInputId) {
+    const checkbox = this.form.querySelector('#' + checkboxId);
+    const textInput = this.form.querySelector('#' + textInputId);
+    if (!checkbox || !textInput) return;
+
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        textInput.value = "I don't know";
+        textInput.disabled = true;
+        textInput.classList.remove('error');
+        const errorMsg = textInput.closest('.form-group')?.querySelector('.error-message');
+        if (errorMsg) errorMsg.classList.remove('show');
+      } else {
+        textInput.value = '';
+        textInput.disabled = false;
+      }
+    });
+
+    textInput.addEventListener('input', () => {
+      if (textInput.value !== "I don't know") {
+        checkbox.checked = false;
+        const parent = checkbox.closest('.checkbox-standalone');
+        if (parent) parent.classList.remove('selected');
+      }
+    });
   }
 }
 

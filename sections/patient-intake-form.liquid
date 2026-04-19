@@ -247,7 +247,7 @@
                 <div class="radio-group">
                   <div class="radio-option" data-value="currently-smoking">
                     <input type="radio" id="smokingStatus1" name="smokingStatus" value="currently-smoking" required>
-                    <label for="smokingStatus1">I am currently smoking and would like to try nicotine vaping products.</label>
+                    <label for="smokingStatus1">I am currently smoking and I'd like to try a nicotine replacement option</label>
                   </div>
                   <div class="radio-option" data-value="quit-with-vaping">
                     <input type="radio" id="smokingStatus2" name="smokingStatus" value="quit-with-vaping" required>
@@ -363,12 +363,12 @@
               </div>
 
               <div class="field form-group">
-                <label class="required">Which First-Line quitting methods have you tried so far? Please check ALL that apply.</label>
-                <div class="helper-text">Nicotine Vaping Prescription may be considered appropriate for people who tried First-Line Nicotine Replacement Therapy (like patches, gums, etc.) and Pharmacotherapy quitting methods but failed and are still motivated to quit smoking.</div>
+                <label class="required">Which quitting methods have you tried so far? Please check ALL that apply.</label>
+                <div class="helper-text">Nicotine vaping prescription may be considered appropriate for people who have tried nicotine replacement therapy (like patches, gums, etc.) and pharmacotherapy quitting methods but were unsuccessful and are still motivated to quit smoking.</div>
                 <div class="checkbox-group">
                   <div class="checkbox-option" data-value="first-line-nrt">
                     <input type="checkbox" id="quitMethod1" name="quitMethods" value="first-line-nrt">
-                    <label for="quitMethod1">First-line NRT (Nicotine Patches, gums and lozenges as an example)</label>
+                    <label for="quitMethod1">Nicotine replacement therapy (patches, gums, lozenges, etc.)</label>
                   </div>
                   <div class="checkbox-option" data-value="pharmacotherapy">
                     <input type="checkbox" id="quitMethod2" name="quitMethods" value="pharmacotherapy">
@@ -387,7 +387,7 @@
               </div>
 
               <div class="field form-group">
-                <label class="required" for="quitMethodExplanation">Please explain why the First-Line quitting methods selected didn't work for you or, why you have not tried first line treatments. This information is crucial for determining your eligibility for NVP.</label>
+                <label class="required" for="quitMethodExplanation">Please explain why the quitting methods selected didn't work for you, or why you have not tried these treatments. This information is crucial for determining your eligibility for nicotine vaping products.</label>
                 <div class="helper-text">The doctor needs this information to determine if this treatment is appropriate. Please provide information about cravings, side effects or relapses back to smoking.</div>
                 <textarea id="quitMethodExplanation" name="quitMethodExplanation" class="form-control" placeholder="Please explain why previous quitting methods didn't work or why you haven't tried them..." required></textarea>
                 <div class="error-message">Please provide an explanation</div>
@@ -478,12 +478,20 @@
                 <div class="field form-group">
                   <label for="vapingStrength" class="required">What is the minimum strength that has been effective to avoid smoking?</label>
                   <input type="text" id="vapingStrength" name="vapingStrength" class="field__input form-control" placeholder="e.g., 20mg/ml" required>
+                  <div class="checkbox-standalone idk-option" data-value="idk-strength">
+                    <input type="checkbox" id="idkVapingStrength" name="idkVapingStrength">
+                    <label for="idkVapingStrength">I don't know</label>
+                  </div>
                   <div class="error-message">Please enter the minimum effective strength</div>
                 </div>
 
                 <div class="field form-group">
                   <label for="vapingVolume" class="required">How many mL's of liquid do you estimate that you use per day?</label>
                   <input type="text" id="vapingVolume" name="vapingVolume" class="field__input form-control" placeholder="e.g., 5ml" required>
+                  <div class="checkbox-standalone idk-option" data-value="idk-volume">
+                    <input type="checkbox" id="idkVapingVolume" name="idkVapingVolume">
+                    <label for="idkVapingVolume">I don't know</label>
+                  </div>
                   <div class="error-message">Please enter the volume you use per day</div>
                 </div>
               </div>
