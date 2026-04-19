@@ -95,19 +95,97 @@ class PatientIntakeForm extends HTMLElement {
     this.form.querySelectorAll('input[name="takesMedication"]').forEach(radio => {
       radio.addEventListener('change', () => {
         const medicationsGroup = this.querySelector('#medicationsListGroup');
+        const medicationsTextGroup = this.querySelector('#medicationsTextGroup');
         const medicationsTextarea = this.querySelector('#medicationsList');
         if (radio.value === 'yes' && radio.checked) {
           medicationsGroup.style.display = '';
+          medicationsTextGroup.style.display = '';
           medicationsTextarea.setAttribute('required', '');
         } else if (radio.value === 'no' && radio.checked) {
           medicationsGroup.style.display = 'none';
+          medicationsTextGroup.style.display = 'none';
           medicationsTextarea.removeAttribute('required');
           medicationsTextarea.value = '';
           medicationsTextarea.classList.remove('error');
-          const errorMsg = medicationsGroup.querySelector('.error-message');
+          const errorMsg = medicationsTextGroup.querySelector('.error-message');
           if (errorMsg) errorMsg.classList.remove('show');
+          // Uncheck high-risk medications
+          this.form.querySelectorAll('input[name="highRiskMedications"]').forEach(cb => {
+            cb.checked = false;
+            const parent = cb.closest('.checkbox-option');
+            if (parent) parent.classList.remove('selected');
+          });
         }
       });
+    });
+
+    // High-risk medications: "none" mutual exclusivity
+    this.form.addEventListener('change', (e) => {
+      if (e.target.name === 'highRiskMedications') {
+        const allHighRisk = this.form.querySelectorAll('input[name="highRiskMedications"]');
+        if (e.target.value === 'none' && e.target.checked) {
+          allHighRisk.forEach(cb => {
+            if (cb.value !== 'none') {
+              cb.checked = false;
+              const parent = cb.closest('.checkbox-option');
+              if (parent) parent.classList.remove('selected');
+            }
+          });
+        } else if (e.target.value !== 'none' && e.target.checked) {
+          const noneCb = this.form.querySelector('input[name="highRiskMedications"][value="none"]');
+          if (noneCb) {
+            noneCb.checked = false;
+            const parent = noneCb.closest('.checkbox-option');
+            if (parent) parent.classList.remove('selected');
+          }
+        }
+      }
+    });
+
+    // Medical conditions conditional visibility
+    this.form.querySelectorAll('input[name="hasMedicalConditions"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const conditionsGroup = this.querySelector('#medicalConditionsGroup');
+        if (radio.value === 'yes' && radio.checked) {
+          conditionsGroup.style.display = '';
+        } else if (radio.value === 'no' && radio.checked) {
+          conditionsGroup.style.display = 'none';
+          // Uncheck all conditions
+          this.form.querySelectorAll('input[name="medicalConditions"]').forEach(cb => {
+            cb.checked = false;
+            const parent = cb.closest('.checkbox-option');
+            if (parent) parent.classList.remove('selected');
+          });
+          // Hide and clear "other" text
+          const otherGroup = this.querySelector('#medicalConditionsOtherGroup');
+          const otherTextarea = this.querySelector('#medicalConditionsOther');
+          if (otherGroup) otherGroup.style.display = 'none';
+          if (otherTextarea) {
+            otherTextarea.value = '';
+            otherTextarea.removeAttribute('required');
+            otherTextarea.classList.remove('error');
+          }
+        }
+      });
+    });
+
+    // Medical conditions "other" toggle
+    this.form.addEventListener('change', (e) => {
+      if (e.target.name === 'medicalConditions' && e.target.value === 'other') {
+        const otherGroup = this.querySelector('#medicalConditionsOtherGroup');
+        const otherTextarea = this.querySelector('#medicalConditionsOther');
+        if (e.target.checked) {
+          otherGroup.style.display = '';
+          otherTextarea.setAttribute('required', '');
+        } else {
+          otherGroup.style.display = 'none';
+          otherTextarea.removeAttribute('required');
+          otherTextarea.value = '';
+          otherTextarea.classList.remove('error');
+          const errMsg = otherGroup.querySelector('.error-message');
+          if (errMsg) errMsg.classList.remove('show');
+        }
+      }
     });
 
     // Medicare IRN conditional visibility
@@ -472,7 +550,7 @@ class PatientIntakeForm extends HTMLElement {
     const rawData = {};
     
     for (let [key, value] of formData.entries()) {
-      if (key === 'quitMethods' || key === 'quitMotivation') {
+      if (key === 'quitMethods' || key === 'quitMotivation' || key === 'medicalConditions' || key === 'highRiskMedications') {
         if (!rawData[key]) rawData[key] = [];
         rawData[key].push(value);
       } else {
@@ -583,8 +661,10 @@ class PatientIntakeForm extends HTMLElement {
       vapingVolume: rawData.vapingVolume || '',
       vapingNotes: rawData.vapingNotes || '',
       hasMedicalConditions: rawData.hasMedicalConditions || '',
-      medicalIllnesses: rawData.medicalIllnesses || '',
+      medicalConditions: rawData.medicalConditions || [],
+      medicalConditionsOther: rawData.medicalConditionsOther || '',
       takesMedication: rawData.takesMedication || '',
+      highRiskMedications: rawData.highRiskMedications || [],
       medicationsList: rawData.medicationsList || '',
       cardiovascular: rawData.cardiovascular || '',
       pregnancy: rawData.pregnancy || '',
@@ -664,7 +744,7 @@ class PatientIntakeForm extends HTMLElement {
     const data = {};
     
     for (let [key, value] of formData.entries()) {
-      if (key === 'quitMethods' || key === 'quitMotivation') {
+      if (key === 'quitMethods' || key === 'quitMotivation' || key === 'medicalConditions' || key === 'highRiskMedications') {
         if (!data[key]) data[key] = [];
         data[key].push(value);
       } else {
@@ -713,7 +793,7 @@ class PatientIntakeForm extends HTMLElement {
       const elements = this.form.elements[key];
       if (!elements) return;
       
-      if ((key === 'quitMethods' || key === 'quitMotivation') && Array.isArray(this.formData[key])) {
+      if ((key === 'quitMethods' || key === 'quitMotivation' || key === 'medicalConditions' || key === 'highRiskMedications') && Array.isArray(this.formData[key])) {
         this.formData[key].forEach(value => {
           const checkbox = this.form.querySelector(`input[name="${key}"][value="${value}"]`);
           if (checkbox) {
@@ -742,10 +822,27 @@ class PatientIntakeForm extends HTMLElement {
     const takesMedication = this.form.elements['takesMedication']?.value;
     if (takesMedication === 'yes') {
       const medicationsGroup = this.querySelector('#medicationsListGroup');
+      const medicationsTextGroup = this.querySelector('#medicationsTextGroup');
       const medicationsTextarea = this.querySelector('#medicationsList');
-      if (medicationsGroup) {
-        medicationsGroup.style.display = '';
+      if (medicationsGroup) medicationsGroup.style.display = '';
+      if (medicationsTextGroup) {
+        medicationsTextGroup.style.display = '';
         medicationsTextarea.setAttribute('required', '');
+      }
+    }
+
+    // Restore medical conditions conditional visibility
+    const hasMedicalConditions = this.form.elements['hasMedicalConditions']?.value;
+    if (hasMedicalConditions === 'yes') {
+      const conditionsGroup = this.querySelector('#medicalConditionsGroup');
+      if (conditionsGroup) conditionsGroup.style.display = '';
+      // Restore "other" textarea visibility
+      const otherCb = this.form.querySelector('input[name="medicalConditions"][value="other"]');
+      if (otherCb && otherCb.checked) {
+        const otherGroup = this.querySelector('#medicalConditionsOtherGroup');
+        const otherTextarea = this.querySelector('#medicalConditionsOther');
+        if (otherGroup) otherGroup.style.display = '';
+        if (otherTextarea) otherTextarea.setAttribute('required', '');
       }
     }
 

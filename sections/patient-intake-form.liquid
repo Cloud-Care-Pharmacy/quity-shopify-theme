@@ -525,9 +525,41 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="field form-group">
-                <label for="medicalIllnesses">Please list all medical conditions</label>
-                <textarea id="medicalIllnesses" name="medicalIllnesses" class="form-control" placeholder="List any significant medical conditions..."></textarea>
+              <div class="field form-group" id="medicalConditionsGroup" style="display: none;">
+                <label class="required">Please select all conditions that apply</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option" data-value="hypertension">
+                    <input type="checkbox" id="condition1" name="medicalConditions" value="hypertension">
+                    <label for="condition1">Uncontrolled hypertension</label>
+                  </div>
+                  <div class="checkbox-option" data-value="heart-attack">
+                    <input type="checkbox" id="condition2" name="medicalConditions" value="heart-attack">
+                    <label for="condition2">Myocardial infarction (heart attack)</label>
+                  </div>
+                  <div class="checkbox-option" data-value="stroke">
+                    <input type="checkbox" id="condition3" name="medicalConditions" value="stroke">
+                    <label for="condition3">Stroke</label>
+                  </div>
+                  <div class="checkbox-option" data-value="cancer">
+                    <input type="checkbox" id="condition4" name="medicalConditions" value="cancer">
+                    <label for="condition4">Cancer</label>
+                  </div>
+                  <div class="checkbox-option" data-value="pregnancy-breastfeeding">
+                    <input type="checkbox" id="condition5" name="medicalConditions" value="pregnancy-breastfeeding">
+                    <label for="condition5">Pregnancy / breastfeeding</label>
+                  </div>
+                  <div class="checkbox-option" data-value="other">
+                    <input type="checkbox" id="condition6" name="medicalConditions" value="other">
+                    <label for="condition6">Other</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select at least one condition</div>
+              </div>
+
+              <div class="field form-group" id="medicalConditionsOtherGroup" style="display: none;">
+                <label for="medicalConditionsOther">Please describe your other medical condition(s)</label>
+                <textarea id="medicalConditionsOther" name="medicalConditionsOther" class="form-control" placeholder="Please list any other medical conditions..."></textarea>
+                <div class="error-message">Please describe your other condition(s)</div>
               </div>
 
               <div class="field form-group">
@@ -546,7 +578,25 @@
               </div>
 
               <div class="field form-group" id="medicationsListGroup" style="display: none;">
-                <label for="medicationsList">Please list all medications.</label>
+                <label>Are you currently taking any of the following high-risk medications?</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option" data-value="olanzapine">
+                    <input type="checkbox" id="highRiskMed1" name="highRiskMedications" value="olanzapine">
+                    <label for="highRiskMed1">Olanzapine</label>
+                  </div>
+                  <div class="checkbox-option" data-value="warfarin">
+                    <input type="checkbox" id="highRiskMed2" name="highRiskMedications" value="warfarin">
+                    <label for="highRiskMed2">Warfarin</label>
+                  </div>
+                  <div class="checkbox-option" data-value="none">
+                    <input type="checkbox" id="highRiskMed3" name="highRiskMedications" value="none">
+                    <label for="highRiskMed3">None of the above</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field form-group" id="medicationsTextGroup" style="display: none;">
+                <label for="medicationsList">Please list all medications you are currently taking</label>
                 <textarea id="medicationsList" name="medicationsList" class="form-control" placeholder="List all medications you are currently taking..."></textarea>
                 <div class="error-message">Please list your medications</div>
               </div>
