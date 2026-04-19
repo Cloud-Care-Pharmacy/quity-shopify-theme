@@ -640,6 +640,7 @@ textarea.form-control {
 .checkbox-standalone.idk-option label {
   font-size: 14px;
   color: #6b7280;
+  margin-bottom: 0;
 }
 
 .checkbox-standalone.idk-option.selected label {
