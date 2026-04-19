@@ -615,6 +615,32 @@ textarea.form-control {
   font-weight: var(--g-font-weight-body, 400);
 }
 
+/* "I don't know" variant — simple inline checkbox, no card border */
+.checkbox-standalone.idk-option {
+  border: none;
+  padding: 6px 0 0 0;
+  background: none;
+}
+
+.checkbox-standalone.idk-option:hover {
+  border-color: transparent;
+  background: none;
+}
+
+.checkbox-standalone.idk-option.selected {
+  border-color: transparent;
+  background: none;
+}
+
+.checkbox-standalone.idk-option label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.checkbox-standalone.idk-option.selected label {
+  color: var(--g-main);
+}
+
 /* ============================================================
    Success Message — Thank-you state
    Mirrors the customer-gate pattern for visual consistency.
