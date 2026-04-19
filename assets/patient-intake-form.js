@@ -15,6 +15,7 @@ class PatientIntakeForm extends HTMLElement {
     this.stepItems = this.querySelectorAll('.step-item');
     this.successMessage = this.querySelector('#successMessage');
     this.completedSteps = new Set();
+    this.uploadedFile = null;
     
     this.init();
   }
@@ -181,6 +182,9 @@ class PatientIntakeForm extends HTMLElement {
         }
       }
     });
+
+    // File upload handling
+    this.bindFileUpload();
 
     // Medicare IRN conditional visibility
     const medicareInput = this.form.querySelector('#medicareNumber');
@@ -440,6 +444,19 @@ class PatientIntakeForm extends HTMLElement {
       }
     });
     
+    // Validate proof of age file upload (step 1 only)
+    if (this.currentStep === 1) {
+      const fileInput = this.form.querySelector('#proofOfAge');
+      if (fileInput && !this.uploadedFile) {
+        isValid = false;
+        const formGroup = fileInput.closest('.field') || fileInput.closest('.form-group');
+        const errorMsg = formGroup?.querySelector('.error-message');
+        if (errorMsg) errorMsg.classList.add('show');
+        const uploadZone = this.querySelector('#fileUploadZone');
+        if (uploadZone) uploadZone.classList.add('error');
+      }
+    }
+
     // Validate Medicare IRN if provided (step 1 only)
     if (this.currentStep === 1) {
       const irnField = this.form.querySelector('#medicareIRN');
@@ -566,6 +583,17 @@ class PatientIntakeForm extends HTMLElement {
     const data = this.transformFormData(rawData);
     console.log('📊 Transformed form data:', data);
     
+    // Attach proof of age file as base64
+    if (this.uploadedFile) {
+      try {
+        data.proofOfAge = await this.fileToBase64(this.uploadedFile);
+        data.proofOfAgeFileName = this.uploadedFile.name;
+        data.proofOfAgeFileType = this.uploadedFile.type;
+      } catch (fileErr) {
+        console.error('❌ Failed to read proof of age file:', fileErr);
+      }
+    }
+
     // Show loading state
     this.setLoadingState(true);
     
@@ -870,6 +898,122 @@ class PatientIntakeForm extends HTMLElement {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  bindFileUpload() {
+    const uploadZone = this.querySelector('#fileUploadZone');
+    const fileInput = this.querySelector('#proofOfAge');
+    const placeholder = this.querySelector('#fileUploadPlaceholder');
+    const preview = this.querySelector('#fileUploadPreview');
+    const previewName = this.querySelector('#filePreviewName');
+    const previewSize = this.querySelector('#filePreviewSize');
+    const removeBtn = this.querySelector('#fileRemoveBtn');
+
+    if (!uploadZone || !fileInput) return;
+
+    const maxSize = 10 * 1024 * 1024; // 10 MB
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp', 'application/pdf'];
+
+    const formatSize = (bytes) => {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    };
+
+    const handleFile = (file) => {
+      // Clear previous errors
+      uploadZone.classList.remove('error');
+      const formGroup = fileInput.closest('.field') || fileInput.closest('.form-group');
+      const errorMsg = formGroup?.querySelector('.error-message');
+      if (errorMsg) errorMsg.classList.remove('show');
+
+      if (!allowedTypes.includes(file.type)) {
+        if (errorMsg) {
+          errorMsg.textContent = 'Invalid file type. Please upload an image (JPG, PNG, HEIC) or PDF.';
+          errorMsg.classList.add('show');
+        }
+        uploadZone.classList.add('error');
+        return;
+      }
+
+      if (file.size > maxSize) {
+        if (errorMsg) {
+          errorMsg.textContent = 'File is too large. Maximum size is 10 MB.';
+          errorMsg.classList.add('show');
+        }
+        uploadZone.classList.add('error');
+        return;
+      }
+
+      this.uploadedFile = file;
+      previewName.textContent = file.name;
+      previewSize.textContent = formatSize(file.size);
+      placeholder.style.display = 'none';
+      preview.style.display = 'flex';
+      uploadZone.classList.add('has-file');
+
+      // Reset error message text for future validations
+      if (errorMsg) errorMsg.textContent = 'Please upload a proof of age document';
+
+      this.saveToSession();
+    };
+
+    // Click to browse
+    uploadZone.addEventListener('click', (e) => {
+      if (e.target.closest('.file-remove-btn')) return;
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files && fileInput.files[0]) {
+        handleFile(fileInput.files[0]);
+      }
+    });
+
+    // Drag & drop
+    ['dragenter', 'dragover'].forEach(evt => {
+      uploadZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadZone.classList.add('drag-over');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(evt => {
+      uploadZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadZone.classList.remove('drag-over');
+      });
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer?.files;
+      if (files && files[0]) {
+        handleFile(files[0]);
+      }
+    });
+
+    // Remove button
+    if (removeBtn) {
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.uploadedFile = null;
+        fileInput.value = '';
+        placeholder.style.display = '';
+        preview.style.display = 'none';
+        uploadZone.classList.remove('has-file');
+      });
+    }
+  }
+
+  fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
   bindIdkCheckbox(checkboxId, textInputId) {
