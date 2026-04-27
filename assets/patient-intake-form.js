@@ -598,7 +598,7 @@ class PatientIntakeForm extends HTMLElement {
     this.setLoadingState(true);
     
     try {
-      const response = await fetch('https://prescription-gateway.quity.workers.dev/api/intake?shop=quity.com.au', {
+      const response = await fetch('https://api.quity.com.au/api/intake?shop=quity.com.au', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
