@@ -579,7 +579,7 @@ class PatientIntakeForm extends HTMLElement {
     sessionStorage.setItem('patientIntakeFormData', JSON.stringify(rawData));
     console.log('💾 Form data saved to sessionStorage as backup');
     
-    // Transform data to match Halaxy API expectations
+    // Transform data to match backend API expectations
     const data = this.transformFormData(rawData);
     console.log('📊 Transformed form data:', data);
     
@@ -598,7 +598,7 @@ class PatientIntakeForm extends HTMLElement {
     this.setLoadingState(true);
     
     try {
-      const response = await fetch('/apps/fastmeds/submit', {
+      const response = await fetch('https://prescription-gateway.quity.workers.dev/api/intake?shop=quity.com.au', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -631,9 +631,8 @@ class PatientIntakeForm extends HTMLElement {
       console.log('📥 API response:', result);
       
       if (result.success) {
-        console.log('🎉 Form submitted successfully to Halaxy!');
+        console.log('🎉 Form submitted successfully!');
         console.log('👤 Patient ID:', result.patientId);
-        console.log('📋 Clinical Note ID:', result.clinicalNoteId);
         
         // Clear session storage on success
         sessionStorage.removeItem('patientIntakeFormData');
