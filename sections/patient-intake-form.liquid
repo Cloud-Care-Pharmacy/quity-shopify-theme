@@ -18,8 +18,8 @@
         You need to be logged in to access the patient intake questionnaire. Please log in or create an account to continue.
       </p>
       <div class="customer-gate__actions">
-        <a href="/account/login" class="btn-theme">Log In</a>
-        <a href="/account/register" class="btn-outline">Create Account</a>
+        <a href="/account/login" class="btn-theme" onclick="try{sessionStorage.setItem('quity_return_url','/pages/questionnaire')}catch(e){}">Log In</a>
+        <a href="/account/register" class="btn-outline" onclick="try{sessionStorage.setItem('quity_return_url','/pages/questionnaire')}catch(e){}">Create Account</a>
       </div>
     </div>
   </div>

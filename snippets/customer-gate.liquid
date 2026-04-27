@@ -20,7 +20,7 @@
 
 {%- unless customer -%}
   {%- if redirect -%}
-    {%- assign login_url = '/account/login?return_url=' | append: request.path -%}
+    {%- assign login_url = '/account/login' -%}
     <style>body { visibility: hidden !important; }</style>
     <script>(function(){ window.location.replace('{{ login_url }}'); })();</script>
     <meta http-equiv="refresh" content="0;url={{ login_url }}">

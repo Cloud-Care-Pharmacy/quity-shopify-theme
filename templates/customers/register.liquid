@@ -190,20 +190,6 @@
           <div class="form-vertical">
             {%- form 'create_customer' -%}
             {{ form.errors | default_errors }}
-            <script>
-              (function() {
-                var params = new URLSearchParams(window.location.search);
-                var returnUrl = params.get('return_url');
-                if (returnUrl) {
-                  var form = document.currentScript.closest('form');
-                  var hidden = document.createElement('input');
-                  hidden.type = 'hidden';
-                  hidden.name = 'return_to';
-                  hidden.value = returnUrl;
-                  form.appendChild(hidden);
-                }
-              })();
-            </script>
             <div class="form-group">
               <input class="form-control" type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
               <label for="FirstName" class="label--hidden">{{ 'customer.register.first_name' | t }}</label>
@@ -222,18 +208,8 @@
             </div>
             <button type="submit" class="btn-register">{{ 'customer.register.submit' | t }}</button>
             <div class="register-footer">
-              <span>{{ 'customer.register.already' | t }}</span> <a href="/account/login" id="register-login-link">{{ 'customer.register.login' | t }}</a>
+              <span>{{ 'customer.register.already' | t }}</span> <a href="/account/login">{{ 'customer.register.login' | t }}</a>
             </div>
-            <script>
-              (function() {
-                var params = new URLSearchParams(window.location.search);
-                var returnUrl = params.get('return_url');
-                if (returnUrl) {
-                  var link = document.getElementById('register-login-link');
-                  link.href = '/account/login?return_url=' + encodeURIComponent(returnUrl);
-                }
-              })();
-            </script>
             {%- endform -%}
           </div>
         </div>
