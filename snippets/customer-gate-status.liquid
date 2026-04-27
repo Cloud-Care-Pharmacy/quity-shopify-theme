@@ -37,8 +37,8 @@
         You need to be logged in to browse our products. Please log in or create an account to continue.
       </p>
       <div class="customer-gate__actions">
-        <a href="/account/login" class="btn-theme">Log In</a>
-        <a href="/account/register" class="btn-outline">Create Account</a>
+        <a href="/account/login?return_url={{ request.path | url_encode }}" class="btn-theme">Log In</a>
+        <a href="/account/register?return_url={{ request.path | url_encode }}" class="btn-outline">Create Account</a>
       </div>
     </div>
   </div>
