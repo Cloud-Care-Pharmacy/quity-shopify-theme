@@ -376,41 +376,6 @@ textarea.form-control::placeholder {
   }
 }
 
-/* DOB + Gender row */
-.patient-intake-form .dob-gender-row {
-  grid-template-columns: 1fr 1fr;
-}
-
-/* Medicare + IRN + Expiry row */
-.patient-intake-form .medicare-row {
-  grid-template-columns: 1fr auto auto;
-}
-
-.patient-intake-form .medicare-row .irn-field {
-  width: 90px;
-  min-width: 90px;
-}
-
-.patient-intake-form .medicare-row .expiry-field {
-  width: 140px;
-  min-width: 140px;
-}
-
-@media (max-width: 768px) {
-  .patient-intake-form .dob-gender-row {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-intake-form .medicare-row {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-intake-form .medicare-row .irn-field,
-  .patient-intake-form .medicare-row .expiry-field {
-    width: 100%;
-  }
-}
-
 .form-navigation {
   display: flex;
   justify-content: space-between;
@@ -549,6 +514,41 @@ textarea.form-control {
   
   .patient-intake-form .form-row .field.form-group:last-child {
     margin-bottom: 0;
+  }
+}
+
+/* DOB + Gender row */
+.patient-intake-form .form-row.dob-gender-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Medicare + IRN + Expiry row */
+.patient-intake-form .form-row.medicare-row {
+  grid-template-columns: 1fr auto auto;
+}
+
+.patient-intake-form .medicare-row .irn-field {
+  width: 90px;
+  min-width: 90px;
+}
+
+.patient-intake-form .medicare-row .expiry-field {
+  width: 140px;
+  min-width: 140px;
+}
+
+@media (max-width: 768px) {
+  .patient-intake-form .form-row.dob-gender-row {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-intake-form .form-row.medicare-row {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-intake-form .medicare-row .irn-field,
+  .patient-intake-form .medicare-row .expiry-field {
+    width: 100%;
   }
 }
 
