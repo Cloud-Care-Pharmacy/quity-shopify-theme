@@ -383,10 +383,6 @@ textarea.form-control::placeholder {
 
 /* Medicare + IRN + Expiry row */
 .patient-intake-form .medicare-row {
-  grid-template-columns: 1fr;
-}
-
-.patient-intake-form .medicare-row.irn-visible {
   grid-template-columns: 1fr auto auto;
 }
 
@@ -405,8 +401,7 @@ textarea.form-control::placeholder {
     grid-template-columns: 1fr;
   }
 
-  .patient-intake-form .medicare-row,
-  .patient-intake-form .medicare-row.irn-visible {
+  .patient-intake-form .medicare-row {
     grid-template-columns: 1fr;
   }
 

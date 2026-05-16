@@ -186,39 +186,6 @@ class PatientIntakeForm extends HTMLElement {
     // File upload handling
     this.bindFileUpload();
 
-    // Medicare IRN + Expiry conditional visibility
-    const medicareInput = this.form.querySelector('#medicareNumber');
-    const irnGroup = this.querySelector('#medicareIRNGroup');
-    const expiryGroup = this.querySelector('#medicareExpiryGroup');
-    const medicareRow = this.querySelector('.medicare-row');
-    if (medicareInput && irnGroup) {
-      const toggleMedicareFields = () => {
-        const hasValue = medicareInput.value.trim().length > 0;
-        irnGroup.style.display = hasValue ? '' : 'none';
-        if (expiryGroup) expiryGroup.style.display = hasValue ? '' : 'none';
-        if (medicareRow) medicareRow.classList.toggle('irn-visible', hasValue);
-        if (!hasValue) {
-          const irnInput = this.form.querySelector('#medicareIRN');
-          if (irnInput) {
-            irnInput.value = '';
-            irnInput.classList.remove('error');
-            const errMsg = irnGroup.querySelector('.error-message');
-            if (errMsg) errMsg.classList.remove('show');
-          }
-          const expiryInput = this.form.querySelector('#medicareExpiry');
-          if (expiryInput) {
-            expiryInput.value = '';
-            expiryInput.classList.remove('error');
-            const errMsg = expiryGroup?.querySelector('.error-message');
-            if (errMsg) errMsg.classList.remove('show');
-          }
-        }
-      };
-      medicareInput.addEventListener('input', toggleMedicareFields);
-      // Run on init in case value was restored from session
-      toggleMedicareFields();
-    }
-
     // Medicare Expiry: auto-format MM/YYYY
     const expiryInput = this.form.querySelector('#medicareExpiry');
     if (expiryInput) {
@@ -907,17 +874,6 @@ class PatientIntakeForm extends HTMLElement {
         if (otherGroup) otherGroup.style.display = '';
         if (otherTextarea) otherTextarea.setAttribute('required', '');
       }
-    }
-
-    // Restore Medicare IRN + Expiry visibility
-    const medicareVal = this.form.elements['medicareNumber']?.value;
-    if (medicareVal && medicareVal.trim().length > 0) {
-      const irnGroup = this.querySelector('#medicareIRNGroup');
-      const expiryGroup = this.querySelector('#medicareExpiryGroup');
-      const medicareRow = this.querySelector('.medicare-row');
-      if (irnGroup) irnGroup.style.display = '';
-      if (expiryGroup) expiryGroup.style.display = '';
-      if (medicareRow) medicareRow.classList.add('irn-visible');
     }
 
     // Restore "I don't know" checkbox states for vaping fields
