@@ -186,14 +186,16 @@ class PatientIntakeForm extends HTMLElement {
     // File upload handling
     this.bindFileUpload();
 
-    // Medicare IRN conditional visibility
+    // Medicare IRN + Expiry conditional visibility
     const medicareInput = this.form.querySelector('#medicareNumber');
     const irnGroup = this.querySelector('#medicareIRNGroup');
-    const medicareRow = this.querySelector('.gender-medicare-row');
+    const expiryGroup = this.querySelector('#medicareExpiryGroup');
+    const medicareRow = this.querySelector('.medicare-row');
     if (medicareInput && irnGroup) {
-      const toggleIRN = () => {
+      const toggleMedicareFields = () => {
         const hasValue = medicareInput.value.trim().length > 0;
         irnGroup.style.display = hasValue ? '' : 'none';
+        if (expiryGroup) expiryGroup.style.display = hasValue ? '' : 'none';
         if (medicareRow) medicareRow.classList.toggle('irn-visible', hasValue);
         if (!hasValue) {
           const irnInput = this.form.querySelector('#medicareIRN');
@@ -203,11 +205,30 @@ class PatientIntakeForm extends HTMLElement {
             const errMsg = irnGroup.querySelector('.error-message');
             if (errMsg) errMsg.classList.remove('show');
           }
+          const expiryInput = this.form.querySelector('#medicareExpiry');
+          if (expiryInput) {
+            expiryInput.value = '';
+            expiryInput.classList.remove('error');
+            const errMsg = expiryGroup?.querySelector('.error-message');
+            if (errMsg) errMsg.classList.remove('show');
+          }
         }
       };
-      medicareInput.addEventListener('input', toggleIRN);
+      medicareInput.addEventListener('input', toggleMedicareFields);
       // Run on init in case value was restored from session
-      toggleIRN();
+      toggleMedicareFields();
+    }
+
+    // Medicare Expiry: auto-format MM/YYYY
+    const expiryInput = this.form.querySelector('#medicareExpiry');
+    if (expiryInput) {
+      expiryInput.addEventListener('input', () => {
+        let val = expiryInput.value.replace(/[^0-9]/g, '');
+        if (val.length > 2) {
+          val = val.slice(0, 2) + '/' + val.slice(2, 6);
+        }
+        expiryInput.value = val;
+      });
     }
 
     // Medicare IRN: restrict to digits 1-9 only
@@ -415,20 +436,16 @@ class PatientIntakeForm extends HTMLElement {
       }
       
       // Special validation for date of birth
-      if (this.currentStep === 1 && (field.id === 'dobDay' || field.id === 'dobMonth' || field.id === 'dobYear')) {
-        const day = this.form.elements['dobDay'].value;
-        const month = this.form.elements['dobMonth'].value;
-        const year = this.form.elements['dobYear'].value;
-        
-        if (day && month && year) {
-          const age = this.calculateAge(year, month, day);
+      if (this.currentStep === 1 && field.id === 'dob') {
+        const dobValue = field.value;
+        if (dobValue) {
+          const parts = dobValue.split('-');
+          const age = this.calculateAge(parts[0], parts[1], parts[2]);
           console.log(`    🎂 Age calculated:`, age);
           if (age < 18) {
             console.log(`    ❌ Age validation failed: under 18`);
             fieldValid = false;
-            this.form.elements['dobDay'].classList.add('error');
-            this.form.elements['dobMonth'].classList.add('error');
-            this.form.elements['dobYear'].classList.add('error');
+            field.classList.add('error');
             const formGroup = field.closest('.field') || field.closest('.form-group');
             const errorMsg = formGroup?.querySelector('.error-message');
             if (errorMsg) errorMsg.classList.add('show');
@@ -466,6 +483,20 @@ class PatientIntakeForm extends HTMLElement {
           irnField.classList.add('error');
           const irnGroup = irnField.closest('.form-group');
           const errMsg = irnGroup?.querySelector('.error-message');
+          if (errMsg) errMsg.classList.add('show');
+        }
+      }
+    }
+
+    // Validate Medicare Expiry if provided (step 1 only)
+    if (this.currentStep === 1) {
+      const expiryField = this.form.querySelector('#medicareExpiry');
+      if (expiryField && expiryField.value.trim() !== '') {
+        if (!/^(0[1-9]|1[0-2])\/\d{4}$/.test(expiryField.value.trim())) {
+          isValid = false;
+          expiryField.classList.add('error');
+          const expiryGroup = expiryField.closest('.form-group');
+          const errMsg = expiryGroup?.querySelector('.error-message');
           if (errMsg) errMsg.classList.add('show');
         }
       }
@@ -657,9 +688,10 @@ class PatientIntakeForm extends HTMLElement {
       firstName: rawData.firstName || '',
       lastName: rawData.lastName || '',
       email: rawData.email || '',
-      dobDay: rawData.dobDay || '',
-      dobMonth: rawData.dobMonth || '',
-      dobYear: rawData.dobYear || '',
+      dob: rawData.dob || '',
+      dobDay: rawData.dob ? rawData.dob.split('-')[2] : '',
+      dobMonth: rawData.dob ? rawData.dob.split('-')[1] : '',
+      dobYear: rawData.dob ? rawData.dob.split('-')[0] : '',
       gender: rawData.gender || '',
       medicareNumber: rawData.medicareNumber || '',
       streetAddress: rawData.streetAddress || '',
@@ -698,6 +730,12 @@ class PatientIntakeForm extends HTMLElement {
     const irn = (rawData.medicareIRN || '').trim();
     if (/^[1-9]$/.test(irn)) {
       data.medicareIRN = irn;
+    }
+
+    // Only include medicareExpiry if it matches MM/YYYY format
+    const expiry = (rawData.medicareExpiry || '').trim();
+    if (/^(0[1-9]|1[0-2])\/\d{4}$/.test(expiry)) {
+      data.medicareExpiry = expiry;
     }
 
     return data;
@@ -871,12 +909,14 @@ class PatientIntakeForm extends HTMLElement {
       }
     }
 
-    // Restore Medicare IRN visibility
+    // Restore Medicare IRN + Expiry visibility
     const medicareVal = this.form.elements['medicareNumber']?.value;
     if (medicareVal && medicareVal.trim().length > 0) {
       const irnGroup = this.querySelector('#medicareIRNGroup');
-      const medicareRow = this.querySelector('.gender-medicare-row');
+      const expiryGroup = this.querySelector('#medicareExpiryGroup');
+      const medicareRow = this.querySelector('.medicare-row');
       if (irnGroup) irnGroup.style.display = '';
+      if (expiryGroup) expiryGroup.style.display = '';
       if (medicareRow) medicareRow.classList.add('irn-visible');
     }
 

@@ -114,44 +114,18 @@
 
               <div class="section-separator with-label"><span class="sep-label">Personal Details</span></div>
 
-              <div class="field form-group">
-                <label class="required">Date of birth</label>
-                <div class="dob-group">
-                  <select id="dobDay" name="dobDay" class="form-control" required>
-                    <option value="">Day</option>
-                    {% for i in (1..31) %}
-                      <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                  </select>
-                  <select id="dobMonth" name="dobMonth" class="form-control" required>
-                    <option value="">Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                  <select id="dobYear" name="dobYear" class="form-control" required>
-                    <option value="">Year</option>
-                    {% assign currentYear = 'now' | date: '%Y' | plus: 0 %}
-                    {% assign startYear = currentYear | minus: 100 %}
-                    {% assign endYear = currentYear | minus: 18 %}
-                    {% for i in (startYear..endYear) reversed %}
-                      <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                  </select>
+              <div class="form-row dob-gender-row">
+                <div class="field form-group">
+                  <label for="dob" class="required">Date of birth</label>
+                  {% assign current_year = 'now' | date: '%Y' | plus: 0 %}
+                  {% assign max_year = current_year | minus: 18 %}
+                  {% assign current_month = 'now' | date: '%m' %}
+                  {% assign current_day = 'now' | date: '%d' %}
+                  {% assign max_date = max_year | append: '-' | append: current_month | append: '-' | append: current_day %}
+                  <input type="date" id="dob" name="dob" class="field__input form-control" max="{{ max_date }}" required>
+                  <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
                 </div>
-                <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
-              </div>
 
-              <div class="form-row gender-medicare-row">
                 <div class="field form-group gender-field">
                   <label for="gender" class="required">Gender</label>
                   <select id="gender" name="gender" class="form-control" required>
@@ -164,7 +138,9 @@
                   </select>
                   <div class="error-message">Please select your gender</div>
                 </div>
+              </div>
 
+              <div class="form-row medicare-row">
                 <div class="field form-group">
                   <label for="medicareNumber">Medicare Card #</label>
                   <input type="text" id="medicareNumber" name="medicareNumber" class="field__input form-control" placeholder="e.g., 2123 45670 1">
@@ -174,6 +150,12 @@
                   <label for="medicareIRN">IRN</label>
                   <input type="text" id="medicareIRN" name="medicareIRN" class="field__input form-control irn-input" maxlength="1" inputmode="numeric" pattern="[1-9]" placeholder="1">
                   <div class="error-message">IRN must be a single digit (1–9)</div>
+                </div>
+
+                <div class="field form-group expiry-field" id="medicareExpiryGroup" style="display: none;">
+                  <label for="medicareExpiry">Expiry</label>
+                  <input type="text" id="medicareExpiry" name="medicareExpiry" class="field__input form-control" placeholder="MM/YYYY" maxlength="7">
+                  <div class="error-message">Please enter a valid expiry (MM/YYYY)</div>
                 </div>
               </div>
 
