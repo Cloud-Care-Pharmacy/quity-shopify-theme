@@ -1,83 +1,374 @@
-<div class="section-header text-center" style="background-color: #f9f9f9; padding: 50px 20px 40px;">
-  <div class="page-width">
-    <h1 class="section-title-1 mb-2" style="font-size: 48px; font-weight: 400;">{{ 'customer.login.title' | t }}</h1>
-    <div class="font-family-2 des-header txt-body-70 mb-0" style="font-size: 16px; color: rgba(0,0,0,0.5);">A valid prescription is required to browse and purchase products. Please log in or create an account to continue.</div>
-  </div>
-</div>
-<div class="page-width py-5">
-  <div class="grid">
+<!-- sections/main-login.liquid -->
+<style>
+  .qy-login-page {
+    min-height: 100vh;
+    background: #F4F2EC;
+    font-family: 'Jost', sans-serif;
+    color: #0F1110;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 24px;
+  }
+  .qy-login-page *,
+  .qy-login-page *::before,
+  .qy-login-page *::after { box-sizing: border-box; }
 
-    <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
-      <div class="content-block text-center">
+  /* These are stroke/line icons — opt out of the theme's global
+     `svg, .icon { fill: currentColor; width:16px; height:16px }` rule
+     (assets/theme.css) which otherwise renders them as solid shapes. */
+  .qy-login-page svg { fill: none; }
+  .qy-login-page .qy-secure svg { width: 14px; height: 14px; }
 
-        <div class="form-success hide" id="ResetSuccess">
-          {{ 'customer.recover_password.success' | t }}
+  /* The theme sets font-family on h1–h6 (var(--g-font-1)) and on
+     p/input/button (var(--g-font-2)) via element selectors in
+     assets/theme.css, which beat the Jost inherited from the container.
+     Re-assert Jost on those elements; the serif (em) and mono accents keep
+     their own, more-specific rules. Also clear the theme's heading
+     text-transform / size so the card heading renders per the design. */
+  .qy-login-page .qy-h1,
+  .qy-login-page .qy-label,
+  .qy-login-page .qy-secure,
+  .qy-login-page .qy-sub,
+  .qy-login-page .qy-meta-row,
+  .qy-login-page .qy-link { font-family: 'Jost', sans-serif; }
+
+  .qy-login-page .qy-wrap { width: 100%; max-width: 480px; }
+
+  /* Card */
+  .qy-login-page .qy-card {
+    background: #FFFFFF;
+    border: 1px solid #E3E0D7;
+    border-radius: 2px;
+    padding: 48px 48px 40px;
+    box-shadow: 0 24px 60px -42px rgba(15,17,16,0.25);
+  }
+
+  /* Header block */
+  .qy-login-page .qy-head { text-align: center; }
+  .qy-login-page .qy-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8A8F8C;
+    margin-bottom: 14px;
+  }
+  .qy-login-page .qy-h1 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 46px;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    text-transform: none;
+    color: #0F1110;
+  }
+  .qy-login-page .qy-h1 em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #E55B4F;
+  }
+
+  .qy-login-page .qy-divider { height: 1px; background: #EDEAE1; margin: 32px 0; }
+
+  /* Fields */
+  .qy-login-page .qy-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #1C1F1D;
+    margin-bottom: 8px;
+  }
+  .qy-login-page .qy-input {
+    width: 100%;
+    min-width: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    color: #0F1110;
+    background: #FAF8F2;
+    border: 1px solid #E3E0D7;
+    border-radius: 2px;
+    padding: 16px 17px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .qy-login-page .qy-input::placeholder { color: #8A8F8C; opacity: 1; }
+  .qy-login-page .qy-input:focus {
+    outline: none;
+    border-color: #E55B4F;
+    box-shadow: 0 0 0 3px rgba(229,91,79,0.12);
+  }
+  .qy-login-page .qy-input--error { border-color: #E55B4F; }
+
+  /* Password label row */
+  .qy-login-page .qy-pw-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 20px 0 8px;
+  }
+  .qy-login-page .qy-pw-row .qy-label { margin-bottom: 0; }
+
+  /* Inline links (forgot / register / back) */
+  .qy-login-page .qy-link {
+    color: #5B615E;
+    font-size: 13px;
+    font-weight: 400;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color .15s ease;
+  }
+  .qy-login-page .qy-link:hover { border-bottom-color: #E55B4F; }
+
+  /* Submit */
+  .qy-login-page .qy-submit {
+    width: 100%;
+    margin-top: 26px;
+    padding: 18px;
+    background: #E55B4F;
+    color: #FFFFFF;
+    border: 1px solid #E55B4F;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .qy-login-page .qy-submit:hover { background: #B83F36; border-color: #B83F36; }
+
+  /* Secure line */
+  .qy-login-page .qy-secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px 0 0;
+    font-size: 13px;
+    color: #8A8F8C;
+    font-weight: 300;
+  }
+
+  /* Meta rows below the card (register / back to login) */
+  .qy-login-page .qy-meta-row {
+    text-align: center;
+    font-size: 15px;
+    color: #5B615E;
+    font-weight: 300;
+    margin: 24px 0 0;
+  }
+  .qy-login-page .qy-meta-row .qy-strong {
+    color: #0F1110;
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .qy-login-page .qy-meta-row .qy-strong:hover { border-bottom-color: #E55B4F; }
+
+  /* Recover sub-text */
+  .qy-login-page .qy-sub {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5B615E;
+    font-weight: 300;
+    margin: 14px 0 0;
+  }
+
+  /* Success banner (recover email sent) */
+  .qy-login-page .qy-success {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    border: 1px solid #C8D8C2;
+    border-radius: 2px;
+    background: #EFF5EC;
+    color: #2E5A33;
+    font-size: 13.5px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  /* Inline form errors (Shopify default_errors) */
+  .qy-login-page .errors,
+  .qy-login-page .form-message {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 13px 16px;
+    border: 1px solid #E55B4F;
+    border-radius: 2px;
+    background: #FBE9E6;
+    color: #B83F36;
+    font-size: 13.5px;
+    font-weight: 400;
+  }
+  .qy-login-page .errors li { margin: 0; }
+  .qy-login-page .errors li + li { margin-top: 4px; }
+
+  /* Guest login (only when the store enables it) */
+  .qy-login-page .qy-guest {
+    margin-top: 16px;
+    text-align: center;
+  }
+  .qy-login-page .qy-guest-btn {
+    width: 100%;
+    padding: 16px 18px;
+    background: transparent;
+    color: #0F1110;
+    border: 1px solid #E3E0D7;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .qy-login-page .qy-guest-btn:hover { background: #0F1110; color: #F4F2EC; }
+
+  /* Visually hidden (accessible labels) */
+  .qy-login-page .qy-vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .qy-login-page { padding: 40px 18px; }
+    .qy-login-page .qy-card { padding: 34px 26px 30px; }
+    .qy-login-page .qy-h1 { font-size: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qy-login-page .qy-input,
+    .qy-login-page .qy-submit,
+    .qy-login-page .qy-link,
+    .qy-login-page .qy-strong,
+    .qy-login-page .qy-guest-btn { transition: none; }
+  }
+</style>
+
+<section class="qy-login-page">
+  <div class="qy-wrap">
+
+    <!-- LOGIN VIEW -->
+    <div id="CustomerLoginForm">
+
+      <div class="form-success qy-success hide" id="ResetSuccess">
+        {{ 'customer.recover_password.success' | t }}
+      </div>
+
+      <div class="qy-card">
+        <div class="qy-head">
+          <div class="qy-kicker">Account login</div>
+          <h1 class="qy-h1">Log <em>in</em></h1>
         </div>
 
-        <div id="CustomerLoginForm" class="form-vertical">
-          {%- form 'customer_login' -%}
+        <div class="qy-divider"></div>
 
-          <p class="mb-5">{{ 'layout.customer.sub_login' | t }} </p>
+        {%- form 'customer_login' -%}
           {{ form.errors | default_errors }}
-          <div class="form-group">
-            <input  class="form-control" type="email" name="customer[email]" id="CustomerEmail" class="{% if form.errors contains 'email' %} input--error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off">
-            <label for="CustomerEmail" class="label--hidden">{{ 'customer.login.email' | t }}</label>
+
+          <div class="qy-field">
+            <label for="CustomerEmail" class="qy-label">Email</label>
+            <input
+              class="qy-input{% if form.errors contains 'email' %} qy-input--error{% endif %}"
+              type="email"
+              name="customer[email]"
+              id="CustomerEmail"
+              placeholder="you@email.com"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off">
           </div>
+
           {%- if form.password_needed -%}
-          <div class="form-group">
-            <input class="form-control" type="password" value="" name="customer[password]" id="CustomerPassword" class="{% if form.errors contains 'password' %} input--error{% endif %}" placeholder="{{ 'customer.login.password' | t }}">
-            <label for="CustomerPassword" class="label--hidden">{{ 'customer.login.password' | t }}</label>
+          <div class="qy-field">
+            <div class="qy-pw-row">
+              <label for="CustomerPassword" class="qy-label">Password</label>
+              <a href="#recover" id="RecoverPassword" class="qy-link">Forgot your password?</a>
+            </div>
+            <input
+              class="qy-input{% if form.errors contains 'password' %} qy-input--error{% endif %}"
+              type="password"
+              name="customer[password]"
+              id="CustomerPassword"
+              placeholder="Enter your password"
+              autocomplete="current-password">
           </div>
           {%- endif -%}
-          {% if form.password_needed %}
-          <p class="text-right mb-3 small"><a href="#recover" id="RecoverPassword" class="disabled-anchor">{{ 'customer.login.forgot_password' | t }}</a></p>
-          {% endif %}
-          <p>
-            <button type="submit" class="btn btn-theme gradient-theme w-100">{{ 'customer.login.sign_in' | t }}</button>
+
+          <button type="submit" class="qy-submit">Login</button>
+
+          <p class="qy-secure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+            Secure &amp; encrypted sign in
           </p>
-          <p class="pt-2"><span class="d-inline-block pr-2">{{ 'layout.customer.question_account' | t }} </span>{{ 'layout.customer.create_account' | t | customer_register_link }}</p>
-
-          {%- endform -%}
-        </div>
-
-        <div id="RecoverPasswordForm" class="hide">
-
-          <h2 class="h3">{{ 'customer.recover_password.title' | t }}</h2>
-          <p class="mb-3">{{ 'customer.recover_password.subtext' | t }}</p>
-
-          <div class="form-vertical">
-            {%- form 'recover_customer_password' -%}
-
-            {{ form.errors | default_errors }}
-
-            {%- if form.posted_successfully? -%}
-            <span class="hide reset-password-success"></span>
-            {%- endif -%}
-            <div class="form-group">
-              
-              <input class="form-control" type="email" value="" name="email" id="RecoverEmail" placeholder="{{ 'customer.recover_password.email' | t }}" autocorrect="off" autocapitalize="off">
-              <label for="RecoverEmail" class="label--hidden">{{ 'customer.recover_password.email' | t }}</label>
-            </div>
-            <p>
-              <input type="submit" class="btn btn-theme gradient-theme mt-4" value="{{ 'customer.recover_password.submit' | t }}">
-            </p>
-
-            <button type="button" id="HideRecoverPasswordLink" class="text-link link-accent-color">{{ 'customer.recover_password.cancel' | t }}</button>
-            {%- endform -%}
-          </div>
-
-        </div>
-
+        {%- endform -%}
       </div>
+
+      <p class="qy-meta-row">New customer? <a href="/account/register" class="qy-link qy-strong">Register</a></p>
+
       {%- if shop.checkout.guest_login -%}
-      <div class="content-block text-center">
-        <h2 class="h1">{{ 'customer.login.guest_title' | t }}</h2>
+      <div class="qy-guest">
         {%- form 'guest_login' -%}
-        <input type="submit" class="btn" value="{{ 'customer.login.guest_continue' | t }}">
+          <button type="submit" class="qy-guest-btn">{{ 'customer.login.guest_continue' | t }}</button>
         {%- endform -%}
       </div>
       {%- endif -%}
     </div>
 
+    <!-- RECOVER PASSWORD VIEW -->
+    <div id="RecoverPasswordForm" class="hide">
+      <div class="qy-card">
+        <div class="qy-head">
+          <div class="qy-kicker">Password reset</div>
+          <h1 class="qy-h1">Reset <em>password</em></h1>
+          <p class="qy-sub">{{ 'customer.recover_password.subtext' | t }}</p>
+        </div>
+
+        <div class="qy-divider"></div>
+
+        {%- form 'recover_customer_password' -%}
+          {{ form.errors | default_errors }}
+
+          {%- if form.posted_successfully? -%}
+          <span class="hide reset-password-success"></span>
+          {%- endif -%}
+
+          <div class="qy-field">
+            <label for="RecoverEmail" class="qy-label">Email</label>
+            <input
+              class="qy-input"
+              type="email"
+              value=""
+              name="email"
+              id="RecoverEmail"
+              placeholder="you@email.com"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off">
+          </div>
+
+          <button type="submit" class="qy-submit">{{ 'customer.recover_password.submit' | t }}</button>
+        {%- endform -%}
+      </div>
+
+      <p class="qy-meta-row">Remembered your password? <button type="button" id="HideRecoverPasswordLink" class="qy-link qy-strong">Back to login</button></p>
+    </div>
+
   </div>
-</div>
+</section>
