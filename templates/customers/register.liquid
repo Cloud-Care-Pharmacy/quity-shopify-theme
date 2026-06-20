@@ -12,6 +12,29 @@
   .qy-getstarted *::before,
   .qy-getstarted *::after { box-sizing: border-box; }
 
+  /* These are stroke/line icons — opt out of the theme's global
+     `svg, .icon { fill: currentColor; width:16px; height:16px }` rule
+     (assets/theme.css) which otherwise renders them as solid shapes. */
+  .qy-getstarted svg { fill: none; }
+  .qy-getstarted .qy-promise-icon svg { width: 21px; height: 21px; }
+  .qy-getstarted .qy-trust-item svg { width: 16px; height: 16px; }
+  .qy-getstarted .qy-secure svg { width: 14px; height: 14px; }
+
+  /* The theme sets font-family on h1–h6 (var(--g-font-1)) and on
+     p/input/button (var(--g-font-2)) via element selectors in
+     assets/theme.css, which beat the Jost inherited from the container.
+     Re-assert Jost on those elements; the serif (em) and mono accents keep
+     their own, more-specific rules. Also clear the theme's heading
+     text-transform so the headline/card heading stay sentence case. */
+  .qy-getstarted .qy-h1,
+  .qy-getstarted .qy-card-h,
+  .qy-getstarted .qy-lead,
+  .qy-getstarted .qy-secure,
+  .qy-getstarted .qy-login-row,
+  .qy-getstarted .qy-login { font-family: 'Jost', sans-serif; }
+  .qy-getstarted .qy-h1,
+  .qy-getstarted .qy-card-h { text-transform: none; }
+
   .qy-getstarted .qy-grid {
     flex: 1;
     display: grid;
