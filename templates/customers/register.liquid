@@ -1,219 +1,374 @@
 <!-- customers/register.liquid -->
 <style>
-  .register-hero {
-    background-color: {{ settings.color_body_bg | default: '#ffffff' }};
-    min-height: 600px;
-    position: relative;
+  .qy-getstarted {
+    min-height: 100vh;
+    background: #F4F2EC;
+    font-family: 'Jost', sans-serif;
+    color: #0F1110;
+    display: flex;
+    flex-direction: column;
+  }
+  .qy-getstarted *,
+  .qy-getstarted *::before,
+  .qy-getstarted *::after { box-sizing: border-box; }
+
+  .qy-getstarted .qy-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 72px;
+    align-items: center;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 48px 56px 88px;
+  }
+  .qy-getstarted .qy-left,
+  .qy-getstarted .qy-card { min-width: 0; }
+
+  /* Left — value proposition */
+  .qy-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: #E55B4F;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 26px;
+  }
+  .qy-eyebrow .qy-bar { width: 28px; height: 2px; background: #E55B4F; }
+
+  .qy-getstarted .qy-h1 {
+    margin: 0;
+    font-weight: 300;
+    font-size: clamp(46px, 5.4vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: #0F1110;
+  }
+  .qy-getstarted .qy-h1 em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #E55B4F;
+  }
+
+  .qy-lead {
+    max-width: 460px;
+    font-size: 21px;
+    line-height: 1.5;
+    color: #1C1F1D;
+    font-weight: 300;
+    margin: 24px 0 0;
+  }
+
+  .qy-promise {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    max-width: 500px;
+    border-top: 1px solid #E3E0D7;
+  }
+  .qy-promise-row {
     display: flex;
     align-items: center;
+    gap: 20px;
+    padding: 22px 4px;
+    border-bottom: 1px solid #E3E0D7;
   }
-  .register-hero-inner {
+  .qy-promise-idx {
+    flex: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #8A8F8C;
+  }
+  .qy-promise-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #E3E0D7;
+    background: #FAF8F2;
+    display: grid;
+    place-items: center;
+    color: #E55B4F;
+  }
+  .qy-promise-title {
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: #0F1110;
+  }
+  .qy-promise-sub {
+    font-size: 14.5px;
+    color: #5B615E;
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .qy-trust {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    padding: 60px 0;
+    gap: 24px;
+    margin-top: 30px;
   }
-  .register-left {
-    flex: 1;
-    min-width: 300px;
-    padding-right: 60px;
-    color: {{ settings.color_body_headings | default: '#222222' }};
-  }
-  .register-left h1 {
-    font-size: 42px;
-    font-weight: 400;
-    margin-bottom: 14px;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-    font-family: var(--g-heading-font-family, inherit);
-    color: {{ settings.color_body_headings | default: '#222222' }};
-  }
-  .register-left .register-subtitle {
-    font-size: 16px;
-    color: {{ settings.color_body_text | default: '#414141' }};
-    margin-bottom: 36px;
-    line-height: 1.7;
-    font-family: var(--g-body-font-family, inherit);
-    opacity: 0.7;
-  }
-  .register-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .register-benefits li {
+  .qy-trust-item {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 0;
-    font-size: 15px;
-    color: {{ settings.color_body_text | default: '#414141' }};
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    font-family: var(--g-body-font-family, inherit);
+    gap: 9px;
+    font-size: 14px;
+    color: #5B615E;
+    font-weight: 300;
   }
-  .register-benefits li:last-child {
-    border-bottom: none;
+
+  /* Right — form card */
+  .qy-getstarted .qy-card {
+    background: #FFFFFF;
+    border: 1px solid #E3E0D7;
+    border-radius: 2px;
+    padding: 42px 42px 36px;
   }
-  .register-benefits .benefit-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #f5f5f5;
+  .qy-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8A8F8C;
+    margin-bottom: 14px;
+  }
+  .qy-getstarted .qy-card-h {
+    margin: 0;
+    font-weight: 300;
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: #0F1110;
+  }
+  .qy-getstarted .qy-card-h em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #E55B4F;
+  }
+
+  .qy-names {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 28px;
+  }
+  .qy-field { min-width: 0; }
+  .qy-field--mt { margin-top: 13px; }
+
+  .qy-getstarted .qy-input {
+    width: 100%;
+    min-width: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    color: #0F1110;
+    background: #FAF8F2;
+    border: 1px solid #E3E0D7;
+    border-radius: 2px;
+    padding: 16px 17px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .qy-getstarted .qy-input::placeholder { color: #8A8F8C; opacity: 1; }
+  .qy-getstarted .qy-input:focus {
+    outline: none;
+    border-color: #E55B4F;
+    box-shadow: 0 0 0 3px rgba(229,91,79,0.12);
+  }
+
+  .qy-getstarted .qy-submit {
+    width: 100%;
+    margin-top: 22px;
+    padding: 18px;
+    background: #E55B4F;
+    color: #FFFFFF;
+    border: 1px solid #E55B4F;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .qy-getstarted .qy-submit:hover { background: #B83F36; border-color: #B83F36; }
+
+  .qy-secure {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    gap: 8px;
+    margin: 16px 0 0;
+    font-size: 13px;
+    color: #8A8F8C;
+    font-weight: 300;
   }
-  .register-benefits .benefit-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: {{ settings.color_body_headings | default: '#222222' }};
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .register-right {
-    flex: 1;
-    min-width: 340px;
-    max-width: 480px;
-  }
-  .register-card {
-    background: #f9f9f9;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 16px;
-    padding: 40px 36px;
-  }
-  .register-card .form-group {
-    margin-bottom: 16px;
-  }
-  .register-card .form-control {
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 10px;
-    color: {{ settings.color_body_headings | default: '#222222' }};
-    padding: 14px 18px;
-    font-size: 15px;
-    font-family: var(--g-body-font-family, inherit);
-    transition: all 0.2s ease;
-  }
-  .register-card .form-control::placeholder {
-    color: rgba(0,0,0,0.35);
-  }
-  .register-card .form-control:focus {
-    border-color: {{ settings.color_body_headings | default: '#222222' }};
-    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
-    outline: none;
-  }
-  .register-card .btn-register {
-    width: 100%;
-    padding: 14px;
-    background: {{ settings.color_body_headings | default: '#222222' }};
-    color: {{ settings.color_body_bg | default: '#ffffff' }};
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: var(--g-body-font-family, inherit);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .register-card .btn-register:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  }
-  .register-card .register-footer {
+
+  .qy-divider { height: 1px; background: #EDEAE1; margin: 24px 0 18px; }
+
+  .qy-login-row {
     text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: {{ settings.color_body_text | default: '#414141' }};
-    font-family: var(--g-body-font-family, inherit);
-    opacity: 0.6;
+    font-size: 15px;
+    color: #5B615E;
+    font-weight: 300;
+    margin: 0;
   }
-  .register-card .register-footer a {
-    color: {{ settings.color_body_headings | default: '#222222' }};
-    text-decoration: underline;
+  .qy-getstarted .qy-login {
+    color: #0F1110;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .15s ease;
   }
-  .register-card .register-footer a:hover {
-    opacity: 0.7;
+  .qy-getstarted .qy-login:hover { border-color: #E55B4F; }
+
+  /* Inline form errors (Shopify default_errors) */
+  .qy-getstarted .errors,
+  .qy-getstarted .form-message {
+    list-style: none;
+    margin: 22px 0 0;
+    padding: 13px 16px;
+    border: 1px solid #E55B4F;
+    border-radius: 2px;
+    background: #FBE9E6;
+    color: #B83F36;
+    font-size: 13.5px;
+    font-weight: 400;
   }
-  @media (max-width: 768px) {
-    .register-hero { min-height: auto; }
-    .register-hero-inner { padding: 40px 0; }
-    .register-left { padding-right: 0; margin-bottom: 40px; }
-    .register-left h1 { font-size: 32px; }
-    .register-right { max-width: 100%; }
-    .register-card { padding: 30px 24px; }
+  .qy-getstarted .errors li { margin: 0; }
+  .qy-getstarted .errors li + li { margin-top: 4px; }
+
+  /* Visually hidden (accessible labels) */
+  .qy-getstarted .qy-vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .qy-getstarted .qy-grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+      padding: 40px 24px 64px;
+    }
+    .qy-promise,
+    .qy-lead { max-width: none; }
+  }
+  @media (max-width: 480px) {
+    .qy-getstarted .qy-card { padding: 32px 24px 28px; }
+    .qy-names { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qy-getstarted .qy-input,
+    .qy-getstarted .qy-submit,
+    .qy-getstarted .qy-login { transition: none; }
   }
 </style>
 
-<section class="register-hero">
-  <div class="page-width">
-    <div class="register-hero-inner">
-      <div class="register-left">
-        <h1>Get Started<br>With Us</h1>
-        <p class="register-subtitle">Create your account to access our full range of pharmacy services. A valid prescription is needed to browse and purchase products.</p>
-        <ul class="register-benefits">
-          <li>
-            <span class="benefit-icon">
-              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-            </span>
-            Verified Prescription Management
-          </li>
-          <li>
-            <span class="benefit-icon">
-              <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>
-            </span>
-            Fast &amp; Convenient Ordering
-          </li>
-          <li>
-            <span class="benefit-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </span>
-            Your Privacy, Fully Protected
-          </li>
-          <li>
-            <span class="benefit-icon">
-              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </span>
-            Dedicated Care Team
-          </li>
-        </ul>
-      </div>
-      <div class="register-right">
-        <div class="register-card">
-          <div class="form-vertical">
-            {%- form 'create_customer' -%}
-            {{ form.errors | default_errors }}
-            <div class="form-group">
-              <input class="form-control" type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
-              <label for="FirstName" class="label--hidden">{{ 'customer.register.first_name' | t }}</label>
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
-              <label for="LastName" class="label--hidden">{{ 'customer.register.last_name' | t }}</label>
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="email" name="customer[email]" id="Email" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
-              <label for="Email" class="label--hidden">{{ 'customer.register.email' | t }}</label>
-            </div>
-            <div class="form-group">
-              <input class="form-control" type="password" name="customer[password]" id="CreatePassword" placeholder="{{ 'customer.register.password' | t }}">
-              <label for="CreatePassword" class="label--hidden">{{ 'customer.register.password' | t }}</label>
-            </div>
-            <button type="submit" class="btn-register">{{ 'customer.register.submit' | t }}</button>
-            <div class="register-footer">
-              <span>{{ 'customer.register.already' | t }}</span> <a href="/account/login">{{ 'customer.register.login' | t }}</a>
-            </div>
-            {%- endform -%}
+<section class="qy-getstarted">
+  <main class="qy-grid">
+
+    <!-- LEFT: value proposition -->
+    <section class="qy-left">
+      <div class="qy-eyebrow"><span class="qy-bar"></span>12-Month Prescription</div>
+
+      <h1 class="qy-h1">Apply for your<br>12 Month <em>Prescription</em></h1>
+
+      <p class="qy-lead">Create your account and apply for a prescription. No upfront cost. You only pay if you&rsquo;re approved.</p>
+
+      <div class="qy-promise">
+        <div class="qy-promise-row">
+          <span class="qy-promise-idx">01</span>
+          <span class="qy-promise-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5l3 1.8"></path></svg>
+          </span>
+          <div>
+            <div class="qy-promise-title">Doctor reviewed within 24 hours</div>
+            <div class="qy-promise-sub">A registered prescriber assesses your application.</div>
+          </div>
+        </div>
+        <div class="qy-promise-row">
+          <span class="qy-promise-idx">02</span>
+          <span class="qy-promise-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7z"></path><circle cx="7" cy="17" r="1.7"></circle><circle cx="17" cy="17" r="1.7"></circle></svg>
+          </span>
+          <div>
+            <div class="qy-promise-title">Free express shipping on first order</div>
+            <div class="qy-promise-sub">If approved, delivered fast and straight to your door.</div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+      <div class="qy-trust">
+        <div class="qy-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg>
+          Privacy fully protected
+        </div>
+        <div class="qy-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2.2 2.2 4.8-5"></path></svg>
+          Verified prescriptions
+        </div>
+        <div class="qy-trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19a5.5 5.5 0 0 1 11 0"></path><circle cx="17" cy="10" r="2.4"></circle><path d="M16 19a4.5 4.5 0 0 1 5-3.8"></path></svg>
+          Dedicated care team
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: account creation form -->
+    <section class="qy-card">
+      <div class="qy-kicker">Start your application</div>
+      <h2 class="qy-card-h">Create your <em>account</em></h2>
+
+      {%- form 'create_customer' -%}
+        <input type="hidden" name="return_to" value="/pages/questionnaire">
+        {{ form.errors | default_errors }}
+
+        <div class="qy-names">
+          <div class="qy-field">
+            <label for="FirstName" class="qy-vh">First name</label>
+            <input class="qy-input" type="text" name="customer[first_name]" id="FirstName" placeholder="First name" autocomplete="given-name" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+          </div>
+          <div class="qy-field">
+            <label for="LastName" class="qy-vh">Last name</label>
+            <input class="qy-input" type="text" name="customer[last_name]" id="LastName" placeholder="Last name" autocomplete="family-name" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+          </div>
+        </div>
+
+        <div class="qy-field qy-field--mt">
+          <label for="Email" class="qy-vh">Email address</label>
+          <input class="qy-input" type="email" name="customer[email]" id="Email" placeholder="Email address" autocomplete="email" autocorrect="off" autocapitalize="off" {% if form.email %}value="{{ form.email }}"{% endif %}>
+        </div>
+
+        <div class="qy-field qy-field--mt">
+          <label for="CreatePassword" class="qy-vh">Password</label>
+          <input class="qy-input" type="password" name="customer[password]" id="CreatePassword" placeholder="Password" autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="qy-submit">Create Account &amp; Apply</button>
+
+        <p class="qy-secure">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+          Secure &amp; encrypted. We never share your details.
+        </p>
+      {%- endform -%}
+
+      <div class="qy-divider"></div>
+      <p class="qy-login-row">Already a member? <a href="/account/login" class="qy-login">Login</a></p>
+    </section>
+
+  </main>
 </section>
