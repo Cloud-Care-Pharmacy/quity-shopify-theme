@@ -1,0 +1,319 @@
+/* ============================================================
+   Quity — Customer Verification States (Design Export)
+   ------------------------------------------------------------
+   Standalone, framework-free mirror of the live theme gate UI,
+   provided for redesign work outside of Shopify/Liquid.
+
+   Source of truth in the theme:
+     - snippets/customer-gate-status.liquid   (markup + status logic)
+     - assets/customer-gate-status.css        (gate styles)
+     - assets/theme.css                        (.btn-theme / .btn-outline)
+
+   The design tokens below are RESOLVED to the theme's currently
+   active values (see .ai/design.md). They intentionally keep their
+   original --g-* names so edits here port back to the theme with
+   minimal friction.
+   ============================================================ */
+
+/* --- Resolved theme design tokens --------------------------- */
+:root {
+  --g-main: #222222;              /* color_primary */
+  --g-main-2: #e35353;            /* color_secondary (accent) */
+  --g-color-heading: #222222;     /* color_body_headings */
+  --g-color-heading-rgb: 34, 34, 34;
+  --color-body-text: #414141;     /* color_body_text */
+  --color-content: #ffffff;       /* color_content_bg */
+  --color-body: #ffffff;          /* color_body_bg */
+  --g-hgutter: 15px;              /* half gutter */
+
+  /* Typography — Futura/Poppins in production. Jost is loaded as a
+     free, geometric stand-in for Futura so the preview stays close. */
+  --g-font-1: 'Jost', 'Futura', 'Century Gothic', 'Trebuchet MS', sans-serif;
+  --g-font-2: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --g-font-size: 15px;
+  --g-font-weight-body: 400;
+  --g-body-lineheight: 1.6;
+
+  /* Buttons */
+  --g-cta-button: transparent;
+  --g-cta-text: #000000;
+  --g-font-family_btn: var(--g-font-2);
+  --g-text-transform-btn: uppercase;
+  --g-font-weight-btn: 600;
+  --g-font-size-btn: 12px;
+  --g-font-spacing-btn: 0.1em;
+  --g-font-radius-btn: 40px;
+  --g-padding-ver-btn: 17px;
+  --g-padding-hoz-btn: 34px;
+}
+
+/* --- Minimal reset / page defaults -------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--g-font-2);
+  font-size: var(--g-font-size);
+  font-weight: var(--g-font-weight-body);
+  line-height: var(--g-body-lineheight);
+  color: var(--color-body-text);
+  background: var(--color-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ============================================================
+   Customer Gate — Shared layout
+   (mirror of assets/customer-gate-status.css)
+   ============================================================ */
+.customer-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* full-bleed for the standalone export (theme uses 65vh inside the page) */
+  padding: 60px var(--g-hgutter, 15px);
+  text-align: center;
+}
+
+.customer-gate__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* --- Heading --- */
+.customer-gate__heading {
+  font-family: var(--g-font-1);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.4;
+  margin: 0 0 15px;
+}
+
+.customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
+  margin-left: 6px;
+}
+
+/* --- Message text --- */
+.customer-gate__message {
+  font-family: var(--g-font-2);
+  font-size: var(--g-font-size, 15px);
+  font-weight: var(--g-font-weight-body, 400);
+  line-height: var(--g-body-lineheight, 1.6);
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+/* --- Icon (login / pending states) --- */
+.customer-gate__icon {
+  margin-bottom: 20px;
+}
+
+.customer-gate__icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* --- Actions --- */
+.customer-gate__actions {
+  display: flex;
+  gap: var(--g-hgutter, 15px);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   Access Denied (Declined / Expired) — dark variant
+   ============================================================ */
+.customer-gate--denied {
+  background-color: var(--g-main, #222222);
+  color: var(--color-content, #ffffff);
+}
+
+.customer-gate--denied .customer-gate__heading {
+  color: var(--color-content, #ffffff);
+}
+
+.customer-gate--denied .customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
+}
+
+.customer-gate--denied .customer-gate__message {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Denied buttons — .btn-outline-white pattern */
+.customer-gate--denied .btn-outline {
+  border-color: var(--color-content, #ffffff);
+  color: var(--color-content, #ffffff);
+}
+
+/* ============================================================
+   Account Required (Not logged in) — light variant
+   ============================================================ */
+.customer-gate--login {
+  background-color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.05);
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--login .customer-gate__heading {
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--login .customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
+}
+
+.customer-gate--login .customer-gate__icon {
+  color: var(--g-main, #222222);
+}
+
+.customer-gate--login .customer-gate__message {
+  color: var(--color-body-text, #414141);
+}
+
+/* ============================================================
+   Verification In Progress (Pending / blank) — light variant
+   ============================================================ */
+.customer-gate--pending {
+  background-color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.05);
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--pending .customer-gate__heading {
+  color: var(--g-color-heading, #222222);
+}
+
+.customer-gate--pending .customer-gate__heading-accent {
+  color: var(--g-main-2, #e35353);
+}
+
+.customer-gate--pending .customer-gate__icon {
+  color: var(--g-main, #222222);
+}
+
+.customer-gate--pending .customer-gate__message {
+  color: var(--color-body-text, #414141);
+}
+
+/* ============================================================
+   Buttons — mirror of .btn-theme / .btn-outline (assets/theme.css)
+   Includes the sliding ::before fill on hover.
+   ============================================================ */
+.btn-theme,
+.btn-outline {
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: var(--g-font-family_btn);
+  font-size: var(--g-font-size-btn);
+  font-weight: var(--g-font-weight-btn);
+  letter-spacing: var(--g-font-spacing-btn);
+  text-transform: var(--g-text-transform-btn);
+  border-radius: var(--g-font-radius-btn);
+  border: 1px solid var(--g-cta-text);
+  color: var(--g-cta-text);
+  transition: 0.4s;
+}
+
+.btn-theme {
+  padding: var(--g-padding-ver-btn) var(--g-padding-hoz-btn); /* 17px 34px */
+  background-color: var(--g-cta-button);                       /* transparent */
+  line-height: 1;
+}
+
+.btn-outline {
+  padding: calc(var(--g-padding-ver-btn) - 4px) var(--g-padding-hoz-btn);
+  background-color: transparent;
+  line-height: 18px;
+}
+
+.btn-outline.btn-outline-white {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Sliding fill on hover (theme ::before animation) */
+.btn-theme::before,
+.btn-outline::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 120%;
+  height: 110%;
+  background: var(--g-main-2);
+  transform: rotate3d(0, 0, 1, 4deg) translate3d(-1em, 108%, 0);
+  transform-origin: 0% 100%;
+  will-change: transform;
+  z-index: -1;
+  transition: transform 0.2s cubic-bezier(.17, .67, .83, .67);
+}
+
+.btn-theme:hover,
+.btn-outline:hover {
+  border-color: var(--g-main-2);
+  color: #fff;
+}
+
+.btn-theme:hover::before,
+.btn-outline:hover::before {
+  transform: rotate3d(0, 0, 1, 0) translateZ(0);
+}
+
+/* ============================================================
+   Responsive (mirror of theme breakpoints)
+   ============================================================ */
+@media screen and (max-width: 1199px) {
+  .customer-gate__heading {
+    font-size: calc(46px * 0.8);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .customer-gate__heading {
+    font-size: calc(46px * 0.7);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .customer-gate {
+    padding: 40px var(--g-hgutter, 15px);
+  }
+
+  .customer-gate__heading {
+    font-size: calc(46px * 0.6);
+  }
+
+  .customer-gate__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .customer-gate__actions .btn-theme,
+  .customer-gate__actions .btn-outline {
+    width: 100%;
+    max-width: 240px;
+  }
+}

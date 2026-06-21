@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Approved — Verification | Quity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Placeholder-only styling for the pass-through state. Not part of
+       the theme — in production an Approved customer simply sees the
+       normal page content (no gate is rendered). */
+    .approved-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 60px var(--g-hgutter, 15px);
+      text-align: center;
+      background: var(--g-alert-bg, #d5f9da);
+      color: var(--g-color-heading, #222);
+    }
+    .approved-note__inner { max-width: 720px; }
+    .approved-note__icon { color: #2e7d4f; margin-bottom: 20px; }
+    .approved-note__icon svg { width: 48px; height: 48px; }
+    .approved-note__heading {
+      font-family: var(--g-font-1);
+      font-weight: 400;
+      font-size: 46px;
+      line-height: 1.4;
+      margin: 0 0 15px;
+    }
+    .approved-note__heading span { color: #2e7d4f; margin-left: 6px; }
+    .approved-note__message { font-family: var(--g-font-2); margin: 0 0 12px; }
+    .approved-note__hint { font-size: 13px; opacity: 0.7; margin: 0; }
+    @media screen and (max-width: 749px) {
+      .approved-note__heading { font-size: calc(46px * 0.6); }
+    }
+  </style>
+</head>
+<body>
+  <!-- State: Approved — no gate in production; page content renders normally.
+       This placeholder exists only to complete the set in the gallery. -->
+  <div class="approved-note">
+    <div class="approved-note__inner">
+      <div class="approved-note__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <h1 class="approved-note__heading">Account <span>Verified</span></h1>
+      <p class="approved-note__message">
+        Approved customers don't see a gate &mdash; the normal page content renders in its place.
+      </p>
+      <p class="approved-note__hint">
+        Placeholder only. No markup is output by <code>customer-gate-status.liquid</code> for the <code>Approved</code> status.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
