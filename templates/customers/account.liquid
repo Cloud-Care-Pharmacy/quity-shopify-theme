@@ -1,280 +1,265 @@
 {{ 'account-dashboard.css' | asset_url | stylesheet_tag }}
 
-<div class="account-dashboard">
-  <div class="page-width">
-    <div class="account-dashboard-layout">
+{%- liquid
+  assign status = customer.metafields.customer.status | strip
+  assign has_active_script = false
+  if status == 'Approved'
+    assign has_active_script = true
+  endif
 
-      <!-- ===== SIDEBAR ===== -->
-      <aside class="account-sidebar">
-        <ul class="account-sidebar__nav">
-          <li>
-            <a href="/account" class="active">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-              </span>
-              Account Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="/account/addresses">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>
-              </span>
-              My Addresses
-            </a>
-          </li>
-          <li>
-            <a href="/collections/all">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-              </span>
-              Shop Pharmacy
-            </a>
-          </li>
-          <li>
-            <a href="/pages/contact">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/><path d="M14.5 2c1.5.5 2.8 1.3 3.8 2.4s1.8 2.4 2.2 3.9"/><path d="M14.5 6c.7.3 1.3.7 1.8 1.3s.9 1.2 1.1 1.9"/></svg>
-              </span>
-              Talk to a Doctor
-            </a>
-          </li>
-          <li>
-            <a href="/pages/prescription">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
-              </span>
-              My Prescription
-            </a>
-          </li>
-          <li>
-            <a href="/pages/auto-delivery">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              </span>
-              Manage Auto-Delivery
-            </a>
-          </li>
-          <li>
-            <a href="/pages/refer-a-friend">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-              </span>
-              Refer a Friend
-            </a>
-          </li>
-          <li>
-            <a href="/pages/upload-prescription">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1"/><polyline points="15 7 12 4 9 7"/><line x1="12" y1="4" x2="12" y2="16"/><path d="M8 12H4a1 1 0 00-1 1v3"/><path d="M16 12h4a1 1 0 011 1v3"/></svg>
-              </span>
-              Upload a Prescription
-            </a>
-          </li>
-          <li>
-            <a href="/account/logout">
-              <span class="nav-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-              </span>
-              Log out
-            </a>
-          </li>
-        </ul>
-      </aside>
+  comment
+    Prescription detail (optional metafields) — shown only when present.
+  endcomment
+  assign rx_name = customer.metafields.customer.medication | strip
+  if rx_name == blank
+    assign rx_name = 'Your prescription is active'
+  endif
+  assign rx_prescriber = customer.metafields.customer.prescriber | strip
+  assign rx_script_id = customer.metafields.customer.script_id | strip
+  assign rx_repeats = customer.metafields.customer.repeats | strip
+  assign rx_next_delivery = customer.metafields.customer.next_delivery | strip
 
-      <!-- ===== MAIN CONTENT ===== -->
-      <div class="account-main">
+  comment
+    Expiry date is stored as a `expiry:DD Mon YYYY` customer tag.
+  endcomment
+  assign expiry_date = ''
+  for tag in customer.tags
+    if tag contains 'expiry:'
+      assign expiry_date = tag | split: 'expiry:' | last | strip
+    endif
+  endfor
 
-        <!-- Top Row: Dashboard Welcome + Referral -->
-        <div class="account-top-row">
-          <div class="account-card account-welcome">
-            <h2>Your Dashboard</h2>
-            <p class="welcome-name">Welcome {{ customer.first_name }}</p>
-            <p>{{ customer.email }}</p>
+  assign first_name = customer.first_name | strip
+  if first_name == blank
+    assign first_name = 'there'
+  endif
+  assign order_count = customer.orders_count
+-%}
+
+<div class="qy-account">
+  <div class="qy-account__inner">
+
+    {%- render 'account-sidebar', active: 'overview' -%}
+
+    <div class="qy-main">
+      <section class="qy-section-gap">
+
+        <!-- header -->
+        <div>
+          <div class="qy-eyebrow">Account · Overview</div>
+          <h1 class="qy-h1">Welcome back, <em>{{ first_name }}</em>.</h1>
+          <p class="qy-lead">Your prescription, orders and deliveries live here. Start with a consultation — a doctor reviews it within 24 hours.</p>
+        </div>
+
+        {%- if has_active_script -%}
+          <!-- active-script hero -->
+          <div class="qy-hero">
+            <div class="qy-hero__top">
+              <div class="qy-hero__lead">
+                <div class="qy-hero__status"><span class="qy-dot"></span>Prescription active</div>
+                <h2 class="qy-hero__title">{{ rx_name }}</h2>
+                <p class="qy-hero__body">
+                  {%- if rx_prescriber != blank -%}Prescribed by {{ rx_prescriber }}. {% endif -%}
+                  {%- if rx_repeats != blank -%}{{ rx_repeats }} repeats remaining. {% endif -%}
+                  Manage your therapy, deliveries and check-ins below.
+                </p>
+              </div>
+              {%- if rx_script_id != blank or expiry_date != blank -%}
+                <div class="qy-hero__meta">
+                  {%- if rx_script_id != blank -%}{{ rx_script_id }}<br>{% endif -%}
+                  {%- if expiry_date != blank -%}Expires {{ expiry_date }}{% endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="qy-hero__actions">
+              <a href="/pages/auto-delivery" class="qy-btn qy-btn--paper">Manage auto-delivery</a>
+              <a href="/pages/prescription" class="qy-btn qy-btn--ghost-dark">View script</a>
+            </div>
+          </div>
+        {%- else -%}
+          <!-- application hero -->
+          <div class="qy-hero">
+            <div class="qy-hero__top">
+              <div class="qy-hero__lead">
+                <div class="qy-hero__eyebrow">Get started</div>
+                <h2 class="qy-hero__title">Apply for your prescription</h2>
+                <p class="qy-hero__body">A short, plain-English health questionnaire. An Australian-registered doctor reviews it within 24 hours. You only pay if you're approved, and we text and email you when it's done.</p>
+              </div>
+              <div class="qy-hero__meta">Step 01 / 04<br>~2 minutes</div>
+            </div>
+
+            <div class="qy-stepper">
+              <div class="qy-step">
+                <span class="qy-step__num qy-step__num--active">1</span>
+                <span class="qy-step__label qy-step__label--active">Account</span>
+              </div>
+              <span class="qy-stepper__line"></span>
+              <div class="qy-step">
+                <span class="qy-step__num">2</span>
+                <span class="qy-step__label">Health</span>
+              </div>
+              <span class="qy-stepper__line"></span>
+              <div class="qy-step">
+                <span class="qy-step__num">3</span>
+                <span class="qy-step__label">Doctor</span>
+              </div>
+              <span class="qy-stepper__line"></span>
+              <div class="qy-step">
+                <span class="qy-step__num">4</span>
+                <span class="qy-step__label">Review</span>
+              </div>
+            </div>
+
+            <div class="qy-hero__actions">
+              <a href="/pages/questionnaire" class="qy-btn qy-btn--coral">Start intake
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+              </a>
+              <span class="qy-hero__note">Free to apply. No charge until you speak to a doctor.</span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- status tiles -->
+        <div class="qy-tiles">
+          <div class="qy-tile">
+            <div class="qy-tile__label">Script status</div>
+            {%- if status == 'Approved' -%}
+              <div class="qy-tile__row"><span class="qy-dot qy-dot--sage"></span><span class="qy-tile__value">Active</span></div>
+              <div class="qy-tile__sub">{% if rx_repeats != blank %}{{ rx_repeats }} repeats remaining.{% else %}Your script is active.{% endif %}</div>
+            {%- elsif status == 'Pending' -%}
+              <div class="qy-tile__row"><span class="qy-dot qy-dot--warn"></span><span class="qy-tile__value">Under review</span></div>
+              <div class="qy-tile__sub">A doctor is assessing your application.</div>
+            {%- elsif status == 'Declined' -%}
+              <div class="qy-tile__row"><span class="qy-dot qy-dot--danger"></span><span class="qy-tile__value">Declined</span></div>
+              <div class="qy-tile__sub">Check your email for details.</div>
+            {%- elsif status == 'Expired' -%}
+              <div class="qy-tile__row"><span class="qy-dot qy-dot--danger"></span><span class="qy-tile__value">Expired</span></div>
+              <div class="qy-tile__sub">Re-apply to continue your therapy.</div>
+            {%- else -%}
+              <div class="qy-tile__row"><span class="qy-dot qy-dot--grey"></span><span class="qy-tile__value">Get started</span></div>
+              <div class="qy-tile__sub">Apply to receive your first script.</div>
+            {%- endif -%}
           </div>
 
-          <div class="account-card account-card--dark account-referral">
-            <div class="account-referral__content">
-              <h3>Refer a Friend</h3>
-              <p>Give your friends <span class="credit-highlight">$10 credit</span> and receive <span class="credit-highlight">$10 credit</span> when they make their first purchase over $50.</p>
-            </div>
-            <a href="/pages/refer-a-friend" class="account-referral__action" style="text-decoration:none;color:inherit;">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-              <span>Refer a Friend</span>
-            </a>
+          <div class="qy-tile">
+            <div class="qy-tile__label">Next delivery</div>
+            {%- if has_active_script -%}
+              <div class="qy-tile__value">{{ rx_next_delivery | default: 'Every 6 weeks' }}</div>
+              <div class="qy-tile__sub">Manage in auto-delivery.</div>
+            {%- else -%}
+              <div class="qy-tile__value">Not set</div>
+              <div class="qy-tile__sub">No active prescription.</div>
+            {%- endif -%}
+          </div>
+
+          <div class="qy-tile">
+            <div class="qy-tile__label">Orders</div>
+            <div class="qy-tile__value">{{ order_count }}</div>
+            <div class="qy-tile__sub">{% if order_count == 0 %}No orders yet.{% else %}Lifetime orders.{% endif %}</div>
           </div>
         </div>
 
-        <!-- Consultation Banner -->
-        <div class="account-card account-card--dark account-consultation">
-          <div class="account-consultation__info">
-            <h2>Start Your Consultation</h2>
-            <p>Apply for your prescription by starting the intake form</p>
-            <p class="notice-text">Notice: Once completed, a doctor will review in under 24 hours. You'll receive an email and a text once the review is complete.</p>
-          </div>
-          <a href="/pages/questionnaire" class="btn-outline-light">Start Intake</a>
-        </div>
-
-        <!-- Stats Row: Orders / Script Status / Script Expiry -->
-        <div class="account-stats-row">
-          <div class="account-card account-stat-card">
-            <h3>Orders</h3>
-            <p>{{ customer.orders_count }} Orders</p>
-            <div class="stat-actions">
-              <a href="/account" class="btn-theme btn-sm">View Orders</a>
-              <a href="/pages/auto-delivery" class="btn-theme btn-sm">Manage Auto-Delivery</a>
+        <!-- recent orders + resources -->
+        <div class="qy-2col">
+          <div class="qy-card" id="account-orders">
+            <div class="qy-card__head">
+              <h3 class="qy-card__title">Recent orders</h3>
+              {%- if customer.orders.size > 0 -%}
+                <a href="/account#account-orders" class="qy-link-muted">View all</a>
+              {%- endif -%}
             </div>
-          </div>
 
-          <div class="account-card account-stat-card">
-            <h3>Script Status</h3>
-            {%- assign customer_status = customer.metafields.customer.status | strip -%}
-            {%- if customer_status == 'Approved' -%}
-              <div class="status-indicator">
-                <span class="status-dot" style="background: var(--g-main);"></span>
-                Approved
-              </div>
-            {%- elsif customer_status == 'Pending' -%}
-              <div class="status-indicator">
-                <span class="status-dot" style="background: var(--g-alert);"></span>
-                Under Review
-              </div>
-            {%- elsif customer_status == 'Declined' -%}
-              <div class="status-indicator">
-                <span class="status-dot" style="background: var(--color-error);"></span>
-                Declined
-              </div>
-            {%- elsif customer_status == 'Expired' -%}
-              <div class="status-indicator">
-                <span class="status-dot" style="background: var(--color-error);"></span>
-                Expired
+            {%- if customer.orders.size > 0 -%}
+              <div class="qy-orders">
+                {%- for order in customer.orders limit: 4 -%}
+                  <a href="{{ order.customer_url }}" class="qy-order-row">
+                    <div>
+                      <div class="qy-order-row__name">{{ order.name }}</div>
+                      <div class="qy-order-row__meta">{{ order.created_at | date: "%d %b %Y" }}</div>
+                    </div>
+                    <div class="qy-order-row__right">
+                      <div class="qy-order-row__total">{{ order.total_price | money }}</div>
+                      <div class="qy-order-row__status">{{ order.fulfillment_status_label }}</div>
+                    </div>
+                  </a>
+                {%- endfor -%}
               </div>
             {%- else -%}
-              <div class="status-indicator">
-                <span class="status-dot"></span>
-                Get Started
+              <div class="qy-empty">
+                <div class="qy-empty__chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l8-3 8 3-8 3z"></path><path d="M4 7v10l8 3 8-3V7"></path><path d="M12 10v10"></path></svg>
+                </div>
+                <div class="qy-empty__title">No orders yet</div>
+                <div class="qy-empty__copy">Once a doctor approves your application, your scripts and orders appear here.</div>
+                <a href="/collections/all" class="qy-btn qy-btn--secondary qy-btn--44">Shop pharmacy</a>
               </div>
             {%- endif -%}
           </div>
 
-          <div class="account-card account-stat-card">
-            <h3>Script Expiry</h3>
-            {%- assign has_expiry = false -%}
-            {%- for tag in customer.tags -%}
-              {%- if tag contains 'expiry:' -%}
-                {%- assign expiry_date = tag | split: 'expiry:' | last -%}
-                <p>{{ expiry_date }}</p>
-                {%- assign has_expiry = true -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- unless has_expiry -%}
-              <p>Please Start Consultation</p>
-            {%- endunless -%}
+          <div class="qy-card">
+            <h3 class="qy-card__title">Resources</h3>
+            <div class="qy-res">
+              <a href="/blogs/news" class="qy-res__item"><span>How nicotine therapy works</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+              <a href="/blogs/news" class="qy-res__item"><span>Read the CMI leaflet</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+              <a href="/blogs/news" class="qy-res__item"><span>What to expect in weeks 1–6</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+              <a href="/pages/contact" class="qy-res__item"><span>Talk to the care team</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+            </div>
           </div>
         </div>
 
-        <!-- Bottom Row: Order History + Resources -->
-        <div class="account-bottom-row">
-          <div class="account-card account-order-history">
-            <h3>Order history</h3>
-            {%- paginate customer.orders by 5 -%}
-              {%- if customer.orders.size > 0 -%}
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Order</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {%- for order in customer.orders -%}
-                      <tr>
-                        <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
-                        <td>{{ order.created_at | date: "%b %d, %Y" }}</td>
-                        <td>{{ order.fulfillment_status_label }}</td>
-                        <td>{{ order.total_price | money }}</td>
-                      </tr>
-                    {%- endfor -%}
-                  </tbody>
-                </table>
-                {%- if paginate.pages > 1 -%}
-                  <div class="pagination" style="margin-top:16px;">
-                    {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-                  </div>
-                {%- endif -%}
-              {%- else -%}
-                <p>You haven't placed any orders yet.</p>
-              {%- endif -%}
-            {%- endpaginate -%}
+        <!-- addresses summary -->
+        <div class="qy-card">
+          <div class="qy-card__head" style="margin-bottom:18px;">
+            <h3 class="qy-card__title">Your addresses</h3>
+            <a href="/account/addresses" class="qy-link-muted">Manage</a>
           </div>
-
-          <div class="account-card account-resources">
-            <h3>Resources</h3>
-            <ul class="account-resources__list">
-              {%- assign resource_blog = blogs['news'] -%}
-              {%- if resource_blog == blank -%}
-                {%- for b in blogs -%}
-                  {%- if resource_blog == blank -%}
-                    {%- assign resource_blog = b -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              {%- endif -%}
-              {%- if resource_blog != blank -%}
-                {%- for article in resource_blog.articles limit: 4 -%}
-                  <li>
-                    <a href="{{ article.url }}" class="account-resources__item">
-                      <div class="account-resources__item-info">
-                        <div class="account-resources__item-date">{{ article.published_at | date: "%b %d, %Y" }}</div>
-                        <div class="account-resources__item-title">{{ article.title | truncate: 32 }}</div>
-                      </div>
-                      <div class="account-resources__item-arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                      </div>
-                    </a>
-                  </li>
-                {%- endfor -%}
-              {%- else -%}
-                <li><p class="txt-body-60">No resources available yet.</p></li>
-              {%- endif -%}
-            </ul>
-          </div>
-        </div>
-
-        <!-- Addresses Section -->
-        <div class="account-card account-addresses">
-          <div class="account-addresses-top">
-            <div class="account-addresses__info">
-              <h3>Your Addresses</h3>
-              <p>To edit, update or create new primary addresses, use the button provided.</p>
-            </div>
-            <div class="account-addresses__actions">
-              <a href="/account/addresses" class="btn-theme">Add your Primary Address</a>
-              <a href="/account/addresses" class="btn-theme">Add your Billing Address</a>
-            </div>
-          </div>
-          {%- if customer.default_address -%}
-            <div class="account-address-display">
-              <div class="account-address-block">
-                <h4>Primary Address</h4>
-                {{ customer.default_address | format_address }}
-              </div>
-              {%- if customer.addresses.size > 1 -%}
-                <div class="account-address-block">
-                  <h4>Billing Address</h4>
-                  {{ customer.addresses[1] | format_address }}
+          <div class="qy-addr-grid">
+            {%- assign primary = customer.default_address -%}
+            {%- if primary -%}
+              <div class="qy-addr-card">
+                <div class="qy-addr__label">Primary · Delivery</div>
+                <div class="qy-addr__name">{{ primary.first_name }} {{ primary.last_name }}</div>
+                <div class="qy-addr__lines">
+                  {{ primary.address1 }}{% if primary.address2 != blank %}, {{ primary.address2 }}{% endif %}{% if primary.city != blank %}, {{ primary.city }}{% endif %}<br>
+                  {{ primary.province_code }} {{ primary.zip }}{% if primary.country != blank %} · {{ primary.country }}{% endif %}
                 </div>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+              </div>
+            {%- else -%}
+              <div class="qy-addr-card qy-addr-card--dashed">
+                <div class="qy-addr__label">Primary · Delivery</div>
+                <div class="qy-addr__lines">No delivery address yet.</div>
+                <a href="/account/addresses" class="qy-btn qy-btn--secondary qy-btn--38">Add delivery address</a>
+              </div>
+            {%- endif -%}
+
+            {%- if customer.addresses.size > 1 -%}
+              {%- assign billing = customer.addresses[1] -%}
+              <div class="qy-addr-card">
+                <div class="qy-addr__label">Billing</div>
+                <div class="qy-addr__name">{{ billing.first_name }} {{ billing.last_name }}</div>
+                <div class="qy-addr__lines">
+                  {{ billing.address1 }}{% if billing.city != blank %}, {{ billing.city }}{% endif %}<br>
+                  {{ billing.province_code }} {{ billing.zip }}{% if billing.country != blank %} · {{ billing.country }}{% endif %}
+                </div>
+              </div>
+            {%- else -%}
+              <div class="qy-addr-card qy-addr-card--dashed">
+                <div class="qy-addr__label">Billing</div>
+                <div class="qy-addr__lines">Not added yet.</div>
+                <a href="/account/addresses" class="qy-btn qy-btn--secondary qy-btn--38">Add billing address</a>
+              </div>
+            {%- endif -%}
+          </div>
         </div>
 
-      </div>
-      <!-- /account-main -->
+        <!-- trust strip -->
+        <div class="qy-trust">
+          <div class="qy-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2.2 2.2 4.8-5"></path></svg>TGA-licensed pharmacy</div>
+          <div class="qy-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg>AHPRA-registered doctors</div>
+          <div class="qy-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>Data stored in Australia</div>
+        </div>
 
+      </section>
     </div>
   </div>
 </div>
-
-<script src="{{ 'account-dashboard.js' | asset_url }}" defer></script>

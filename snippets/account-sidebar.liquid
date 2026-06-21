@@ -1,0 +1,108 @@
+{%- comment -%}
+  Quity account sidebar — shared by the account dashboard and the
+  addresses page. Renders the identity card, grouped navigation and
+  the support card.
+
+  Usage:
+    {% render 'account-sidebar', active: 'overview' %}
+
+  Accepts:
+    active — which nav item is current. One of:
+      overview | prescription | doctor | autodelivery | upload |
+      shop | orders | addresses | refer
+{%- endcomment -%}
+
+{%- liquid
+  assign first = customer.first_name | strip
+  assign last = customer.last_name | strip
+  assign full_name = customer.name | strip
+  if full_name == blank
+    assign full_name = customer.email
+  endif
+
+  assign fi = first | slice: 0
+  assign li = last | slice: 0
+  assign initials = fi | append: li | upcase
+  if initials == blank
+    assign initials = customer.email | slice: 0 | upcase
+  endif
+-%}
+
+<aside class="qy-side">
+
+  <!-- identity -->
+  <div class="qy-id">
+    <div class="qy-id__row">
+      <div class="qy-id__avatar">{{ initials }}</div>
+      <div class="qy-id__meta">
+        <div class="qy-id__name">{{ full_name }}</div>
+        <div class="qy-id__email">{{ customer.email }}</div>
+      </div>
+    </div>
+    <div class="qy-id__badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      Verified · Australian resident
+    </div>
+  </div>
+
+  <!-- nav -->
+  <nav class="qy-nav">
+    <a href="/account" class="qy-nav__item{% if active == 'overview' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></svg>
+      <span>Overview</span>
+    </a>
+
+    <div class="qy-nav__group">Your care</div>
+    <a href="/pages/prescription" class="qy-nav__item{% if active == 'prescription' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1z"></path><path d="M9 13l2 2 4-4"></path></svg>
+      <span>My prescription</span>
+    </a>
+    <a href="/pages/contact" class="qy-nav__item{% if active == 'doctor' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg>
+      <span>Talk to a doctor</span>
+    </a>
+    <a href="/pages/auto-delivery" class="qy-nav__item{% if active == 'autodelivery' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h10v9H3z"></path><path d="M13 9h4l3 3v3h-7z"></path><circle cx="7" cy="17.5" r="1.7"></circle><circle cx="17" cy="17.5" r="1.7"></circle></svg>
+      <span>Auto-delivery</span>
+    </a>
+    <a href="/pages/upload-prescription" class="qy-nav__item{% if active == 'upload' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5"></path><path d="M8 9l4-4 4 4"></path><path d="M5 19h14"></path></svg>
+      <span>Upload a script</span>
+    </a>
+
+    <div class="qy-nav__group">Pharmacy</div>
+    <a href="/collections/all" class="qy-nav__item{% if active == 'shop' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+      <span>Shop pharmacy</span>
+    </a>
+    <a href="/account#account-orders" class="qy-nav__item{% if active == 'orders' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l8-3 8 3-8 3z"></path><path d="M4 7v10l8 3 8-3V7"></path><path d="M12 10v10"></path></svg>
+      <span>Orders</span>
+    </a>
+
+    <div class="qy-nav__group">Account</div>
+    <a href="/account/addresses" class="qy-nav__item{% if active == 'addresses' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+      <span>Addresses</span>
+    </a>
+    <a href="/pages/refer-a-friend" class="qy-nav__item{% if active == 'refer' %} is-active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20S4 15 4 9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 8 2.5C20 15 12 20 12 20z"></path></svg>
+      <span>Refer a friend</span>
+    </a>
+
+    <div class="qy-nav__divider"></div>
+    <a href="/account/logout" class="qy-nav__item qy-nav__item--logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"></path><path d="M16 16l4-4-4-4"></path><path d="M20 12H10"></path></svg>
+      <span>Log out</span>
+    </a>
+  </nav>
+
+  <!-- support -->
+  <div class="qy-support">
+    <div class="qy-support__title">Need a hand?</div>
+    <div class="qy-support__copy">Our Sydney care team replies within a few hours, 7 days.</div>
+    <a href="/pages/contact" class="qy-support__link">Contact support
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+</aside>
