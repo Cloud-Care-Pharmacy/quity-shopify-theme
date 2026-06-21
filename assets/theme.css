@@ -6347,7 +6347,7 @@ p a:not(.button):focus,
   z-index: 101;
 }
 .page-container {
-  background-color: #fff;
+  background-color: var(--color-content);
 }
 .is-moved-by-drawer,
 .js-drawer-open .is-moved-by-drawer {
