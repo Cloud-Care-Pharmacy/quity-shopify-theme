@@ -697,7 +697,6 @@ class PatientIntakeForm extends HTMLElement {
       medicationsList: rawData.medicationsList || '',
       cardiovascular: rawData.cardiovascular || '',
       pregnancy: rawData.pregnancy || '',
-      forwardEmail: rawData.forwardEmail || '',
       additionalNotes: rawData.additionalNotes || '',
       safetyAcknowledgment: rawData.safetyAcknowledgment === 'on' ? 'yes' : 'no'
     };
