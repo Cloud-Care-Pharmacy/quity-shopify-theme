@@ -23,16 +23,20 @@
    rule (assets/theme.css) so the 1.5px stroke icons render. */
 .qy-gate svg { fill: none; }
 
-/* --- Section shell (one full-viewport gate) --- */
+/* --- Section shell --- */
+/* Rendered inside <main>, below the theme header, so the content is
+   anchored near the top (flex-start) with a fixed top gap rather than
+   vertically centred in a viewport-tall box — centring there pushes the
+   content far below the header and leaves a large empty band above it. */
 .qy-gate {
   position: relative;
-  min-height: 100vh;
+  min-height: 66vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 96px 24px;
+  padding: 72px 24px;
   background: #FFFFFF;
   font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
   color: #0F1110;
@@ -226,13 +230,13 @@
    Responsive
    ============================================================ */
 @media screen and (max-width: 749px) {
-  .qy-gate { padding: 72px 20px; }
+  .qy-gate { padding: 56px 20px; }
   .qy-gate .qy-gate__heading,
   .qy-gate--login .qy-gate__heading { font-size: 36px; line-height: 1.08; }
 }
 
 @media screen and (max-width: 480px) {
-  .qy-gate { padding: 56px 18px; }
+  .qy-gate { padding: 48px 18px; }
   .qy-gate .qy-gate__heading,
   .qy-gate--login .qy-gate__heading { font-size: 30px; }
   .qy-gate__actions { flex-direction: column; width: 100%; max-width: 300px; }
