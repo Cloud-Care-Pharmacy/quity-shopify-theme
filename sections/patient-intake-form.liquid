@@ -1,3 +1,4 @@
+{{ 'flatpickr.min.css' | asset_url | stylesheet_tag }}
 {{ 'patient-intake-form.css' | asset_url | stylesheet_tag }}
 
 {%- unless customer -%}
@@ -129,14 +130,7 @@
                   {% assign current_day = 'now' | date: '%d' %}
                   {% assign max_date = max_year | append: '-' | append: current_month | append: '-' | append: current_day %}
                   {% assign min_date = min_year | append: '-' | append: current_month | append: '-' | append: current_day %}
-                  <input type="hidden" id="dob" name="dob" class="form-control" required>
-                  <details class="datefield" data-datepicker data-min="{{ min_date }}" data-max="{{ max_date }}">
-                    <summary class="selectish" aria-haspopup="dialog" aria-label="Date of birth">
-                      <span class="dp-val ph">DD / MM / YYYY</span>
-                      <svg class="ci" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 9.5h18M8 3v4M16 3v4"></path></svg>
-                    </summary>
-                    <div class="cal pop"></div>
-                  </details>
+                  <input type="text" id="dob" name="dob" class="field__input form-control" data-datepicker data-min="{{ min_date }}" data-max="{{ max_date }}" placeholder="DD / MM / YYYY" required>
                   <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
                 </div>
 
@@ -734,6 +728,7 @@
   </div>
 </div>
 
+<script src="{{ 'flatpickr.min.js' | asset_url }}" defer></script>
 <script src="{{ 'patient-intake-form.js' | asset_url }}" defer></script>
 
 {%- endunless -%}
