@@ -1,14 +1,104 @@
-.patient-intake-form {
-  padding: 60px 0;
+/* ============================================================
+   Quity — Patient Intake / Prescription Application Form
+   6-step wizard rebuilt to the Quity brand system
+   (https://brand.quity.com.au/).
+
+   Self-contained and scoped under `.qy-intake` so it does not
+   depend on (or fight with) the theme's `--g-*` tokens. Matches
+   the Quity login/register/account redesign pattern:
+   - Hard-coded brand tokens (these ARE the Quity values).
+   - Opts out of theme.css global rules for h1..h6, svg, inputs.
+   - Fonts (Jost / Newsreader / JetBrains Mono) are loaded for the
+     `page.questionnaire` template in layout/theme.liquid.
+
+   NOTE: class names used by patient-intake-form.js (.form-step,
+   .step-item, .radio-option, .selected, .error-message, etc.) are
+   preserved — this file restyles them, it does not rename them.
+   ============================================================ */
+
+.qy-intake {
+  /* Brand tokens */
+  --ink: #0F1110;
+  --ink-2: #1C1F1D;
+  --ink-3: #2A2E2C;
+  --slate: #5B615E;
+  --slate-2: #8A8F8C;
+  --line: #E3E0D7;
+  --line-2: #EDEAE1;
+  --dash: #C9C6BC;
+  --paper: #F4F2EC;
+  --paper-2: #FAF8F2;
+  --white: #FFFFFF;
+  --coral: #E55B4F;
+  --coral-deep: #B83F36;
+  --coral-tint: #F8D7D3;
+  --coral-wash: #FBE9E6;
+  --sage-deep: #4F6B53;
+  --sage-tint: #D9E2D5;
+  --sage-wash: #EDF1E9;
+  --danger: #B5453A;
+  --ring: 0 0 0 3px rgba(229, 91, 79, 0.12);
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
 }
 
+/* ---- Resets / opt-outs (scoped) ----
+   Element resets are wrapped in :where() so they carry ZERO
+   specificity — they override theme.css globals (which target bare
+   elements) while never out-ranking the single-class component
+   rules below them. */
+.qy-intake *,
+.qy-intake *::before,
+.qy-intake *::after { box-sizing: border-box; }
+
+.qy-intake :where(svg) { fill: none; }
+
+.qy-intake :where(h1, h2, h3) {
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.2;
+}
+
+.qy-intake :where(p) { font-family: 'Jost', sans-serif; margin: 0; }
+.qy-intake :where(a) { color: var(--coral); text-decoration: none; }
+
+.qy-intake :where(input, textarea, select, button) {
+  font-family: 'Jost', sans-serif;
+}
+
+.qy-intake ::placeholder { color: var(--slate-2); opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qy-intake *,
+  .qy-intake *::before,
+  .qy-intake *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---- Layout ---- */
+.qy-intake__wrap {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+/* ============================================================
+   STEPPER
+   ============================================================ */
 .progress-indicator {
-  margin-bottom: 40px;
+  margin: 8px 0 44px;
 }
 
 .steps-list {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
   position: relative;
   padding: 0;
@@ -16,94 +106,101 @@
   list-style: none;
 }
 
-.steps-list::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: calc(100% / 12);
-  right: calc(100% / 12);
-  height: 2px;
-  background: var(--g-input-border);
-  z-index: 0;
-}
-
 .step-item {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 1;
   cursor: default;
 }
 
-.step-item.clickable {
-  cursor: pointer;
+.step-item.clickable { cursor: pointer; }
+
+/* connector line into the left of each circle */
+.step-item::before {
+  content: '';
+  position: absolute;
+  top: 21px;
+  left: -50%;
+  width: 100%;
+  height: 1.5px;
+  background: var(--line);
+  z-index: 0;
 }
+
+.step-item:first-child::before { display: none; }
+
+/* line leading into a completed circle is ink */
+.step-item.completed::before { background: var(--ink); }
 
 .step-circle {
-  width: 40px;
-  height: 40px;
+  position: relative;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: var(--color-body, #fff);
-  border: 2px solid var(--g-input-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-family: 'Jost', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: rgba(var(--g-color-heading-rgb), 0.4);
-  margin-bottom: 10px;
-  transition: all 0.3s ease;
-  position: relative;
+  color: var(--slate-2);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-/* Completed steps: Primary color circle with white number */
+/* Completed: ink fill + white check (number hidden) */
 .step-item.completed .step-circle {
-  background: var(--g-main);
-  border-color: var(--g-main);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: transparent;
+}
+
+.step-item.completed .step-circle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Current: coral fill + white number (wins over completed) */
+.step-item.current .step-circle {
+  background: var(--coral);
+  border-color: var(--coral);
   color: #fff;
 }
 
-/* Current step: Black circle with white number */
-.step-item.current .step-circle {
-  background: var(--g-main);
-  border-color: var(--g-main);
-  color: #fff;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
-  width: 44px;
-  height: 44px;
-  margin-top: -2px;
-  font-size: 17px;
-}
+.step-item.current .step-circle::after { display: none; }
 
 .step-name {
-  font-size: 12px;
-  color: rgba(var(--g-color-heading-rgb), 0.4);
-  text-align: center;
+  margin-top: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  transition: all 0.3s ease;
-  max-width: 100px;
+  color: var(--slate-2);
+  text-align: center;
   line-height: 1.3;
 }
 
-.step-item.completed .step-name {
-  color: var(--g-main);
+.step-item.current .step-name {
+  color: var(--ink);
   font-weight: 600;
 }
 
-.step-item.current .step-name {
-  color: var(--g-main);
-  font-weight: 700;
-  font-size: 13px;
-}
-
 .step-item.clickable:hover .step-circle {
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(var(--g-color-heading-rgb), 0.1);
+  border-color: var(--slate-2);
 }
 
-/* Mobile responsive */
+.step-item.completed.clickable:hover .step-circle,
+.step-item.current:hover .step-circle {
+  border-color: var(--ink);
+}
+
 @media (max-width: 768px) {
   .steps-list {
     overflow-x: auto;
@@ -111,168 +208,280 @@
     justify-content: flex-start;
     padding-bottom: 10px;
     scrollbar-width: thin;
-    scrollbar-color: var(--g-main) rgba(var(--g-color-heading-rgb), 0.06);
+    scrollbar-color: var(--line) transparent;
   }
-
-  .steps-list::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .steps-list::-webkit-scrollbar-track {
-    background: rgba(var(--g-color-heading-rgb), 0.06);
-    border-radius: 2px;
-  }
-
-  .steps-list::-webkit-scrollbar-thumb {
-    background: var(--g-main);
-    border-radius: 2px;
-  }
-
-  .step-item {
-    min-width: 80px;
-    flex-shrink: 0;
-  }
-
-  .step-circle {
-    width: 35px;
-    height: 35px;
-    font-size: 14px;
-  }
-
-  .step-name {
-    font-size: 11px;
-    max-width: 80px;
-  }
-
-  .step-item.current .step-name {
-    font-size: 12px;
-  }
+  .steps-list::-webkit-scrollbar { height: 4px; }
+  .steps-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+  .step-item { min-width: 92px; flex-shrink: 0; }
 }
 
-@media (max-width: 576px) {
-  .steps-list::before {
-    top: 17px;
-  }
-
-  .step-item {
-    min-width: 70px;
-  }
-
-  .step-circle {
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
-  }
-
-  .step-name {
-    font-size: 10px;
-    max-width: 70px;
-  }
+/* ============================================================
+   CARD
+   ============================================================ */
+.qy-intake__card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 48px 48px 40px;
 }
 
-.form-step {
+@media (max-width: 600px) {
+  .qy-intake__wrap { padding: 32px 16px 72px; }
+  .qy-intake__card { padding: 28px 22px 28px; }
+}
+
+/* Error banner (top of card) */
+.qy-intake__banner {
   display: none;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 26px;
+  padding: 14px 18px;
+  background: var(--coral-wash);
+  border: 1px solid var(--coral-tint);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--danger);
 }
 
-.form-step.active {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
+.qy-intake__banner.show { display: flex; }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.qy-intake__banner svg { flex: none; width: 18px; height: 18px; }
+
+/* Submission error (created by JS) */
+.form-error-message {
+  margin-bottom: 24px;
+  padding: 14px 18px;
+  background: var(--coral-wash);
+  border: 1px solid var(--coral-tint);
+  border-radius: 10px;
+  color: var(--danger);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.form-error-message strong { font-weight: 600; }
+.form-error-message p { margin: 6px 0 0; }
+
+/* ============================================================
+   STEPS — eyebrow + title
+   ============================================================ */
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+.qy-intake__eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--coral);
 }
 
 .step-title {
-  font-size: var(--g-h2-font-size);
-  font-weight: var(--g-h2-font-weight);
-  letter-spacing: var(--g-h2-font-spacing);
-  line-height: var(--g-h2-font-lineheight);
-  text-transform: var(--g-h2-font-transform);
-  margin-bottom: 30px;
-  color: var(--g-color-heading);
+  margin: 8px 0 4px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 46px);
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: var(--ink);
 }
 
+.step-title em {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral);
+}
+
+.qy-intake__lead {
+  font-size: 16px;
+  color: var(--slate);
+  line-height: 1.55;
+  margin: 14px 0 0;
+  max-width: 560px;
+}
+
+/* ============================================================
+   SECTION EYEBROW (label + hairline rule)
+   ============================================================ */
+.section-separator {
+  margin: 38px 0 22px;
+  height: 1px;
+  background: var(--line-2);
+}
+
+.section-separator.with-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: auto;
+  background: none;
+}
+
+.section-separator.with-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line-2);
+}
+
+.section-separator .sep-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--coral);
+  white-space: nowrap;
+}
+
+/* first eyebrow of a step sits tighter to the title */
+.form-step > .section-separator.with-label:first-of-type { margin-top: 34px; }
+
+/* ============================================================
+   FIELDS
+   ============================================================ */
 .field.form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 32px;
   position: relative;
 }
 
-.field.form-group label {
+.field.form-group:last-child { margin-bottom: 0; }
+
+.field.form-group > label {
   display: block;
-  font-size: var(--g-font-size);
-  font-weight: 700;
-  margin-bottom: 5px;
-  padding-left: 0;
-  color: var(--g-color-heading);
-  position: static;
-  transform: none;
-  background: transparent;
-  pointer-events: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin: 0 0 8px;
 }
 
-.field.form-group label.required::after {
+/* Question-style labels (those that head a radio/checkbox group or
+   a required free-text answer) read larger, per the design. */
+.field.form-group > label.required::after {
   content: " *";
-  color: var(--color-error, #dc3545);
+  color: var(--coral);
+  font-weight: 400;
+}
+
+/* Larger "question" labels: any label that is immediately followed
+   by a group / textarea / helper acts as a question heading. */
+.field.form-group > label:has(~ .radio-group),
+.field.form-group > label:has(~ .checkbox-group),
+.field.form-group > label:has(~ .radio-cards),
+.field.form-group > label:has(~ textarea),
+.field.form-group > label:has(~ .checkbox-standalone),
+.field.form-group > label:has(~ .helper-text) {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-2);
+  line-height: 1.35;
+  margin-bottom: 16px;
 }
 
 .field__input.form-control,
 select.form-control,
 textarea.form-control {
   width: 100%;
-  padding: 0 1rem;
-  border-radius: var(--g-input-radius);
-  background: var(--g-input-bg);
-  border: 1px solid var(--g-input-border);
+  height: 50px;
+  padding: 0 16px;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   outline: none;
   box-shadow: none;
-  color: var(--g-color-heading);
-  height: var(--g-input-height);
-  line-height: var(--g-input-height);
-  transition: border-color 0.2s;
-  font-size: 14px;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
   margin: 0;
 }
 
-.field__input.form-control:active,
 .field__input.form-control:focus,
-select.form-control:active,
 select.form-control:focus,
-textarea.form-control:active,
 textarea.form-control:focus {
-  border-color: var(--g-color-heading);
-  box-shadow: 0 0 0 1px rgb(var(--g-color-heading-rgb)) inset;
+  border-color: var(--coral);
+  box-shadow: var(--ring);
 }
 
 .field__input.form-control.error,
 select.form-control.error,
 textarea.form-control.error {
-  border-color: var(--color-error, #dc3545);
+  border-color: var(--coral);
+  box-shadow: var(--ring);
 }
 
-.field__input.form-control::placeholder,
-textarea.form-control::placeholder {
-  color: rgba(var(--g-color-heading-rgb), 0.5);
+.field__input.form-control:disabled {
+  background: var(--line-2);
+  color: var(--slate);
+  cursor: not-allowed;
 }
+
+textarea.form-control {
+  height: auto;
+  min-height: 120px;
+  padding: 13px 16px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* Selects — chevron */
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B615E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.helper-text {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.55;
+  margin: -6px 0 16px;
+}
+
+/* a helper directly under a question label hugs it */
+.field.form-group > label + .helper-text { margin-top: 0; }
 
 .error-message {
-  color: var(--color-error, #dc3545);
-  font-size: 12px;
-  margin-top: 5px;
   display: none;
+  font-size: 13px;
+  color: var(--danger);
+  margin-top: 8px;
+  line-height: 1.45;
 }
 
-.error-message.show {
-  display: block;
+.error-message.show { display: block; }
+
+/* ============================================================
+   GRID ROWS
+   ============================================================ */
+.patient-intake-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+  width: 100%;
 }
 
+.patient-intake-form .form-row .field.form-group { margin-bottom: 0; }
+
+.patient-intake-form .form-row.dob-gender-row { grid-template-columns: 1fr 1fr; }
+.patient-intake-form .form-row.medicare-row { grid-template-columns: 2fr 1fr 1fr; }
+
+@media (max-width: 768px) {
+  .patient-intake-form .form-row,
+  .patient-intake-form .form-row.dob-gender-row,
+  .patient-intake-form .form-row.medicare-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ============================================================
+   RADIO / CHECKBOX OPTION CARDS
+   ============================================================ */
 .radio-group,
 .checkbox-group {
   display: flex;
@@ -284,31 +493,69 @@ textarea.form-control::placeholder {
 .checkbox-option {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  border: 2px solid var(--g-input-border);
-  border-radius: var(--g-input-radius);
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 15px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.12s ease;
 }
 
 .radio-option:hover,
-.checkbox-option:hover {
-  border-color: var(--g-main);
-  background-color: rgba(var(--g-color-heading-rgb), 0.03);
-}
+.checkbox-option:hover { border-color: var(--slate-2); }
 
 .radio-option.selected,
-.checkbox-option.selected {
-  border-color: var(--g-main);
-  background-color: rgba(var(--g-main-rgb), 0.05);
+.checkbox-option.selected { border-color: var(--ink); }
+
+/* the native control, restyled into the brand indicator */
+.radio-option input[type="radio"],
+.checkbox-option input[type="checkbox"],
+.radio-card input[type="radio"],
+.checkbox-standalone input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  background: var(--white);
+  border: 1.5px solid var(--slate-2);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
 }
 
+/* radios = circle + coral dot */
 .radio-option input[type="radio"],
-.checkbox-option input[type="checkbox"] {
-  margin-right: 12px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
+.radio-card input[type="radio"] { border-radius: 50%; }
+
+.radio-option input[type="radio"]:checked,
+.radio-card input[type="radio"]:checked {
+  border-color: var(--coral);
+  background-image: radial-gradient(circle at center, var(--coral) 0 5px, transparent 5.5px);
+}
+
+/* checkboxes = rounded square + coral fill + white check */
+.checkbox-option input[type="checkbox"],
+.checkbox-standalone input[type="checkbox"] { border-radius: 6px; }
+
+.checkbox-option input[type="checkbox"]:checked,
+.checkbox-standalone input[type="checkbox"]:checked {
+  border-color: var(--coral);
+  background-color: var(--coral);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.radio-option input:focus-visible,
+.checkbox-option input:focus-visible,
+.radio-card input:focus-visible,
+.checkbox-standalone input:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .field.form-group .radio-option label,
@@ -316,522 +563,155 @@ textarea.form-control::placeholder {
   margin: 0;
   cursor: pointer;
   flex: 1;
+  font-size: 16px;
   font-weight: 400;
+  color: var(--ink);
+  line-height: 1.4;
 }
 
+/* ============================================================
+   YES / NO BIG CARDS (step 4)
+   ============================================================ */
 .radio-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .radio-cards {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  gap: 18px;
+  margin-top: 0;
 }
 
 .radio-card {
-  padding: 30px 20px;
-  border: 3px solid var(--g-input-border);
-  border-radius: var(--g-input-radius);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  background: var(--color-body, #fff);
-}
-
-.radio-card:hover {
-  border-color: var(--g-main);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(var(--g-color-heading-rgb), 0.1);
-}
-
-.radio-card.selected {
-  border-color: var(--g-main);
-  background: rgba(var(--g-main-rgb), 0.05);
-}
-
-.radio-card input[type="radio"] {
-  display: none;
-}
-
-.radio-card label {
-  font-size: calc(var(--g-font-size) + 4px);
-  font-weight: 600;
-  cursor: pointer;
-  margin: 0;
-}
-
-.dob-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 15px;
-}
-
-@media (max-width: 576px) {
-  .dob-group {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-  padding-top: 30px;
-  border-top: 1px solid var(--g-input-border);
-}
-
-.btn-back,
-.btn-next,
-.btn-submit {
-  padding: var(--g-padding-ver-btn) var(--g-padding-hoz-btn);
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  text-transform: var(--g-text-transform-btn);
-  font-size: var(--g-font-size-btn);
-  line-height: 1;
-  font-weight: var(--g-font-weight-btn);
-  font-family: var(--g-font-family_btn);
-  letter-spacing: var(--g-font-spacing-btn);
-  border-radius: var(--g-font-radius-btn);
-  position: relative;
-  overflow: hidden;
-  transition: 0.4s;
-  z-index: 1;
-}
-
-.btn-back {
-  background-color: transparent;
-  border: 1px solid var(--g-input-border);
-  color: var(--g-color-heading);
-}
-
-.btn-back:hover {
-  border-color: var(--g-main);
-  color: var(--g-main);
-}
-
-.btn-back:disabled {
-  opacity: 0;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.btn-next,
-.btn-submit {
-  background-color: var(--g-cta-button);
-  border: 1px solid var(--g-cta-text);
-  color: var(--g-cta-text);
-}
-
-.btn-next:before,
-.btn-submit:before {
-  content: "";
-  display: block;
-  position: absolute;
-  background: var(--g-main-2);
-  width: 120%;
-  height: 110%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: rotate3d(0,0,1,4deg) translate3d(-1em,108%,0);
-  transform-origin: 0% 100%;
-  will-change: transform;
-  z-index: -1;
-  transition: transform 0.2s cubic-bezier(.17,.67,.83,.67);
-}
-
-.btn-next:hover,
-.btn-submit:hover {
-  border-color: var(--g-main-2);
-  color: #fff;
-}
-
-.btn-next:hover:before,
-.btn-submit:hover:before {
-  transform: rotate3d(0,0,1,0) translateZ(0);
-}
-
-.btn-next:disabled,
-.btn-submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-textarea.form-control {
-  min-height: 100px;
-  line-height: 28px;
-  resize: vertical;
-  padding: 0.75rem 1rem;
-}
-
-.helper-text {
-  font-size: calc(var(--g-font-size) - 1px);
-  color: rgba(var(--g-color-heading-rgb), 0.6);
-  margin-bottom: 10px;
-  line-height: var(--g-body-lineheight);
-}
-
-/* Two-column grid layout */
-.patient-intake-form .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 1.5rem;
-  padding: 0;
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  flex-wrap: initial;
-}
-
-.patient-intake-form .form-row .field.form-group {
-  margin-bottom: 0;
-  padding: 0;
-}
-
-@media (max-width: 768px) {
-  .patient-intake-form .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  
-  .patient-intake-form .form-row .field.form-group {
-    margin-bottom: 1.5rem;
-  }
-  
-  .patient-intake-form .form-row .field.form-group:last-child {
-    margin-bottom: 0;
-  }
-}
-
-/* DOB + Gender row */
-.patient-intake-form .form-row.dob-gender-row {
-  grid-template-columns: 1fr 1fr;
-}
-
-/* Medicare + IRN + Expiry row */
-.patient-intake-form .form-row.medicare-row {
-  grid-template-columns: 1fr auto auto;
-}
-
-.patient-intake-form .medicare-row .irn-field {
-  width: 90px;
-  min-width: 90px;
-}
-
-.patient-intake-form .medicare-row .expiry-field {
-  width: 140px;
-  min-width: 140px;
-}
-
-@media (max-width: 768px) {
-  .patient-intake-form .form-row.dob-gender-row {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-intake-form .form-row.medicare-row {
-    grid-template-columns: 1fr;
-  }
-
-  .patient-intake-form .medicare-row .irn-field,
-  .patient-intake-form .medicare-row .expiry-field {
-    width: 100%;
-  }
-}
-
-/* Section separators */
-.section-separator {
-  margin: 40px 0 28px;
-  position: relative;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(var(--g-color-heading-rgb), 0.08), transparent);
-}
-
-.section-separator.with-label {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin: 44px 0 28px;
-  height: auto;
-  background: none;
-}
-
-.section-separator.with-label::before,
-.section-separator.with-label::after {
-  content: '';
   flex: 1;
-  height: 1px;
-}
-
-.section-separator.with-label::before {
-  background: linear-gradient(to right, transparent, rgba(var(--g-color-heading-rgb), 0.12));
-}
-
-.section-separator.with-label::after {
-  background: linear-gradient(to left, transparent, rgba(var(--g-color-heading-rgb), 0.12));
-}
-
-.section-separator .sep-label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 18px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(var(--g-color-heading-rgb), 0.55);
-  background: rgba(var(--g-color-heading-rgb), 0.03);
-  border: 1px solid rgba(var(--g-color-heading-rgb), 0.08);
-  border-radius: 100px;
-  white-space: nowrap;
-  order: 2;
-  margin: 0 16px;
-  line-height: 1;
-  transition: background 0.2s ease, color 0.2s ease;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+  text-align: left;
 }
 
-.safety-info {
-  padding: 20px;
-  background: var(--g-alert-bg);
-  border: 1px solid var(--g-alert-bd);
-  border-radius: var(--g-input-radius);
-  margin-bottom: 20px;
-  font-size: var(--g-font-size);
-  line-height: var(--g-body-lineheight);
-  color: var(--g-alert);
+.radio-card:hover { border-color: var(--slate-2); }
+.radio-card.selected { border-color: var(--ink); }
+
+.field.form-group .radio-card label {
+  margin: 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
 }
 
+@media (max-width: 480px) {
+  .radio-cards { flex-direction: column; }
+}
+
+/* ============================================================
+   STANDALONE CHECKBOX (safety acknowledgement) + "I don't know"
+   ============================================================ */
 .checkbox-standalone {
   display: flex;
-  align-items: flex-start;
-  padding: 15px;
-  border: 2px solid var(--g-input-border);
-  border-radius: var(--g-input-radius);
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.12s ease;
 }
 
-.checkbox-standalone:hover {
-  border-color: var(--g-main);
-}
-
-.checkbox-standalone.selected {
-  border-color: var(--g-main);
-  background: rgba(var(--g-main-rgb), 0.05);
-}
-
-.checkbox-standalone input[type="checkbox"] {
-  margin-right: 12px;
-  margin-top: 3px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
+.checkbox-standalone:hover { border-color: var(--slate-2); }
+.checkbox-standalone.selected { border-color: var(--ink); }
 
 .checkbox-standalone label {
   margin: 0;
   cursor: pointer;
-  font-size: var(--g-font-size);
-  font-weight: var(--g-font-weight-body, 400);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
 }
 
-/* "I don't know" variant — simple inline checkbox, no card border */
+/* "I don't know" — compact, borderless inline checkbox */
 .checkbox-standalone.idk-option {
-  border: none;
-  padding: 6px 0 0 0;
-  background: none;
+  display: inline-flex;
   align-items: center;
-}
-
-.checkbox-standalone.idk-option:hover {
-  border-color: transparent;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0;
+  border: none;
   background: none;
 }
 
-.checkbox-standalone.idk-option.selected {
-  border-color: transparent;
-  background: none;
-}
+.checkbox-standalone.idk-option:hover,
+.checkbox-standalone.idk-option.selected { border-color: transparent; background: none; }
 
 .checkbox-standalone.idk-option input[type="checkbox"] {
-  margin-top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
 }
 
 .checkbox-standalone.idk-option label {
   font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 0;
-}
-
-.checkbox-standalone.idk-option.selected label {
-  color: var(--g-main);
-}
-
-/* ============================================================
-   Success Message — Thank-you state
-   Mirrors the customer-gate pattern for visual consistency.
-   ============================================================ */
-.success-message {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  min-height: 55vh;
-  padding: 60px var(--g-hgutter, 15px);
-  text-align: center;
-}
-
-.success-message.show {
-  display: flex;
-}
-
-.success-message__inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.success-message__icon {
-  margin-bottom: 24px;
-  color: var(--g-main);
-}
-
-.success-message__icon svg {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-}
-
-.success-message__heading {
-  font-family: var(--g-font-1);
   font-weight: 400;
-  font-size: 46px;
-  line-height: 1.4;
-  margin: 0 0 15px;
-  color: var(--g-color-heading, #222222);
+  color: var(--slate);
 }
-
-.success-message__heading-accent {
-  color: var(--g-main-2, #e35353);
-  margin-left: 6px;
-}
-
-.success-message__text {
-  font-family: var(--g-font-2);
-  font-size: var(--g-font-size, 15px);
-  font-weight: var(--g-font-weight-body, 400);
-  line-height: var(--g-body-lineheight, 1.6);
-  color: var(--color-body-text, #414141);
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.success-message__ref {
-  font-size: calc(var(--g-font-size, 15px) - 1px);
-  color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.55);
-  margin-bottom: 20px;
-}
-
-.success-message__saved {
-  margin-bottom: 30px;
-}
-
-.success-message__actions {
-  display: flex;
-  gap: var(--g-hgutter, 15px);
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .patient-intake-form {
-    padding: 40px 0;
-  }
-
-  .step-title {
-    font-size: calc(var(--g-h2-font-size) * 0.8);
-    margin-bottom: 20px;
-  }
-
-  .form-navigation {
-    flex-direction: column-reverse;
-    gap: 15px;
-  }
-
-  .btn-back,
-  .btn-next,
-  .btn-submit {
-    width: 100%;
-  }
-
-  .success-message {
-    min-height: 45vh;
-    padding: 40px var(--g-hgutter, 15px);
-  }
-
-  .success-message__heading {
-    font-size: calc(46px * 0.65);
-  }
-
-  .success-message__actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .success-message__actions .btn-theme,
-  .success-message__actions .btn-outline {
-    width: 100%;
-    max-width: 240px;
-  }
-}
-
-/* IRN input style */
 
 /* ============================================================
-   File Upload Zone
+   SAFETY ACKNOWLEDGEMENT BOX
+   ============================================================ */
+.safety-info {
+  display: flex;
+  gap: 16px;
+  padding: 24px 26px;
+  background: var(--sage-wash);
+  border: 1px solid var(--sage-tint);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+.safety-info::before {
+  content: '';
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%234F6B53' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+}
+
+/* ============================================================
+   FILE UPLOAD (proof of age)
    ============================================================ */
 .file-upload-zone {
   position: relative;
-  border: 2px dashed var(--g-input-border);
-  border-radius: var(--g-input-radius);
-  padding: 30px 20px;
+  border: 1.5px dashed var(--dash);
+  border-radius: 12px;
+  padding: 42px 24px;
   text-align: center;
+  background: var(--paper-2);
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.file-upload-zone:hover {
-  border-color: var(--g-main);
-  background-color: rgba(var(--g-main-rgb), 0.02);
-}
-
+.file-upload-zone:hover,
 .file-upload-zone.drag-over {
-  border-color: var(--g-main);
-  background-color: rgba(var(--g-main-rgb), 0.06);
+  border-color: var(--coral);
+  background-color: var(--coral-wash);
 }
 
-.file-upload-zone.error {
-  border-color: var(--color-error, #dc3545);
-}
+.file-upload-zone.error { border-color: var(--coral); }
 
 .file-upload-zone.has-file {
   border-style: solid;
-  border-color: var(--g-main);
-  background-color: rgba(var(--g-main-rgb), 0.03);
+  border-color: var(--line);
+  background: var(--white);
   padding: 16px 20px;
 }
 
@@ -848,26 +728,30 @@ textarea.form-control {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  color: rgba(var(--g-color-heading-rgb), 0.4);
 }
 
-.file-upload-placeholder svg {
-  color: rgba(var(--g-color-heading-rgb), 0.25);
+.file-upload-placeholder > svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--slate);
 }
 
 .file-upload-text {
-  font-size: var(--g-font-size);
-  color: rgba(var(--g-color-heading-rgb), 0.6);
+  font-size: 16px;
+  color: var(--ink-2);
 }
 
 .file-upload-text strong {
-  color: var(--g-main);
+  color: var(--coral);
+  font-weight: 600;
   text-decoration: underline;
 }
 
 .file-upload-hint {
-  font-size: 12px;
-  color: rgba(var(--g-color-heading-rgb), 0.4);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--slate-2);
 }
 
 .file-upload-preview {
@@ -886,13 +770,15 @@ textarea.form-control {
 
 .file-preview-info svg {
   flex-shrink: 0;
-  color: var(--g-main);
+  width: 24px;
+  height: 24px;
+  stroke: var(--coral);
 }
 
 .file-preview-name {
   font-size: 14px;
   font-weight: 600;
-  color: var(--g-color-heading);
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -901,7 +787,7 @@ textarea.form-control {
 
 .file-preview-size {
   font-size: 12px;
-  color: rgba(var(--g-color-heading-rgb), 0.5);
+  color: var(--slate-2);
   flex-shrink: 0;
 }
 
@@ -909,32 +795,283 @@ textarea.form-control {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  border: 1px solid var(--g-input-border);
-  border-radius: 50%;
   width: 32px;
   height: 32px;
-  cursor: pointer;
-  color: rgba(var(--g-color-heading-rgb), 0.5);
-  transition: all 0.2s;
-  flex-shrink: 0;
   padding: 0;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--slate);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
 }
 
+.file-remove-btn svg { width: 18px; height: 18px; stroke: currentColor; }
+
 .file-remove-btn:hover {
-  background: var(--color-error, #dc3545);
-  border-color: var(--color-error, #dc3545);
+  background: var(--danger);
+  border-color: var(--danger);
   color: #fff;
 }
 
 @media (max-width: 576px) {
-  .file-preview-name {
-    max-width: 140px;
-  }
+  .file-preview-name { max-width: 140px; }
 }
 
+/* Medicare IRN single-digit input */
 .irn-input {
   text-align: center;
-  font-size: 18px;
   letter-spacing: 2px;
+}
+
+/* ============================================================
+   FOOTER NAVIGATION
+   ============================================================ */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-2);
+}
+
+.btn-back,
+.btn-next,
+.btn-submit {
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  border-radius: 999px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-back {
+  padding: 0 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.btn-back:hover { border-color: var(--slate-2); }
+
+.btn-back:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-next,
+.btn-submit {
+  padding: 0 36px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--paper);
+}
+
+.btn-next:hover,
+.btn-submit:hover { background: var(--ink-3); border-color: var(--ink-3); }
+
+.btn-submit.loading,
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .form-navigation { gap: 12px; }
+  .btn-back { padding: 0 24px; }
+  .btn-next,
+  .btn-submit { padding: 0 28px; }
+}
+
+/* ============================================================
+   SUCCESS / CONFIRMATION SCREEN
+   ============================================================ */
+.success-message {
+  display: none;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.success-message.show { display: block; }
+
+.success-message__inner {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 48px;
+}
+
+.success-message__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--sage-wash);
+  border: 1px solid var(--sage-tint);
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.success-message__icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--sage-deep);
+  border-radius: 0;
+}
+
+.success-message__eyebrow {
+  margin-top: 24px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+
+.success-message__heading {
+  margin: 10px 0 0;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 42px);
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  color: var(--ink);
+}
+
+.success-message__heading em {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral);
+}
+
+.success-message__text {
+  font-family: 'Jost', sans-serif;
+  font-size: 17px;
+  color: var(--slate);
+  line-height: 1.55;
+  margin: 16px 0 0;
+}
+
+.success-message__ref {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 16px 20px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.success-message__ref-label {
+  font-size: 14px;
+  color: var(--slate);
+}
+
+.success-message__ref-code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.success-timeline {
+  margin-top: 30px;
+  border-top: 1px solid var(--line-2);
+}
+
+.success-timeline__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 2px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.success-timeline__item:last-child { border-bottom: none; }
+
+.success-timeline__index {
+  flex: none;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--slate-2);
+  margin-top: 2px;
+}
+
+.success-timeline__title {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.success-timeline__desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--slate);
+  margin-top: 2px;
+}
+
+.success-message__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* success action pills */
+.success-message__actions .btn-theme,
+.success-message__actions .btn-outline {
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.success-message__actions .btn-theme {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--paper);
+}
+
+.success-message__actions .btn-theme:hover { background: var(--ink-3); border-color: var(--ink-3); }
+
+.success-message__actions .btn-outline {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.success-message__actions .btn-outline:hover { border-color: var(--slate-2); }
+
+@media (max-width: 600px) {
+  .success-message__inner { padding: 32px 22px; }
+  .success-message__actions { flex-direction: column; }
+  .success-message__actions .btn-theme,
+  .success-message__actions .btn-outline { width: 100%; }
 }
