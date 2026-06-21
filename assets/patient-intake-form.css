@@ -39,7 +39,9 @@
   --danger: #B5453A;
   --ring: 0 0 0 3px rgba(229, 91, 79, 0.12);
 
-  background: var(--paper);
+  /* White page; the form card carries the warm paper tone (below).
+     Inputs and option cards inside stay white for contrast. */
+  background: var(--white);
   color: var(--ink);
   font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -230,7 +232,7 @@
    CARD
    ============================================================ */
 .qy-intake__card {
-  background: var(--white);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 48px 48px 40px;
@@ -948,7 +950,7 @@ select.form-control {
 
 .btn-back {
   padding: 0 32px;
-  background: var(--paper);
+  background: var(--white);
   border: 1px solid var(--line);
   color: var(--ink);
 }
