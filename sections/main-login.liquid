@@ -5,6 +5,7 @@
     background: #F4F2EC;
     font-family: 'Jost', sans-serif;
     color: #0F1110;
+    -webkit-font-smoothing: antialiased;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,44 +24,43 @@
   /* The theme sets font-family on h1–h6 (var(--g-font-1)) and on
      p/input/button (var(--g-font-2)) via element selectors in
      assets/theme.css, which beat the Jost inherited from the container.
-     Re-assert Jost on those elements; the serif (em) and mono accents keep
-     their own, more-specific rules. Also clear the theme's heading
-     text-transform / size so the card heading renders per the design. */
+     Re-assert Jost on those elements; the serif (em) accent keeps its own,
+     more-specific rule. Also clear the theme's heading text-transform / size
+     so the card heading renders per the design. */
   .qy-login-page .qy-h1,
   .qy-login-page .qy-label,
   .qy-login-page .qy-secure,
   .qy-login-page .qy-sub,
   .qy-login-page .qy-meta-row,
   .qy-login-page .qy-link { font-family: 'Jost', sans-serif; }
+  .qy-login-page .qy-h1 { text-transform: none; }
 
-  .qy-login-page .qy-wrap { width: 100%; max-width: 480px; }
+  .qy-login-page .qy-wrap { width: 100%; max-width: 452px; }
 
-  /* Card */
+  /* Card — single allowed soft elevation shadow */
   .qy-login-page .qy-card {
     background: #FFFFFF;
     border: 1px solid #E3E0D7;
-    border-radius: 2px;
-    padding: 48px 48px 40px;
-    box-shadow: 0 24px 60px -42px rgba(15,17,16,0.25);
+    border-radius: 14px;
+    padding: 44px 44px 36px;
+    box-shadow: 0 4px 14px -4px rgba(0,0,0,0.10);
   }
 
   /* Header block */
-  .qy-login-page .qy-head { text-align: center; }
   .qy-login-page .qy-kicker {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #8A8F8C;
     margin-bottom: 14px;
   }
   .qy-login-page .qy-h1 {
     margin: 0;
-    font-weight: 300;
-    font-size: 46px;
+    font-weight: 400;
+    font-size: 44px;
     line-height: 1;
-    letter-spacing: -0.035em;
-    text-transform: none;
+    letter-spacing: -0.02em;
     color: #0F1110;
   }
   .qy-login-page .qy-h1 em {
@@ -69,29 +69,38 @@
     font-weight: 400;
     color: #E55B4F;
   }
+  .qy-login-page .qy-sub {
+    margin: 14px 0 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: #5B615E;
+  }
 
-  .qy-login-page .qy-divider { height: 1px; background: #EDEAE1; margin: 32px 0; }
+  .qy-login-page .qy-divider { height: 1px; background: #EDEAE1; margin: 30px 0; }
 
   /* Fields */
   .qy-login-page .qy-label {
     display: block;
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.01em;
     color: #1C1F1D;
     margin-bottom: 8px;
   }
   .qy-login-page .qy-input {
     width: 100%;
     min-width: 0;
+    height: 48px;
+    margin: 0;
     font-family: 'Jost', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 400;
     color: #0F1110;
-    background: #FAF8F2;
+    background: #FFFFFF;
     border: 1px solid #E3E0D7;
-    border-radius: 2px;
-    padding: 16px 17px;
-    transition: border-color .15s ease, box-shadow .15s ease;
+    border-radius: 8px;
+    padding: 0 15px;
+    transition: border-color .12s ease, box-shadow .12s ease;
   }
   .qy-login-page .qy-input::placeholder { color: #8A8F8C; opacity: 1; }
   .qy-login-page .qy-input:focus {
@@ -106,11 +115,11 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    margin: 20px 0 8px;
+    margin: 18px 0 8px;
   }
   .qy-login-page .qy-pw-row .qy-label { margin-bottom: 0; }
 
-  /* Inline links (forgot / register / back) */
+  /* Inline links (forgot / back) */
   .qy-login-page .qy-link {
     color: #5B615E;
     font-size: 13px;
@@ -121,28 +130,27 @@
     border-bottom: 1px solid transparent;
     padding: 0;
     cursor: pointer;
-    transition: border-color .15s ease;
+    transition: border-color .12s ease;
   }
   .qy-login-page .qy-link:hover { border-bottom-color: #E55B4F; }
 
-  /* Submit */
+  /* Submit — ink pill, coral on hover */
   .qy-login-page .qy-submit {
     width: 100%;
-    margin-top: 26px;
-    padding: 18px;
-    background: #E55B4F;
-    color: #FFFFFF;
-    border: 1px solid #E55B4F;
-    border-radius: 2px;
+    height: 48px;
+    margin-top: 24px;
+    padding: 0;
+    background: #0F1110;
+    color: #F4F2EC;
+    border: 1px solid #0F1110;
+    border-radius: 999px;
     font-family: 'Jost', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 15px;
     cursor: pointer;
-    transition: background .15s ease, border-color .15s ease;
+    transition: background .12s ease, border-color .12s ease;
   }
-  .qy-login-page .qy-submit:hover { background: #B83F36; border-color: #B83F36; }
+  .qy-login-page .qy-submit:hover { background: #E55B4F; border-color: #E55B4F; }
 
   /* Secure line */
   .qy-login-page .qy-secure {
@@ -151,42 +159,33 @@
     justify-content: center;
     gap: 8px;
     margin: 16px 0 0;
-    font-size: 13px;
+    font-size: 12.5px;
+    font-weight: 400;
     color: #8A8F8C;
-    font-weight: 300;
   }
 
   /* Meta rows below the card (register / back to login) */
   .qy-login-page .qy-meta-row {
     text-align: center;
     font-size: 15px;
+    font-weight: 400;
     color: #5B615E;
-    font-weight: 300;
-    margin: 24px 0 0;
+    margin: 22px 0 0;
   }
   .qy-login-page .qy-meta-row .qy-strong {
     color: #0F1110;
     font-weight: 500;
     font-size: 15px;
+    border-bottom: 1px solid transparent;
   }
   .qy-login-page .qy-meta-row .qy-strong:hover { border-bottom-color: #E55B4F; }
-
-  /* Recover sub-text */
-  .qy-login-page .qy-sub {
-    text-align: center;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #5B615E;
-    font-weight: 300;
-    margin: 14px 0 0;
-  }
 
   /* Success banner (recover email sent) */
   .qy-login-page .qy-success {
     margin: 0 0 18px;
     padding: 14px 16px;
     border: 1px solid #C8D8C2;
-    border-radius: 2px;
+    border-radius: 8px;
     background: #EFF5EC;
     color: #2E5A33;
     font-size: 13.5px;
@@ -201,7 +200,7 @@
     margin: 24px 0 0;
     padding: 13px 16px;
     border: 1px solid #E55B4F;
-    border-radius: 2px;
+    border-radius: 8px;
     background: #FBE9E6;
     color: #B83F36;
     font-size: 13.5px;
@@ -210,27 +209,22 @@
   .qy-login-page .errors li { margin: 0; }
   .qy-login-page .errors li + li { margin-top: 4px; }
 
-  /* Guest login (only when the store enables it) */
-  .qy-login-page .qy-guest {
-    margin-top: 16px;
-    text-align: center;
-  }
+  /* Guest login (only when the store enables it) — secondary pill */
+  .qy-login-page .qy-guest { margin-top: 14px; }
   .qy-login-page .qy-guest-btn {
     width: 100%;
-    padding: 16px 18px;
+    height: 48px;
     background: transparent;
     color: #0F1110;
     border: 1px solid #E3E0D7;
-    border-radius: 2px;
+    border-radius: 999px;
     font-family: 'Jost', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 15px;
     cursor: pointer;
-    transition: background .15s ease, color .15s ease;
+    transition: background .12s ease, color .12s ease, border-color .12s ease;
   }
-  .qy-login-page .qy-guest-btn:hover { background: #0F1110; color: #F4F2EC; }
+  .qy-login-page .qy-guest-btn:hover { background: #0F1110; color: #F4F2EC; border-color: #0F1110; }
 
   /* Visually hidden (accessible labels) */
   .qy-login-page .qy-vh {
@@ -272,10 +266,9 @@
       </div>
 
       <div class="qy-card">
-        <div class="qy-head">
-          <div class="qy-kicker">Account login</div>
-          <h1 class="qy-h1">Log <em>in</em></h1>
-        </div>
+        <div class="qy-kicker">Account · Login</div>
+        <h1 class="qy-h1">Welcome <em>back</em>.</h1>
+        <p class="qy-sub">Log in to manage your prescription, orders and deliveries.</p>
 
         <div class="qy-divider"></div>
 
@@ -311,16 +304,16 @@
           </div>
           {%- endif -%}
 
-          <button type="submit" class="qy-submit">Login</button>
+          <button type="submit" class="qy-submit">Log in</button>
 
           <p class="qy-secure">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
-            Secure &amp; encrypted sign in
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+            Secure &amp; encrypted. Your data is stored in Australia.
           </p>
         {%- endform -%}
       </div>
 
-      <p class="qy-meta-row">New customer? <a href="/account/register" class="qy-link qy-strong">Register</a></p>
+      <p class="qy-meta-row">New to Quity? <a href="/account/register" class="qy-link qy-strong">Create an account</a></p>
 
       {%- if shop.checkout.guest_login -%}
       <div class="qy-guest">
@@ -334,11 +327,9 @@
     <!-- RECOVER PASSWORD VIEW -->
     <div id="RecoverPasswordForm" class="hide">
       <div class="qy-card">
-        <div class="qy-head">
-          <div class="qy-kicker">Password reset</div>
-          <h1 class="qy-h1">Reset <em>password</em></h1>
-          <p class="qy-sub">{{ 'customer.recover_password.subtext' | t }}</p>
-        </div>
+        <div class="qy-kicker">Password reset</div>
+        <h1 class="qy-h1">Reset <em>password</em></h1>
+        <p class="qy-sub">{{ 'customer.recover_password.subtext' | t }}</p>
 
         <div class="qy-divider"></div>
 
