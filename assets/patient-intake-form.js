@@ -23,13 +23,17 @@ class PatientIntakeForm extends HTMLElement {
 
   init() {
     console.log('🔧 PatientIntakeForm initialized');
-    console.log('📊 Current step:', this.currentStep);
-    console.log('📝 Total steps:', this.totalSteps);
-    this.loadFromSession();
-    this.updateDisplay();
-    this.bindEvents();
-    this.restoreFormData();
-    this.initBrandControls();
+    // Each step is isolated so a failure in one (e.g. restoring real
+    // session/account data) can never prevent the brand dropdowns and the
+    // date picker from being wired up.
+    const safe = (label, fn) => {
+      try { fn(); } catch (e) { console.error('[intake] ' + label + ' failed:', e); }
+    };
+    safe('loadFromSession', () => this.loadFromSession());
+    safe('updateDisplay', () => this.updateDisplay());
+    safe('bindEvents', () => this.bindEvents());
+    safe('restoreFormData', () => this.restoreFormData());
+    safe('initBrandControls', () => this.initBrandControls());
   }
 
   bindEvents() {
@@ -1059,9 +1063,11 @@ class PatientIntakeForm extends HTMLElement {
   // Called after restoreFormData() so saved values render correctly.
   // ============================================================
   initBrandControls() {
-    this.initBrandDropdowns();
-    this.initBrandDatePicker();
-    this.bindBrandOutsideClose();
+    // Dropdowns and the date picker are independent — one failing must not
+    // take the other down.
+    try { this.initBrandDropdowns(); } catch (e) { console.error('[intake] dropdowns failed:', e); }
+    try { this.initBrandDatePicker(); } catch (e) { console.error('[intake] datepicker failed:', e); }
+    try { this.bindBrandOutsideClose(); } catch (e) { console.error('[intake] outside-close failed:', e); }
   }
 
   // Close any open dropdown on outside click or Escape. (The date picker
@@ -1084,11 +1090,12 @@ class PatientIntakeForm extends HTMLElement {
 
   initBrandDropdowns() {
     this.querySelectorAll('[data-dropdown]').forEach(details => {
+     try {
       const field = details.closest('.field');
-      const input = field.querySelector('input[type="hidden"]');
+      const input = field && field.querySelector('input[type="hidden"]');
       const valEl = details.querySelector('.dd-val');
       const opts = Array.from(details.querySelectorAll('.opt'));
-      if (!input || !valEl) return;
+      if (!field || !input || !valEl) return;
 
       const placeholder = valEl.textContent;
 
@@ -1135,6 +1142,7 @@ class PatientIntakeForm extends HTMLElement {
 
       // Reflect the current hidden value (default or session-restored).
       apply(input.value || '', { silent: true });
+     } catch (e) { console.error('[intake] dropdown init failed:', e); }
     });
   }
 
