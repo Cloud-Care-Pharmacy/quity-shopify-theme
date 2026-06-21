@@ -8,12 +8,9 @@
   <meta http-equiv="refresh" content="0;url=/account/register">
 {%- else -%}
 
-<div class="patient-intake-form">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-12">
-        
-        <patient-intake-form>
+<div class="patient-intake-form qy-intake">
+  <div class="qy-intake__wrap">
+    <patient-intake-form>
           <!-- Progress Indicator -->
           <div class="progress-indicator">
             <ul class="steps-list" id="stepsList">
@@ -44,58 +41,83 @@
             </ul>
           </div>
 
-          <!-- Success Message -->
+          <!-- Success / Confirmation -->
           <div class="success-message" id="successMessage">
             <div class="success-message__inner">
               <div class="success-message__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                  <circle cx="32" cy="32" r="32" fill="currentColor"/>
-                  <path d="M20 33l8 8 16-16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7"></path>
                 </svg>
               </div>
-              <h1 class="success-message__heading">
-                <span class="success-message__heading-primary">Thank</span>
-                <span class="success-message__heading-accent">You!</span>
-              </h1>
-              <p class="success-message__text">Your patient intake questionnaire has been submitted successfully.</p>
-              <p class="success-message__text success-message__ref" id="successRef"></p>
-              <p class="success-message__text success-message__saved">One of our doctors will carefully review your responses and assess your eligibility. You can expect to hear from us within the next 24 hours via email.</p>
-              <p class="success-message__text success-message__note">If you have any questions in the meantime, feel free to reach out to our support team.</p>
+              <div class="success-message__eyebrow">Application received</div>
+              <h1 class="success-message__heading">Thanks — we&rsquo;ll take it <em>from here.</em></h1>
+              <p class="success-message__text">An Australian-registered doctor will review your application within 24 hours. We&rsquo;ll email you at the address you provided &mdash; there&rsquo;s nothing else to do right now.</p>
+
+              <div class="success-message__ref">
+                <span class="success-message__ref-label">Reference</span>
+                <span class="success-message__ref-code" id="successRef">&mdash;</span>
+              </div>
+
+              <div class="success-timeline">
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">01</span>
+                  <div>
+                    <div class="success-timeline__title">Doctor reviews your application</div>
+                    <div class="success-timeline__desc">Within 24 hours. They may message you with a question.</div>
+                  </div>
+                </div>
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">02</span>
+                  <div>
+                    <div class="success-timeline__title">Your script is issued</div>
+                    <div class="success-timeline__desc">If approved, we email your 12-month prescription securely.</div>
+                  </div>
+                </div>
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">03</span>
+                  <div>
+                    <div class="success-timeline__title">Pharmacy ships your order</div>
+                    <div class="success-timeline__desc">Overnight from our Sydney pharmacy, in plain packaging.</div>
+                  </div>
+                </div>
+              </div>
+
               <div class="success-message__actions">
-                <a href="/" class="btn-theme">Back to Home</a>
-                <a href="/account" class="btn-outline">My Account</a>
+                <a href="/account" class="btn-theme">My Account</a>
+                <a href="/" class="btn-outline">Back to Home</a>
               </div>
             </div>
           </div>
 
           <!-- Form -->
-          <form id="patientIntakeForm" novalidate>
-            
+          <form id="patientIntakeForm" class="qy-intake__card" novalidate>
+
+            <!-- Validation banner -->
+            <div class="qy-intake__banner" id="formErrorBanner">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4.5"></path><path d="M12 16.3v.4"></path></svg>
+              <span>Please review the highlighted fields before continuing.</span>
+            </div>
+
             <!-- Step 1: About You -->
             <div class="form-step active" data-step="1">
-              <h2 class="step-title">About You</h2>
+              <div class="qy-intake__eyebrow">Step 01 / 06</div>
+              <h2 class="step-title">About <em>you</em></h2>
+
+              <div class="section-separator with-label"><span class="sep-label">Personal details</span></div>
 
               <div class="form-row">
                 <div class="field form-group">
                   <label for="firstName" class="required">First name</label>
-                  <input type="text" id="firstName" name="firstName" class="field__input form-control" required>
+                  <input type="text" id="firstName" name="firstName" class="field__input form-control" placeholder="First name" required>
                   <div class="error-message">Please enter your first name</div>
                 </div>
 
                 <div class="field form-group">
                   <label for="lastName" class="required">Last name</label>
-                  <input type="text" id="lastName" name="lastName" class="field__input form-control" required>
+                  <input type="text" id="lastName" name="lastName" class="field__input form-control" placeholder="Last name" required>
                   <div class="error-message">Please enter your last name</div>
                 </div>
               </div>
-
-              <div class="field form-group">
-                <label for="email" class="required">Email</label>
-                <input type="email" id="email" name="email" class="field__input form-control" required>
-                <div class="error-message">Please enter a valid email address</div>
-              </div>
-
-              <div class="section-separator with-label"><span class="sep-label">Personal Details</span></div>
 
               <div class="form-row dob-gender-row">
                 <div class="field form-group">
@@ -196,13 +218,21 @@
 
               <div class="section-separator with-label"><span class="sep-label">Contact</span></div>
 
-              <div class="field form-group">
-                <label for="mobile" class="required">Mobile number</label>
-                <input type="tel" id="mobile" name="mobile" class="field__input form-control" placeholder="+61" required>
-                <div class="error-message">Please enter your mobile number</div>
+              <div class="form-row">
+                <div class="field form-group">
+                  <label for="email" class="required">Email</label>
+                  <input type="email" id="email" name="email" class="field__input form-control" placeholder="you@email.com" required>
+                  <div class="error-message">Please enter a valid email address</div>
+                </div>
+
+                <div class="field form-group">
+                  <label for="mobile" class="required">Mobile number</label>
+                  <input type="tel" id="mobile" name="mobile" class="field__input form-control" placeholder="04XX XXX XXX" required>
+                  <div class="error-message">Please enter your mobile number</div>
+                </div>
               </div>
 
-              <div class="section-separator with-label"><span class="sep-label">Proof of Age</span></div>
+              <div class="section-separator with-label"><span class="sep-label">Proof of age</span></div>
 
               <div class="field form-group">
                 <label class="required">Upload proof of age document</label>
@@ -240,9 +270,11 @@
 
             <!-- Step 2: Smoking Status -->
             <div class="form-step" data-step="2">
-              <h2 class="step-title">Smoking Status</h2>
+              <div class="qy-intake__eyebrow">Step 02 / 06</div>
+              <h2 class="step-title">Smoking <em>status</em></h2>
+              <p class="qy-intake__lead">Tell us where you are right now. There&rsquo;s no wrong answer &mdash; it helps the doctor choose the right option for you.</p>
 
-              <div class="field form-group">
+              <div class="field form-group" style="margin-top:36px;">
                 <label class="required">Current smoking status</label>
                 <div class="radio-group">
                   <div class="radio-option" data-value="currently-smoking">
@@ -268,7 +300,8 @@
 
             <!-- Step 3: Smoking History -->
             <div class="form-step" data-step="3">
-              <h2 class="step-title">Smoking History</h2>
+              <div class="qy-intake__eyebrow">Step 03 / 06</div>
+              <h2 class="step-title">Smoking <em>history</em></h2>
 
               <div class="section-separator with-label"><span class="sep-label">Smoking Habits</span></div>
 
@@ -427,9 +460,10 @@
 
             <!-- Step 4: Vaping Status -->
             <div class="form-step" data-step="4">
-              <h2 class="step-title">Vaping Status</h2>
+              <div class="qy-intake__eyebrow">Step 04 / 06</div>
+              <h2 class="step-title">Vaping <em>status</em></h2>
 
-              <div class="field form-group">
+              <div class="field form-group" style="margin-top:36px;">
                 <label class="required">Have you ever vaped?</label>
                 <div class="radio-cards">
                   <div class="radio-card" data-value="yes">
@@ -447,7 +481,8 @@
 
             <!-- Step 5: Vaping History -->
             <div class="form-step" data-step="5">
-              <h2 class="step-title">Vaping History</h2>
+              <div class="qy-intake__eyebrow">Step 05 / 06</div>
+              <h2 class="step-title">Vaping <em>history</em></h2>
 
               <div class="section-separator with-label"><span class="sep-label">Vaping Preferences</span></div>
 
@@ -506,7 +541,8 @@
 
             <!-- Step 6: Medical History -->
             <div class="form-step" data-step="6">
-              <h2 class="step-title">Medical History</h2>
+              <div class="qy-intake__eyebrow">Step 06 / 06</div>
+              <h2 class="step-title">Medical <em>history</em></h2>
 
               <div class="section-separator with-label"><span class="sep-label">Medical Conditions</span></div>
 
@@ -648,7 +684,7 @@
 
               <div class="field form-group">
                 <div class="safety-info">
-                  Complete abstinence from smoking and vaping is the safest option for your health. Nicotine is addictive, and the long-term risks of vaping are unknown. Currently no nicotine vaping products have been approved by the TGA, and the safety of these products have not yet been thoroughly assessed. Quit Clinics, or its doctors, cannot guarantee the safety of any vaping product. In order to minimise risk of harms, only short-term use of e-cigarettes is recommended, and dual use (vaping plus smoking) needs to be avoided.
+                  Complete abstinence from smoking and vaping is the safest option for your health. Nicotine is addictive, and the long-term risks of vaping are unknown. No nicotine vaping products are currently approved by the TGA, and their safety has not been thoroughly assessed. Quity, and its doctors, cannot guarantee the safety of any vaping product. To minimise harm, only short-term use of e-cigarettes is recommended, and dual use (vaping plus smoking) should be avoided.
                 </div>
                 <div class="checkbox-standalone" data-value="acknowledged">
                   <input type="checkbox" id="safetyAcknowledgment" name="safetyAcknowledgment" required>
@@ -662,13 +698,11 @@
             <div class="form-navigation">
               <button type="button" class="btn-back" id="btnBack" disabled>Back</button>
               <button type="button" class="btn-next" id="btnNext">Next</button>
-              <button type="submit" class="btn-submit" id="btnSubmit" style="display: none;">Submit</button>
+              <button type="submit" class="btn-submit" id="btnSubmit" style="display: none;">Submit application</button>
             </div>
           </form>
         </patient-intake-form>
 
-      </div>
-    </div>
   </div>
 </div>
 

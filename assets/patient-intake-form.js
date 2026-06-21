@@ -14,6 +14,7 @@ class PatientIntakeForm extends HTMLElement {
     this.stepsList = this.querySelector('#stepsList');
     this.stepItems = this.querySelectorAll('.step-item');
     this.successMessage = this.querySelector('#successMessage');
+    this.errorBanner = this.querySelector('#formErrorBanner');
     this.completedSteps = new Set();
     this.uploadedFile = null;
     
@@ -469,6 +470,11 @@ class PatientIntakeForm extends HTMLElement {
       }
     }
 
+    // Top-of-card validation banner mirrors the inline field errors
+    if (this.errorBanner) {
+      this.errorBanner.classList.toggle('show', !isValid);
+    }
+
     console.log(isValid ? '✅ Overall validation PASSED' : '❌ Overall validation FAILED');
     return isValid;
   }
@@ -499,7 +505,10 @@ class PatientIntakeForm extends HTMLElement {
 
   updateDisplay() {
     console.log('🔄 Updating display for step', this.currentStep);
-    
+
+    // Errors are step-scoped — clear the banner when changing steps
+    if (this.errorBanner) this.errorBanner.classList.remove('show');
+
     // Update steps visibility
     this.steps.forEach((step, index) => {
       step.classList.toggle('active', parseInt(step.dataset.step) === this.currentStep);
@@ -728,12 +737,13 @@ class PatientIntakeForm extends HTMLElement {
     this.querySelector('.progress-indicator').style.display = 'none';
     this.querySelector('.form-navigation').style.display = 'none';
     
-    // Add patient ID to success message if available
-    if (patientId) {
-      const refEl = this.successMessage.querySelector('#successRef');
-      if (refEl) {
-        refEl.textContent = 'Reference ID: ' + patientId;
-      }
+    // Populate the reference chip with the server-issued ID, or a
+    // generated QY- code as a fallback.
+    const refEl = this.successMessage.querySelector('#successRef');
+    if (refEl) {
+      refEl.textContent = patientId
+        ? String(patientId)
+        : 'QY-' + Math.random().toString(36).slice(2, 8).toUpperCase();
     }
     
     this.successMessage.classList.add('show');
