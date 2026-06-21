@@ -149,13 +149,6 @@
         "default": "#fff"
       },
       {
-        "type": "checkbox",
-        "id": "enable_bodybg",
-        "label": "Limit page & content background to homepage",
-        "info": "When enabled, the Page background and Content background colors apply only to the homepage; all other pages stay white.",
-        "default": false
-      },
-      {
         "type": "color",
         "id": "color_body_headings",
         "label": "Heading text",
