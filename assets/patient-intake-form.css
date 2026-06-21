@@ -77,6 +77,17 @@
 
 .qy-intake ::placeholder { color: var(--slate-2); opacity: 1; }
 
+/* The theme's float-label pattern hides every placeholder inside a
+   `.form-group` via `color: transparent !important` (theme.css). This
+   form uses real, always-visible labels, so the placeholders (e.g. the
+   mobile and Medicare-expiry format hints) must be re-enabled here with
+   matching specificity *and* !important to win the cascade. */
+.qy-intake .form-group input::placeholder,
+.qy-intake .form-group textarea::placeholder {
+  color: var(--slate-2) !important;
+  opacity: 1 !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .qy-intake *,
   .qy-intake *::before,
@@ -1247,6 +1258,13 @@ select.form-control {
   max-height: 286px;
   overflow-y: auto;
 }
+
+/* Required: browsers do NOT hide an absolutely-positioned child of a
+   closed <details> (the UA's closed-content suppression doesn't catch
+   out-of-flow boxes), so without this every dropdown menu would render
+   permanently — stacked over each other and the fields below. Force the
+   menu hidden unless its <details> is open. */
+.qy-intake .dropdown:not([open]) .menu { display: none; }
 
 .qy-intake .menu .opt {
   display: flex;
