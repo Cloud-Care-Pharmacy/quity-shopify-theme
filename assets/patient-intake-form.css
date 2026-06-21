@@ -438,6 +438,19 @@ textarea.form-control.error {
   cursor: not-allowed;
 }
 
+/* Read-only fields pre-filled from the customer's account (name / email).
+   Kept legible (not greyed-out like :disabled) and visibly non-editable. */
+.field__input.form-control[readonly] {
+  background: var(--paper-2);
+  color: var(--ink-2);
+  cursor: default;
+}
+
+.field__input.form-control[readonly]:focus {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
 textarea.form-control {
   height: auto;
   min-height: 120px;
@@ -487,6 +500,25 @@ select.form-control {
 
 /* a helper directly under a question label hugs it */
 .field.form-group > label + .helper-text { margin-top: 0; }
+
+/* "From your account" hint under read-only, account-linked fields */
+.qy-locked-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--slate-2);
+}
+
+.qy-locked-hint svg {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+}
 
 .error-message {
   display: none;

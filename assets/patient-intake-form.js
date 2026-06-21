@@ -848,7 +848,9 @@ class PatientIntakeForm extends HTMLElement {
         elements.checked = this.formData[key] === 'on' || this.formData[key] === true;
         const parent = elements.closest('.checkbox-standalone');
         if (parent && elements.checked) parent.classList.add('selected');
-      } else {
+      } else if (!elements.readOnly) {
+        // Skip read-only fields (e.g. name/email pulled from the customer
+        // account) so saved session data can't overwrite the account values.
         elements.value = this.formData[key];
       }
     });
