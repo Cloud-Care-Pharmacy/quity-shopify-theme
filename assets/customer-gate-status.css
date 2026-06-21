@@ -1,172 +1,244 @@
 /* ============================================================
-   Customer Gate Status — Blocked State UI
-   Uses theme design tokens throughout for consistency.
+   Customer Gate Status — Quity Verification Gate States
+   ------------------------------------------------------------
+   Full-viewport "gate" screens shown to customers based on their
+   account verification status. Recreates the Quity brand
+   "Verification States" design using the Quity design tokens.
+
+   Fonts (Jost / Newsreader / JetBrains Mono) are loaded in
+   layout/theme.liquid. Colours are hard-coded Quity tokens, the
+   same approach as sections/main-login.liquid.
+
+   States (root modifier): --login, --pending, --expired, --denied.
    ============================================================ */
 
-/* --- Shared layout --- */
-.customer-gate {
+/* --- Scope reset --- */
+.qy-gate,
+.qy-gate *,
+.qy-gate *::before,
+.qy-gate *::after { box-sizing: border-box; }
+
+/* Line icons: opt out of the theme's global
+   `svg, .icon { fill: currentColor; width:16px; height:16px }`
+   rule (assets/theme.css) so the 1.5px stroke icons render. */
+.qy-gate svg { fill: none; }
+
+/* --- Section shell (one full-viewport gate) --- */
+.qy-gate {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 96px 24px;
+  background: #FFFFFF;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  color: #0F1110;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Content column --- */
+.qy-gate__col {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Icon chip --- */
+.qy-gate__chip {
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 65vh;
-  padding: 60px var(--g-hgutter, 15px);
-  text-align: center;
+  border: 1px solid var(--gate-chip-bd, #E3E0D7);
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: var(--gate-icon, #0F1110);
+  margin-bottom: 26px;
 }
+.qy-gate__chip svg { width: 24px; height: 24px; }
 
-.customer-gate__inner {
-  max-width: 720px;
-  margin: 0 auto;
+/* --- Status badge --- */
+.qy-gate__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--gate-badge-bg, #F4F2EC);
+  border: 1px solid var(--gate-badge-bd, #E3E0D7);
+  margin-bottom: 20px;
+}
+.qy-gate__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gate-dot, #8A8F8C);
+}
+.qy-gate__badge-label {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--gate-badge-text, #5B615E);
 }
 
 /* --- Heading --- */
-.customer-gate__heading {
-  font-family: var(--g-font-1);
+/* Double-scoped to beat the theme's element `h1` / `.h1` rules
+   (assets/theme.css) that otherwise set font, size and transform. */
+.qy-gate .qy-gate__heading {
+  margin: 0;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
   font-weight: 400;
-  font-size: 46px;
-  line-height: 1.4;
-  margin: 0 0 15px;
+  font-size: 42px;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: #0F1110;
+}
+.qy-gate .qy-gate__heading em {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gate-em, #E55B4F);
 }
 
-.customer-gate__heading-accent {
-  color: var(--g-main-2, #e35353);
-  margin-left: 6px;
-}
-
-/* --- Message text --- */
-.customer-gate__message {
-  font-family: var(--g-font-2);
-  font-size: var(--g-font-size, 15px);
-  font-weight: var(--g-font-weight-body, 400);
-  line-height: var(--g-body-lineheight, 1.6);
-  margin-top: 0;
-  margin-bottom: 30px;
-}
-
-/* --- Icon (pending state) --- */
-.customer-gate__icon {
-  margin-bottom: 20px;
-}
-
-.customer-gate__icon svg {
-  width: 48px;
-  height: 48px;
+/* --- Message --- */
+.qy-gate .qy-gate__message {
+  margin: 18px 0 0;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #5B615E;
+  max-width: 400px;
 }
 
 /* --- Actions --- */
-.customer-gate__actions {
+.qy-gate__actions {
   display: flex;
-  gap: var(--g-hgutter, 15px);
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* --- Buttons (pill, 48px) --- */
+.qy-gate .qy-gate__btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  height: 48px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .12s ease, border-color .12s ease, color .12s ease;
 }
+.qy-gate .qy-gate__btn--ink {
+  background: #0F1110;
+  color: #F4F2EC;
+  border: 1px solid #0F1110;
+}
+.qy-gate .qy-gate__btn--ink:hover {
+  background: #2A2E2C;
+  border-color: #2A2E2C;
+  color: #F4F2EC;
+}
+.qy-gate .qy-gate__btn--sec {
+  background: transparent;
+  color: #0F1110;
+  border: 1px solid #E3E0D7;
+}
+.qy-gate .qy-gate__btn--sec:hover {
+  border-color: #0F1110;
+  color: #0F1110;
+}
+.qy-gate .qy-gate__btn--coral {
+  background: #E55B4F;
+  color: #FFFFFF;
+  border: 1px solid #E55B4F;
+}
+.qy-gate .qy-gate__btn--coral:hover {
+  background: #B83F36;
+  border-color: #B83F36;
+  color: #FFFFFF;
+}
+
+/* --- Footer note --- */
+.qy-gate__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 34px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #8A8F8C;
+}
+.qy-gate__footer svg { width: 13px; height: 13px; flex: 0 0 auto; }
+
+/* --- Heading size variant (screens 01 & 04) --- */
+.qy-gate--login .qy-gate__heading { font-size: 44px; line-height: 1.0; }
 
 /* ============================================================
-   Access Denied (Declined / Expired)
+   Per-state tokens
    ============================================================ */
-.customer-gate--denied {
-  background-color: var(--g-main, #222222);
-  color: var(--color-content, #ffffff);
+.qy-gate--login {
+  --gate-icon: #0F1110;
+  --gate-chip-bd: #E3E0D7;
+  --gate-badge-bg: #F4F2EC;
+  --gate-badge-bd: #E3E0D7;
+  --gate-dot: #8A8F8C;
+  --gate-badge-text: #5B615E;
+  --gate-em: #E55B4F;
 }
-
-.customer-gate--denied .customer-gate__heading {
-  color: var(--color-content, #ffffff);
+.qy-gate--pending {
+  --gate-icon: #C79C3D;
+  --gate-chip-bd: #E3E0D7;
+  --gate-badge-bg: #FBF4E2;
+  --gate-badge-bd: #ECDFC0;
+  --gate-dot: #C79C3D;
+  --gate-badge-text: #9A7A28;
+  --gate-em: #C79C3D;
 }
-
-.customer-gate--denied .customer-gate__heading-accent {
-  color: var(--g-main-2, #e35353);
-}
-
-.customer-gate--denied .customer-gate__message {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Denied buttons — use .btn-outline-white pattern */
-.customer-gate--denied .btn-outline {
-  border-color: var(--color-content, #ffffff);
-  color: var(--color-content, #ffffff);
-}
-
-/* ============================================================
-   Account Required (Not logged in)
-   ============================================================ */
-.customer-gate--login {
-  background-color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.05);
-  color: var(--g-color-heading, #222222);
-}
-
-.customer-gate--login .customer-gate__heading {
-  color: var(--g-color-heading, #222222);
-}
-
-.customer-gate--login .customer-gate__heading-accent {
-  color: var(--g-main-2, #e35353);
-}
-
-.customer-gate--login .customer-gate__icon {
-  color: var(--g-main, #222222);
-}
-
-.customer-gate--login .customer-gate__message {
-  color: var(--color-body-text, #414141);
-}
-
-/* ============================================================
-   Verification In Progress (Pending / blank)
-   ============================================================ */
-.customer-gate--pending {
-  background-color: rgba(var(--g-color-heading-rgb, 34, 34, 34), 0.05);
-  color: var(--g-color-heading, #222222);
-}
-
-.customer-gate--pending .customer-gate__heading {
-  color: var(--g-color-heading, #222222);
-}
-
-.customer-gate--pending .customer-gate__heading-accent {
-  color: var(--g-main-2, #e35353);
-}
-
-.customer-gate--pending .customer-gate__icon {
-  color: var(--g-main, #222222);
-}
-
-.customer-gate--pending .customer-gate__message {
-  color: var(--color-body-text, #414141);
+.qy-gate--expired,
+.qy-gate--denied {
+  --gate-icon: #E55B4F;
+  --gate-chip-bd: #E3E0D7;
+  --gate-badge-bg: #FBE9E6;
+  --gate-badge-bd: #F8D7D3;
+  --gate-dot: #E55B4F;
+  --gate-badge-text: #B83F36;
+  --gate-em: #E55B4F;
 }
 
 /* ============================================================
    Responsive
    ============================================================ */
-@media screen and (max-width: 1199px) {
-  .customer-gate__heading {
-    font-size: calc(46px * 0.8);
-  }
-}
-
-@media screen and (max-width: 991px) {
-  .customer-gate__heading {
-    font-size: calc(46px * 0.7);
-  }
-}
-
 @media screen and (max-width: 749px) {
-  .customer-gate {
-    min-height: 55vh;
-    padding: 40px var(--g-hgutter, 15px);
-  }
+  .qy-gate { padding: 72px 20px; }
+  .qy-gate .qy-gate__heading,
+  .qy-gate--login .qy-gate__heading { font-size: 36px; line-height: 1.08; }
+}
 
-  .customer-gate__heading {
-    font-size: calc(46px * 0.6);
-  }
+@media screen and (max-width: 480px) {
+  .qy-gate { padding: 56px 18px; }
+  .qy-gate .qy-gate__heading,
+  .qy-gate--login .qy-gate__heading { font-size: 30px; }
+  .qy-gate__actions { flex-direction: column; width: 100%; max-width: 300px; }
+  .qy-gate .qy-gate__btn { width: 100%; }
+}
 
-  .customer-gate__actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .customer-gate__actions .btn-theme,
-  .customer-gate__actions .btn-outline {
-    width: 100%;
-    max-width: 240px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .qy-gate .qy-gate__btn { transition: none; }
 }
