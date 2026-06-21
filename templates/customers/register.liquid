@@ -5,6 +5,7 @@
     background: #F4F2EC;
     font-family: 'Jost', sans-serif;
     color: #0F1110;
+    -webkit-font-smoothing: antialiased;
     display: flex;
     flex-direction: column;
   }
@@ -17,18 +18,20 @@
      (assets/theme.css) which otherwise renders them as solid shapes. */
   .qy-getstarted svg { fill: none; }
   .qy-getstarted .qy-promise-icon svg { width: 21px; height: 21px; }
-  .qy-getstarted .qy-trust-item svg { width: 16px; height: 16px; }
+  .qy-getstarted .qy-trust-pill svg { width: 14px; height: 14px; }
   .qy-getstarted .qy-secure svg { width: 14px; height: 14px; }
 
   /* The theme sets font-family on h1–h6 (var(--g-font-1)) and on
      p/input/button (var(--g-font-2)) via element selectors in
      assets/theme.css, which beat the Jost inherited from the container.
-     Re-assert Jost on those elements; the serif (em) and mono accents keep
-     their own, more-specific rules. Also clear the theme's heading
-     text-transform so the headline/card heading stay sentence case. */
+     Re-assert Jost on those elements; the serif (em) accent keeps its own,
+     more-specific rule. Also clear the theme's heading text-transform so the
+     headline/card heading stay sentence case. */
   .qy-getstarted .qy-h1,
   .qy-getstarted .qy-card-h,
   .qy-getstarted .qy-lead,
+  .qy-getstarted .qy-card-sub,
+  .qy-getstarted .qy-label,
   .qy-getstarted .qy-secure,
   .qy-getstarted .qy-login-row,
   .qy-getstarted .qy-login { font-family: 'Jost', sans-serif; }
@@ -39,36 +42,32 @@
     flex: 1;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
-    gap: 72px;
+    gap: 64px;
     align-items: center;
-    max-width: 1320px;
+    max-width: 1280px;
     width: 100%;
     margin: 0 auto;
-    padding: 48px 56px 88px;
+    padding: 48px 48px 80px;
   }
   .qy-getstarted .qy-left,
   .qy-getstarted .qy-card { min-width: 0; }
 
   /* Left — value proposition */
-  .qy-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    color: #E55B4F;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
+  .qy-getstarted .qy-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    font-weight: 600;
-    margin-bottom: 26px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8A8F8C;
+    margin-bottom: 18px;
   }
-  .qy-eyebrow .qy-bar { width: 28px; height: 2px; background: #E55B4F; }
 
   .qy-getstarted .qy-h1 {
     margin: 0;
-    font-weight: 300;
-    font-size: clamp(46px, 5.4vw, 72px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
+    font-weight: 400;
+    font-size: clamp(44px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
     color: #0F1110;
   }
   .qy-getstarted .qy-h1 em {
@@ -78,94 +77,100 @@
     color: #E55B4F;
   }
 
-  .qy-lead {
+  .qy-getstarted .qy-lead {
     max-width: 460px;
-    font-size: 21px;
+    font-size: 20px;
+    font-weight: 400;
     line-height: 1.5;
-    color: #1C1F1D;
-    font-weight: 300;
-    margin: 24px 0 0;
+    color: #5B615E;
+    margin: 20px 0 0;
   }
 
-  .qy-promise {
+  .qy-getstarted .qy-promise {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 36px;
     max-width: 500px;
     border-top: 1px solid #E3E0D7;
   }
-  .qy-promise-row {
+  .qy-getstarted .qy-promise-row {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 22px 4px;
+    gap: 18px;
+    padding: 20px 2px;
     border-bottom: 1px solid #E3E0D7;
   }
-  .qy-promise-idx {
+  .qy-getstarted .qy-promise-idx {
     flex: none;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
     color: #8A8F8C;
   }
-  .qy-promise-icon {
+  /* Ink-stroke icon tile — coral is kept scarce on this surface */
+  .qy-getstarted .qy-promise-icon {
     flex: none;
     width: 44px;
     height: 44px;
     border: 1px solid #E3E0D7;
     background: #FAF8F2;
+    border-radius: 8px;
     display: grid;
     place-items: center;
-    color: #E55B4F;
-  }
-  .qy-promise-title {
-    font-weight: 500;
-    font-size: 18px;
-    letter-spacing: -0.01em;
     color: #0F1110;
   }
-  .qy-promise-sub {
-    font-size: 14.5px;
+  .qy-getstarted .qy-promise-title {
+    font-weight: 500;
+    font-size: 17px;
+    color: #0F1110;
+  }
+  .qy-getstarted .qy-promise-sub {
+    font-size: 14px;
     color: #5B615E;
-    font-weight: 300;
     margin-top: 2px;
   }
 
-  .qy-trust {
+  /* Trust pills */
+  .qy-getstarted .qy-trust {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 30px;
+    gap: 10px;
+    margin-top: 24px;
   }
-  .qy-trust-item {
-    display: flex;
+  .qy-getstarted .qy-trust-pill {
+    display: inline-flex;
     align-items: center;
-    gap: 9px;
-    font-size: 14px;
+    gap: 8px;
+    background: #FAF8F2;
+    border: 1px solid #E3E0D7;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12.5px;
     color: #5B615E;
-    font-weight: 300;
   }
 
   /* Right — form card */
   .qy-getstarted .qy-card {
     background: #FFFFFF;
     border: 1px solid #E3E0D7;
-    border-radius: 2px;
-    padding: 42px 42px 36px;
+    border-radius: 14px;
+    padding: 38px 38px 32px;
+    box-shadow: 0 4px 14px -4px rgba(0,0,0,0.08);
   }
-  .qy-kicker {
+  .qy-getstarted .qy-kicker {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #8A8F8C;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .qy-getstarted .qy-card-h {
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 30px;
-    letter-spacing: -0.025em;
-    line-height: 1.05;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
     color: #0F1110;
   }
   .qy-getstarted .qy-card-h em {
@@ -174,27 +179,45 @@
     font-weight: 400;
     color: #E55B4F;
   }
+  .qy-getstarted .qy-card-sub {
+    font-size: 14.5px;
+    font-weight: 400;
+    color: #5B615E;
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
 
-  .qy-names {
+  .qy-getstarted .qy-names {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 13px;
-    margin-top: 28px;
+    margin-top: 24px;
   }
-  .qy-field { min-width: 0; }
-  .qy-field--mt { margin-top: 13px; }
+  .qy-getstarted .qy-field { min-width: 0; }
+  .qy-getstarted .qy-field--mt { margin-top: 14px; }
+
+  .qy-getstarted .qy-label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #1C1F1D;
+    margin-bottom: 7px;
+  }
 
   .qy-getstarted .qy-input {
     width: 100%;
     min-width: 0;
+    height: 48px;
+    margin: 0;
     font-family: 'Jost', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 400;
     color: #0F1110;
-    background: #FAF8F2;
+    background: #FFFFFF;
     border: 1px solid #E3E0D7;
-    border-radius: 2px;
-    padding: 16px 17px;
-    transition: border-color .15s ease, box-shadow .15s ease;
+    border-radius: 8px;
+    padding: 0 15px;
+    transition: border-color .12s ease, box-shadow .12s ease;
   }
   .qy-getstarted .qy-input::placeholder { color: #8A8F8C; opacity: 1; }
   .qy-getstarted .qy-input:focus {
@@ -203,42 +226,42 @@
     box-shadow: 0 0 0 3px rgba(229,91,79,0.12);
   }
 
+  /* Submit — ink pill, coral on hover */
   .qy-getstarted .qy-submit {
     width: 100%;
+    height: 48px;
     margin-top: 22px;
-    padding: 18px;
-    background: #E55B4F;
-    color: #FFFFFF;
-    border: 1px solid #E55B4F;
-    border-radius: 2px;
+    padding: 0;
+    background: #0F1110;
+    color: #F4F2EC;
+    border: 1px solid #0F1110;
+    border-radius: 999px;
     font-family: 'Jost', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 15px;
     cursor: pointer;
-    transition: background .15s ease, border-color .15s ease;
+    transition: background .12s ease, border-color .12s ease;
   }
-  .qy-getstarted .qy-submit:hover { background: #B83F36; border-color: #B83F36; }
+  .qy-getstarted .qy-submit:hover { background: #E55B4F; border-color: #E55B4F; }
 
-  .qy-secure {
+  .qy-getstarted .qy-secure {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 16px 0 0;
-    font-size: 13px;
+    margin: 14px 0 0;
+    font-size: 12.5px;
+    font-weight: 400;
     color: #8A8F8C;
-    font-weight: 300;
   }
 
-  .qy-divider { height: 1px; background: #EDEAE1; margin: 24px 0 18px; }
+  .qy-getstarted .qy-divider { height: 1px; background: #EDEAE1; margin: 22px 0 16px; }
 
-  .qy-login-row {
+  .qy-getstarted .qy-login-row {
     text-align: center;
-    font-size: 15px;
+    font-size: 14.5px;
+    font-weight: 400;
     color: #5B615E;
-    font-weight: 300;
     margin: 0;
   }
   .qy-getstarted .qy-login {
@@ -246,7 +269,7 @@
     font-weight: 500;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color .15s ease;
+    transition: border-color .12s ease;
   }
   .qy-getstarted .qy-login:hover { border-color: #E55B4F; }
 
@@ -257,7 +280,7 @@
     margin: 22px 0 0;
     padding: 13px 16px;
     border: 1px solid #E55B4F;
-    border-radius: 2px;
+    border-radius: 8px;
     background: #FBE9E6;
     color: #B83F36;
     font-size: 13.5px;
@@ -266,19 +289,6 @@
   .qy-getstarted .errors li { margin: 0; }
   .qy-getstarted .errors li + li { margin-top: 4px; }
 
-  /* Visually hidden (accessible labels) */
-  .qy-getstarted .qy-vh {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
   /* Responsive */
   @media (max-width: 900px) {
     .qy-getstarted .qy-grid {
@@ -286,12 +296,12 @@
       gap: 44px;
       padding: 40px 24px 64px;
     }
-    .qy-promise,
-    .qy-lead { max-width: none; }
+    .qy-getstarted .qy-promise,
+    .qy-getstarted .qy-lead { max-width: none; }
   }
   @media (max-width: 480px) {
-    .qy-getstarted .qy-card { padding: 32px 24px 28px; }
-    .qy-names { grid-template-columns: 1fr; }
+    .qy-getstarted .qy-card { padding: 30px 22px 26px; }
+    .qy-getstarted .qy-names { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -306,47 +316,47 @@
 
     <!-- LEFT: value proposition -->
     <section class="qy-left">
-      <div class="qy-eyebrow"><span class="qy-bar"></span>12-Month Prescription</div>
+      <div class="qy-eyebrow">Get started · 12-month script</div>
 
-      <h1 class="qy-h1">Apply for your<br>12 Month <em>Prescription</em></h1>
+      <h1 class="qy-h1">Apply for your<br>12-month <em>prescription</em></h1>
 
-      <p class="qy-lead">Create your account and apply for a prescription. No upfront cost. You only pay if you&rsquo;re approved.</p>
+      <p class="qy-lead">Create your account and apply for a prescription. No upfront cost &mdash; you only pay if you&rsquo;re approved.</p>
 
       <div class="qy-promise">
         <div class="qy-promise-row">
           <span class="qy-promise-idx">01</span>
           <span class="qy-promise-icon">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5l3 1.8"></path></svg>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5l3 1.8"></path></svg>
           </span>
           <div>
             <div class="qy-promise-title">Doctor reviewed within 24 hours</div>
-            <div class="qy-promise-sub">A registered prescriber assesses your application.</div>
+            <div class="qy-promise-sub">An Australian-registered prescriber assesses your application.</div>
           </div>
         </div>
         <div class="qy-promise-row">
           <span class="qy-promise-idx">02</span>
           <span class="qy-promise-icon">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7z"></path><circle cx="7" cy="17" r="1.7"></circle><circle cx="17" cy="17" r="1.7"></circle></svg>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v8H3z"></path><path d="M14 10h4l3 3v2h-7z"></path><circle cx="7" cy="17" r="1.7"></circle><circle cx="17" cy="17" r="1.7"></circle></svg>
           </span>
           <div>
             <div class="qy-promise-title">Free express shipping on first order</div>
-            <div class="qy-promise-sub">If approved, delivered fast and straight to your door.</div>
+            <div class="qy-promise-sub">If approved, dispatched overnight from our Sydney pharmacy.</div>
           </div>
         </div>
       </div>
 
       <div class="qy-trust">
-        <div class="qy-trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg>
-          Privacy fully protected
+        <div class="qy-trust-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg>
+          TGA-licensed pharmacy
         </div>
-        <div class="qy-trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2.2 2.2 4.8-5"></path></svg>
-          Verified prescriptions
+        <div class="qy-trust-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.5l2.2 2.2 4.8-5"></path></svg>
+          AHPRA-registered doctors
         </div>
-        <div class="qy-trust-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="9" r="3"></circle><path d="M3.5 19a5.5 5.5 0 0 1 11 0"></path><circle cx="17" cy="10" r="2.4"></circle><path d="M16 19a4.5 4.5 0 0 1 5-3.8"></path></svg>
-          Dedicated care team
+        <div class="qy-trust-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1110" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+          Data stored in Australia
         </div>
       </div>
     </section>
@@ -355,6 +365,7 @@
     <section class="qy-card">
       <div class="qy-kicker">Start your application</div>
       <h2 class="qy-card-h">Create your <em>account</em></h2>
+      <p class="qy-card-sub">Takes about 2 minutes. A valid prescription is needed to browse and purchase.</p>
 
       {%- form 'create_customer' -%}
         <input type="hidden" name="return_to" value="/pages/questionnaire">
@@ -362,35 +373,35 @@
 
         <div class="qy-names">
           <div class="qy-field">
-            <label for="FirstName" class="qy-vh">First name</label>
+            <label for="FirstName" class="qy-label">First name</label>
             <input class="qy-input" type="text" name="customer[first_name]" id="FirstName" placeholder="First name" autocomplete="given-name" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
           </div>
           <div class="qy-field">
-            <label for="LastName" class="qy-vh">Last name</label>
+            <label for="LastName" class="qy-label">Last name</label>
             <input class="qy-input" type="text" name="customer[last_name]" id="LastName" placeholder="Last name" autocomplete="family-name" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
           </div>
         </div>
 
         <div class="qy-field qy-field--mt">
-          <label for="Email" class="qy-vh">Email address</label>
-          <input class="qy-input" type="email" name="customer[email]" id="Email" placeholder="Email address" autocomplete="email" autocorrect="off" autocapitalize="off" {% if form.email %}value="{{ form.email }}"{% endif %}>
+          <label for="Email" class="qy-label">Email address</label>
+          <input class="qy-input" type="email" name="customer[email]" id="Email" placeholder="you@email.com" autocomplete="email" autocorrect="off" autocapitalize="off" {% if form.email %}value="{{ form.email }}"{% endif %}>
         </div>
 
         <div class="qy-field qy-field--mt">
-          <label for="CreatePassword" class="qy-vh">Password</label>
-          <input class="qy-input" type="password" name="customer[password]" id="CreatePassword" placeholder="Password" autocomplete="new-password">
+          <label for="CreatePassword" class="qy-label">Password</label>
+          <input class="qy-input" type="password" name="customer[password]" id="CreatePassword" placeholder="Create a password" autocomplete="new-password">
         </div>
 
-        <button type="submit" class="qy-submit">Create Account &amp; Apply</button>
+        <button type="submit" class="qy-submit">Create account &amp; apply</button>
 
         <p class="qy-secure">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
-          Secure &amp; encrypted. We never share your details.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+          Free to apply. No charge until a doctor approves.
         </p>
       {%- endform -%}
 
       <div class="qy-divider"></div>
-      <p class="qy-login-row">Already a member? <a href="/account/login" class="qy-login">Login</a></p>
+      <p class="qy-login-row">Already a member? <a href="/account/login" class="qy-login">Log in</a></p>
     </section>
 
   </main>
