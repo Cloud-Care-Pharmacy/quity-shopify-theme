@@ -444,7 +444,7 @@
   margin-top: 28px;
   flex-wrap: wrap;
 }
-.qy-step { display: flex; align-items: center; gap: 11px; }
+.qy-step { display: flex; align-items: center; gap: 11px; flex: none; }
 .qy-step__num {
   width: 30px;
   height: 30px;
@@ -461,7 +461,7 @@
   color: #fff;
   font-weight: 500;
 }
-.qy-step__label { font-size: 14.5px; color: var(--slate-2); }
+.qy-step__label { font-size: 14.5px; color: var(--slate-2); white-space: nowrap; }
 .qy-step__label--active { color: var(--paper); }
 .qy-stepper__line {
   flex: 1;
