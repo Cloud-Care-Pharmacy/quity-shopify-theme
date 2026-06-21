@@ -9,11 +9,11 @@
   assets/customer-gate-status.css. Fonts (Jost / Newsreader / JetBrains
   Mono) are loaded in layout/theme.liquid.
 
-  customer.metafields.customer.status values:
-    - "Approved"            → content renders normally (no gate)
-    - "Pending" / blank/nil → Verification in progress
+  customer.metafields.shop.status values:
+    - "Open"                → content renders normally (gate open)
     - "Expired"             → Access expired (renew prescription)
     - "Declined"            → Access denied
+    - "Pending" / blank/nil → Verification in progress
     - (not logged in)       → Account required
 
   Usage in theme.liquid (gated templates only):
@@ -53,10 +53,10 @@
 
 {%- else -%}
 
-{%- assign customer_status = customer.metafields.customer.status | strip -%}
+{%- assign customer_status = customer.metafields.shop.status | strip -%}
 
-{%- if customer_status == 'Approved' -%}
-  {%- comment -%} Customer is approved — do nothing, content renders normally {%- endcomment -%}
+{%- if customer_status == 'Open' -%}
+  {%- comment -%} Gate open — do nothing, content renders normally {%- endcomment -%}
 
 {%- elsif customer_status == 'Expired' -%}
   {%- comment -%} Access expired — renew prescription {%- endcomment -%}
