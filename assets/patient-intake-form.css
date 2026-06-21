@@ -1151,3 +1151,354 @@ select.form-control {
   .success-message__actions .btn-theme,
   .success-message__actions .btn-outline { width: 100%; }
 }
+
+/* ============================================================
+   BRAND DROPDOWN + DATE PICKER  (Quity UI kit)
+   The native <select> (gender / state / country) and the native
+   <input type="date"> (date of birth) are replaced by the brand
+   kit's <details>-based controls — driven by patient-intake-form.js
+   over a hidden <input> that keeps the original name/value contract.
+
+   The trigger (.selectish) deliberately mirrors the form's text-input
+   metrics (50px tall · 8px radius · 15px · slate icon · coral focus
+   ring) so it sits flush beside sibling text inputs, while the
+   popover menu / calendar use the kit's own radii and shadow.
+   ============================================================ */
+.qy-intake .dropdown,
+.qy-intake .datefield { position: relative; display: block; }
+
+.qy-intake .dropdown > summary,
+.qy-intake .datefield > summary { list-style: none; }
+.qy-intake .dropdown > summary::-webkit-details-marker,
+.qy-intake .datefield > summary::-webkit-details-marker { display: none; }
+
+/* Trigger ---------------------------------------------------- */
+.qy-intake .selectish {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.qy-intake .selectish:hover { border-color: var(--slate-2); }
+
+.qy-intake .selectish > span:first-child {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qy-intake .selectish .ph { color: var(--slate-2); }
+
+.qy-intake .selectish .cv {
+  margin-left: auto;
+  width: 13px;
+  height: 13px;
+  flex: none;
+  stroke: var(--slate);
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.15s ease;
+}
+
+.qy-intake .selectish .ci {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  stroke: var(--slate);
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Open / focus — coral ring, matching the form's inputs */
+.qy-intake .dropdown[open] > summary.selectish,
+.qy-intake .datefield[open] > summary.selectish,
+.qy-intake summary.selectish:focus-visible {
+  border-color: var(--coral);
+  box-shadow: var(--ring);
+}
+
+.qy-intake .dropdown[open] > summary .cv { transform: rotate(180deg); }
+
+/* Error — driven by the .error class the validator places on the
+   adjacent hidden <input> (which carries .form-control so it is
+   cleared on re-validation alongside the other fields). */
+.qy-intake input.error + .dropdown > summary.selectish,
+.qy-intake input.error + .datefield > summary.selectish {
+  border-color: var(--coral);
+  box-shadow: var(--ring);
+}
+
+/* Menu (dropdown popover) ------------------------------------ */
+.qy-intake .menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 30;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.25);
+  max-height: 286px;
+  overflow-y: auto;
+}
+
+.qy-intake .menu .opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.qy-intake .menu .opt:hover { background: var(--paper-2); }
+
+.qy-intake .menu .opt:focus-visible {
+  outline: none;
+  background: var(--paper-2);
+  box-shadow: var(--ring);
+}
+
+.qy-intake .menu .opt .ck {
+  margin-left: auto;
+  width: 14px;
+  height: 10px;
+  flex: none;
+  stroke: var(--coral);
+  stroke-width: 2.4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+.qy-intake .menu .opt.on { font-weight: 500; }
+.qy-intake .menu .opt.on .ck { opacity: 1; }
+
+/* Calendar --------------------------------------------------- */
+.qy-intake .cal {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  width: 300px;
+  max-width: calc(100vw - 48px);
+}
+
+.qy-intake .cal.pop {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 30;
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.25);
+}
+
+.qy-intake .cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.qy-intake .cal-head .mo {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 5px 9px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.qy-intake .cal-head .mo:hover { background: var(--paper-2); }
+
+.qy-intake .cal-head .nav { display: flex; gap: 6px; }
+
+.qy-intake .cal-head .nav button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.qy-intake .cal-head .nav button:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.qy-intake .cal-head .nav button svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.qy-intake .cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 2px;
+}
+
+.qy-intake .cal-dow span {
+  text-align: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  padding: 6px 0;
+}
+
+.qy-intake .cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.qy-intake .cal-days a {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.qy-intake .cal-days a > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  max-width: 100%;
+  border-radius: 9px;
+  transition: background-color 0.12s ease;
+}
+
+.qy-intake .cal-days a:hover > span { background: var(--paper-2); }
+
+.qy-intake .cal-days a.mute { color: var(--slate-2); cursor: default; }
+.qy-intake .cal-days a.mute:hover > span { background: transparent; }
+
+.qy-intake .cal-days a.today { font-weight: 600; }
+.qy-intake .cal-days a.today > span::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.qy-intake .cal-days a.sel > span {
+  background: var(--coral);
+  color: #fff;
+  font-weight: 500;
+}
+.qy-intake .cal-days a.sel.today > span::after { background: #fff; }
+
+.qy-intake .cal-days a.disabled {
+  color: var(--slate-2);
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.qy-intake .cal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.qy-intake .cal-foot .sub { font-size: 12px; color: var(--slate); }
+
+.qy-intake .cal-foot .lnk {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.qy-intake .cal-foot .lnk:hover { color: var(--coral); }
+
+/* Month / year selection grid */
+.qy-intake .cal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.qy-intake .cal-grid button {
+  padding: 12px 6px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.qy-intake .cal-grid button:hover { background: var(--paper-2); }
+.qy-intake .cal-grid button.sel { background: var(--coral); color: #fff; }
+.qy-intake .cal-grid button.disabled {
+  color: var(--slate-2);
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qy-intake .selectish,
+  .qy-intake .selectish .cv,
+  .qy-intake .cal-head .nav button,
+  .qy-intake .cal-days a > span,
+  .qy-intake .cal-grid button { transition: none; }
+}
