@@ -415,7 +415,7 @@
         "progress_bar_bg": "#121212",
         "image_item_border_color": "#121212",
         "background_style": "solid",
-        "background_color": "#F4F2EC",
+        "background_color": "#ffffff",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "border_color": "#121212",
         "margin_top": 0,
@@ -441,7 +441,7 @@
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
         "marginsection": "40px 0px 40px 0px",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
         "wborder": "1px"
@@ -547,7 +547,7 @@
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
         "marginsection": "40px 0px 40px 0px",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
         "wborder": "1px"
@@ -560,7 +560,7 @@
           "type": "text_block",
           "settings": {
             "width": "100%",
-            "bgtext": "#F4F2EC",
+            "bgtext": "#ffffff",
             "title_color": "rgba(0,0,0,0)",
             "subtitle": "",
             "title": "Connect with an expert doctor. 24 hour response, 7 days a week.",
@@ -589,7 +589,7 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "rangebg": 0,
         "bgbefore": "rgba(0,0,0,0)",
         "bg_pos": "left",
@@ -608,7 +608,7 @@
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
         "marginsection": "40px 0px 40px 0px",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
         "wborder": "1px"
@@ -627,7 +627,7 @@
           "type": "text_block",
           "settings": {
             "width": "100%",
-            "bgtext": "#F4F2EC",
+            "bgtext": "#ffffff",
             "title_color": "rgba(0,0,0,0)",
             "subtitle": "",
             "title": "Get Your Nicotine Vape Prescription Online. Fast, Private, No Hassle.",
@@ -650,7 +650,7 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "rangebg": 0,
         "bgbefore": "rgba(0,0,0,0)",
         "bg_pos": "left",
@@ -669,7 +669,7 @@
         "animation": "",
         "paddingsection": "0px 0px 0px 0px",
         "marginsection": "40px 0px 40px 0px",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "setwidth": "container",
         "bgborder": "#dddddd",
         "wborder": "1px"
@@ -981,7 +981,7 @@
       "settings": {
         "animation": "",
         "setwidth": "container",
-        "bgsection": "#F4F2EC",
+        "bgsection": "#ffffff",
         "e_size": "auto",
         "e_repeat": "no-repeat",
         "e_pos": "center center",
