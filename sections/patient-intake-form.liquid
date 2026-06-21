@@ -121,26 +121,41 @@
 
               <div class="form-row dob-gender-row">
                 <div class="field form-group">
-                  <label for="dob" class="required">Date of birth</label>
+                  <label class="required">Date of birth</label>
                   {% assign current_year = 'now' | date: '%Y' | plus: 0 %}
                   {% assign max_year = current_year | minus: 18 %}
+                  {% assign min_year = current_year | minus: 100 %}
                   {% assign current_month = 'now' | date: '%m' %}
                   {% assign current_day = 'now' | date: '%d' %}
                   {% assign max_date = max_year | append: '-' | append: current_month | append: '-' | append: current_day %}
-                  <input type="date" id="dob" name="dob" class="field__input form-control" max="{{ max_date }}" required>
+                  {% assign min_date = min_year | append: '-' | append: current_month | append: '-' | append: current_day %}
+                  <input type="hidden" id="dob" name="dob" class="form-control" required>
+                  <details class="datefield" data-datepicker data-min="{{ min_date }}" data-max="{{ max_date }}">
+                    <summary class="selectish" aria-haspopup="dialog" aria-label="Date of birth">
+                      <span class="dp-val ph">DD / MM / YYYY</span>
+                      <svg class="ci" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 9.5h18M8 3v4M16 3v4"></path></svg>
+                    </summary>
+                    <div class="cal pop"></div>
+                  </details>
                   <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
                 </div>
 
                 <div class="field form-group gender-field">
-                  <label for="gender" class="required">Gender</label>
-                  <select id="gender" name="gender" class="form-control" required>
-                    <option value="">Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="non-binary">Non-binary</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <label class="required">Gender</label>
+                  <input type="hidden" id="gender" name="gender" class="form-control" required>
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="Gender">
+                      <span class="dd-val ph">Select gender</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="male">Male <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="female">Female <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="non-binary">Non-binary <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="prefer-not-to-say">Prefer not to say <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="other">Other <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
                   <div class="error-message">Please select your gender</div>
                 </div>
               </div>
@@ -159,7 +174,7 @@
 
                 <div class="field form-group expiry-field" id="medicareExpiryGroup">
                   <label for="medicareExpiry">Expiry</label>
-                  <input type="text" id="medicareExpiry" name="medicareExpiry" class="field__input form-control" placeholder="e.g., 10/2028" maxlength="7">
+                  <input type="text" id="medicareExpiry" name="medicareExpiry" class="field__input form-control" placeholder="MM/YYYY" maxlength="7" inputmode="numeric">
                   <div class="error-message">Please enter a valid expiry (MM/YYYY)</div>
                 </div>
               </div>
@@ -180,18 +195,24 @@
                 </div>
 
                 <div class="field form-group">
-                  <label for="state">State</label>
-                  <select id="state" name="state" class="form-control">
-                    <option value="">Select state</option>
-                    <option value="NSW">New South Wales</option>
-                    <option value="VIC">Victoria</option>
-                    <option value="QLD">Queensland</option>
-                    <option value="SA">South Australia</option>
-                    <option value="WA">Western Australia</option>
-                    <option value="TAS">Tasmania</option>
-                    <option value="NT">Northern Territory</option>
-                    <option value="ACT">Australian Capital Territory</option>
-                  </select>
+                  <label>State</label>
+                  <input type="hidden" id="state" name="state" class="form-control">
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="State">
+                      <span class="dd-val ph">Select state</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="NSW">New South Wales <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="VIC">Victoria <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="QLD">Queensland <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="SA">South Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="WA">Western Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="TAS">Tasmania <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="NT">Northern Territory <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="ACT">Australian Capital Territory <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
                 </div>
 
               </div>
@@ -204,14 +225,21 @@
                 </div>
 
                 <div class="field form-group">
-                  <label for="country" class="required">Country</label>
-                  <select id="country" name="country" class="form-control" required>
-                    <option value="Australia">Australia</option>
-                    <option value="New Zealand">New Zealand</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="United States">United States</option>
-                    <option value="Canada">Canada</option>
-                  </select>
+                  <label class="required">Country</label>
+                  <input type="hidden" id="country" name="country" class="form-control" value="Australia" required>
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="Country">
+                      <span class="dd-val">Australia</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="Australia">Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="New Zealand">New Zealand <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="United Kingdom">United Kingdom <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="United States">United States <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="Canada">Canada <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
                   <div class="error-message">Please select your country</div>
                 </div>
               </div>

@@ -29,6 +29,7 @@ class PatientIntakeForm extends HTMLElement {
     this.updateDisplay();
     this.bindEvents();
     this.restoreFormData();
+    this.initBrandControls();
   }
 
   bindEvents() {
@@ -1046,6 +1047,309 @@ class PatientIntakeForm extends HTMLElement {
         if (parent) parent.classList.remove('selected');
       }
     });
+  }
+
+  // ============================================================
+  // Brand UI kit controls (https://brand.quity.com.au/ui.html)
+  // The native <select> and <input type="date"> are progressively
+  // enhanced into the kit's <details>-based dropdown / date picker.
+  // Each control writes through to a hidden <input> so the existing
+  // FormData / validation / session-restore logic is untouched.
+  // Called after restoreFormData() so saved values render correctly.
+  // ============================================================
+  initBrandControls() {
+    this.initBrandDropdowns();
+    this.initBrandDatePicker();
+    this.bindBrandOutsideClose();
+  }
+
+  // Close any open dropdown / date picker on outside click or Escape.
+  bindBrandOutsideClose() {
+    document.addEventListener('click', (e) => {
+      this.querySelectorAll('.dropdown[open], .datefield[open]').forEach(d => {
+        if (!d.contains(e.target)) d.open = false;
+      });
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      this.querySelectorAll('.dropdown[open], .datefield[open]').forEach(d => {
+        d.open = false;
+        const summary = d.querySelector('summary');
+        if (summary) summary.focus();
+      });
+    });
+  }
+
+  initBrandDropdowns() {
+    this.querySelectorAll('[data-dropdown]').forEach(details => {
+      const field = details.closest('.field');
+      const input = field.querySelector('input[type="hidden"]');
+      const valEl = details.querySelector('.dd-val');
+      const opts = Array.from(details.querySelectorAll('.opt'));
+      if (!input || !valEl) return;
+
+      const placeholder = valEl.textContent;
+
+      const apply = (value, { silent = false } = {}) => {
+        let label = placeholder;
+        let matched = false;
+        opts.forEach(o => {
+          const on = value !== '' && o.dataset.value === value;
+          o.classList.toggle('on', on);
+          if (on) { label = o.textContent.trim(); matched = true; }
+        });
+        input.value = matched ? value : '';
+        valEl.textContent = label;
+        valEl.classList.toggle('ph', !matched);
+        if (matched) this.clearBrandError(field, input);
+        if (!silent) {
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      };
+
+      opts.forEach(o => {
+        o.setAttribute('tabindex', '0');
+        o.setAttribute('role', 'option');
+        const choose = () => {
+          apply(o.dataset.value);
+          details.open = false;
+          const summary = details.querySelector('summary');
+          if (summary) summary.focus();
+        };
+        o.addEventListener('click', choose);
+        o.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(); }
+        });
+      });
+
+      // Only one dropdown / date picker open at a time.
+      details.addEventListener('toggle', () => {
+        if (!details.open) return;
+        this.querySelectorAll('.dropdown[open], .datefield[open]').forEach(d => {
+          if (d !== details) d.open = false;
+        });
+      });
+
+      // Reflect the current hidden value (default or session-restored).
+      apply(input.value || '', { silent: true });
+    });
+  }
+
+  initBrandDatePicker() {
+    const field = this.querySelector('[data-datepicker]');
+    if (!field) return;
+    const input = this.querySelector('#dob');
+    const valEl = field.querySelector('.dp-val');
+    const pop = field.querySelector('.cal');
+    if (!input || !valEl || !pop) return;
+
+    const fieldGroup = field.closest('.field');
+    const placeholder = valEl.textContent;
+
+    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const toISO = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
+    const daysIn = (y, m) => new Date(y, m, 0).getDate();        // m is 1-12
+    const mondayIndex = (y, m) => (new Date(y, m - 1, 1).getDay() + 6) % 7;
+
+    const now = new Date();
+    const todayISO = toISO(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    const isISO = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v || '');
+
+    const min = isISO(field.dataset.min) ? field.dataset.min : '1900-01-01';
+    const max = isISO(field.dataset.max) ? field.dataset.max : todayISO;
+    const minY = parseInt(min.slice(0, 4), 10);
+    const maxY = parseInt(max.slice(0, 4), 10);
+    const pageFloor = Math.floor(minY / 12) * 12;
+    const pageCeil = Math.floor(maxY / 12) * 12;
+
+    let sel = isISO(input.value) ? input.value : null;
+    const base = sel || max;
+    let viewY = parseInt(base.slice(0, 4), 10);
+    let viewM = parseInt(base.slice(5, 7), 10);                   // 1-12
+    let yearPage = Math.floor(viewY / 12) * 12;
+    let mode = 'days';
+
+    const longLabel = (iso) => {
+      const y = +iso.slice(0, 4), m = +iso.slice(5, 7), d = +iso.slice(8, 10);
+      const wd = (new Date(y, m - 1, d).getDay() + 6) % 7;
+      return `${DOW[wd]} ${d} ${MON[m - 1]} ${y}`;
+    };
+
+    const setValue = (iso, { silent = false } = {}) => {
+      sel = iso || null;
+      if (sel) {
+        valEl.textContent = `${sel.slice(8, 10)} / ${sel.slice(5, 7)} / ${sel.slice(0, 4)}`;
+        valEl.classList.remove('ph');
+        input.value = sel;
+        this.clearBrandError(fieldGroup, input);
+      } else {
+        valEl.textContent = placeholder;
+        valEl.classList.add('ph');
+        input.value = '';
+      }
+      if (!silent) {
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    };
+
+    const navHTML = `
+      <button type="button" class="cal-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
+      <button type="button" class="cal-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>`;
+    const footHTML = () =>
+      `<div class="cal-foot"><span class="sub">${sel ? longLabel(sel) : 'Select your date of birth'}</span><button type="button" class="lnk cal-clear">Clear</button></div>`;
+
+    const renderDays = () => {
+      const lead = mondayIndex(viewY, viewM);
+      const dim = daysIn(viewY, viewM);
+      const prevDim = daysIn(viewM === 1 ? viewY - 1 : viewY, viewM === 1 ? 12 : viewM - 1);
+      let cells = '';
+      for (let i = lead; i > 0; i--) cells += `<a class="mute"><span>${prevDim - i + 1}</span></a>`;
+      for (let d = 1; d <= dim; d++) {
+        const iso = toISO(viewY, viewM, d);
+        const cls = [
+          iso === todayISO ? 'today' : '',
+          iso === sel ? 'sel' : '',
+          (iso < min || iso > max) ? 'disabled' : ''
+        ].filter(Boolean).join(' ');
+        cells += `<a data-iso="${iso}" class="${cls}"><span>${d}</span></a>`;
+      }
+      const trail = (7 - ((lead + dim) % 7)) % 7;
+      for (let d = 1; d <= trail; d++) cells += `<a class="mute"><span>${d}</span></a>`;
+      pop.innerHTML = `
+        <div class="cal-head">
+          <button type="button" class="mo" data-go="months">${MONTHS[viewM - 1]} ${viewY}</button>
+          <div class="nav">${navHTML}</div>
+        </div>
+        <div class="cal-dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+        <div class="cal-days">${cells}</div>
+        ${footHTML()}`;
+    };
+
+    const renderMonths = () => {
+      let cells = '';
+      for (let m = 1; m <= 12; m++) {
+        const disabled = toISO(viewY, m, daysIn(viewY, m)) < min || toISO(viewY, m, 1) > max;
+        const isSel = sel && +sel.slice(0, 4) === viewY && +sel.slice(5, 7) === m;
+        cells += `<button type="button" data-m="${m}" class="${[isSel ? 'sel' : '', disabled ? 'disabled' : ''].filter(Boolean).join(' ')}">${MON[m - 1]}</button>`;
+      }
+      pop.innerHTML = `
+        <div class="cal-head">
+          <button type="button" class="mo" data-go="years">${viewY}</button>
+          <div class="nav">${navHTML}</div>
+        </div>
+        <div class="cal-grid">${cells}</div>
+        ${footHTML()}`;
+    };
+
+    const renderYears = () => {
+      let cells = '';
+      for (let i = 0; i < 12; i++) {
+        const y = yearPage + i;
+        const disabled = y < minY || y > maxY;
+        const isSel = (sel && +sel.slice(0, 4) === y) || y === viewY;
+        cells += `<button type="button" data-y="${y}" class="${[isSel ? 'sel' : '', disabled ? 'disabled' : ''].filter(Boolean).join(' ')}">${y}</button>`;
+      }
+      pop.innerHTML = `
+        <div class="cal-head">
+          <button type="button" class="mo" data-go="days">${yearPage} – ${yearPage + 11}</button>
+          <div class="nav">${navHTML}</div>
+        </div>
+        <div class="cal-grid">${cells}</div>
+        ${footHTML()}`;
+    };
+
+    const render = () => {
+      if (mode === 'months') renderMonths();
+      else if (mode === 'years') renderYears();
+      else renderDays();
+    };
+
+    const step = (dir) => {
+      if (mode === 'days') {
+        viewM += dir;
+        if (viewM < 1) { viewM = 12; viewY--; }
+        else if (viewM > 12) { viewM = 1; viewY++; }
+        viewY = Math.max(minY, Math.min(maxY, viewY));
+      } else if (mode === 'months') {
+        viewY = Math.max(minY, Math.min(maxY, viewY + dir));
+      } else {
+        yearPage = Math.max(pageFloor, Math.min(pageCeil, yearPage + dir * 12));
+      }
+      render();
+    };
+
+    pop.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t.closest('.cal-prev')) { e.preventDefault(); step(-1); return; }
+      if (t.closest('.cal-next')) { e.preventDefault(); step(1); return; }
+
+      const go = t.closest('[data-go]');
+      if (go) {
+        e.preventDefault();
+        mode = go.dataset.go;
+        if (mode === 'years') yearPage = Math.max(pageFloor, Math.min(pageCeil, Math.floor(viewY / 12) * 12));
+        render();
+        return;
+      }
+
+      const day = t.closest('a[data-iso]');
+      if (day && !day.classList.contains('disabled')) {
+        e.preventDefault();
+        setValue(day.dataset.iso);
+        field.open = false;
+        const summary = field.querySelector('summary');
+        if (summary) summary.focus();
+        return;
+      }
+
+      const monthBtn = t.closest('button[data-m]');
+      if (monthBtn && !monthBtn.classList.contains('disabled')) {
+        e.preventDefault();
+        viewM = +monthBtn.dataset.m;
+        mode = 'days';
+        render();
+        return;
+      }
+
+      const yearBtn = t.closest('button[data-y]');
+      if (yearBtn && !yearBtn.classList.contains('disabled')) {
+        e.preventDefault();
+        viewY = +yearBtn.dataset.y;
+        mode = 'months';
+        render();
+        return;
+      }
+
+      if (t.closest('.cal-clear')) { e.preventDefault(); setValue(''); mode = 'days'; render(); }
+    });
+
+    field.addEventListener('toggle', () => {
+      if (!field.open) return;
+      this.querySelectorAll('.dropdown[open], .datefield[open]').forEach(d => {
+        if (d !== field) d.open = false;
+      });
+      if (sel) { viewY = +sel.slice(0, 4); viewM = +sel.slice(5, 7); }
+      mode = 'days';
+      render();
+    });
+
+    render();
+    setValue(sel || '', { silent: true });
+  }
+
+  // Clear a brand control's inline error once a value is chosen. The
+  // top-of-card banner is left to re-evaluate on the next validation,
+  // matching how the text inputs behave.
+  clearBrandError(field, input) {
+    if (input) input.classList.remove('error');
+    const errorMsg = field && field.querySelector('.error-message');
+    if (errorMsg) errorMsg.classList.remove('show');
   }
 }
 
