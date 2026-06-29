@@ -396,7 +396,7 @@
       <p class="qy-card-sub">Takes about 2 minutes. A valid prescription is needed to browse and purchase.</p>
 
       {%- form 'create_customer', novalidate: 'novalidate', id: 'QyRegisterForm' -%}
-        <input type="hidden" name="return_to" value="/pages/questionnaire">
+        <input type="hidden" name="return_to" value="/account">
         {{ form.errors | default_errors }}
 
         <div class="qy-error-banner" id="RegisterErrorBanner">Please check the highlighted fields below.</div>
