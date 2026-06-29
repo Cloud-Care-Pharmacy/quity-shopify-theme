@@ -1187,6 +1187,27 @@ class PatientIntakeForm extends HTMLElement {
       monthSelectorType: 'dropdown',
       allowInput: true,                    // let users type DD / MM / YYYY directly
       clickOpens: false,                   // typing in the box shouldn't pop the calendar; the icon does
+      // Lenient parser so typed dates work with or without spaces around the
+      // separators (15/06/1990, 15 / 06 / 1990, 15-06-1990 all parse). The
+      // canonical value flatpickr stores is YYYY-MM-DD (4-digit-dash), which
+      // is unambiguous; anything else is treated as day-first (DD MM YYYY).
+      parseDate: (str) => {
+        const s = String(str || '').trim();
+        if (!s) return undefined;
+        const iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+        if (iso) {
+          const dt = new Date(+iso[1], +iso[2] - 1, +iso[3]);
+          return isNaN(dt.getTime()) ? undefined : dt;
+        }
+        const p = s.split(/\D+/).filter(Boolean).map(Number);
+        if (p.length !== 3) return undefined;
+        let [d, mo, y] = p;
+        if (y < 100) y += y > 30 ? 1900 : 2000;
+        const dt = new Date(y, mo - 1, d);
+        // Reject impossible dates (e.g. 32/13/2000) that Date would roll over.
+        if (isNaN(dt.getTime()) || dt.getDate() !== d || dt.getMonth() !== mo - 1) return undefined;
+        return dt;
+      },
       prevArrow: '<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg>',
       nextArrow: '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>',
       onReady: (dates, str, fp) => {
