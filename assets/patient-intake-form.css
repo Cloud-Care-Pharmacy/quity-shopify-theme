@@ -1338,6 +1338,7 @@ select.form-control {
   --paper-2: #FAF8F2;
   --coral: #E55B4F;
   --white: #FFFFFF;
+  --ring: 0 0 0 3px rgba(229, 91, 79, 0.12);
   font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
   background: var(--white);
   border: 1px solid var(--line);
@@ -1365,6 +1366,29 @@ select.form-control {
 }
 .flatpickr-calendar.qy-cal .flatpickr-monthDropdown-months:hover { background: var(--paper-2); }
 .flatpickr-calendar.qy-cal .flatpickr-current-month input.cur-year { font-weight: 500; font-size: 15px; }
+
+/* Year picker — a <select> injected in place of the number stepper, so any
+   year is one click away (DOB needs to reach back decades). Mirrors the
+   month dropdown's look. */
+.flatpickr-calendar.qy-cal .qy-year-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin-left: 2px;
+  cursor: pointer;
+  outline: none;
+}
+.flatpickr-calendar.qy-cal .qy-year-select:hover { background: var(--paper-2); }
+.flatpickr-calendar.qy-cal .qy-year-select:focus-visible { box-shadow: var(--ring); }
+.flatpickr-calendar.qy-cal .qy-year-select option { color: var(--ink); }
 
 .flatpickr-calendar.qy-cal .flatpickr-prev-month svg,
 .flatpickr-calendar.qy-cal .flatpickr-next-month svg { fill: var(--slate); width: 13px; }

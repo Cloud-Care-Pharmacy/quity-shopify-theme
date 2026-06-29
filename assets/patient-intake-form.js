@@ -1147,11 +1147,13 @@ class PatientIntakeForm extends HTMLElement {
   }
 
   // Date of birth uses flatpickr (https://flatpickr.js.org) — a proper,
-  // well-tested datepicker with a month dropdown and year input, so the
-  // month/year are trivial to change. flatpickr keeps the canonical
-  // YYYY-MM-DD value on the hidden #dob input (preserving the FormData /
-  // validation / age-check contract) and shows a friendly DD / MM / YYYY
-  // alt input to the user.
+  // well-tested datepicker. Both the month AND the year are exposed as
+  // dropdowns (the year stepper is replaced by a <select> of every valid
+  // year, most-recent first), so jumping across decades takes a single
+  // click — the MUI-style "pick a year" experience that a DOB field needs.
+  // flatpickr keeps the canonical YYYY-MM-DD value on the hidden #dob input
+  // (preserving the FormData / validation / age-check contract) and shows a
+  // friendly DD / MM / YYYY alt input to the user.
   initBrandDatePicker() {
     const input = this.querySelector('[data-datepicker]');
     if (!input) return;
@@ -1185,12 +1187,54 @@ class PatientIntakeForm extends HTMLElement {
       monthSelectorType: 'dropdown',
       prevArrow: '<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg>',
       nextArrow: '<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>',
-      onReady: (dates, str, fp) => { fp.calendarContainer.classList.add('qy-cal'); },
+      onReady: (dates, str, fp) => {
+        fp.calendarContainer.classList.add('qy-cal');
+        this.buildYearDropdown(fp, minDate, maxDate);
+      },
+      // Keep the year <select> in sync when the year changes by any other
+      // route (the prev/next arrows crossing a year boundary, setDate, etc.).
+      onYearChange: (dates, str, fp) => { this.syncYearDropdown(fp); },
       onChange: () => {
         input.dispatchEvent(new Event('input', { bubbles: true }));
         this.clearBrandError(fieldGroup, input);
       }
     });
+  }
+
+  // Replace flatpickr's year number-stepper with a <select> listing every
+  // selectable year (most recent first, which is what a DOB wants). Picking
+  // a year jumps the calendar straight there — no clicking arrows 40 times.
+  buildYearDropdown(fp, minDate, maxDate) {
+    const wrap = fp.calendarContainer.querySelector('.numInputWrapper');
+    if (!wrap || wrap.dataset.qyYear) return;
+    wrap.dataset.qyYear = '1';
+
+    const minYear = parseInt(String(minDate).slice(0, 4), 10);
+    const maxYear = parseInt(String(maxDate).slice(0, 4), 10);
+    if (!minYear || !maxYear) return;
+
+    const select = document.createElement('select');
+    select.className = 'qy-year-select';
+    select.setAttribute('aria-label', 'Year');
+    for (let y = maxYear; y >= minYear; y--) {
+      const opt = document.createElement('option');
+      opt.value = String(y);
+      opt.textContent = String(y);
+      select.appendChild(opt);
+    }
+    select.value = String(fp.currentYear);
+    select.addEventListener('change', () => {
+      fp.changeYear(parseInt(select.value, 10));
+    });
+
+    wrap.style.display = 'none';
+    wrap.parentNode.insertBefore(select, wrap);
+    fp._qyYearSelect = select;
+  }
+
+  // Mirror the displayed year onto the <select> when it changed elsewhere.
+  syncYearDropdown(fp) {
+    if (fp._qyYearSelect) fp._qyYearSelect.value = String(fp.currentYear);
   }
 
   // Clear a brand control's inline error once a value is chosen. The
