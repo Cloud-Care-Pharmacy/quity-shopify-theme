@@ -24,12 +24,13 @@
                 <div class="row">
                     <div class="col-lg-6 col-12">
                         <div class="field form-group">
-                            <input class="field__input form-control" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'contact.form.name' | t }}">
                             <label class="field__label" for="ContactForm-name">{{ 'contact.form.name' | t }}</label>
+                            <input class="field__input form-control" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="{{ 'contact.form.name' | t }}">
                           </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="field field--with-error form-group">
+                            <label class="field__label" for="ContactForm-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
                             <input
                               autocomplete="email"
                               type="email"
@@ -46,7 +47,6 @@
                               {% endif %}
                               placeholder="{{ 'contact.form.email' | t }}"
                             >
-                            <label class="field__label" for="ContactForm-email">{{ 'contact.form.email' | t }} <span aria-hidden="true">*</span></label>
                             {%- if form.errors contains 'email' -%}
                               <small class="contact__field-error" id="ContactForm-email-error">
                                 <span class="visually-hidden">{{ form.errors | default_errors }}</span>
@@ -58,20 +58,18 @@
                 </div>
             </div>
             <div class="field form-group">
-              <input type="tel" id="ContactForm-phone" class="field__input form-control" autocomplete="tel" name="contact[{{ 'contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'contact.form.phone' | t }}">
               <label class="field__label" for="ContactForm-phone">{{ 'contact.form.phone' | t }}</label>
+              <input type="tel" id="ContactForm-phone" class="field__input form-control" autocomplete="tel" name="contact[{{ 'contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'contact.form.phone' | t }}">
             </div>
             <div class="field form-group">
+              <label class="form__label field__label" for="ContactForm-body">{{ 'contact.form.message' | t }}</label>
               <textarea
                 rows="10"
                 id="ContactForm-body"
                 class="text-area field__input form-control form-control-area"
                 name="contact[{{ 'contact.form.message' | t }}]"
                 placeholder="{{ 'contact.form.message' | t }}"
-              >
-                {{- form.body -}}
-              </textarea>
-              <label class="form__label field__label" for="ContactForm-body">{{ 'contact.form.message' | t }}</label>
+              >{{- form.body -}}</textarea>
             </div>
             <div class="contact__button text-center">
               <button type="submit" class="button btn btn-theme">
