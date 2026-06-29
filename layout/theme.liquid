@@ -2,22 +2,6 @@
 <html class="no-js " lang="{{ shop.locale }}">
   <head>
     <meta charset="utf-8">
-    {%- comment -%} Prescription-flow redirect: after login/registration, bounce back to the prescription page {%- endcomment -%}
-    {%- if customer -%}
-    <script>
-      (function() {
-        try {
-          var dest = sessionStorage.getItem('quity_return_url');
-          if (dest) {
-            sessionStorage.removeItem('quity_return_url');
-            if (window.location.pathname !== dest) {
-              window.location.replace(dest);
-            }
-          }
-        } catch(e) {}
-      })();
-    </script>
-    {%- endif -%}
     {%- comment -%} Login redirect temporarily disabled for merchant review {%- endcomment -%}
     {%- comment -%}
     {%- unless customer -%}

@@ -3,7 +3,6 @@
 
 {%- unless customer -%}
   <script>
-    try { sessionStorage.setItem('quity_return_url', '/pages/questionnaire'); } catch(e) {}
     window.location.replace('/account/register');
   </script>
   <meta http-equiv="refresh" content="0;url=/account/register">
