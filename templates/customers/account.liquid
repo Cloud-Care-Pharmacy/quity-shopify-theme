@@ -124,48 +124,8 @@
           </div>
         {%- endif -%}
 
-        <!-- status tiles -->
-        <div class="qy-tiles">
-          <div class="qy-tile">
-            <div class="qy-tile__label">Script status</div>
-            {%- if status == 'Approved' -%}
-              <div class="qy-tile__row"><span class="qy-dot qy-dot--sage"></span><span class="qy-tile__value">Active</span></div>
-              <div class="qy-tile__sub">{% if rx_repeats != blank %}{{ rx_repeats }} repeats remaining.{% else %}Your script is active.{% endif %}</div>
-            {%- elsif status == 'Pending' -%}
-              <div class="qy-tile__row"><span class="qy-dot qy-dot--warn"></span><span class="qy-tile__value">Under review</span></div>
-              <div class="qy-tile__sub">A doctor is assessing your application.</div>
-            {%- elsif status == 'Declined' -%}
-              <div class="qy-tile__row"><span class="qy-dot qy-dot--danger"></span><span class="qy-tile__value">Declined</span></div>
-              <div class="qy-tile__sub">Check your email for details.</div>
-            {%- elsif status == 'Expired' -%}
-              <div class="qy-tile__row"><span class="qy-dot qy-dot--danger"></span><span class="qy-tile__value">Expired</span></div>
-              <div class="qy-tile__sub">Re-apply to continue your therapy.</div>
-            {%- else -%}
-              <div class="qy-tile__row"><span class="qy-dot qy-dot--grey"></span><span class="qy-tile__value">Get started</span></div>
-              <div class="qy-tile__sub">Apply to receive your first script.</div>
-            {%- endif -%}
-          </div>
-
-          <div class="qy-tile">
-            <div class="qy-tile__label">Next delivery</div>
-            {%- if has_active_script -%}
-              <div class="qy-tile__value">{{ rx_next_delivery | default: 'Every 6 weeks' }}</div>
-              <div class="qy-tile__sub">Manage in auto-delivery.</div>
-            {%- else -%}
-              <div class="qy-tile__value">Not set</div>
-              <div class="qy-tile__sub">No active prescription.</div>
-            {%- endif -%}
-          </div>
-
-          <div class="qy-tile">
-            <div class="qy-tile__label">Orders</div>
-            <div class="qy-tile__value">{{ order_count }}</div>
-            <div class="qy-tile__sub">{% if order_count == 0 %}No orders yet.{% else %}Lifetime orders.{% endif %}</div>
-          </div>
-        </div>
-
-        <!-- recent orders + resources -->
-        <div class="qy-2col">
+        <!-- recent orders -->
+        <div class="qy-1col">
           <div class="qy-card" id="account-orders">
             <div class="qy-card__head">
               <h3 class="qy-card__title">Recent orders</h3>
