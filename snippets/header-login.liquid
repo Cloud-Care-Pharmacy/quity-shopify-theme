@@ -11,7 +11,7 @@
 %}
 {% if customer %}
   <div class="header--acount d-none d-lg-flex topbar-block header-login-{{ styleLogin }}">
-    <a href="{{ routes.account_url }}" class="site-header__link site-account" title="{{ 'customer.account.title' | t }}">
+    <a href="/account" class="site-header__link site-account" title="{{ 'customer.account.title' | t }}">
       {%- render 'icon-user' -%}
       <span class="account-text">{{ 'customer.account.title' | t }}</span>
     </a>

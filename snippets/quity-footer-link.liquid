@@ -1,0 +1,33 @@
+{%- comment -%}
+  Renders a single footer menu <li>, normalising a few known-bad links and
+  labels that originate from the Shopify admin Navigation menus (linklists are
+  not stored in this theme repo, so they can't be edited here directly). This
+  is a defensive safety-net — the canonical fix is also to correct the menus in
+  Shopify admin > Content > Menus.
+
+  Normalisations:
+    - "Help & Advise"            -> "Help & Advice"   (spelling)
+    - "About us" -> "/" or "#"   -> /pages/about-us   (was a dead/wrong link)
+    - "Help & Advice/Advise" "#" -> /pages/faqs       (dead link given a home)
+    - account.quity.com.au links -> the custom /account portal (unify the two
+                                     account experiences)
+
+  Expects: link (a Shopify linklist link object)
+{%- endcomment -%}
+{%- assign q_url = link.url -%}
+{%- assign q_title = link.title | replace: 'Help & Advise', 'Help & Advice' | replace: 'Help &amp; Advise', 'Help &amp; Advice' -%}
+{%- assign q_title_dc = q_title | downcase | strip -%}
+{%- if q_url contains 'account.quity.com.au' -%}
+  {%- if q_title_dc contains 'order' -%}
+    {%- assign q_url = '/account#account-orders' -%}
+  {%- else -%}
+    {%- assign q_url = '/account' -%}
+  {%- endif -%}
+{%- elsif q_title_dc == 'about us' and q_url == '/' -%}
+  {%- assign q_url = '/pages/about-us' -%}
+{%- elsif q_title_dc == 'about us' and q_url == '#' -%}
+  {%- assign q_url = '/pages/about-us' -%}
+{%- elsif q_title_dc contains 'advi' and q_url == '#' -%}
+  {%- assign q_url = '/pages/faqs' -%}
+{%- endif -%}
+<li class="site-footer__list-item"><a href="{{ q_url }}">{{ q_title }}</a></li>

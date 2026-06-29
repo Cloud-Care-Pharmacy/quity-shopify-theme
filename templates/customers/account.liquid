@@ -189,8 +189,15 @@
                 <div class="qy-addr__label">Primary · Delivery</div>
                 <div class="qy-addr__name">{{ primary.first_name }} {{ primary.last_name }}</div>
                 <div class="qy-addr__lines">
-                  {{ primary.address1 }}{% if primary.address2 != blank %}, {{ primary.address2 }}{% endif %}{% if primary.city != blank %}, {{ primary.city }}{% endif %}<br>
-                  {{ primary.province_code }} {{ primary.zip }}{% if primary.country != blank %} · {{ primary.country }}{% endif %}
+                  {%- assign addr_line1 = '' -%}
+                  {%- if primary.address1 != blank -%}{%- assign addr_line1 = primary.address1 -%}{%- endif -%}
+                  {%- if primary.address2 != blank -%}{%- if addr_line1 != '' -%}{%- assign addr_line1 = addr_line1 | append: ', ' -%}{%- endif -%}{%- assign addr_line1 = addr_line1 | append: primary.address2 -%}{%- endif -%}
+                  {%- if primary.city != blank -%}{%- if addr_line1 != '' -%}{%- assign addr_line1 = addr_line1 | append: ', ' -%}{%- endif -%}{%- assign addr_line1 = addr_line1 | append: primary.city -%}{%- endif -%}
+                  {%- assign addr_line2 = '' -%}
+                  {%- if primary.province_code != blank -%}{%- assign addr_line2 = primary.province_code -%}{%- endif -%}
+                  {%- if primary.zip != blank -%}{%- if addr_line2 != '' -%}{%- assign addr_line2 = addr_line2 | append: ' ' -%}{%- endif -%}{%- assign addr_line2 = addr_line2 | append: primary.zip -%}{%- endif -%}
+                  {%- if primary.country != blank -%}{%- if addr_line2 != '' -%}{%- assign addr_line2 = addr_line2 | append: ' · ' -%}{%- endif -%}{%- assign addr_line2 = addr_line2 | append: primary.country -%}{%- endif -%}
+                  {%- if addr_line1 != '' -%}{{ addr_line1 }}{%- if addr_line2 != '' -%}<br>{%- endif -%}{%- endif -%}{{ addr_line2 }}
                 </div>
               </div>
             {%- else -%}
@@ -207,8 +214,14 @@
                 <div class="qy-addr__label">Billing</div>
                 <div class="qy-addr__name">{{ billing.first_name }} {{ billing.last_name }}</div>
                 <div class="qy-addr__lines">
-                  {{ billing.address1 }}{% if billing.city != blank %}, {{ billing.city }}{% endif %}<br>
-                  {{ billing.province_code }} {{ billing.zip }}{% if billing.country != blank %} · {{ billing.country }}{% endif %}
+                  {%- assign bill_line1 = '' -%}
+                  {%- if billing.address1 != blank -%}{%- assign bill_line1 = billing.address1 -%}{%- endif -%}
+                  {%- if billing.city != blank -%}{%- if bill_line1 != '' -%}{%- assign bill_line1 = bill_line1 | append: ', ' -%}{%- endif -%}{%- assign bill_line1 = bill_line1 | append: billing.city -%}{%- endif -%}
+                  {%- assign bill_line2 = '' -%}
+                  {%- if billing.province_code != blank -%}{%- assign bill_line2 = billing.province_code -%}{%- endif -%}
+                  {%- if billing.zip != blank -%}{%- if bill_line2 != '' -%}{%- assign bill_line2 = bill_line2 | append: ' ' -%}{%- endif -%}{%- assign bill_line2 = bill_line2 | append: billing.zip -%}{%- endif -%}
+                  {%- if billing.country != blank -%}{%- if bill_line2 != '' -%}{%- assign bill_line2 = bill_line2 | append: ' · ' -%}{%- endif -%}{%- assign bill_line2 = bill_line2 | append: billing.country -%}{%- endif -%}
+                  {%- if bill_line1 != '' -%}{{ bill_line1 }}{%- if bill_line2 != '' -%}<br>{%- endif -%}{%- endif -%}{{ bill_line2 }}
                 </div>
               </div>
             {%- else -%}

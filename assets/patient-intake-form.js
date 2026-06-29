@@ -480,8 +480,42 @@ class PatientIntakeForm extends HTMLElement {
       this.errorBanner.classList.toggle('show', !isValid);
     }
 
+    // On a long step the first error can be off-screen above the Next button,
+    // so bring it into view (and focus it) instead of leaving the user stuck.
+    if (!isValid) {
+      this.scrollToFirstError(currentStepElement);
+    }
+
     console.log(isValid ? '✅ Overall validation PASSED' : '❌ Overall validation FAILED');
     return isValid;
+  }
+
+  // Scroll/focus the first invalid field on the current step. Every invalid
+  // field shows a `.error-message.show` inside its `.field`/`.form-group`
+  // wrapper (covers text inputs, custom dropdowns, radios, checkboxes and the
+  // file upload), so that is the most reliable anchor. Falls back to the
+  // top-of-card error banner.
+  scrollToFirstError(stepEl) {
+    if (!stepEl) return;
+    const firstErrorMsg = stepEl.querySelector('.error-message.show');
+    let target = null;
+    if (firstErrorMsg) {
+      target = firstErrorMsg.closest('.field') || firstErrorMsg.closest('.form-group') || firstErrorMsg;
+    } else {
+      target = stepEl.querySelector('.field__input.error, .form-control.error, .error') || this.errorBanner;
+    }
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Move keyboard focus to the first usable control in that wrapper. Delay
+    // slightly so the focus jump doesn't fight the smooth scroll.
+    const focusable = target.querySelector
+      ? target.querySelector('input:not([type=hidden]):not([readonly]), select, textarea, summary, [tabindex]')
+      : null;
+    if (focusable) {
+      setTimeout(() => {
+        try { focusable.focus({ preventScroll: true }); } catch (e) { focusable.focus(); }
+      }, 80);
+    }
   }
 
   isValidEmail(email) {

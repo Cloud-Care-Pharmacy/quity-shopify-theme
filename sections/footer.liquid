@@ -415,7 +415,7 @@
           {%- endif -%}
           <ul class="site-footer__list site-footer-block">
             {%- for link in linklists[block.settings.link_list].links -%}
-            <li class="site-footer__list-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- render 'quity-footer-link', link: link -%}
             {%- endfor -%}
           </ul>
         </div>
