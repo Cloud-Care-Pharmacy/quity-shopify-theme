@@ -73,53 +73,43 @@
 /* ============================================================
    FIELDS
    ============================================================ */
-/* Stack the label above its input. The theme markup puts the
-   <label> AFTER the <input> and floats it absolutely
-   (theme.css:10437); flex-column + order:-1 lifts it into normal
-   flow on top, and the reset below neutralises the absolute float. */
 .qy-contact .field.form-group {
-  display: flex;
-  flex-direction: column;
+  display: block;
   position: relative;
   margin-bottom: 18px;
 }
 
-/* Neutralise theme.css's float-label positioning. */
+/* Brand field label — a static block ABOVE the input (13px / 500, ink).
+   The label now precedes the input in the markup, so the theme's
+   float-label rule (`.form-control:focus ~ label`, theme.css:10454)
+   can never match it. We still neutralise the theme's base
+   `.form-group label` absolute positioning (theme.css:10437); the
+   `!important` on the structural properties guarantees the label can
+   never be floated, shrunk, or hidden by the theme — or by any other
+   stylesheet that loads after this one. */
+.qy-contact .field.form-group > label,
 .qy-contact .form-group label {
-  position: static;
-  inset: auto;
-  left: auto;
-  top: auto;
-  order: -1;
-  transform: none;
-  padding: 0;
+  position: static !important;
+  display: block;
+  top: auto !important;
+  left: auto !important;
+  right: auto;
+  bottom: auto;
+  transform: none !important;
+  clip: auto !important;
+  overflow: visible;
   width: auto;
   height: auto;
   max-width: none;
-  overflow: visible;
-  clip: auto;
-  pointer-events: auto;
-  background: transparent;
-  transition: none;
-}
-
-/* The theme raises / shrinks the label on focus + .has-value via a
-   `~ label` sibling rule (theme.css:10454). Our labels are static, so
-   pin the size back so they don't shrink when the field is active. */
-.qy-contact .form-group .form-control:focus ~ label,
-.qy-contact .form-group .form-control.has-value ~ label {
-  top: auto;
-  left: auto;
-  font-size: 13px;
-}
-
-/* Brand field label — 13px / 500, ink. */
-.qy-contact .field.form-group > label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
   margin: 0 0 6px;
+  padding: 0;
+  background: transparent;
+  pointer-events: auto;
+  transition: none;
+  font-size: 13px !important;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 /* Required asterisk in coral. */
@@ -127,14 +117,16 @@
   color: var(--coral);
 }
 
-/* Inputs / textarea. */
+/* Inputs / textarea. (`!important` on the box model mirrors the label
+   hardening above so the theme's fixed-height float-input styling can't
+   reassert itself if this sheet ever loads out of order.) */
 .qy-contact .field__input.form-control,
 .qy-contact textarea.form-control {
   width: 100%;
-  height: auto;
+  height: auto !important;
   padding: 13px 14px;
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.45 !important;
   color: var(--ink);
   background: var(--white);
   border: 1px solid var(--line);
@@ -147,8 +139,8 @@
 
 .qy-contact .field__input.form-control:focus,
 .qy-contact textarea.form-control:focus {
-  border-color: var(--ink);
-  box-shadow: var(--ring);
+  border-color: var(--ink) !important;
+  box-shadow: var(--ring) !important;
 }
 
 /* Placeholders stay hidden (theme sets them transparent): the label
