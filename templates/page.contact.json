@@ -100,7 +100,7 @@
             "step_number_text": "",
             "title": "Address",
             "description": "526/368 Sussex St,<br>\nSydney NSW 2000",
-            "icon": "<i class=\"icon-map-pin\"></i>"
+            "icon": "<i class=\"icon-placeholder\"></i>"
           }
         }
       },
