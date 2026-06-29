@@ -1,0 +1,268 @@
+/* ============================================================
+   Quity — Contact / "Get in Touch" form
+   Restyles the theme's Contact Form section to the Quity brand
+   system (https://brand.quity.com.au/).
+
+   Scoped under `.qy-contact` so it overrides the theme's `--g-*`
+   form styling without affecting other forms on the site. Mirrors
+   the patient-intake / login / register redesign pattern:
+   - Hard-coded brand tokens (these ARE the Quity values).
+   - Opts out of theme.css globals via zero-specificity :where().
+   - Fonts (Jost) are loaded for the page.contact template in
+     layout/theme.liquid.
+
+   Markup / classes (.field, .form-group, .field__input,
+   .form-control, .btn-theme) come from sections/contact-form.liquid
+   and are preserved — this file restyles them, it does not rename.
+   ============================================================ */
+
+.qy-contact {
+  /* Brand tokens */
+  --ink: #0F1110;
+  --ink-2: #1C1F1D;
+  --ink-3: #2A2E2C;
+  --slate: #5B615E;
+  --slate-2: #8A8F8C;
+  --line: #E3E0D7;
+  --line-2: #EDEAE1;
+  --paper: #F4F2EC;
+  --paper-2: #FAF8F2;
+  --white: #FFFFFF;
+  --coral: #E55B4F;
+  --coral-deep: #B83F36;
+  --danger: #B5453A;
+  --ring: 0 0 0 3px rgba(15, 17, 16, 0.08);
+
+  color: var(--ink);
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Scoped resets / opt-outs ----
+   :where() carries zero specificity, so these override theme.css
+   element globals without out-ranking the class rules below. */
+.qy-contact :where(input, textarea, button, label, p, a) {
+  font-family: 'Jost', sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qy-contact *,
+  .qy-contact *::before,
+  .qy-contact *::after { transition: none !important; }
+}
+
+/* ============================================================
+   HEADING — "Get in Touch" + lede
+   ============================================================ */
+.qy-contact .section-header .section-title-1 span,
+.qy-contact .section-header .section-title-2 span,
+.qy-contact .section-header .section-title-1,
+.qy-contact .section-header .section-title-2 {
+  font-family: 'Jost', sans-serif;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.qy-contact .section-header .des-header,
+.qy-contact .section-header p {
+  font-family: 'Jost', sans-serif;
+  color: var(--slate);
+}
+
+/* ============================================================
+   FIELDS
+   ============================================================ */
+/* Stack the label above its input. The theme markup puts the
+   <label> AFTER the <input> and floats it absolutely
+   (theme.css:10437); flex-column + order:-1 lifts it into normal
+   flow on top, and the reset below neutralises the absolute float. */
+.qy-contact .field.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+/* Neutralise theme.css's float-label positioning. */
+.qy-contact .form-group label {
+  position: static;
+  inset: auto;
+  left: auto;
+  top: auto;
+  order: -1;
+  transform: none;
+  padding: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  overflow: visible;
+  clip: auto;
+  pointer-events: auto;
+  background: transparent;
+  transition: none;
+}
+
+/* The theme raises / shrinks the label on focus + .has-value via a
+   `~ label` sibling rule (theme.css:10454). Our labels are static, so
+   pin the size back so they don't shrink when the field is active. */
+.qy-contact .form-group .form-control:focus ~ label,
+.qy-contact .form-group .form-control.has-value ~ label {
+  top: auto;
+  left: auto;
+  font-size: 13px;
+}
+
+/* Brand field label — 13px / 500, ink. */
+.qy-contact .field.form-group > label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+/* Required asterisk in coral. */
+.qy-contact .field.form-group > label span {
+  color: var(--coral);
+}
+
+/* Inputs / textarea. */
+.qy-contact .field__input.form-control,
+.qy-contact textarea.form-control {
+  width: 100%;
+  height: auto;
+  padding: 13px 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  margin: 0;
+}
+
+.qy-contact .field__input.form-control:focus,
+.qy-contact textarea.form-control:focus {
+  border-color: var(--ink);
+  box-shadow: var(--ring);
+}
+
+/* Placeholders stay hidden (theme sets them transparent): the label
+   above already names each field, so an identical placeholder inside
+   would just duplicate the text. */
+
+.qy-contact textarea.field__input.form-control,
+.qy-contact .form-control-area {
+  height: auto;
+  min-height: 140px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+/* Error state. */
+.qy-contact .field--with-error .field__input.form-control[aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(181, 69, 58, 0.10);
+}
+
+.qy-contact .contact__field-error,
+.qy-contact .contact__field-error .form__message {
+  display: block;
+  font-size: 12px;
+  color: var(--danger);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   SUBMIT BUTTON — brand pill (ink → coral on hover)
+   Overrides theme.css .btn-theme, including its diagonal ::before
+   fill animation.
+   ============================================================ */
+.qy-contact .contact__button {
+  margin-top: 28px;
+}
+
+.qy-contact .btn.btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 14px 32px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Remove the theme's diagonal slide-up fill panel. */
+.qy-contact .btn.btn-theme::before {
+  display: none;
+}
+
+.qy-contact .btn.btn-theme:hover,
+.qy-contact .btn.btn-theme:focus,
+.qy-contact .btn.btn-theme:active {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--white);
+}
+
+.qy-contact .btn.btn-theme .icon-arrow-right,
+.qy-contact .btn.btn-theme [class^="icon-"] {
+  position: static;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* ============================================================
+   PRIVACY / TERMS NOTICE (richtext below the form)
+   ============================================================ */
+.qy-contact .mt-5 {
+  margin-top: 28px !important;
+}
+
+.qy-contact .mt-5 p {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--slate);
+  margin: 0;
+}
+
+.qy-contact .mt-5 a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.12s ease;
+}
+
+.qy-contact .mt-5 a:hover {
+  color: var(--coral);
+}
+
+/* ---- Form status messages (success / error) ---- */
+.qy-contact .form-status,
+.qy-contact .form-status-list {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+}
+
+.qy-contact .form-status-list .link {
+  color: var(--danger);
+  text-decoration: underline;
+}
