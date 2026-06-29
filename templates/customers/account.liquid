@@ -52,6 +52,10 @@
         </div>
 
         {%- if has_active_script -%}
+          {%- comment -%}
+            Hidden: the "Prescription active" hero is not functional yet
+            (auto-delivery / view-script actions don't work). Kept for restore.
+
           <!-- active-script hero -->
           <div class="qy-hero">
             <div class="qy-hero__top">
@@ -76,6 +80,7 @@
               <a href="/pages/prescription" class="qy-btn qy-btn--ghost-dark">View script</a>
             </div>
           </div>
+          {%- endcomment -%}
         {%- else -%}
           <!-- application hero -->
           <div class="qy-hero">
@@ -196,6 +201,9 @@
             {%- endif -%}
           </div>
 
+          {%- comment -%}
+            Hidden: the Resources card links are not wired up yet. Kept for restore.
+
           <div class="qy-card">
             <h3 class="qy-card__title">Resources</h3>
             <div class="qy-res">
@@ -205,6 +213,7 @@
               <a href="/pages/contact" class="qy-res__item"><span>Talk to the care team</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
             </div>
           </div>
+          {%- endcomment -%}
         </div>
 
         <!-- addresses summary -->

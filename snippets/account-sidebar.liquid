@@ -52,6 +52,10 @@
       <span>Overview</span>
     </a>
 
+    {%- comment -%}
+      Hidden: the "Your care" links (prescription, doctor, auto-delivery,
+      upload a script) are not functional yet. Kept for restore.
+
     <div class="qy-nav__group">Your care</div>
     <a href="/pages/prescription" class="qy-nav__item{% if active == 'prescription' %} is-active{% endif %}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1z"></path><path d="M9 13l2 2 4-4"></path></svg>
@@ -69,6 +73,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5"></path><path d="M8 9l4-4 4 4"></path><path d="M5 19h14"></path></svg>
       <span>Upload a script</span>
     </a>
+    {%- endcomment -%}
 
     <div class="qy-nav__group">Pharmacy</div>
     <a href="/collections/all" class="qy-nav__item{% if active == 'shop' %} is-active{% endif %}">
