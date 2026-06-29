@@ -166,8 +166,8 @@
         "des": "Have questions about quitting smoking or our products? Send us a message and our team will get back to you within 2 business days.",
         "align-heading": "center",
         "answer_content": "<p>By submitting this form, you agree to Quity's <a href=\"/pages/privacy-policy\">Privacy Policy</a> and <a href=\"/pages/terms-conditions\">Terms &amp; Conditions</a>.</p>",
-        "paddingsection": "80px 0px 80px 0px",
-        "paddingmobile": "40px 0px 40px 0px",
+        "paddingsection": "80px 0px 24px 0px",
+        "paddingmobile": "40px 0px 24px 0px",
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
@@ -234,8 +234,8 @@
         "e_small": true,
         "left_html": "",
         "e_right": false,
-        "paddingsection": "80px 0px 80px 0px",
-        "paddingmobile": "60px 0px 60px 0px",
+        "paddingsection": "40px 0px 80px 0px",
+        "paddingmobile": "32px 0px 60px 0px",
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px"
       }
