@@ -109,7 +109,7 @@
     border-color: #E55B4F;
     box-shadow: 0 0 0 3px rgba(229,91,79,0.12);
   }
-  .qy-login-page .qy-input--error { border-color: #E55B4F; }
+  .qy-login-page .qy-input--error { border-color: #E55B4F; box-shadow: 0 0 0 3px rgba(229,91,79,0.12); }
 
   /* Password label row */
   .qy-login-page .qy-pw-row {
@@ -210,6 +210,28 @@
   .qy-login-page .errors li { margin: 0; }
   .qy-login-page .errors li + li { margin-top: 4px; }
 
+  /* Client-side per-field validation (inline errors + top banner) */
+  .qy-login-page .error-message {
+    display: none;
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #B83F36;
+  }
+  .qy-login-page .error-message.show { display: block; }
+  .qy-login-page .qy-error-banner {
+    display: none;
+    margin: 0 0 18px;
+    padding: 13px 16px;
+    border: 1px solid #E55B4F;
+    border-radius: 8px;
+    background: #FBE9E6;
+    color: #B83F36;
+    font-size: 13.5px;
+    font-weight: 400;
+  }
+  .qy-login-page .qy-error-banner.show { display: block; }
+
   /* Guest login (only when the store enables it) — secondary pill */
   .qy-login-page .qy-guest { margin-top: 14px; }
   .qy-login-page .qy-guest-btn {
@@ -273,8 +295,10 @@
 
         <div class="qy-divider"></div>
 
-        {%- form 'customer_login' -%}
+        {%- form 'customer_login', novalidate: 'novalidate', id: 'QyLoginForm' -%}
           {{ form.errors | default_errors }}
+
+          <div class="qy-error-banner" id="LoginErrorBanner">Please check the highlighted fields below.</div>
 
           <div class="qy-field">
             <label for="CustomerEmail" class="qy-label">Email</label>
@@ -287,6 +311,7 @@
               autocomplete="email"
               autocorrect="off"
               autocapitalize="off">
+            <div class="error-message" id="CustomerEmailError">Please enter a valid email address.</div>
           </div>
 
           {%- if form.password_needed -%}
@@ -302,6 +327,7 @@
               id="CustomerPassword"
               placeholder="Enter your password"
               autocomplete="current-password">
+            <div class="error-message" id="CustomerPasswordError">Please enter your password.</div>
           </div>
           {%- endif -%}
 
@@ -334,7 +360,7 @@
 
         <div class="qy-divider"></div>
 
-        {%- form 'recover_customer_password' -%}
+        {%- form 'recover_customer_password', novalidate: 'novalidate', id: 'QyRecoverForm' -%}
           {{ form.errors | default_errors }}
 
           {%- if form.posted_successfully? -%}
@@ -353,6 +379,7 @@
               autocomplete="email"
               autocorrect="off"
               autocapitalize="off">
+            <div class="error-message" id="RecoverEmailError">Please enter a valid email address.</div>
           </div>
 
           <button type="submit" class="qy-submit">{{ 'customer.recover_password.submit' | t }}</button>
@@ -364,3 +391,86 @@
 
   </div>
 </section>
+
+<script>
+  (function () {
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setError(input, msgEl, message) {
+      if (input) input.classList.add('qy-input--error');
+      if (msgEl) { if (message) msgEl.textContent = message; msgEl.classList.add('show'); }
+    }
+    function clearError(input, msgEl) {
+      if (input) input.classList.remove('qy-input--error');
+      if (msgEl) msgEl.classList.remove('show');
+    }
+    function reqEmail(v) {
+      v = (v || '').trim();
+      if (!v) return 'Please enter your email address.';
+      if (!EMAIL_RE.test(v)) return 'Please enter a valid email address.';
+      return null;
+    }
+    function reqPassword(v) {
+      if (!v) return 'Please enter your password.';
+      return null;
+    }
+
+    // Custom inline validation replaces the native browser bubble (the email
+    // type triggers an "include an @" tooltip that overlapped the password
+    // row); the forms carry `novalidate` so the native bubble never shows.
+    function wire(form, banner, fields) {
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        var firstInvalid = null;
+        fields.forEach(function (f) {
+          var input = form.querySelector(f.input);
+          if (!input) return;
+          var msgEl = form.querySelector(f.error);
+          var err = f.validate(input.value);
+          if (err) {
+            setError(input, msgEl, err);
+            if (!firstInvalid) firstInvalid = input;
+          } else {
+            clearError(input, msgEl);
+          }
+        });
+        if (firstInvalid) {
+          e.preventDefault();
+          if (banner) banner.classList.add('show');
+          firstInvalid.focus();
+        } else if (banner) {
+          banner.classList.remove('show');
+        }
+      });
+      fields.forEach(function (f) {
+        var input = form.querySelector(f.input);
+        if (!input) return;
+        var msgEl = form.querySelector(f.error);
+        input.addEventListener('input', function () {
+          if (!f.validate(input.value)) {
+            clearError(input, msgEl);
+            if (banner && !form.querySelector('.qy-input--error')) banner.classList.remove('show');
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      wire(
+        document.getElementById('QyLoginForm'),
+        document.getElementById('LoginErrorBanner'),
+        [
+          { input: '#CustomerEmail', error: '#CustomerEmailError', validate: reqEmail },
+          { input: '#CustomerPassword', error: '#CustomerPasswordError', validate: reqPassword }
+        ]
+      );
+      wire(
+        document.getElementById('QyRecoverForm'),
+        null,
+        [
+          { input: '#RecoverEmail', error: '#RecoverEmailError', validate: reqEmail }
+        ]
+      );
+    });
+  })();
+</script>

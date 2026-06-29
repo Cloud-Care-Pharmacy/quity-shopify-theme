@@ -289,6 +289,30 @@
   .qy-getstarted .errors li { margin: 0; }
   .qy-getstarted .errors li + li { margin-top: 4px; }
 
+  /* Client-side per-field validation (inline errors, password hint, banner) */
+  .qy-getstarted .qy-input--error { border-color: #E55B4F; box-shadow: 0 0 0 3px rgba(229,91,79,0.12); }
+  .qy-getstarted .error-message {
+    display: none;
+    margin: 7px 0 0;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #B83F36;
+  }
+  .qy-getstarted .error-message.show { display: block; }
+  .qy-getstarted .qy-hint { margin: 7px 0 0; font-size: 12px; font-weight: 400; color: #8A8F8C; }
+  .qy-getstarted .qy-error-banner {
+    display: none;
+    margin: 18px 0 0;
+    padding: 13px 16px;
+    border: 1px solid #E55B4F;
+    border-radius: 8px;
+    background: #FBE9E6;
+    color: #B83F36;
+    font-size: 13.5px;
+    font-weight: 400;
+  }
+  .qy-getstarted .qy-error-banner.show { display: block; }
+
   /* Responsive */
   @media (max-width: 900px) {
     .qy-getstarted .qy-grid {
@@ -296,6 +320,10 @@
       gap: 44px;
       padding: 40px 24px 64px;
     }
+    /* Surface the sign-up form first on mobile so the fields aren't pushed
+       below the fold by the marketing column (which is first in the DOM). */
+    .qy-getstarted .qy-card { order: 1; }
+    .qy-getstarted .qy-left { order: 2; }
     .qy-getstarted .qy-promise,
     .qy-getstarted .qy-lead { max-width: none; }
   }
@@ -367,29 +395,36 @@
       <h2 class="qy-card-h">Create your <em>account</em></h2>
       <p class="qy-card-sub">Takes about 2 minutes. A valid prescription is needed to browse and purchase.</p>
 
-      {%- form 'create_customer' -%}
+      {%- form 'create_customer', novalidate: 'novalidate', id: 'QyRegisterForm' -%}
         <input type="hidden" name="return_to" value="/pages/questionnaire">
         {{ form.errors | default_errors }}
+
+        <div class="qy-error-banner" id="RegisterErrorBanner">Please check the highlighted fields below.</div>
 
         <div class="qy-names">
           <div class="qy-field">
             <label for="FirstName" class="qy-label">First name</label>
             <input class="qy-input" type="text" name="customer[first_name]" id="FirstName" placeholder="First name" autocomplete="given-name" {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+            <div class="error-message" id="FirstNameError">Please enter your first name.</div>
           </div>
           <div class="qy-field">
             <label for="LastName" class="qy-label">Last name</label>
             <input class="qy-input" type="text" name="customer[last_name]" id="LastName" placeholder="Last name" autocomplete="family-name" {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+            <div class="error-message" id="LastNameError">Please enter your last name.</div>
           </div>
         </div>
 
         <div class="qy-field qy-field--mt">
           <label for="Email" class="qy-label">Email address</label>
           <input class="qy-input" type="email" name="customer[email]" id="Email" placeholder="you@email.com" autocomplete="email" autocorrect="off" autocapitalize="off" {% if form.email %}value="{{ form.email }}"{% endif %}>
+          <div class="error-message" id="EmailError">Please enter a valid email address.</div>
         </div>
 
         <div class="qy-field qy-field--mt">
           <label for="CreatePassword" class="qy-label">Password</label>
           <input class="qy-input" type="password" name="customer[password]" id="CreatePassword" placeholder="Create a password" autocomplete="new-password">
+          <div class="qy-hint" id="PasswordHint">Use at least 5 characters.</div>
+          <div class="error-message" id="CreatePasswordError">Please create a password with at least 5 characters.</div>
         </div>
 
         <button type="submit" class="qy-submit">Create account &amp; apply</button>
@@ -406,3 +441,72 @@
 
   </main>
 </section>
+
+<script>
+  (function () {
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function setError(input, msgEl, message) {
+      if (input) input.classList.add('qy-input--error');
+      if (msgEl) { if (message) msgEl.textContent = message; msgEl.classList.add('show'); }
+    }
+    function clearError(input, msgEl) {
+      if (input) input.classList.remove('qy-input--error');
+      if (msgEl) msgEl.classList.remove('show');
+    }
+    var FIELDS = [
+      { input: '#FirstName', error: '#FirstNameError', validate: function (v) {
+          return (v || '').trim() ? null : 'Please enter your first name.';
+        } },
+      { input: '#LastName', error: '#LastNameError', validate: function (v) {
+          return (v || '').trim() ? null : 'Please enter your last name.';
+        } },
+      { input: '#Email', error: '#EmailError', validate: function (v) {
+          v = (v || '').trim();
+          if (!v) return 'Please enter your email address.';
+          if (!EMAIL_RE.test(v)) return 'Please enter a valid email address.';
+          return null;
+        } },
+      { input: '#CreatePassword', error: '#CreatePasswordError', validate: function (v) {
+          if (!v) return 'Please create a password.';
+          if (v.length < 5) return 'Password must be at least 5 characters.';
+          return null;
+        } }
+    ];
+    // Custom inline validation (the form carries `novalidate`, so the native
+    // browser bubble never shows). Mirrors the intake form's per-field error UX.
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('QyRegisterForm');
+      if (!form) return;
+      var banner = document.getElementById('RegisterErrorBanner');
+      form.addEventListener('submit', function (e) {
+        var firstInvalid = null;
+        FIELDS.forEach(function (f) {
+          var input = form.querySelector(f.input);
+          if (!input) return;
+          var msgEl = form.querySelector(f.error);
+          var err = f.validate(input.value);
+          if (err) { setError(input, msgEl, err); if (!firstInvalid) firstInvalid = input; }
+          else { clearError(input, msgEl); }
+        });
+        if (firstInvalid) {
+          e.preventDefault();
+          if (banner) banner.classList.add('show');
+          firstInvalid.focus();
+        } else if (banner) {
+          banner.classList.remove('show');
+        }
+      });
+      FIELDS.forEach(function (f) {
+        var input = form.querySelector(f.input);
+        if (!input) return;
+        var msgEl = form.querySelector(f.error);
+        input.addEventListener('input', function () {
+          if (!f.validate(input.value)) {
+            clearError(input, msgEl);
+            if (banner && !form.querySelector('.qy-input--error')) banner.classList.remove('show');
+          }
+        });
+      });
+    });
+  })();
+</script>

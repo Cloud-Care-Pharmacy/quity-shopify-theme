@@ -906,7 +906,7 @@
           "type": "faq",
           "settings": {
             "faq_title": "What's the first step to begin?",
-            "faq_des": "<p>If you don't have a Quity account yet, simply click the 'Get Started' button in the menu. This will give you access to the patient portal where you can request a prescription or upload your existing one. Visit our How It Works page for more details.</p>"
+            "faq_des": "<p>If you don't have a Quity account yet, <a href=\"/account/register\">create your account</a> to open the patient portal, where you can apply for a prescription or upload an existing one. You'll answer a few quick health questions, then an Australian-registered doctor reviews your application — you only pay if you're approved.</p>"
           }
         },
         "faq_XFYRfr": {

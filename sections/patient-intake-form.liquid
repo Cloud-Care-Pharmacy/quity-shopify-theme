@@ -189,8 +189,8 @@
                 </div>
 
                 <div class="field form-group">
-                  <label>State</label>
-                  <input type="hidden" id="state" name="state" class="form-control">
+                  <label class="required">State</label>
+                  <input type="hidden" id="state" name="state" class="form-control" required>
                   <details class="dropdown" data-dropdown>
                     <summary class="selectish" aria-haspopup="listbox" aria-label="State">
                       <span class="dd-val ph">Select state</span>
@@ -207,6 +207,7 @@
                       <div class="opt" data-value="ACT">Australian Capital Territory <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
                     </div>
                   </details>
+                  <div class="error-message">Please select your state</div>
                 </div>
 
               </div>
