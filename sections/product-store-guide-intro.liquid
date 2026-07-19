@@ -1,0 +1,41 @@
+{%- comment -%}
+  Product Store — guide chapter divider
+  "The complete guide" eyebrow, big light headline with an italic
+  accent word, and an intro paragraph. Opens the education chapters.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-guidehead">
+  <div class="qps__wrap qps-guidehead__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="qps-guidehead__eyebrow">{{ section.settings.eyebrow | escape }}</div>
+    {%- endif -%}
+    <h2 class="qps-guidehead__title">{{ section.settings.title_pre | escape }}{% if section.settings.title_italic != blank %} <span class="qps-it">{{ section.settings.title_italic | escape }}</span>{% endif %} {{ section.settings.title_post | escape }}</h2>
+    {%- if section.settings.intro != blank -%}
+      <p class="qps-guidehead__sub">{{ section.settings.intro | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — guide intro",
+  "class": "index-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The complete guide" },
+    { "type": "text", "id": "title_pre", "label": "Heading (before italic)", "default": "Everything worth knowing" },
+    { "type": "text", "id": "title_italic", "label": "Heading italic word", "default": "before" },
+    { "type": "text", "id": "title_post", "label": "Heading (after italic)", "default": "you switch" },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro",
+      "default": "Devices, strengths, coils and upkeep. The essentials our pharmacists walk every new patient through, in plain language."
+    }
+  ],
+  "presets": [
+    { "name": "Product store — guide intro" }
+  ]
+}
+{% endschema %}

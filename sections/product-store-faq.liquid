@@ -1,0 +1,67 @@
+{%- comment -%}
+  Product Store — FAQ
+  Warm band (final band: no bottom border). Accordion with +/- signs;
+  one item open at a time. Behavior: assets/product-store.js.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-store.js' | asset_url }}" defer></script>
+
+<section class="qps qps-band--warm qps-band--last">
+  <div class="qps__wrap qps__wrap--820 qps-faq" data-qps-faq>
+    <div class="qps-head qps-faq__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h2 class="qps-h2">{{ section.settings.title | escape }}</h2>
+    </div>
+    <div class="qps-faq__list">
+      {%- for block in section.blocks -%}
+        <div class="qps-faq__item" data-qps-faq-item {{ block.shopify_attributes }}>
+          <button type="button" class="qps-faq__q" aria-expanded="false" aria-controls="qps-faq-a-{{ block.id }}">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="qps-faq__sign" aria-hidden="true">+</span>
+          </button>
+          <p class="qps-faq__a" id="qps-faq-a-{{ block.id }}">{{ block.settings.answer | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — FAQ",
+  "class": "index-section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Frequently asked" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Do I need a prescription to buy?" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "Do I need a prescription to buy?", "answer": "Yes. Nicotine vaping products are prescription-only in Australia. Apply through Quity and an Australian-registered prescriber reviews your details, usually within 24 hours." } },
+        { "type": "faq", "settings": { "question": "How long does delivery take?", "answer": "Orders ship within 1-2 business days and arrive in 2-5 days depending on your state. Express shipping is free over $120." } },
+        { "type": "faq", "settings": { "question": "Is the packaging discreet?", "answer": "Always. Everything ships in plain, unbranded packaging with no reference to the contents." } },
+        { "type": "faq", "settings": { "question": "How do I choose a strength?", "answer": "Your prescriber recommends a starting strength based on how much you smoke. You can adjust it at your next review." } },
+        { "type": "faq", "settings": { "question": "Can I subscribe and save?", "answer": "Yes. A subscription takes 10% off every repeat order, and you can pause or cancel anytime." } },
+        { "type": "faq", "settings": { "question": "How often do I replace the coil?", "answer": "Most coils last one to two weeks. Replace when the flavour fades or you notice a burnt taste." } },
+        { "type": "faq", "settings": { "question": "What if my prescription expires?", "answer": "We remind you before it lapses. Renewing takes a few minutes and keeps your repeats running." } },
+        { "type": "faq", "settings": { "question": "Do you help me quit for good?", "answer": "Every order includes pharmacist support and a structured weaning plan designed to step you off nicotine entirely." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

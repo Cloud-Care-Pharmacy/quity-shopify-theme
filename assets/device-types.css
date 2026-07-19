@@ -303,8 +303,30 @@
   color: #5B615E;
 }
 
+/* --- Guide variant (Product Store guide chapter) ---
+   Simpler presentation used inside the product-store page: wider
+   container, 42px heading, roomier cards; axis/rows/footnote are
+   left empty by the template rather than restyled here. */
+.qdt--guide .qdt__container {
+  max-width: 1240px;
+  padding: 96px 40px;
+}
+.qdt--guide .qdt__head {
+  max-width: 620px;
+  margin: 0 auto 52px;
+}
+.qdt--guide .qdt__title {
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.qdt--guide .qdt-card { padding-bottom: 34px; }
+.qdt--guide .qdt-card__media { margin-bottom: 26px; }
+
 /* --- Responsive (single breakpoint, per design) --- */
 @media (max-width: 900px) {
   .qdt-grid { grid-template-columns: 1fr; }
   .qdt-axis { display: none; }
+  .qdt--guide .qdt__container { padding: 56px 20px; }
+  .qdt--guide .qdt__title { font-size: 32px; }
 }

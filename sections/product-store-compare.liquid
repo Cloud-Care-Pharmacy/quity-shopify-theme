@@ -1,0 +1,92 @@
+{%- comment -%}
+  Product Store — comparison table
+  Warm band. Four-column table: feature / Quity (ink header column) /
+  two alternatives, rows show a green check or a muted dash.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--warm">
+  <div class="qps__wrap qps__wrap--1080 qps-compare">
+    <div class="qps-head qps-compare__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h2 class="qps-h2">{{ section.settings.title | escape }}</h2>
+    </div>
+    <div class="qps-compare__table">
+      <div class="qps-compare__row qps-compare__row--head">
+        <div class="qps-compare__lead"></div>
+        <div class="qps-compare__hero">{{ section.settings.col_hero | escape }}</div>
+        <div class="qps-compare__col">{{ section.settings.col_2 | escape }}</div>
+        <div class="qps-compare__col">{{ section.settings.col_3 | escape }}</div>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="qps-compare__row" {{ block.shopify_attributes }}>
+          <div class="qps-compare__feat">{{ block.settings.feature | escape }}</div>
+          <div class="qps-compare__cell qps-compare__cell--hero">
+            {%- if block.settings.hero -%}
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+            {%- else -%}
+              <span class="qps-compare__dash">-</span>
+            {%- endif -%}
+          </div>
+          <div class="qps-compare__cell">
+            {%- if block.settings.alt2 -%}
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#5F7A68;"><path d="M20 6L9 17l-5-5"></path></svg>
+            {%- else -%}
+              <span class="qps-compare__dash">-</span>
+            {%- endif -%}
+          </div>
+          <div class="qps-compare__cell">
+            {%- if block.settings.alt3 -%}
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:#5F7A68;"><path d="M20 6L9 17l-5-5"></path></svg>
+            {%- else -%}
+              <span class="qps-compare__dash">-</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — compare",
+  "class": "index-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Quity vs the alternatives" },
+    { "type": "text", "id": "col_hero", "label": "Highlighted column", "default": "Quity" },
+    { "type": "text", "id": "col_2", "label": "Second column", "default": "Disposables" },
+    { "type": "text", "id": "col_3", "label": "Third column", "default": "Local chemist" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "Feature", "default": "Prescriber-matched strength" },
+        { "type": "checkbox", "id": "hero", "label": "Highlighted column has it", "default": true },
+        { "type": "checkbox", "id": "alt2", "label": "Second column has it", "default": false },
+        { "type": "checkbox", "id": "alt3", "label": "Third column has it", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — compare",
+      "blocks": [
+        { "type": "row", "settings": { "feature": "Prescriber-matched strength", "hero": true, "alt2": false, "alt3": true } },
+        { "type": "row", "settings": { "feature": "Refillable, cheaper per mL", "hero": true, "alt2": false, "alt3": true } },
+        { "type": "row", "settings": { "feature": "Pharmacist support included", "hero": true, "alt2": false, "alt3": false } },
+        { "type": "row", "settings": { "feature": "Discreet home delivery", "hero": true, "alt2": false, "alt3": false } },
+        { "type": "row", "settings": { "feature": "Structured weaning plan", "hero": true, "alt2": false, "alt3": false } },
+        { "type": "row", "settings": { "feature": "TGA-notified device", "hero": true, "alt2": true, "alt3": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

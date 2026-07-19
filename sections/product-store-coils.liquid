@@ -1,0 +1,119 @@
+{%- comment -%}
+  Product Store — coil resistance
+  Warm band. Two raised cards (ohm figure + pill, four labeled meter
+  bars, "Best for" footer note).
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--warm">
+  <div class="qps__wrap qps__wrap--1160 qps-coils">
+    <div class="qps-head qps-coils__head">
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-h2 qps-h2--lg">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.sub != blank -%}
+        <p class="qps-head__sub">{{ section.settings.sub | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="qps-coils__grid">
+      {%- for block in section.blocks -%}
+        <div class="qps-card qps-coil" {{ block.shopify_attributes }}>
+          <div class="qps-coil__top">
+            <span class="qps-coil__ohm">{{ block.settings.ohm | escape }}<span> Ω</span></span>
+            <span class="qps-coil__tag">{{ block.settings.label | escape }}</span>
+          </div>
+          <div class="qps-coil__meters">
+            {%- for i in (1..4) -%}
+              {%- assign label_key = 'meter' | append: i | append: '_label' -%}
+              {%- assign pct_key = 'meter' | append: i | append: '_pct' -%}
+              {%- assign meter_label = block.settings[label_key] -%}
+              {%- if meter_label != blank -%}
+                <div>
+                  <div class="qps-coil__meter-label"><span>{{ meter_label | escape }}</span></div>
+                  <div class="qps-meterbar"><div class="qps-meterbar__fill" style="width:{{ block.settings[pct_key] | default: 0 }}%;"></div></div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <div class="qps-coil__foot">
+            <span class="qps-coil__bestlabel">{{ section.settings.best_label | escape }} </span>
+            <span class="qps-coil__best">{{ block.settings.best | escape }}</span>
+            {%- if block.settings.note != blank -%}
+              <p class="qps-coil__note">{{ block.settings.note | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — coils",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "Coils" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Selecting the right resistance" },
+    {
+      "type": "textarea",
+      "id": "sub",
+      "label": "Sub-paragraph",
+      "default": "Resistance, in ohms, shapes how the device draws, warms and vapes. Lower resistance means more of everything."
+    },
+    { "type": "text", "id": "best_label", "label": "Footer label", "default": "Best for" }
+  ],
+  "blocks": [
+    {
+      "type": "coil",
+      "name": "Coil card",
+      "settings": [
+        { "type": "text", "id": "ohm", "label": "Resistance (Ω)", "default": "0.4" },
+        { "type": "text", "id": "label", "label": "Pill label", "default": "Sub-ohm" },
+        { "type": "text", "id": "best", "label": "Best for", "default": "DTL · 3-6 mg/mL" },
+        { "type": "textarea", "id": "note", "label": "Note" },
+        { "type": "text", "id": "meter1_label", "label": "Meter 1 label", "default": "Vapour" },
+        { "type": "range", "id": "meter1_pct", "label": "Meter 1 fill", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "text", "id": "meter2_label", "label": "Meter 2 label", "default": "Warmth" },
+        { "type": "range", "id": "meter2_pct", "label": "Meter 2 fill", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "text", "id": "meter3_label", "label": "Meter 3 label", "default": "Draw tightness" },
+        { "type": "range", "id": "meter3_pct", "label": "Meter 3 fill", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "text", "id": "meter4_label", "label": "Meter 4 label", "default": "E-liquid usage" },
+        { "type": "range", "id": "meter4_pct", "label": "Meter 4 fill", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — coils",
+      "blocks": [
+        {
+          "type": "coil",
+          "settings": {
+            "ohm": "0.4", "label": "Sub-ohm", "best": "DTL · 3-6 mg/mL",
+            "note": "Higher airflow and warmer vapour. Pairs with lower-strength freebase e-liquid.",
+            "meter1_label": "Vapour", "meter1_pct": 85,
+            "meter2_label": "Warmth", "meter2_pct": 78,
+            "meter3_label": "Draw tightness", "meter3_pct": 26,
+            "meter4_label": "E-liquid usage", "meter4_pct": 82
+          }
+        },
+        {
+          "type": "coil",
+          "settings": {
+            "ohm": "1.2", "label": "Standard", "best": "MTL · 25-50 mg/mL",
+            "note": "Tighter draw and cooler vapour. Pairs with higher-strength nicotine salts.",
+            "meter1_label": "Vapour", "meter1_pct": 44,
+            "meter2_label": "Warmth", "meter2_pct": 38,
+            "meter3_label": "Draw tightness", "meter3_pct": 82,
+            "meter4_label": "E-liquid usage", "meter4_pct": 40
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

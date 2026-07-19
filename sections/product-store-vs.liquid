@@ -1,0 +1,90 @@
+{%- comment -%}
+  Product Store — nicotine science (salts vs freebase)
+  Warm band. Two raised cards rendering the same attribute rows from
+  opposite columns: each row block carries the property name plus the
+  value for the left (salts) and right (freebase) card.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--warm">
+  <div class="qps__wrap qps__wrap--1160 qps-vs">
+    <div class="qps-head qps-vs__head">
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-h2 qps-h2--lg">{{ section.settings.title | escape }}{% if section.settings.title_italic != blank %} <span class="qps-it">{{ section.settings.title_italic | escape }}</span>{% endif %}</h2>
+      {%- if section.settings.sub != blank -%}
+        <p class="qps-head__sub">{{ section.settings.sub | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="qps-vs__grid">
+      <div class="qps-card qps-vs__card">
+        <span class="qps-tag">{{ section.settings.left_tag | escape }}</span>
+        <h3 class="qps-vs__title">{{ section.settings.left_title | escape }}</h3>
+        {%- for block in section.blocks -%}
+          <div class="qps-vs__row" {{ block.shopify_attributes }}>
+            <span class="qps-vs__key">{{ block.settings.property | escape }}</span>
+            <span class="qps-vs__val">{{ block.settings.left_value | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="qps-card qps-vs__card">
+        <span class="qps-tag">{{ section.settings.right_tag | escape }}</span>
+        <h3 class="qps-vs__title">{{ section.settings.right_title | escape }}</h3>
+        {%- for block in section.blocks -%}
+          <div class="qps-vs__row">
+            <span class="qps-vs__key">{{ block.settings.property | escape }}</span>
+            <span class="qps-vs__val">{{ block.settings.right_value | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — salts vs freebase",
+  "class": "index-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "The science" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Nicotine salts vs." },
+    { "type": "text", "id": "title_italic", "label": "Heading italic word", "default": "freebase" },
+    {
+      "type": "textarea",
+      "id": "sub",
+      "label": "Sub-paragraph",
+      "default": "Two forms of the same molecule, delivered differently, which suits you depends on how you draw and how much you smoke today."
+    },
+    { "type": "text", "id": "left_tag", "label": "Left card tag", "default": "Mouth to lung · MTL" },
+    { "type": "text", "id": "left_title", "label": "Left card title", "default": "Nicotine salts" },
+    { "type": "text", "id": "right_tag", "label": "Right card tag", "default": "Direct to lung · DTL" },
+    { "type": "text", "id": "right_title", "label": "Right card title", "default": "Freebase nicotine" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Attribute row",
+      "settings": [
+        { "type": "text", "id": "property", "label": "Property", "default": "Draw style" },
+        { "type": "text", "id": "left_value", "label": "Left card value", "default": "Tight - mouth to lung" },
+        { "type": "text", "id": "right_value", "label": "Right card value", "default": "Open - direct to lung" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — salts vs freebase",
+      "blocks": [
+        { "type": "row", "settings": { "property": "Draw style", "left_value": "Tight - mouth to lung", "right_value": "Open - direct to lung" } },
+        { "type": "row", "settings": { "property": "Throat hit", "left_value": "Smooth at high strength", "right_value": "Harsh at high strength" } },
+        { "type": "row", "settings": { "property": "Strength", "left_value": "25-50 mg/mL", "right_value": "3-6 mg/mL" } },
+        { "type": "row", "settings": { "property": "Vapour", "left_value": "Cooler, discreet", "right_value": "Warmer, voluminous" } },
+        { "type": "row", "settings": { "property": "Suited to", "left_value": "Recent quitters", "right_value": "Lower nicotine need" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

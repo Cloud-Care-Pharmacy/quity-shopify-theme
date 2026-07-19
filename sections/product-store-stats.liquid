@@ -1,0 +1,48 @@
+{%- comment -%}
+  Product Store — spec stat strip
+  Ink band with four stats (light Jost value + mono caption).
+  Styles: assets/product-store.css (.qps- scope).
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--ink">
+  <div class="qps__wrap qps-stats">
+    {%- for block in section.blocks -%}
+      <div class="qps-stat" {{ block.shopify_attributes }}>
+        <div class="qps-stat__value">{{ block.settings.value | escape }}</div>
+        <div class="qps-stat__key">{{ block.settings.key | escape }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — stats",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "5 × 5mL" },
+        { "type": "text", "id": "key", "label": "Caption", "default": "Refill pods" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — stats",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "5 × 5mL", "key": "Refill pods" } },
+        { "type": "stat", "settings": { "value": "1100", "key": "mAh battery" } },
+        { "type": "stat", "settings": { "value": "0.4 Ω", "key": "Starter coil" } },
+        { "type": "stat", "settings": { "value": "24 hr", "key": "Script review" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

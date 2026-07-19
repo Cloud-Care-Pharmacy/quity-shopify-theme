@@ -1,0 +1,62 @@
+{%- comment -%}
+  Product Store — quit journey timeline
+  Ink band, heading with italic accent word, four columns with
+  left-divider rhythm and coral time labels.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--ink">
+  <div class="qps__wrap qps-timeline">
+    <div class="qps-head qps-timeline__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h2 class="qps-h2">{{ section.settings.title | escape }}{% if section.settings.title_italic != blank %} <span class="qps-it">{{ section.settings.title_italic | escape }}</span>{% endif %}</h2>
+    </div>
+    <div class="qps-timeline__grid">
+      {%- for block in section.blocks -%}
+        <div class="qps-timeline__col" {{ block.shopify_attributes }}>
+          <div class="qps-timeline__when">{{ block.settings.when | escape }}</div>
+          <div class="qps-timeline__title">{{ block.settings.title | escape }}</div>
+          <div class="qps-timeline__body">{{ block.settings.body | escape }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — timeline",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What to expect" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Your quit" },
+    { "type": "text", "id": "title_italic", "label": "Heading italic word", "default": "journey" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Timeline step",
+      "settings": [
+        { "type": "text", "id": "when", "label": "When", "default": "Week 1" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Switch" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — timeline",
+      "blocks": [
+        { "type": "step", "settings": { "when": "Week 1", "title": "Switch", "body": "Set up your device and switch fully from cigarettes at your prescribed strength." } },
+        { "type": "step", "settings": { "when": "Month 1", "title": "Settle", "body": "Cravings ease. Your pharmacist checks in and adjusts strength if needed." } },
+        { "type": "step", "settings": { "when": "Month 3", "title": "Reduce", "body": "Begin stepping strength down as your nicotine need falls." } },
+        { "type": "step", "settings": { "when": "Month 6+", "title": "Wean off", "body": "Transition toward patches or lozenges, and off nicotine entirely." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
