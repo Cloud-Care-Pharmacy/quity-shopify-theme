@@ -116,8 +116,8 @@
                             {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                             </div>
                         {%- endif -%}
+                          {%- if block.settings.image2 != blank -%}
                           <div class="image-content-6-2" >
-                            {%- if block.settings.image2 != blank -%}
                           <div class="image-content__image-container image-content-2" data-aos="{{ section.settings.animation }}" data-aos-duration="1000">
                               <div class="image-content__image-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image2.aspect_ratio | times: 100 }}%;">
                                 {% assign img_url = block.settings.image2 | image_url: width: 1 | replace: 'width=1', 'width={width}' %}
@@ -133,12 +133,8 @@
                                 height="{{ block.settings.image2.height }}">
                               </div>
                             </div>
-                            {%- else -%}
-                            <div class="image-content__image">
-                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                            </div>
-                        {%- endif -%}
                         </div>
+                        {%- endif -%}
                     </div>
                     
                   

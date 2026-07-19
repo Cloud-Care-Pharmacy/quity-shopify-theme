@@ -1,0 +1,139 @@
+{%- comment -%}
+  Customer Gate Status Snippet
+  ----------------------------
+  Renders a full-page Quity verification gate for non-approved customers
+  on gated templates, then opens a hidden wrapper that hides the real page
+  content (closed by customer-gate-status-end.liquid).
+
+  Design: Quity "Verification States" — scoped .qy-gate classes styled in
+  assets/customer-gate-status.css. Fonts (Jost / Newsreader / JetBrains
+  Mono) are loaded in layout/theme.liquid.
+
+  customer.metafields.shop.status values:
+    - "Open"                → content renders normally (gate open)
+    - "Expired"             → Access expired (renew prescription)
+    - "Declined"            → Access denied
+    - "Pending" / blank/nil → Verification in progress
+    - (not logged in)       → Account required
+
+  Usage in theme.liquid (gated templates only):
+    {% render 'customer-gate-status' %}
+    {{ content_for_layout }}
+    {% render 'customer-gate-status-end' %}
+{%- endcomment -%}
+
+{%- unless customer -%}
+  {%- comment -%} Account required — not logged in {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="qy-gate qy-gate--login">
+    <div class="qy-gate__col">
+      <div class="qy-gate__chip">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+      </div>
+      <div class="qy-gate__badge">
+        <span class="qy-gate__dot"></span>
+        <span class="qy-gate__badge-label">Members only</span>
+      </div>
+      <h1 class="qy-gate__heading">Account <em>required</em></h1>
+      <p class="qy-gate__message">You need to be signed in to browse our products. Log in or create an account to continue.</p>
+      <div class="qy-gate__actions">
+        <a href="/account/login" class="qy-gate__btn qy-gate__btn--ink">Log in</a>
+        <a href="/account/register" class="qy-gate__btn qy-gate__btn--sec">Create account</a>
+      </div>
+      <div class="qy-gate__footer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+        Secure &amp; encrypted · stored in Australia
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- else -%}
+
+{%- assign customer_status = customer.metafields.shop.status | strip -%}
+
+{%- if customer_status == 'Open' -%}
+  {%- comment -%} Gate open — do nothing, content renders normally {%- endcomment -%}
+
+{%- elsif customer_status == 'Expired' -%}
+  {%- comment -%} Access expired — renew prescription {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="qy-gate qy-gate--expired">
+    <div class="qy-gate__col">
+      <div class="qy-gate__chip">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="21 4 21 10 15 10"></polyline><path d="M21 10A9 9 0 1 0 18.3 17.6"></path><polyline points="12 7 12 12 15.5 14"></polyline></svg>
+      </div>
+      <div class="qy-gate__badge">
+        <span class="qy-gate__dot"></span>
+        <span class="qy-gate__badge-label">Prescription expired</span>
+      </div>
+      <h1 class="qy-gate__heading">Access <em>expired</em></h1>
+      <p class="qy-gate__message">Your prescription has run out. To keep ordering, renew it with our pharmacy team — most renewals are sorted the same day.</p>
+      <div class="qy-gate__actions">
+        <a href="/pages/renew" class="qy-gate__btn qy-gate__btn--coral">Renew prescription</a>
+        <a href="/pages/contact" class="qy-gate__btn qy-gate__btn--sec">Contact support</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- elsif customer_status == 'Declined' -%}
+  {%- comment -%} Access denied — Declined {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="qy-gate qy-gate--denied">
+    <div class="qy-gate__col">
+      <div class="qy-gate__chip">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path><line x1="9.5" y1="9.5" x2="14.5" y2="14.5"></line><line x1="14.5" y1="9.5" x2="9.5" y2="14.5"></line></svg>
+      </div>
+      <div class="qy-gate__badge">
+        <span class="qy-gate__dot"></span>
+        <span class="qy-gate__badge-label">Access denied</span>
+      </div>
+      <h1 class="qy-gate__heading">Access <em>denied</em></h1>
+      <p class="qy-gate__message">This area is only available to verified patients. If you think this is a mistake, reach out to our team and we'll help sort it out.</p>
+      <div class="qy-gate__actions">
+        <a href="/pages/contact" class="qy-gate__btn qy-gate__btn--ink">Contact support</a>
+        <a href="/" class="qy-gate__btn qy-gate__btn--sec">Back to home</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- else -%}
+  {%- comment -%} Verification in progress — Pending or blank (new customer) {%- endcomment -%}
+  {{ 'customer-gate-status.css' | asset_url | stylesheet_tag }}
+
+  <div class="qy-gate qy-gate--pending">
+    <div class="qy-gate__col">
+      <div class="qy-gate__chip">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 7 12 12 15.5 14"></polyline></svg>
+      </div>
+      <div class="qy-gate__badge">
+        <span class="qy-gate__dot"></span>
+        <span class="qy-gate__badge-label">Pending review</span>
+      </div>
+      <h1 class="qy-gate__heading">Verification <em>in progress</em></h1>
+      <p class="qy-gate__message">Our pharmacy team is reviewing your account. Once it's verified you'll be able to browse and order — we'll email you the moment it's ready.</p>
+      <div class="qy-gate__actions">
+        <a href="/pages/contact" class="qy-gate__btn qy-gate__btn--ink">Contact us</a>
+        <a href="/" class="qy-gate__btn qy-gate__btn--sec">Back to home</a>
+      </div>
+      <div class="qy-gate__footer">Typical review · within 1 business day</div>
+    </div>
+  </div>
+
+  <div style="display:none !important;">
+  {%- comment -%} Hide page content — closed by customer-gate-status-end snippet {%- endcomment -%}
+
+{%- endif -%}
+
+{%- endunless -%}

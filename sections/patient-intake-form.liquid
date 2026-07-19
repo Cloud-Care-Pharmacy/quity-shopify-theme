@@ -1,11 +1,16 @@
+{{ 'flatpickr.min.css' | asset_url | stylesheet_tag }}
 {{ 'patient-intake-form.css' | asset_url | stylesheet_tag }}
 
-<div class="patient-intake-form">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-12">
-        
-        <patient-intake-form>
+{%- unless customer -%}
+  <script>
+    window.location.replace('/account/register');
+  </script>
+  <meta http-equiv="refresh" content="0;url=/account/register">
+{%- else -%}
+
+<div class="patient-intake-form qy-intake">
+  <div class="qy-intake__wrap">
+    <patient-intake-form>
           <!-- Progress Indicator -->
           <div class="progress-indicator">
             <ul class="steps-list" id="stepsList">
@@ -36,93 +41,138 @@
             </ul>
           </div>
 
-          <!-- Success Message -->
+          <!-- Success / Confirmation -->
           <div class="success-message" id="successMessage">
-            <h2>✓ Thank You!</h2>
-            <p>Your questionnaire has been completed successfully.</p>
-            <p>Your responses have been saved.</p>
+            <div class="success-message__inner">
+              <div class="success-message__icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7"></path>
+                </svg>
+              </div>
+              <div class="success-message__eyebrow">Application received</div>
+              <h1 class="success-message__heading">Thanks — we&rsquo;ll take it <em>from here.</em></h1>
+              <p class="success-message__text">An Australian-registered doctor will review your application within 24 hours. We&rsquo;ll email you at the address you provided &mdash; there&rsquo;s nothing else to do right now.</p>
+
+              <div class="success-message__ref">
+                <span class="success-message__ref-label">Reference</span>
+                <span class="success-message__ref-code" id="successRef">&mdash;</span>
+              </div>
+
+              <div class="success-timeline">
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">01</span>
+                  <div>
+                    <div class="success-timeline__title">Doctor reviews your application</div>
+                    <div class="success-timeline__desc">Within 24 hours. They may message you with a question.</div>
+                  </div>
+                </div>
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">02</span>
+                  <div>
+                    <div class="success-timeline__title">Your script is issued</div>
+                    <div class="success-timeline__desc">If approved, we email your 12-month prescription securely.</div>
+                  </div>
+                </div>
+                <div class="success-timeline__item">
+                  <span class="success-timeline__index">03</span>
+                  <div>
+                    <div class="success-timeline__title">Pharmacy ships your order</div>
+                    <div class="success-timeline__desc">Overnight from our pharmacy, in discreet packaging.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="success-message__actions">
+                <a href="/account" class="btn-theme">My Account</a>
+                <a href="/" class="btn-outline">Back to Home</a>
+              </div>
+            </div>
           </div>
 
           <!-- Form -->
-          <form id="patientIntakeForm" novalidate>
-            
+          <form id="patientIntakeForm" class="qy-intake__card" novalidate>
+
+            <!-- Validation banner -->
+            <div class="qy-intake__banner" id="formErrorBanner">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4.5"></path><path d="M12 16.3v.4"></path></svg>
+              <span>Please review the highlighted fields before continuing.</span>
+            </div>
+
             <!-- Step 1: About You -->
             <div class="form-step active" data-step="1">
-              <h2 class="step-title">About You</h2>
+              <div class="qy-intake__eyebrow">Step 01 / 06</div>
+              <h2 class="step-title">About <em>you</em></h2>
+
+              <div class="section-separator with-label"><span class="sep-label">Personal details</span></div>
 
               <div class="form-row">
                 <div class="field form-group">
                   <label for="firstName" class="required">First name</label>
-                  <input type="text" id="firstName" name="firstName" class="field__input form-control" required>
+                  <input type="text" id="firstName" name="firstName" class="field__input form-control" placeholder="First name" value="{{ customer.first_name | escape }}" required>
                   <div class="error-message">Please enter your first name</div>
                 </div>
 
                 <div class="field form-group">
                   <label for="lastName" class="required">Last name</label>
-                  <input type="text" id="lastName" name="lastName" class="field__input form-control" required>
+                  <input type="text" id="lastName" name="lastName" class="field__input form-control" placeholder="Last name" value="{{ customer.last_name | escape }}" required>
                   <div class="error-message">Please enter your last name</div>
                 </div>
               </div>
 
-              <div class="field form-group">
-                <label for="email" class="required">Email</label>
-                <input type="email" id="email" name="email" class="field__input form-control" required>
-                <div class="error-message">Please enter a valid email address</div>
-              </div>
-
-              <div class="section-separator with-label" data-label="Personal Details"></div>
-
-              <div class="field form-group">
-                <label class="required">Date of birth</label>
-                <div class="dob-group">
-                  <select id="dobDay" name="dobDay" class="form-control" required>
-                    <option value="">Day</option>
-                    {% for i in (1..31) %}
-                      <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                  </select>
-                  <select id="dobMonth" name="dobMonth" class="form-control" required>
-                    <option value="">Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                  <select id="dobYear" name="dobYear" class="form-control" required>
-                    <option value="">Year</option>
-                    {% assign currentYear = 'now' | date: '%Y' | plus: 0 %}
-                    {% assign startYear = currentYear | minus: 100 %}
-                    {% assign endYear = currentYear | minus: 18 %}
-                    {% for i in (startYear..endYear) reversed %}
-                      <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                  </select>
+              <div class="form-row dob-gender-row">
+                <div class="field form-group">
+                  <label class="required">Date of birth</label>
+                  {% assign current_year = 'now' | date: '%Y' | plus: 0 %}
+                  {% assign min_year = current_year | minus: 100 %}
+                  {% assign current_month = 'now' | date: '%m' %}
+                  {% assign current_day = 'now' | date: '%d' %}
+                  {%- comment -%} Calendar allows any DOB up to today; the 18+ rule is enforced on the next-step age check, not by hiding recent years. {%- endcomment -%}
+                  {% assign max_date = current_year | append: '-' | append: current_month | append: '-' | append: current_day %}
+                  {% assign min_date = min_year | append: '-' | append: current_month | append: '-' | append: current_day %}
+                  <input type="text" id="dob" name="dob" class="field__input form-control" data-datepicker data-min="{{ min_date }}" data-max="{{ max_date }}" placeholder="DD / MM / YYYY" required>
+                  <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
                 </div>
-                <div class="error-message">Please enter a valid date of birth (you must be 18+)</div>
+
+                <div class="field form-group gender-field">
+                  <label class="required">Gender</label>
+                  <input type="hidden" id="gender" name="gender" class="form-control" required>
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="Gender">
+                      <span class="dd-val ph">Select gender</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="male">Male <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="female">Female <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="non-binary">Non-binary <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="prefer-not-to-say">Prefer not to say <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="other">Other <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
+                  <div class="error-message">Please select your gender</div>
+                </div>
               </div>
 
-              <div class="field form-group">
-                <label for="gender" class="required">Gender</label>
-                <select id="gender" name="gender" class="form-control" required>
-                  <option value="">Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="non-binary">Non-binary</option>
-                  <option value="prefer-not-to-say">Prefer not to say</option>
-                  <option value="other">Other</option>
-                </select>
-                <div class="error-message">Please select your gender</div>
+              <div class="form-row medicare-row">
+                <div class="field form-group">
+                  <label for="medicareNumber">Medicare Card #</label>
+                  <input type="text" id="medicareNumber" name="medicareNumber" class="field__input form-control" placeholder="e.g., 2123 45670 1">
+                </div>
+
+                <div class="field form-group irn-field" id="medicareIRNGroup">
+                  <label for="medicareIRN">IRN</label>
+                  <input type="text" id="medicareIRN" name="medicareIRN" class="field__input form-control irn-input" maxlength="1" inputmode="numeric" pattern="[1-9]" placeholder="1">
+                  <div class="error-message">IRN must be a single digit (1–9)</div>
+                </div>
+
+                <div class="field form-group expiry-field" id="medicareExpiryGroup">
+                  <label for="medicareExpiry">Expiry</label>
+                  <input type="text" id="medicareExpiry" name="medicareExpiry" class="field__input form-control" placeholder="MM/YYYY" maxlength="7" inputmode="numeric">
+                  <div class="error-message">Please enter a valid expiry (MM/YYYY)</div>
+                </div>
               </div>
 
-              <div class="section-separator with-label" data-label="Address"></div>
+              <div class="section-separator with-label"><span class="sep-label">Address</span></div>
 
               <div class="field form-group">
                 <label for="streetAddress" class="required">Street Address</label>
@@ -138,47 +188,138 @@
                 </div>
 
                 <div class="field form-group">
+                  <label class="required">State</label>
+                  <input type="hidden" id="state" name="state" class="form-control" required>
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="State">
+                      <span class="dd-val ph">Select state</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="NSW">New South Wales <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="VIC">Victoria <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="QLD">Queensland <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="SA">South Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="WA">Western Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="TAS">Tasmania <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="NT">Northern Territory <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="ACT">Australian Capital Territory <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
+                  <div class="error-message">Please select your state</div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="field form-group">
                   <label for="postcode" class="required">Postcode</label>
                   <input type="text" id="postcode" name="postcode" class="field__input form-control" required>
                   <div class="error-message">Please enter your postcode</div>
                 </div>
+
+                <div class="field form-group">
+                  <label class="required">Country</label>
+                  <input type="hidden" id="country" name="country" class="form-control" value="Australia" required>
+                  <details class="dropdown" data-dropdown>
+                    <summary class="selectish" aria-haspopup="listbox" aria-label="Country">
+                      <span class="dd-val">Australia</span>
+                      <svg class="cv" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5"></path></svg>
+                    </summary>
+                    <div class="menu" role="listbox">
+                      <div class="opt" data-value="Australia">Australia <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="New Zealand">New Zealand <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="United Kingdom">United Kingdom <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="United States">United States <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                      <div class="opt" data-value="Canada">Canada <svg class="ck" viewBox="0 0 14 10"><path d="M1 5l4 4 8-8"></path></svg></div>
+                    </div>
+                  </details>
+                  <div class="error-message">Please select your country</div>
+                </div>
               </div>
 
-              <div class="field form-group">
-                <label for="country" class="required">Country</label>
-                <select id="country" name="country" class="form-control" required>
-                  <option value="Australia">Australia</option>
-                  <option value="New Zealand">New Zealand</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="United States">United States</option>
-                  <option value="Canada">Canada</option>
-                </select>
-                <div class="error-message">Please select your country</div>
+              <div class="section-separator with-label"><span class="sep-label">Contact</span></div>
+
+              <div class="form-row">
+                <div class="field form-group">
+                  <label for="email" class="required">Email</label>
+                  <input type="email" id="email" name="email" class="field__input form-control" placeholder="you@email.com" value="{{ customer.email | escape }}"{% if customer.email != blank %} readonly{% endif %} required>
+                  {%- if customer.email != blank -%}
+                    <span class="qy-locked-hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+                      From your account
+                    </span>
+                  {%- endif -%}
+                  <div class="error-message">Please enter a valid email address</div>
+                </div>
+
+                <div class="field form-group">
+                  <label for="mobile" class="required">Mobile number</label>
+                  <input type="tel" id="mobile" name="mobile" class="field__input form-control" placeholder="04XX XXX XXX" required>
+                  <div class="error-message">Please enter your mobile number</div>
+                </div>
               </div>
 
-              <div class="section-separator with-label" data-label="Contact"></div>
+              <div class="section-separator with-label"><span class="sep-label">Proof of age</span></div>
 
               <div class="field form-group">
-                <label for="mobile" class="required">Mobile number</label>
-                <input type="tel" id="mobile" name="mobile" class="field__input form-control" placeholder="+61" required>
-                <div class="error-message">Please enter your mobile number</div>
+                <label class="required">Upload proof of age document</label>
+                <p class="helper-text">Please upload a clear photo or scan of your driver's licence, passport, or other valid proof of age document.</p>
+                <div class="file-upload-zone" id="fileUploadZone">
+                  <input type="file" id="proofOfAge" name="proofOfAge" accept="image/jpeg,image/png,image/heic,image/heif,image/webp,application/pdf" class="file-upload-input">
+                  <div class="file-upload-placeholder" id="fileUploadPlaceholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    <span class="file-upload-text">Drag &amp; drop your file here or <strong>browse</strong></span>
+                    <span class="file-upload-hint">Accepted: Images (JPG, PNG, HEIC) or PDF — Max 10 MB</span>
+                  </div>
+                  <div class="file-upload-preview" id="fileUploadPreview" style="display:none;">
+                    <div class="file-preview-info">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                      </svg>
+                      <span class="file-preview-name" id="filePreviewName"></span>
+                      <span class="file-preview-size" id="filePreviewSize"></span>
+                    </div>
+                    <button type="button" class="file-remove-btn" id="fileRemoveBtn" aria-label="Remove file">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="error-message">Please upload a proof of age document</div>
               </div>
             </div>
 
             <!-- Step 2: Smoking Status -->
             <div class="form-step" data-step="2">
-              <h2 class="step-title">Smoking Status</h2>
+              <div class="qy-intake__eyebrow">Step 02 / 06</div>
+              <h2 class="step-title">Smoking <em>status</em></h2>
+              <p class="qy-intake__lead">Tell us where you are right now. There&rsquo;s no wrong answer &mdash; it helps the doctor choose the right option for you.</p>
 
-              <div class="field form-group">
-                <label class="required">Which best describes you?</label>
+              <div class="field form-group" style="margin-top:36px;">
+                <label class="required">Current smoking status</label>
                 <div class="radio-group">
-                  <div class="radio-option" data-value="never-smoked">
-                    <input type="radio" id="smokingStatus1" name="smokingStatus" value="never-smoked" required>
-                    <label for="smokingStatus1">I've never smoked</label>
+                  <div class="radio-option" data-value="currently-smoking">
+                    <input type="radio" id="smokingStatus1" name="smokingStatus" value="currently-smoking" required>
+                    <label for="smokingStatus1">I am currently smoking and I'd like to try a nicotine replacement option</label>
                   </div>
-                  <div class="radio-option" data-value="current-or-ex">
-                    <input type="radio" id="smokingStatus2" name="smokingStatus" value="current-or-ex" required>
-                    <label for="smokingStatus2">Current or ex-smoker</label>
+                  <div class="radio-option" data-value="quit-with-vaping">
+                    <input type="radio" id="smokingStatus2" name="smokingStatus" value="quit-with-vaping" required>
+                    <label for="smokingStatus2">I have quit smoking using nicotine replacement products and am managing a nicotine dependence to avoid otherwise smoking cigarettes</label>
+                  </div>
+                  <div class="radio-option" data-value="managing-dependence">
+                    <input type="radio" id="smokingStatus3" name="smokingStatus" value="managing-dependence" required>
+                    <label for="smokingStatus3">I am currently using nicotine replacement products to manage a nicotine dependence</label>
+                  </div>
+                  <div class="radio-option" data-value="never-smoked-or-vaped">
+                    <input type="radio" id="smokingStatus4" name="smokingStatus" value="never-smoked-or-vaped" required>
+                    <label for="smokingStatus4">I have never smoked before, but would like to try a nicotine replacement option.</label>
                   </div>
                 </div>
                 <div class="error-message">Please select an option</div>
@@ -187,107 +328,130 @@
 
             <!-- Step 3: Smoking History -->
             <div class="form-step" data-step="3">
-              <h2 class="step-title">Smoking History</h2>
+              <div class="qy-intake__eyebrow">Step 03 / 06</div>
+              <h2 class="step-title">Smoking <em>history</em></h2>
 
-              <div class="section-separator with-label" data-label="Smoking Habits"></div>
-
-              <div class="field form-group">
-                <label class="required">When you were smoking at your heaviest, how many cigarettes did you smoke per day?</label>
-                <div class="radio-group">
-                  <div class="radio-option" data-value="fewer-than-5">
-                    <input type="radio" id="cigarettesPerDay1" name="cigarettesPerDay" value="fewer-than-5" required>
-                    <label for="cigarettesPerDay1">Fewer than 5</label>
-                  </div>
-                  <div class="radio-option" data-value="5-10">
-                    <input type="radio" id="cigarettesPerDay2" name="cigarettesPerDay" value="5-10" required>
-                    <label for="cigarettesPerDay2">5-10</label>
-                  </div>
-                  <div class="radio-option" data-value="11-20">
-                    <input type="radio" id="cigarettesPerDay3" name="cigarettesPerDay" value="11-20" required>
-                    <label for="cigarettesPerDay3">11-20</label>
-                  </div>
-                  <div class="radio-option" data-value="20-40">
-                    <input type="radio" id="cigarettesPerDay4" name="cigarettesPerDay" value="20-40" required>
-                    <label for="cigarettesPerDay4">20-40</label>
-                  </div>
-                  <div class="radio-option" data-value="40-plus">
-                    <input type="radio" id="cigarettesPerDay5" name="cigarettesPerDay" value="40-plus" required>
-                    <label for="cigarettesPerDay5">40+</label>
-                  </div>
-                </div>
-                <div class="error-message">Please select an option</div>
-              </div>
+              <div class="section-separator with-label"><span class="sep-label">Smoking Habits</span></div>
 
               <div class="field form-group">
-                <label class="required">How many years have you smoked in total?</label>
+                <label class="required">How many cigarettes on average do/did you smoke in a day?</label>
                 <div class="radio-group">
-                  <div class="radio-option" data-value="5-or-fewer">
-                    <input type="radio" id="yearsSmoked1" name="yearsSmoked" value="5-or-fewer" required>
-                    <label for="yearsSmoked1">5 or fewer</label>
+                  <div class="radio-option" data-value="1-5">
+                    <input type="radio" id="cigarettesPerDay1" name="cigarettesPerDay" value="1-5" required>
+                    <label for="cigarettesPerDay1">1–5</label>
                   </div>
-                  <div class="radio-option" data-value="5-10">
-                    <input type="radio" id="yearsSmoked2" name="yearsSmoked" value="5-10" required>
-                    <label for="yearsSmoked2">5-10</label>
+                  <div class="radio-option" data-value="6-10">
+                    <input type="radio" id="cigarettesPerDay2" name="cigarettesPerDay" value="6-10" required>
+                    <label for="cigarettesPerDay2">6–10</label>
                   </div>
                   <div class="radio-option" data-value="10-20">
-                    <input type="radio" id="yearsSmoked3" name="yearsSmoked" value="10-20" required>
-                    <label for="yearsSmoked3">10-20</label>
+                    <input type="radio" id="cigarettesPerDay3" name="cigarettesPerDay" value="10-20" required>
+                    <label for="cigarettesPerDay3">10–20</label>
                   </div>
-                  <div class="radio-option" data-value="20-30">
-                    <input type="radio" id="yearsSmoked4" name="yearsSmoked" value="20-30" required>
-                    <label for="yearsSmoked4">20-30</label>
-                  </div>
-                  <div class="radio-option" data-value="30-plus">
-                    <input type="radio" id="yearsSmoked5" name="yearsSmoked" value="30-plus" required>
-                    <label for="yearsSmoked5">30+</label>
+                  <div class="radio-option" data-value="over-20">
+                    <input type="radio" id="cigarettesPerDay4" name="cigarettesPerDay" value="over-20" required>
+                    <label for="cigarettesPerDay4">Over 20</label>
                   </div>
                 </div>
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="section-separator with-label" data-label="Quit Attempts"></div>
+              <div class="field form-group">
+                <label class="required">For how many years have you smoked and/or vaped?</label>
+                <div class="radio-group">
+                  <div class="radio-option" data-value="less-than-year">
+                    <input type="radio" id="yearsSmoked1" name="yearsSmoked" value="less-than-year" required>
+                    <label for="yearsSmoked1">Less than a year</label>
+                  </div>
+                  <div class="radio-option" data-value="1-5-years">
+                    <input type="radio" id="yearsSmoked2" name="yearsSmoked" value="1-5-years" required>
+                    <label for="yearsSmoked2">1–5 years</label>
+                  </div>
+                  <div class="radio-option" data-value="6-10-years">
+                    <input type="radio" id="yearsSmoked3" name="yearsSmoked" value="6-10-years" required>
+                    <label for="yearsSmoked3">6–10 years</label>
+                  </div>
+                  <div class="radio-option" data-value="over-10-years">
+                    <input type="radio" id="yearsSmoked4" name="yearsSmoked" value="over-10-years" required>
+                    <label for="yearsSmoked4">Over 10 years</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select an option</div>
+              </div>
+
+              <div class="section-separator with-label"><span class="sep-label">Quit Attempts</span></div>
 
               <div class="field form-group">
-                <label class="required">What method(s) have you previously tried to assist you in quitting? (please tick all that apply)</label>
+                <label class="required">How many times have you tried quitting?</label>
+                <div class="radio-group">
+                  <div class="radio-option" data-value="1-5">
+                    <input type="radio" id="timesTriedQuitting1" name="timesTriedQuitting" value="1-5" required>
+                    <label for="timesTriedQuitting1">1–5</label>
+                  </div>
+                  <div class="radio-option" data-value="6-10">
+                    <input type="radio" id="timesTriedQuitting2" name="timesTriedQuitting" value="6-10" required>
+                    <label for="timesTriedQuitting2">6–10</label>
+                  </div>
+                  <div class="radio-option" data-value="more-than-10">
+                    <input type="radio" id="timesTriedQuitting3" name="timesTriedQuitting" value="more-than-10" required>
+                    <label for="timesTriedQuitting3">More than 10</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select an option</div>
+              </div>
+
+              <div class="field form-group">
+                <label class="required">What has motivated you to quit smoking?</label>
                 <div class="checkbox-group">
-                  <div class="checkbox-option" data-value="cold-turkey">
-                    <input type="checkbox" id="quitMethod1" name="quitMethods" value="cold-turkey">
-                    <label for="quitMethod1">Cold-Turkey</label>
+                  <div class="checkbox-option" data-value="health">
+                    <input type="checkbox" id="quitMotivation1" name="quitMotivation" value="health">
+                    <label for="quitMotivation1">Health</label>
                   </div>
-                  <div class="checkbox-option" data-value="gum">
-                    <input type="checkbox" id="quitMethod2" name="quitMethods" value="gum">
-                    <label for="quitMethod2">Nicotine Replacement Gum</label>
+                  <div class="checkbox-option" data-value="wellbeing">
+                    <input type="checkbox" id="quitMotivation2" name="quitMotivation" value="wellbeing">
+                    <label for="quitMotivation2">General well-being</label>
                   </div>
-                  <div class="checkbox-option" data-value="patches">
-                    <input type="checkbox" id="quitMethod3" name="quitMethods" value="patches">
-                    <label for="quitMethod3">Nicotine Replacement Patches</label>
+                  <div class="checkbox-option" data-value="cost">
+                    <input type="checkbox" id="quitMotivation3" name="quitMotivation" value="cost">
+                    <label for="quitMotivation3">Cost</label>
                   </div>
-                  <div class="checkbox-option" data-value="lozenges">
-                    <input type="checkbox" id="quitMethod4" name="quitMethods" value="lozenges">
-                    <label for="quitMethod4">Nicotine Replacement Lozenges/Sprays</label>
+                  <div class="checkbox-option" data-value="family-friends">
+                    <input type="checkbox" id="quitMotivation4" name="quitMotivation" value="family-friends">
+                    <label for="quitMotivation4">Family/friends</label>
                   </div>
-                  <div class="checkbox-option" data-value="pouches">
-                    <input type="checkbox" id="quitMethod5" name="quitMethods" value="pouches">
-                    <label for="quitMethod5">Nicotine pouches/snus</label>
+                </div>
+                <div class="error-message">Please select at least one option</div>
+              </div>
+
+              <div class="field form-group">
+                <label class="required">Which quitting methods have you tried so far? Please check ALL that apply.</label>
+                <div class="helper-text">Nicotine vaping prescription may be considered appropriate for people who have tried nicotine replacement therapy (like patches, gums, etc.) and pharmacotherapy quitting methods but were unsuccessful and are still motivated to quit smoking.</div>
+                <div class="checkbox-group">
+                  <div class="checkbox-option" data-value="first-line-nrt">
+                    <input type="checkbox" id="quitMethod1" name="quitMethods" value="first-line-nrt">
+                    <label for="quitMethod1">Nicotine replacement therapy (patches, gums, lozenges, etc.)</label>
                   </div>
-                  <div class="checkbox-option" data-value="counselling">
-                    <input type="checkbox" id="quitMethod6" name="quitMethods" value="counselling">
-                    <label for="quitMethod6">Counselling/Quitline</label>
+                  <div class="checkbox-option" data-value="pharmacotherapy">
+                    <input type="checkbox" id="quitMethod2" name="quitMethods" value="pharmacotherapy">
+                    <label for="quitMethod2">Pharmacotherapy Varenicline (Champix) or Bupropion (Zyban)</label>
                   </div>
-                  <div class="checkbox-option" data-value="hypnotherapy">
-                    <input type="checkbox" id="quitMethod7" name="quitMethods" value="hypnotherapy">
-                    <label for="quitMethod7">Hypnotherapy</label>
+                  <div class="checkbox-option" data-value="quit-using-vaping">
+                    <input type="checkbox" id="quitMethod3" name="quitMethods" value="quit-using-vaping">
+                    <label for="quitMethod3">I have already quit using vaping products and am managing a nicotine dependence</label>
                   </div>
-                  <div class="checkbox-option" data-value="varenicline">
-                    <input type="checkbox" id="quitMethod8" name="quitMethods" value="varenicline">
-                    <label for="quitMethod8">Varenicline (Champix)</label>
-                  </div>
-                  <div class="checkbox-option" data-value="buproprion">
-                    <input type="checkbox" id="quitMethod9" name="quitMethods" value="buproprion">
-                    <label for="quitMethod9">Buproprion (Zyban)</label>
+                  <div class="checkbox-option" data-value="not-tried">
+                    <input type="checkbox" id="quitMethod4" name="quitMethods" value="not-tried">
+                    <label for="quitMethod4">I have not tried to quit before</label>
                   </div>
                 </div>
                 <div class="error-message">Please select at least one method</div>
+              </div>
+
+              <div class="field form-group">
+                <label class="required" for="quitMethodExplanation">Please explain why the quitting methods selected didn't work for you, or why you have not tried these treatments. This information is crucial for determining your eligibility for nicotine vaping products.</label>
+                <div class="helper-text">The doctor needs this information to determine if this treatment is appropriate. Please provide information about cravings, side effects or relapses back to smoking.</div>
+                <textarea id="quitMethodExplanation" name="quitMethodExplanation" class="form-control" placeholder="Please explain why previous quitting methods didn't work or why you haven't tried them..." required></textarea>
+                <div class="error-message">Please provide an explanation</div>
               </div>
 
               <div class="field form-group">
@@ -324,9 +488,10 @@
 
             <!-- Step 4: Vaping Status -->
             <div class="form-step" data-step="4">
-              <h2 class="step-title">Vaping Status</h2>
+              <div class="qy-intake__eyebrow">Step 04 / 06</div>
+              <h2 class="step-title">Vaping <em>status</em></h2>
 
-              <div class="field form-group">
+              <div class="field form-group" style="margin-top:36px;">
                 <label class="required">Have you ever vaped?</label>
                 <div class="radio-cards">
                   <div class="radio-card" data-value="yes">
@@ -344,9 +509,10 @@
 
             <!-- Step 5: Vaping History -->
             <div class="form-step" data-step="5">
-              <h2 class="step-title">Vaping History</h2>
+              <div class="qy-intake__eyebrow">Step 05 / 06</div>
+              <h2 class="step-title">Vaping <em>history</em></h2>
 
-              <div class="section-separator with-label" data-label="Vaping Preferences"></div>
+              <div class="section-separator with-label"><span class="sep-label">Vaping Preferences</span></div>
 
               <div class="field form-group">
                 <label class="required">Which vaping method has worked best for you?</label>
@@ -375,12 +541,20 @@
                 <div class="field form-group">
                   <label for="vapingStrength" class="required">What is the minimum strength that has been effective to avoid smoking?</label>
                   <input type="text" id="vapingStrength" name="vapingStrength" class="field__input form-control" placeholder="e.g., 20mg/ml" required>
+                  <div class="checkbox-standalone idk-option" data-value="idk-strength">
+                    <input type="checkbox" id="idkVapingStrength" name="idkVapingStrength">
+                    <label for="idkVapingStrength">I don't know</label>
+                  </div>
                   <div class="error-message">Please enter the minimum effective strength</div>
                 </div>
 
                 <div class="field form-group">
                   <label for="vapingVolume" class="required">How many mL's of liquid do you estimate that you use per day?</label>
                   <input type="text" id="vapingVolume" name="vapingVolume" class="field__input form-control" placeholder="e.g., 5ml" required>
+                  <div class="checkbox-standalone idk-option" data-value="idk-volume">
+                    <input type="checkbox" id="idkVapingVolume" name="idkVapingVolume">
+                    <label for="idkVapingVolume">I don't know</label>
+                  </div>
                   <div class="error-message">Please enter the volume you use per day</div>
                 </div>
               </div>
@@ -395,16 +569,99 @@
 
             <!-- Step 6: Medical History -->
             <div class="form-step" data-step="6">
-              <h2 class="step-title">Medical History</h2>
+              <div class="qy-intake__eyebrow">Step 06 / 06</div>
+              <h2 class="step-title">Medical <em>history</em></h2>
 
-              <div class="section-separator with-label" data-label="Medical Conditions"></div>
+              <div class="section-separator with-label"><span class="sep-label">Medical Conditions</span></div>
 
               <div class="field form-group">
-                <label for="medicalIllnesses">Please list below any significant medical illnesses, such as diabetes, cancer, asthma, COPD/emphysema or psychiatric disorders.</label>
-                <textarea id="medicalIllnesses" name="medicalIllnesses" class="form-control" placeholder="List any significant medical conditions..."></textarea>
+                <label class="required">Do you have any medical conditions, particularly uncontrolled hypertension, unstable heart disease, abnormal heart rhythm, or chronic lung disease?</label>
+                <div class="radio-group">
+                  <div class="radio-option" data-value="yes">
+                    <input type="radio" id="hasMedicalConditions1" name="hasMedicalConditions" value="yes" required>
+                    <label for="hasMedicalConditions1">Yes</label>
+                  </div>
+                  <div class="radio-option" data-value="no">
+                    <input type="radio" id="hasMedicalConditions2" name="hasMedicalConditions" value="no" required>
+                    <label for="hasMedicalConditions2">No</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="section-separator with-label" data-label="Cardiovascular Health"></div>
+              <div class="field form-group" id="medicalConditionsGroup" style="display: none;">
+                <label class="required">Please select all conditions that apply</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option" data-value="hypertension">
+                    <input type="checkbox" id="condition1" name="medicalConditions" value="hypertension">
+                    <label for="condition1">Uncontrolled hypertension</label>
+                  </div>
+                  <div class="checkbox-option" data-value="heart-attack">
+                    <input type="checkbox" id="condition2" name="medicalConditions" value="heart-attack">
+                    <label for="condition2">Myocardial infarction (heart attack)</label>
+                  </div>
+                  <div class="checkbox-option" data-value="stroke">
+                    <input type="checkbox" id="condition3" name="medicalConditions" value="stroke">
+                    <label for="condition3">Stroke</label>
+                  </div>
+                  <div class="checkbox-option" data-value="cancer">
+                    <input type="checkbox" id="condition4" name="medicalConditions" value="cancer">
+                    <label for="condition4">Cancer</label>
+                  </div>
+                  <div class="checkbox-option" data-value="other">
+                    <input type="checkbox" id="condition5" name="medicalConditions" value="other">
+                    <label for="condition5">Other</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select at least one condition</div>
+              </div>
+
+              <div class="field form-group" id="medicalConditionsOtherGroup" style="display: none;">
+                <label for="medicalConditionsOther">Please describe your other medical condition(s)</label>
+                <textarea id="medicalConditionsOther" name="medicalConditionsOther" class="form-control" placeholder="Please list any other medical conditions..."></textarea>
+                <div class="error-message">Please describe your other condition(s)</div>
+              </div>
+
+              <div class="field form-group">
+                <label class="required">Do you currently take any medication(s)?</label>
+                <div class="radio-group">
+                  <div class="radio-option" data-value="yes">
+                    <input type="radio" id="takesMedication1" name="takesMedication" value="yes" required>
+                    <label for="takesMedication1">Yes</label>
+                  </div>
+                  <div class="radio-option" data-value="no">
+                    <input type="radio" id="takesMedication2" name="takesMedication" value="no" required>
+                    <label for="takesMedication2">No</label>
+                  </div>
+                </div>
+                <div class="error-message">Please select an option</div>
+              </div>
+
+              <div class="field form-group" id="medicationsListGroup" style="display: none;">
+                <label>Are you currently taking any of the following high-risk medications?</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option" data-value="olanzapine">
+                    <input type="checkbox" id="highRiskMed1" name="highRiskMedications" value="olanzapine">
+                    <label for="highRiskMed1">Olanzapine</label>
+                  </div>
+                  <div class="checkbox-option" data-value="warfarin">
+                    <input type="checkbox" id="highRiskMed2" name="highRiskMedications" value="warfarin">
+                    <label for="highRiskMed2">Warfarin</label>
+                  </div>
+                  <div class="checkbox-option" data-value="other">
+                    <input type="checkbox" id="highRiskMed3" name="highRiskMedications" value="other">
+                    <label for="highRiskMed3">Other</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field form-group" id="medicationsTextGroup" style="display: none;">
+                <label for="medicationsList">Please list all medications you are currently taking</label>
+                <textarea id="medicationsList" name="medicationsList" class="form-control" placeholder="List all medications you are currently taking..."></textarea>
+                <div class="error-message">Please list your medications</div>
+              </div>
+
+              <div class="section-separator with-label"><span class="sep-label">Cardiovascular Health</span></div>
 
               <div class="field form-group">
                 <label class="required">Have you had a stroke, heart attack, irregular heartbeat, uncontrolled hypertension or angina in the past month?</label>
@@ -421,7 +678,7 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="section-separator with-label" data-label="Pregnancy Status"></div>
+              <div class="section-separator with-label"><span class="sep-label">Pregnancy Status</span></div>
 
               <div class="field form-group">
                 <label class="required">Are you breastfeeding, pregnant, or planning to become pregnant within the next 12 months?</label>
@@ -438,24 +695,18 @@
                 <div class="error-message">Please select an option</div>
               </div>
 
-              <div class="section-separator with-label" data-label="Additional Information"></div>
-
-              <div class="field form-group">
-                <label for="forwardEmail">Email</label>
-                <div class="helper-text">Your documents will be securely emailed to you, and no one else, unless you request otherwise. If you would like us to also forward your prescription to a pharmacy, supplier or friend/carer, please enter their email address.</div>
-                <input type="email" id="forwardEmail" name="forwardEmail" class="field__input form-control" placeholder="Optional forwarding email">
-              </div>
+              <div class="section-separator with-label"><span class="sep-label">Additional Information</span></div>
 
               <div class="field form-group">
                 <label for="additionalNotes">Is there anything else you would like to mention before proceeding?</label>
                 <textarea id="additionalNotes" name="additionalNotes" class="form-control" placeholder="Any additional information..."></textarea>
               </div>
 
-              <div class="section-separator with-label" data-label="Safety Acknowledgement"></div>
+              <div class="section-separator with-label"><span class="sep-label">Safety Acknowledgement</span></div>
 
               <div class="field form-group">
                 <div class="safety-info">
-                  Complete abstinence from smoking and vaping is the safest option for your health. Nicotine is addictive, and the long-term risks of vaping are unknown. Currently no nicotine vaping products have been approved by the TGA, and the safety of these products have not yet been thoroughly assessed. Quit Clinics, or its doctors, cannot guarantee the safety of any vaping product. In order to minimise risk of harms, only short-term use of e-cigarettes is recommended, and dual use (vaping plus smoking) needs to be avoided.
+                  Complete abstinence from smoking and vaping is the safest option for your health. Nicotine is addictive, and the long-term risks of vaping are unknown. No nicotine vaping products are currently approved by the TGA, and their safety has not been thoroughly assessed. Quity, and its doctors, cannot guarantee the safety of any vaping product. To minimise harm, only short-term use of e-cigarettes is recommended, and dual use (vaping plus smoking) should be avoided.
                 </div>
                 <div class="checkbox-standalone" data-value="acknowledged">
                   <input type="checkbox" id="safetyAcknowledgment" name="safetyAcknowledgment" required>
@@ -469,17 +720,18 @@
             <div class="form-navigation">
               <button type="button" class="btn-back" id="btnBack" disabled>Back</button>
               <button type="button" class="btn-next" id="btnNext">Next</button>
-              <button type="submit" class="btn-submit" id="btnSubmit" style="display: none;">Submit</button>
+              <button type="submit" class="btn-submit" id="btnSubmit" style="display: none;">Submit application</button>
             </div>
           </form>
         </patient-intake-form>
 
-      </div>
-    </div>
   </div>
 </div>
 
+<script src="{{ 'flatpickr.min.js' | asset_url }}" defer></script>
 <script src="{{ 'patient-intake-form.js' | asset_url }}" defer></script>
+
+{%- endunless -%}
 
 {% schema %}
 {

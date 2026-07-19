@@ -1,1 +1,47 @@
-{"sections":{"main":{"type":"cart-template","settings":{"cart_notes_enable":true}},"2979a36a-c6b2-4ef9-a5cc-d84aa4da690b":{"type":"product-list-swiper","settings":{"animation":"","setwidth":"container","bgsection":"#ffffff","title_top":"recomment","title":"You May Also Like","des":"","align-heading":"left","collection":"basket-storage","limit":8,"perviewDesktop":4,"spaceBetween":30,"nowrap":true,"arrows":true,"scrollbar":false,"paddingsection":"40px 0px 40px 0px","paddingmobile":"40px 0px 40px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}}},"order":["main","2979a36a-c6b2-4ef9-a5cc-d84aa4da690b"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "cart-template",
+      "settings": {
+        "cart_notes_enable": true
+      }
+    },
+    "2979a36a-c6b2-4ef9-a5cc-d84aa4da690b": {
+      "type": "product-list-swiper",
+      "disabled": true,
+      "settings": {
+        "animation": "",
+        "setwidth": "container",
+        "bgsection": "#ffffff",
+        "title_top": "recomment",
+        "title": "You May Also Like",
+        "des": "",
+        "align-heading": "left",
+        "collection": "basket-storage",
+        "limit": 8,
+        "perviewDesktop": 4,
+        "spaceBetween": 30,
+        "nowrap": true,
+        "arrows": true,
+        "scrollbar": false,
+        "paddingsection": "40px 0px 40px 0px",
+        "paddingmobile": "40px 0px 40px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "2979a36a-c6b2-4ef9-a5cc-d84aa4da690b"
+  ]
+}
