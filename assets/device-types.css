@@ -1,0 +1,310 @@
+/* ============================================================
+   Device Types — guided comparison of the three vape device
+   architectures Quity prescribes (Closed / Refillable / Hybrid).
+   ------------------------------------------------------------
+   Recreates the Quity "Device Types" design: spectrum axis,
+   three comparison cards with an upkeep dot meter, and a shared
+   safety footnote. Scoped .qdt- classes, used by
+   sections/device-types.liquid.
+
+   Fonts (Jost / JetBrains Mono) are loaded in layout/theme.liquid.
+   Colours are hard-coded Quity tokens, the same approach as
+   assets/customer-gate-status.css.
+   ============================================================ */
+
+/* --- Scope reset --- */
+.qdt,
+.qdt *,
+.qdt *::before,
+.qdt *::after { box-sizing: border-box; }
+
+.qdt {
+  background: transparent;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  color: #383D3A;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Paragraphs: re-assert Jost over the theme's element-level
+   `body, input, textarea, button, select, p { font-family: var(--g-font-2) }` */
+.qdt p {
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+}
+
+.qdt__container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 64px 40px 88px;
+}
+
+/* --- Context line --- */
+.qdt__context {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.qdt__wordmark {
+  line-height: normal;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  color: #0F1110;
+}
+.qdt__context-sub {
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9AA09B;
+  margin-top: 6px;
+}
+
+/* --- Header --- */
+.qdt__head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 8px;
+}
+.qdt__eyebrow {
+  line-height: normal;
+  display: inline-block;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5F7A68;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  padding: 8px 15px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.qdt__title {
+  margin: 0;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  text-transform: none;
+  color: #0F1110;
+}
+.qdt__lede {
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5B615E;
+}
+
+/* --- Spectrum axis --- */
+.qdt-axis {
+  max-width: 760px;
+  margin: 52px auto 60px;
+}
+.qdt-axis__ends {
+  line-height: normal;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #9AA09B;
+}
+.qdt-axis__track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+.qdt-axis__line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 7.5px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #D6E0D6, #5F7A68);
+  z-index: 0;
+}
+.qdt-axis__node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.qdt-axis__line + .qdt-axis__node { align-items: flex-start; }
+.qdt-axis__node:last-child { align-items: flex-end; }
+.qdt-axis__dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #5F7A68;
+  /* White ring knocks the gradient line out behind the dot */
+  box-shadow: 0 0 0 5px #FFFFFF;
+}
+.qdt-axis__label {
+  line-height: normal;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #0F1110;
+}
+
+/* --- Comparison cards --- */
+.qdt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.qdt-card {
+  border: 1px solid #E3E0D7;
+  border-radius: 24px;
+  background: #FFFFFF;
+  padding: 14px 14px 30px;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
+  display: flex;
+  flex-direction: column;
+}
+.qdt-card__media {
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  background: #F4F2EC;
+  margin-bottom: 24px;
+}
+.qdt-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Placeholder SVG: opt out of the theme's global 16px svg sizing */
+.qdt-card__media svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.qdt-card__body {
+  padding: 0 18px;
+}
+.qdt-card__pill {
+  line-height: normal;
+  display: inline-block;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5F7A68;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.qdt-card__title {
+  line-height: normal;
+  margin: 0 0 12px;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: #0F1110;
+}
+.qdt-card__desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.62;
+  color: #5B615E;
+}
+
+/* --- Attribute rows --- */
+.qdt-specs {
+  margin-top: 22px;
+  padding-top: 6px;
+  border-top: 1px solid #EDEAE1;
+}
+.qdt-spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+}
+.qdt-spec + .qdt-spec {
+  border-top: 1px solid #EDEAE1;
+}
+.qdt-spec--meter {
+  align-items: center;
+}
+.qdt-spec__label {
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6E736F;
+}
+.qdt-spec__value {
+  line-height: normal;
+  font-size: 15px;
+  color: #1C1F1D;
+}
+.qdt-spec__value--meter {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.qdt-meter {
+  display: flex;
+  gap: 4px;
+}
+.qdt-meter__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E3E0D7;
+}
+.qdt-meter__dot--on {
+  background: #5F7A68;
+}
+
+/* --- Safety footnote callout --- */
+.qdt-note {
+  margin: 44px auto 0;
+  max-width: 820px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  background: #FAF8F2;
+  border: 1px solid #E3E0D7;
+  border-radius: 18px;
+  padding: 22px 26px;
+}
+/* Line icon: opt out of the theme's global
+   `svg { fill: currentColor; width:16px; height:16px }` rule */
+.qdt-note svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.qdt-note p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #5B615E;
+}
+
+/* --- Responsive (single breakpoint, per design) --- */
+@media (max-width: 900px) {
+  .qdt-grid { grid-template-columns: 1fr; }
+  .qdt-axis { display: none; }
+}

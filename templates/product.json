@@ -304,6 +304,83 @@
         "enable_left": true
       }
     },
+    "device-types": {
+      "type": "device-types",
+      "blocks": {
+        "device-closed": {
+          "type": "device",
+          "settings": {
+            "image": "shopify://shop_images/OZ-POD-x-SMOK-Nord-6-Kit-with-box.png",
+            "axis_label": "Closed",
+            "pill": "Sealed · prefilled",
+            "title": "Closed system",
+            "description": "Prefilled sealed pods - nothing to fill or maintain. The simplest first step off cigarettes and the lowest-effort option.",
+            "upkeep_fill": 1,
+            "upkeep_word": "None",
+            "cost": "Higher",
+            "draw": "Tight · MTL",
+            "stage": "Just switched"
+          }
+        },
+        "device-refillable": {
+          "type": "device",
+          "settings": {
+            "image": "shopify://shop_images/OZ-POD-Arco-Kit-3D-Picture_55da3cfc-3c45-4179-b935-ca4755fabe0f.png",
+            "axis_label": "Refillable",
+            "pill": "Fill your own",
+            "title": "Refillable system",
+            "description": "Filled with your prescribed e-liquid, cheaper per millilitre over time. Swap the coil when flavour fades. The Solo Plus is refillable.",
+            "upkeep_fill": 3,
+            "upkeep_word": "Refill + coil",
+            "cost": "Lowest",
+            "draw": "Tight to open",
+            "stage": "Settled routine"
+          }
+        },
+        "device-hybrid": {
+          "type": "device",
+          "settings": {
+            "image": "shopify://shop_images/OZ-POD-x-SMOK-Nord-6-Refillable-Pods-3D.jpg",
+            "axis_label": "Hybrid",
+            "pill": "Sealed or refill",
+            "title": "Hybrid system",
+            "description": "Accepts sealed or refillable pods, so you can step strength down as you taper. Built for pharmacist-guided weaning.",
+            "upkeep_fill": 2,
+            "upkeep_word": "Optional",
+            "cost": "Flexible",
+            "draw": "Adjustable",
+            "stage": "Weaning down"
+          }
+        }
+      },
+      "block_order": [
+        "device-closed",
+        "device-refillable",
+        "device-hybrid"
+      ],
+      "settings": {
+        "animation": "",
+        "paddingsection": "0px 0px 0px 0px",
+        "paddingmobile": "0px 0px 0px 0px",
+        "marginsection": "0px 0px 0px 0px",
+        "marginmobile": "0px 0px 0px 0px",
+        "bgsection": "#FFFFFF",
+        "show_context": false,
+        "context_title": "Quity",
+        "context_sub": "Device guide · exploration",
+        "eyebrow": "Choosing a device",
+        "title": "Different device types",
+        "lede": "Three architectures, each suited to a different stage of quitting. Your prescriber helps you match one to where you're starting from - here's how they compare.",
+        "show_axis": true,
+        "axis_left": "Simplest · lowest effort",
+        "axis_right": "Most flexibility",
+        "label_upkeep": "Upkeep",
+        "label_cost": "Cost per mL",
+        "label_draw": "Draw",
+        "label_stage": "Best stage",
+        "footnote": "Every Solo device is rechargeable over USB-C, TGA-notified, and ships with a child-resistant lock and a 12-month warranty. The differences above are about upkeep and flexibility - not safety."
+      }
+    },
     "1e04ea1d-fcaa-48a4-9b36-62344d508849": {
       "type": "parallax-banner",
       "blocks": {
@@ -664,6 +741,7 @@
     "main",
     "product-requently",
     "product-content",
+    "device-types",
     "1e04ea1d-fcaa-48a4-9b36-62344d508849",
     "30d4e0bd-da81-4442-b71d-c0fd1f5b3906",
     "c5690cdb-c04d-45fd-9c6c-cfee011363ca",
