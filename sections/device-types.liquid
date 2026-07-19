@@ -14,7 +14,7 @@
 
 {{ 'device-types.css' | asset_url | stylesheet_tag }}
 
-<section class="qdt customstyle{{ section.id }}" data-aos="{{ section.settings.animation }}">
+<section class="qdt{% if section.settings.style == 'guide' %} qdt--guide{% endif %} customstyle{{ section.id }}" data-aos="{{ section.settings.animation }}">
   {%- render 'style-section' -%}
   <div class="qdt__container">
 
@@ -92,6 +92,13 @@
               <p class="qdt-card__desc">{{ block.settings.description | escape }}</p>
             {%- endif -%}
 
+            {%- liquid
+              assign has_specs = false
+              if block.settings.upkeep_word != blank or block.settings.upkeep_fill > 0 or block.settings.cost != blank or block.settings.draw != blank or block.settings.stage != blank
+                assign has_specs = true
+              endif
+            -%}
+            {%- if has_specs -%}
             <div class="qdt-specs">
               {%- if block.settings.upkeep_word != blank or block.settings.upkeep_fill > 0 -%}
                 <div class="qdt-spec qdt-spec--meter">
@@ -125,6 +132,7 @@
                 </div>
               {%- endif -%}
             </div>
+            {%- endif -%}
           </div>
         </div>
       {%- endfor -%}
@@ -146,6 +154,16 @@
   "class": "index-section",
   "max_blocks": 3,
   "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "standalone",
+      "options": [
+        { "value": "standalone", "label": "Standalone (with axis & rows)" },
+        { "value": "guide", "label": "Guide chapter (compact)" }
+      ]
+    },
     {
       "type": "select",
       "id": "animation",

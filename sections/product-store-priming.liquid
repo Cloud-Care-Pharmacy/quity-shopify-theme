@@ -1,0 +1,90 @@
+{%- comment -%}
+  Product Store — priming
+  Square image on the left; pill, heading, copy, six numbered steps
+  and a green "never skip it" callout on the right.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps__wrap--1240 qps-prime">
+    <div class="qps-prime__img">
+      {%- if section.settings.image -%}
+        <img src="{{ section.settings.image | image_url: width: 1100 }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy" alt="{{ section.settings.image.alt | default: section.settings.title | escape }}">
+      {%- else -%}
+        {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div>
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-prime__title">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.copy != blank -%}
+        <p class="qps-prime__copy">{{ section.settings.copy | escape }}</p>
+      {%- endif -%}
+      <div class="qps-prime__steps">
+        {%- for block in section.blocks -%}
+          <div class="qps-prime__step" {{ block.shopify_attributes }}>
+            <span class="qps-prime__num">{{ block.settings.number | escape }}</span>
+            <span>{{ block.settings.text | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.callout != blank -%}
+        <div class="qps-prime__callout">
+          <span class="qps-prime__callout-ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
+          <span>{{ section.settings.callout | escape }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — priming",
+  "class": "index-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "Before first use" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Priming your pod or coil" },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Priming soaks the wick before power is applied. It takes two minutes and prevents a scorched first draw."
+    },
+    {
+      "type": "text",
+      "id": "callout",
+      "label": "Callout",
+      "default": "Priming stops dry, burnt hits and extends coil life, never skip it."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Remove the pod and open the fill port." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — priming",
+      "blocks": [
+        { "type": "step", "settings": { "number": "01", "text": "Remove the pod and open the fill port." } },
+        { "type": "step", "settings": { "number": "02", "text": "Add e-liquid slowly down the side, avoiding the centre tube." } },
+        { "type": "step", "settings": { "number": "03", "text": "Add a drop directly onto each exposed coil wick." } },
+        { "type": "step", "settings": { "number": "04", "text": "Reseat the pod firmly until it clicks." } },
+        { "type": "step", "settings": { "number": "05", "text": "Rest the filled pod 5-10 minutes before first use." } },
+        { "type": "step", "settings": { "number": "06", "text": "Start on low power with a few short primer draws." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

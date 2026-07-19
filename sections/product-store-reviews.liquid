@@ -1,0 +1,110 @@
+{%- comment -%}
+  Product Store — reviews
+  Summary (big score + stars + count + blurb) with a 5→1 star
+  histogram, then four review cards (stars, quote, name, meta).
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps-reviews">
+    <div class="qps-reviews__summary">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="qps-eyebrow qps-reviews__eyebrow">{{ section.settings.eyebrow | escape }}</div>
+        {%- endif -%}
+        <div class="qps-reviews__scorewrap">
+          <div class="qps-reviews__score">{{ section.settings.score | escape }}</div>
+          <div class="qps-reviews__scoremeta">
+            <span class="qps-stars">
+              {%- for i in (1..5) -%}
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"></path></svg>
+              {%- endfor -%}
+            </span>
+            <div class="qps-reviews__count">{{ section.settings.count_text | escape }}</div>
+          </div>
+        </div>
+        {%- if section.settings.blurb != blank -%}
+          <p class="qps-reviews__blurb">{{ section.settings.blurb | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="qps-reviews__bars">
+        {%- for i in (1..5) -%}
+          {%- assign star = 6 | minus: i -%}
+          {%- assign pct_key = 'pct_' | append: star -%}
+          {%- assign pct = section.settings[pct_key] | default: 0 -%}
+          <div class="qps-reviews__bar">
+            <span class="qps-reviews__bar-star">{{ star }} &#9733;</span>
+            <div class="qps-reviews__bar-track"><div class="qps-reviews__bar-fill" style="width:{{ pct }}%;"></div></div>
+            <span class="qps-reviews__bar-pct">{{ pct }}%</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="qps-reviews__grid">
+      {%- for block in section.blocks -%}
+        <div class="qps-review" {{ block.shopify_attributes }}>
+          <span class="qps-stars">
+            {%- for i in (1..5) -%}
+              {%- if i > block.settings.stars -%}
+                <span class="qps-star--off"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"></path></svg></span>
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"></path></svg>
+              {%- endif -%}
+            {%- endfor -%}
+          </span>
+          <p class="qps-review__quote">{{ block.settings.quote | escape }}</p>
+          <div class="qps-review__name">{{ block.settings.name | escape }}</div>
+          <div class="qps-review__meta">{{ block.settings.meta | escape }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store — reviews",
+  "class": "index-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "score", "label": "Score", "default": "4.8" },
+    { "type": "text", "id": "count_text", "label": "Count text", "default": "Based on 212 verified reviews" },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Blurb",
+      "default": "Real Quity patients who have switched from cigarettes. Every review is tied to a verified order."
+    },
+    { "type": "range", "id": "pct_5", "label": "5-star %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 86 },
+    { "type": "range", "id": "pct_4", "label": "4-star %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 11 },
+    { "type": "range", "id": "pct_3", "label": "3-star %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 2 },
+    { "type": "range", "id": "pct_2", "label": "2-star %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 1 },
+    { "type": "range", "id": "pct_1", "label": "1-star %", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Marcus T." },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "Verified · Solo Plus" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store — reviews",
+      "blocks": [
+        { "type": "review", "settings": { "stars": 5, "quote": "Switched in a week and never looked back. The strength was spot on from day one.", "name": "Marcus T.", "meta": "Verified · Solo Plus" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "The pharmacist support made all the difference when the cravings hit hardest.", "name": "Priya N.", "meta": "Verified · Solo Plus" } },
+        { "type": "review", "settings": { "stars": 5, "quote": "Discreet delivery, easy refills, and my script renews itself. Effortless.", "name": "Dan R.", "meta": "Verified · Subscriber" } },
+        { "type": "review", "settings": { "stars": 4, "quote": "Took a couple of days to get the priming right, then it was perfect.", "name": "Sarah L.", "meta": "Verified · Solo Plus" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
