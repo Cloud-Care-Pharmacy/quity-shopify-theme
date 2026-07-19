@@ -1,1 +1,3 @@
+{%- comment -%} Normalise known menu-label typos sourced from the Shopify admin nav (e.g. "Advise" -> "Advice"). {%- endcomment -%}
+{%- assign itemName = itemName | replace: 'Help & Advise', 'Help & Advice' | replace: 'Help &amp; Advise', 'Help &amp; Advice' -%}
 {%- if itemName contains '[' and itemName contains ']' -%}{{ itemName | escape | split: '[' | first }}{%- else -%}{{itemName | escape}}{%- endif -%}

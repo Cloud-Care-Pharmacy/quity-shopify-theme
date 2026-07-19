@@ -71,6 +71,7 @@
     "base_size_sup": 12,
     "letter_spacing_sub": 0.2,
     "main_linklist": "main-menu",
+    "enable_breadcrumb": false,
     "enable_post": false,
     "enable_article": false,
     "enable_collection": true,
@@ -82,10 +83,10 @@
     "align_bread": "left",
     "layout_bread": "container",
     "share_image": "",
-    "social_facebook_link": "https://www.facebook.com/shopify",
-    "social_twitter_link": "https://twitter.com/shopify",
+    "social_facebook_link": "https://www.facebook.com/quity.au",
+    "social_twitter_link": "",
     "social_pinterest_link": "",
-    "social_instagram_link": "https://instagram.com/shopify",
+    "social_instagram_link": "https://www.instagram.com/quity.au",
     "social_tumblr_link": "",
     "social_snapchat_link": "",
     "social_youtube_link": "",
@@ -159,12 +160,7 @@
     "input_round": 5,
     "cartdraw": true,
     "e_notecart": true,
-    "product_list": [
-      "elegant-evening-gown",
-      "classic-mens-oxford-shirt",
-      "leather-biker-jacket",
-      "cozy-knit-sweater"
-    ],
+    "product_list": [],
     "product_gift": "gift-wrapping",
     "coupon_code_enable": true,
     "coupon_code_title": "List Coupon",
@@ -2131,6 +2127,7 @@
         "blocks": {
           "a2730c80-674d-41f6-9f75-d2dea64fcd6b": {
             "type": "menu-banner",
+            "disabled": true,
             "settings": {
               "menu_title": "",
               "menu_width": "container",
@@ -2161,6 +2158,7 @@
           },
           "281b36cf-b829-4a1c-a3a5-5a7c0a30225a": {
             "type": "menu-collection",
+            "disabled": true,
             "settings": {
               "menu_title": "shop",
               "menu_width": "container",
@@ -2179,6 +2177,7 @@
           },
           "9d3d821c-82a9-439a-b2db-6700a3c6685f": {
             "type": "menu-product",
+            "disabled": true,
             "settings": {
               "menu_title": "product",
               "menu_width": "container",
@@ -2195,6 +2194,7 @@
           },
           "0f4d122e-cf9d-4fbf-8082-85a6cb05155f": {
             "type": "menu-banner",
+            "disabled": true,
             "settings": {
               "menu_title": "",
               "menu_width": "container",
@@ -2225,6 +2225,7 @@
           },
           "96e8331c-f8e4-4b9d-802b-4a659893f052": {
             "type": "menu-banner-classic",
+            "disabled": true,
             "settings": {
               "menu_title": "blog",
               "menu_width": "container",
@@ -2373,7 +2374,7 @@
             "settings": {
               "widthlogofooter": 130,
               "title": "Get in touch",
-              "text": "<ul style=\"line-height:1.6;\">\n    <li class=\"mb-4\">\n        <div>\n<span style=\"color:#fff;font-weight:500;\">T:</span> 1800 327 863</div>\n        <div>\n<span style=\"color:#fff;font-weight:500;\">E:</span> hello@quity.com.au</div>\n    </li>\n    <li style=\"color:#fff;font-weight:200;\">\n        Unit 1, 2 Pippabilly Pl, Upper Coomera,<br>\n        Queensland, Australia.\n    </li>\n</ul>",
+              "text": "<ul style=\"line-height:1.6;\">\n    <li class=\"mb-4\">\n       \n        <div>\n<span style=\"color:#fff;font-weight:500;\">E:</span> hello@quity.com.au</div>\n    </li>\n    <li style=\"color:#fff;font-weight:200;\">\n        526/368 Sussex St,<br>\n        Sydney NSW 2000\n    </li>\n</ul>",
               "show_social": false,
               "width": "25%"
             }
@@ -2727,13 +2728,13 @@
       "apmenuitem_ihtml_5": "",
       "apmenuitem_chtml_5": "",
       "share_image": "",
-      "social_facebook_link": "https://www.facebook.com/shopify",
-      "social_twitter_link": "https://twitter.com/shopify",
-      "social_pinterest_link": "https://www.pinterest.com/shopify",
-      "social_instagram_link": "https://instagram.com/shopify",
-      "social_tumblr_link": "http://shopify.tumblr.com",
-      "social_snapchat_link": "https://www.snapchat.com/add/shopify",
-      "social_youtube_link": "https://www.youtube.com/user/shopify",
+      "social_facebook_link": "",
+      "social_twitter_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
       "social_vimeo_link": "",
       "share_facebook": true,
       "share_twitter": true,
