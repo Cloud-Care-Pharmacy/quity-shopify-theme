@@ -136,6 +136,19 @@
     width: 14px;
     height: auto;
   }
+  .footer-legitscript {
+    padding: 5px 0;
+    text-align: center;
+  }
+  @media only screen and (min-width: 992px) {
+    .footer-legitscript {
+      text-align: right;
+    }
+  }
+  .footer-legitscript img {
+    display: inline-block;
+    height: auto;
+  }
   .site-footer .payment-icons {
     padding: 5px 0;
   }
@@ -577,6 +590,11 @@
             </div>
         </div>
         <div class="footer-copy-right">
+          <div class="footer-legitscript my-lg-0 my-2">
+            <a href="https://www.legitscript.com/websites/?checker_keywords=quity.com.au" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.quity.com.au">
+              <img src="https://static.legitscript.com/seals/49151511.png" alt="Verify Approval for www.quity.com.au" width="73" height="79" loading="lazy" />
+            </a>
+          </div>
           {%- if section.settings.payment_info == 'svg' -%}
             {%- if shop.enabled_payment_types != empty -%}
               <ul id="footer-payment-methods" class="list-inline payment-icons text-center text-lg-right">
