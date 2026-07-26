@@ -136,8 +136,17 @@
     width: 14px;
     height: auto;
   }
+  .text-footer-social .social-icons {
+    margin-bottom: 0;
+  }
+  .footer-legitscript {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+  }
   .footer-legitscript img {
-    display: inline-block;
+    display: block;
+    width: 60px;
     height: auto;
   }
   .site-footer .payment-icons {
@@ -451,13 +460,10 @@
             {%- endif -%}
             <div class="rte-setting">{{ block.settings.text }}</div>
             {% if block.settings.show_social %}
-              <div class="text-footer-social mt-4">
-                <p></p>
+              <div class="text-footer-social mt-4 d-flex align-items-center flex-wrap">
                 {%- render 'block-social' -%}
-              </div>
-              <div class="footer-legitscript mt-4">
-                <a href="https://www.legitscript.com/websites/?checker_keywords=quity.com.au" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.quity.com.au">
-                  <img src="https://static.legitscript.com/seals/49151511.png" alt="Verify Approval for www.quity.com.au" width="73" height="79" loading="lazy" />
+                <a class="footer-legitscript" href="https://www.legitscript.com/websites/?checker_keywords=quity.com.au" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.quity.com.au">
+                  <img src="https://static.legitscript.com/seals/49151511.png" alt="Verify Approval for www.quity.com.au" width="60" height="65" loading="lazy" />
                 </a>
               </div>
             {% endif %}
