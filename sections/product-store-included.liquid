@@ -1,0 +1,87 @@
+{%- comment -%}
+  Product Store - what's included + specifications
+  Warm band. Two columns under 2px ink top-rules: a ticked contents
+  checklist (item + qty) and a key/value spec list. Two block types.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--warm">
+  <div class="qps__wrap qps-included">
+    <div>
+      <div class="qps-included__eyebrow">{{ section.settings.included_label | escape }}</div>
+      <div class="qps-included__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <div class="qps-included__item" {{ block.shopify_attributes }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              <span class="qps-included__name">{{ block.settings.name | escape }}</span>
+              <span class="qps-included__qty">{{ block.settings.qty | escape }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <div>
+      <div class="qps-included__eyebrow">{{ section.settings.specs_label | escape }}</div>
+      <div class="qps-included__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'spec' -%}
+            <div class="qps-included__spec" {{ block.shopify_attributes }}>
+              <span class="qps-included__key">{{ block.settings.key | escape }}</span>
+              <span class="qps-included__val">{{ block.settings.value | escape }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - included",
+  "class": "index-section",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "included_label", "label": "Left column label", "default": "What's included" },
+    { "type": "text", "id": "specs_label", "label": "Right column label", "default": "Specifications" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Included item",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Item", "default": "Solo Plus device" },
+        { "type": "text", "id": "qty", "label": "Quantity", "default": "×1" }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "Specification",
+      "settings": [
+        { "type": "text", "id": "key", "label": "Key", "default": "Battery" },
+        { "type": "text", "id": "value", "label": "Value", "default": "1100 mAh" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - included",
+      "blocks": [
+        { "type": "item", "settings": { "name": "Solo Plus device", "qty": "×1" } },
+        { "type": "item", "settings": { "name": "Refillable pods · 5mL", "qty": "×5" } },
+        { "type": "item", "settings": { "name": "USB-C charging cable", "qty": "×1" } },
+        { "type": "item", "settings": { "name": "Spare coil · 0.4Ω", "qty": "×1" } },
+        { "type": "item", "settings": { "name": "Quick-start & weaning guide", "qty": "×1" } },
+        { "type": "spec", "settings": { "key": "Battery", "value": "1100 mAh" } },
+        { "type": "spec", "settings": { "key": "Coil", "value": "0.4 Ω refillable" } },
+        { "type": "spec", "settings": { "key": "Pods", "value": "5 × 5mL" } },
+        { "type": "spec", "settings": { "key": "Charging", "value": "USB-C" } },
+        { "type": "spec", "settings": { "key": "Registration", "value": "TGA-notified" } },
+        { "type": "spec", "settings": { "key": "Warranty", "value": "12 months" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

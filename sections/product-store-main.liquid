@@ -1,0 +1,451 @@
+{%- comment -%}
+  Product Store - hero buy box
+  ----------------------------
+  Quity "Product Store" redesign: gallery with thumbnail switching,
+  buy box (kicker, title, intro, rating row, benefits checklist,
+  one-time / subscribe purchase options, variant selects, price row,
+  quantity stepper, add-to-cart, guarantees) and the sticky buy bar.
+
+  Commerce is wired to the live product object: variants and prices
+  come from the product, the subscribe option renders only when the
+  product has a selling plan, and add-to-cart submits a real product
+  form (AJAX with native fallback). Styles: assets/product-store.css
+  (.qps- scope). Behavior: assets/product-store.js.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-store.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_options = false
+  unless product.has_only_default_variant
+    assign has_options = true
+  endunless
+
+  assign selling_plan = nil
+  if section.settings.show_subscribe and product.selling_plan_groups.size > 0
+    assign selling_plan = product.selling_plan_groups.first.selling_plans.first
+  endif
+-%}
+
+<div class="qps" data-qps-product="{{ section.id }}">
+  <section class="qps__wrap qps-hero">
+    <div data-qps-gallery>
+      <div class="qps-gallery__main">
+        {%- assign featured = product.featured_media | default: product.media.first -%}
+        {%- if featured -%}
+          <img
+            data-qps-gallery-main
+            src="{{ featured | image_url: width: 1100 }}"
+            srcset="{{ featured | image_url: width: 550 }} 550w, {{ featured | image_url: width: 1100 }} 1100w, {{ featured | image_url: width: 1600 }} 1600w"
+            sizes="(max-width: 900px) calc(100vw - 40px), 580px"
+            width="{{ featured.width }}" height="{{ featured.height }}"
+            alt="{{ featured.alt | default: product.title | escape }}">
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        {%- if section.settings.flag_text != blank -%}
+          <span class="qps-gallery__flag">{{ section.settings.flag_text | escape }}</span>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="qps-gallery__thumbs">
+          {%- for media in product.media limit: 4 -%}
+            <button
+              type="button"
+              class="qps-gallery__thumb"
+              data-qps-gallery-thumb
+              data-qps-full="{{ media | image_url: width: 1100 }}"
+              data-qps-full-srcset="{{ media | image_url: width: 550 }} 550w, {{ media | image_url: width: 1100 }} 1100w"
+              aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-label="{{ 'products.product.gallery_thumbnail_alt' | t: title: product.title | default: product.title | escape }}">
+              <img src="{{ media | image_url: width: 300 }}" width="{{ media.width }}" height="{{ media.height }}" loading="lazy" alt="{{ media.alt | escape }}">
+              <span class="qps-ring"></span>
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div data-qps-buybox>
+      {%- if section.settings.kicker != blank -%}
+        <div class="qps-buy__kicker">{{ section.settings.kicker | escape }}</div>
+      {%- endif -%}
+      <h1 class="qps-buy__title">{{ product.title | escape }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="qps-buy__intro">{{ section.settings.intro | escape }}</p>
+      {%- endif -%}
+
+      <div class="qps-buy__trust">
+        <div class="qps-buy__rating">
+          <span class="qps-stars">
+            {%- for i in (1..5) -%}
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+            {%- endfor -%}
+          </span>
+          {%- if section.settings.rating_text != blank -%}
+            <span class="qps-buy__rating-text">{{ section.settings.rating_text | escape }}</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.badge1 != blank -%}
+          <span class="qps-buy__divider"></span>
+          <span class="qps-buy__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>{{ section.settings.badge1 | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.badge2 != blank -%}
+          <span class="qps-buy__badge qps-buy__badge--muted">{{ section.settings.badge2 | escape }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- assign benefit_blocks = section.blocks | where: 'type', 'benefit' -%}
+      {%- if benefit_blocks.size > 0 -%}
+        <div class="qps-buy__benefits">
+          {%- for block in benefit_blocks -%}
+            <div class="qps-buy__benefit" {{ block.shopify_attributes }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              {{ block.settings.text | escape }}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="qps-options">
+        <div class="qps-option is-active" data-qps-option="once">
+          <input type="radio" name="qps-purchase-{{ section.id }}" checked aria-label="{{ section.settings.once_title | escape }}">
+          <span class="qps-option__radio"><span class="qps-option__dot"></span></span>
+          <span class="qps-option__label">
+            <span class="qps-option__name">{{ section.settings.once_title | escape }}</span>
+            <span class="qps-option__sub">{{ section.settings.once_sub | escape }}</span>
+          </span>
+          <span class="qps-option__price" data-qps-once-price>{{ current_variant.price | money }}</span>
+          <span class="qps-ring"></span>
+        </div>
+        {%- if selling_plan -%}
+          {%- assign plan_alloc = current_variant.selling_plan_allocations | where: 'selling_plan_id', selling_plan.id | first -%}
+          <div class="qps-option qps-option--sub" data-qps-option="sub">
+            {%- if section.settings.popular_flag != blank -%}
+              <span class="qps-option__flag">{{ section.settings.popular_flag | escape }}</span>
+            {%- endif -%}
+            <input type="radio" name="qps-purchase-{{ section.id }}" aria-label="{{ selling_plan.name | escape }}">
+            <span class="qps-option__radio"><span class="qps-option__dot"></span></span>
+            <span class="qps-option__label">
+              <span class="qps-option__name">{{ selling_plan.name | escape }}</span>
+              <span class="qps-option__sub">{{ section.settings.sub_sub | escape }}</span>
+            </span>
+            <span class="qps-option__price" data-qps-sub-price>{{ plan_alloc.price | default: current_variant.price | money }}</span>
+            <span class="qps-ring"></span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if has_options -%}
+        {%- for option in product.options_with_values -%}
+          <div class="qps-field">
+            <div class="qps-field__label">{{ option.name | escape }}</div>
+            <div class="qps-field__control">
+              <select data-qps-variant-select aria-label="{{ option.name | escape }}">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value | escape }}</option>
+                {%- endfor -%}
+              </select>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B615E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+
+      <div class="qps-price">
+        <span class="qps-price__big" data-qps-price>{{ current_variant.price | money }}</span>
+        <span class="qps-price__was" data-qps-price-was hidden></span>
+        <span class="qps-price__save" data-qps-price-save data-qps-save-label="{{ section.settings.save_label | default: 'Save' | escape }}" hidden></span>
+      </div>
+
+      {%- form 'product', product, data-qps-form: '' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-qps-id-input>
+        <input type="hidden" name="quantity" value="1" data-qps-qty-input>
+        {%- if selling_plan -%}
+          <input type="hidden" name="selling_plan" value="" data-qps-plan-input>
+        {%- endif -%}
+        <div class="qps-atc">
+          <div class="qps-qty">
+            <button type="button" class="qps-qty__btn" data-qps-qty="dec" aria-label="{{ 'products.product.decrease_quantity' | t | default: 'Decrease quantity' }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+            <span class="qps-qty__num" data-qps-qty-num>1</span>
+            <button type="button" class="qps-qty__btn" data-qps-qty="inc" aria-label="{{ 'products.product.increase_quantity' | t | default: 'Increase quantity' }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+          <button
+            type="submit"
+            class="qps-atc__btn"
+            data-qps-add="{{ section.settings.atc_label | escape }}"
+            data-qps-added="{{ section.settings.added_label | escape }}"
+            data-qps-soldout="{{ section.settings.soldout_label | escape }}">
+            {{ section.settings.atc_label | escape }} {{ current_variant.price | money }}
+          </button>
+        </div>
+      {%- endform -%}
+
+      {%- if section.settings.stock_text != blank -%}
+        <div class="qps-buy__stock" data-qps-stock data-qps-instock="{{ section.settings.stock_text | escape }}" data-qps-nostock="{{ section.settings.soldout_label | escape }}">{{ section.settings.stock_text | escape }}</div>
+      {%- endif -%}
+
+      {%- assign guarantee_blocks = section.blocks | where: 'type', 'guarantee' -%}
+      {%- if guarantee_blocks.size > 0 -%}
+        <div class="qps-buy__guarantees">
+          {%- for block in guarantee_blocks -%}
+            <div class="qps-guarantee" {{ block.shopify_attributes }}>
+              <span>
+                {%- case block.settings.icon -%}
+                  {%- when 'prescription' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                  {%- when 'shipping' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="14" height="11" rx="2"></rect><path d="M15 9h4l3 3v5h-7"></path><circle cx="6.5" cy="18.5" r="1.8"></circle><circle cx="18.5" cy="18.5" r="1.8"></circle></svg>
+                  {%- when 'support' -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"></path></svg>
+                  {%- else -%}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"></path><path d="M3 8v8l9 5 9-5V8"></path></svg>
+                {%- endcase -%}
+              </span>
+              <span>{{ block.settings.text | escape }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- if section.settings.show_sticky -%}
+    <div class="qps-stickybar" data-qps-stickybar="{{ section.id }}" hidden>
+      <div class="qps-stickybar__inner">
+        <div class="qps-stickybar__id">
+          <div class="qps-stickybar__thumb">
+            {%- if featured -%}
+              <img src="{{ featured | image_url: width: 120 }}" width="{{ featured.width }}" height="{{ featured.height }}" loading="lazy" alt="{{ featured.alt | default: product.title | escape }}">
+            {%- endif -%}
+          </div>
+          <div style="min-width:0;">
+            <div class="qps-stickybar__name">{{ product.title | escape }}</div>
+            <span class="qps-stars qps-stickybar__stars">
+              {%- for i in (1..5) -%}
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+              {%- endfor -%}
+            </span>
+          </div>
+        </div>
+        <div class="qps-stickybar__cta">
+          <span class="qps-stickybar__price" data-qps-price>{{ current_variant.price | money }}</span>
+          <button type="button" class="qps-stickybar__btn" data-qps-sticky-add data-qps-add="{{ section.settings.atc_label | escape }}" data-qps-added="{{ section.settings.added_label | escape }}" data-qps-soldout="{{ section.settings.soldout_label | escape }}">{{ section.settings.atc_label | escape }} {{ current_variant.price | money }}</button>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <script type="application/json" data-qps-data>
+    {
+      "moneyFormat": {{ shop.money_format | json }},
+      "initialVariant": {{ current_variant.id | json }},
+      "variants": [
+        {%- for variant in product.variants -%}
+          {
+            "id": {{ variant.id | json }},
+            "price": {{ variant.price | json }},
+            "compare_at_price": {{ variant.compare_at_price | default: 0 | json }},
+            "available": {{ variant.available | json }},
+            "options": {{ variant.options | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      {%- if selling_plan -%}
+      "plan": {
+        "id": {{ selling_plan.id | json }},
+        "name": {{ selling_plan.name | json }},
+        "prices": {
+          {%- for variant in product.variants -%}
+            {%- assign alloc = variant.selling_plan_allocations | where: 'selling_plan_id', selling_plan.id | first -%}
+            {%- if alloc -%}"{{ variant.id }}": {{ alloc.price | json }}{% unless forloop.last %},{% endunless %}{%- endif -%}
+          {%- endfor -%}
+        }
+      }
+      {%- else -%}
+      "plan": null
+      {%- endif -%}
+    }
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Product store - buy box",
+  "class": "index-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Prescription vaping · Starter kit"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro paragraph",
+      "default": "A prescriber-matched vaping device that helps you switch from cigarettes, and step off nicotine on your own timeline."
+    },
+    {
+      "type": "text",
+      "id": "flag_text",
+      "label": "Image flag",
+      "default": "Best value"
+    },
+    {
+      "type": "header",
+      "content": "Trust row"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "4.8 · 212 reviews"
+    },
+    {
+      "type": "text",
+      "id": "badge1",
+      "label": "Shield badge",
+      "default": "TGA-notified"
+    },
+    {
+      "type": "text",
+      "id": "badge2",
+      "label": "Second badge",
+      "default": "40,000+ quitters"
+    },
+    {
+      "type": "header",
+      "content": "Purchase options"
+    },
+    {
+      "type": "text",
+      "id": "once_title",
+      "label": "One-time title",
+      "default": "One-time purchase"
+    },
+    {
+      "type": "text",
+      "id": "once_sub",
+      "label": "One-time subtitle",
+      "default": "Ships once. No commitment."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscribe",
+      "label": "Show subscription option",
+      "info": "Renders only when the product has a selling plan (subscription app).",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sub_sub",
+      "label": "Subscription subtitle",
+      "default": "Repeat delivery. Pause anytime."
+    },
+    {
+      "type": "text",
+      "id": "popular_flag",
+      "label": "Subscription badge",
+      "default": "Most popular"
+    },
+    {
+      "type": "text",
+      "id": "save_label",
+      "label": "Save pill label",
+      "default": "Save"
+    },
+    {
+      "type": "header",
+      "content": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Button label (total is appended)",
+      "default": "Add to cart,"
+    },
+    {
+      "type": "text",
+      "id": "added_label",
+      "label": "Added confirmation",
+      "default": "Added ✓"
+    },
+    {
+      "type": "text",
+      "id": "soldout_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "text",
+      "id": "stock_text",
+      "label": "Stock note",
+      "default": "In stock · ships in 1-2 business days"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky",
+      "label": "Show sticky add-to-cart bar",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Prescriber-matched strength"
+        }
+      ]
+    },
+    {
+      "type": "guarantee",
+      "name": "Guarantee",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "prescription",
+          "options": [
+            { "value": "prescription", "label": "Prescription" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "support", "label": "Support chat" },
+            { "value": "package", "label": "Package" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Prescription included"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Product store - buy box",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Prescriber-matched strength" } },
+        { "type": "benefit", "settings": { "text": "Refillable & rechargeable" } },
+        { "type": "benefit", "settings": { "text": "Pharmacist support included" } },
+        { "type": "benefit", "settings": { "text": "Designed to step you down" } },
+        { "type": "guarantee", "settings": { "icon": "prescription", "text": "Prescription included" } },
+        { "type": "guarantee", "settings": { "icon": "shipping", "text": "Free express over $120" } },
+        { "type": "guarantee", "settings": { "icon": "support", "text": "Pharmacist support" } },
+        { "type": "guarantee", "settings": { "icon": "package", "text": "Plain, discreet packaging" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

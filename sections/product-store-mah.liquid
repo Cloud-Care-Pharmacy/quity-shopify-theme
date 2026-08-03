@@ -1,0 +1,78 @@
+{%- comment -%}
+  Product Store - device mAh
+  Copy + two capacity range cards on the left, decorative battery
+  graphic (pure CSS/SVG) on the right.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps__wrap--1240 qps-mah">
+    <div>
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-mah__title">{{ section.settings.title | escape }}{% if section.settings.title_italic != blank %} <span class="qps-it">{{ section.settings.title_italic | escape }}</span>{% endif %}</h2>
+      {%- if section.settings.copy != blank -%}
+        <p class="qps-mah__copy">{{ section.settings.copy | escape }}</p>
+      {%- endif -%}
+      <div class="qps-mah__cards">
+        {%- for block in section.blocks -%}
+          <div class="qps-mah__card" {{ block.shopify_attributes }}>
+            <div class="qps-mah__range">{{ block.settings.range | escape }}</div>
+            <div class="qps-mah__unit">{{ block.settings.unit | escape }}</div>
+            <div class="qps-mah__use">{{ block.settings.use | escape }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="qps-mah__viz" aria-hidden="true">
+      <div class="qps-mah__scale"><span>{{ section.settings.scale_top | escape }}</span><span>{{ section.settings.scale_bottom | escape }}</span></div>
+      <div class="qps-mah__battery">
+        <div class="qps-mah__cap"></div>
+        <div class="qps-mah__charge"><svg width="38" height="38" viewBox="0 0 24 24" fill="#5F7A68"><path d="M13 2L4 14h6l-1 8 9-12h-6z"></path></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - battery",
+  "class": "index-section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "Battery life" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "What is device" },
+    { "type": "text", "id": "title_italic", "label": "Heading italic word", "default": "mAh?" },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "mAh is battery capacity. Higher mAh means more time between charges, useful if you're out all day, less so for a low-use closed device you charge nightly."
+    },
+    { "type": "text", "id": "scale_top", "label": "Scale top label", "default": "3000 mAh" },
+    { "type": "text", "id": "scale_bottom", "label": "Scale bottom label", "default": "0 mAh" }
+  ],
+  "blocks": [
+    {
+      "type": "range",
+      "name": "Capacity range",
+      "settings": [
+        { "type": "text", "id": "range", "label": "Range", "default": "400-600" },
+        { "type": "text", "id": "unit", "label": "Unit", "default": "mAh" },
+        { "type": "text", "id": "use", "label": "Use", "default": "Closed / low-use devices" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - battery",
+      "blocks": [
+        { "type": "range", "settings": { "range": "400-600", "unit": "mAh", "use": "Closed / low-use devices" } },
+        { "type": "range", "settings": { "range": "800-1000", "unit": "mAh", "use": "All-day refillable devices" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
