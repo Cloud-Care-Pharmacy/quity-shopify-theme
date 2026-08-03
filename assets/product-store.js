@@ -14,14 +14,110 @@
 (function () {
   'use strict';
 
+  function withDelimiters(cents, decimals, thousands, decimal) {
+    var parts = (Math.abs(cents) / 100).toFixed(decimals).split('.');
+    var whole = parts[0].replace(/(\d)(?=(\d\d\d)+$)/g, '$1' + thousands);
+    return (cents < 0 ? '-' : '') + whole + (parts[1] ? decimal + parts[1] : '');
+  }
+
   function formatMoney(cents, format) {
-    var amount = (cents / 100).toFixed(2);
-    var noDecimals = Math.round(cents / 100).toString();
-    var withComma = amount.replace('.', ',');
-    return (format || '${{amount}}')
-      .replace(/\{\{\s*amount_no_decimals\s*\}\}/g, noDecimals)
-      .replace(/\{\{\s*amount_with_comma_separator\s*\}\}/g, withComma)
-      .replace(/\{\{\s*amount\s*\}\}/g, amount);
+    var value = Number(cents);
+    if (isNaN(value)) value = 0;
+    /* money_format can carry markup (<span class=money>…</span>); we write the
+       result with textContent, so strip it rather than print the tags. */
+    return String(format || '${{amount}}')
+      .replace(/<[^>]*>/g, '')
+      .replace(/\{\{\s*(\w+)\s*\}\}/g, function (match, name) {
+        switch (name) {
+          case 'amount_no_decimals': return withDelimiters(value, 0, ',', '.');
+          case 'amount_with_comma_separator': return withDelimiters(value, 2, '.', ',');
+          case 'amount_no_decimals_with_comma_separator': return withDelimiters(value, 0, '.', ',');
+          case 'amount_with_apostrophe_separator': return withDelimiters(value, 2, "'", '.');
+          case 'amount_with_space_separator': return withDelimiters(value, 2, ' ', ',');
+          case 'amount_no_decimals_with_space_separator': return withDelimiters(value, 0, ' ', '.');
+          default: return withDelimiters(value, 2, ',', '.');
+        }
+      });
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ---------- Theme cart drawer ----------
+     The header cart is the theme's mini cart (snippets/block-cart.liquid). Its
+     contents are painted by theme.miniCart in assets/theme.js, not by Liquid on
+     every request — so an AJAX add has to ask theme.miniCart to repaint, or the
+     drawer keeps showing the cart as it was when the page loaded. generateCart()
+     rebuilds the line item list, updateElements() refreshes the count, total and
+     free-shipping bar and opens the drawer when the drawer style is enabled. */
+  function themeMiniCart() {
+    var t = window.theme;
+    return t && t.miniCart && typeof t.miniCart.generateCart === 'function' ? t.miniCart : null;
+  }
+
+  function isDrawerCart() {
+    var el = document.querySelector('.js-mini-cart');
+    return !!el && el.getAttribute('data-cartmini') === 'true';
+  }
+
+  /* Only used when theme.js has not loaded — keeps the header honest. */
+  function paintCartFallback(cart) {
+    document.querySelectorAll('.js-cart-count').forEach(function (el) {
+      el.textContent = el.textContent.indexOf('(') === 0 ? '(' + cart.item_count + ')' : cart.item_count;
+    });
+    document.querySelectorAll('.js-cart-total').forEach(function (el) {
+      el.textContent = formatMoney(cart.total_price, (window.theme && window.theme.moneyFormat) || '${{amount}}');
+    });
+  }
+
+  function notifyAdded(item) {
+    /* In drawer mode the sliding cart is the confirmation. Otherwise use the
+       theme's growl notice, same as the grid/quickview add buttons. */
+    if (isDrawerCart() || !item) return;
+    var t = window.theme;
+    if (!t || !t.alert || typeof t.alert.new !== 'function') return;
+    var variant = item.variant_title ? '<i>(' + escapeHtml(item.variant_title) + ')</i>' : '';
+    var html =
+      '<div class="media mt-2 alert--cart"><a class="mr-3" href="' + ((window.routes && window.routes.cart_url) || '/cart') + '">' +
+      '<img class="lazyload" data-src="' + escapeHtml(item.image) + '"></a>' +
+      '<div class="media-body align-self-center"><p class="m-0 font-weight-bold">' +
+      escapeHtml(item.product_title) + ' x ' + item.quantity + '</p>' + variant + '</div></div>';
+    t.alert.new((t.strings && t.strings.addToCartSuccess) || '', html, 3000, 'notice');
+  }
+
+  function syncThemeCart(item) {
+    var mini = themeMiniCart();
+    if (mini) {
+      /* theme.miniCart leans on jQuery, Shopify.getCart and theme.Currency; if
+         any of those are missing the repaint must not take the add down with it */
+      try {
+        mini.generateCart();
+        mini.updateElements();
+      } catch (e) {
+        mini = null;
+      }
+    }
+    if (mini) {
+      document.dispatchEvent(new CustomEvent('qps:cart:added', { detail: { item: item, cart: null } }));
+      notifyAdded(item);
+      return;
+    }
+    fetch((window.routes && window.routes.cart_url ? window.routes.cart_url : '/cart') + '.js', {
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        paintCartFallback(cart);
+        document.dispatchEvent(new CustomEvent('qps:cart:added', { detail: { item: item, cart: cart } }));
+      })
+      .catch(function () { /* header stays as-is; the add itself still succeeded */ })
+      .then(function () { notifyAdded(item); });
   }
 
   /* ---------- Product buy box ---------- */
@@ -163,8 +259,31 @@
       });
     });
 
-    /* add to cart (AJAX with form fallback) */
-    var form = root.querySelector('[data-qps-form]');
+    /* add to cart (AJAX, native submit only if the request never lands) */
+    var form = root.querySelector('[data-qps-form]') || root.querySelector('form[action*="/cart/add"]');
+    var errorEl = root.querySelector('[data-qps-error]');
+    var addedTimer = null;
+
+    function showError(message) {
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.hidden = !message;
+      }
+      var t = window.theme;
+      if (message && t && t.alert && typeof t.alert.new === 'function') {
+        t.alert.new('', escapeHtml(message), 4000, 'warning');
+      }
+    }
+
+    function flashAdded() {
+      clearTimeout(addedTimer);
+      els.addBtns.forEach(function (b) {
+        b.disabled = false;
+        b.textContent = b.getAttribute('data-qps-added') || 'Added';
+      });
+      addedTimer = setTimeout(render, 1600);
+    }
+
     if (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -174,50 +293,65 @@
         if (state.purchase === 'sub' && data.plan && subPrice(v) != null) {
           body.selling_plan = data.plan.id;
         }
-        var btns = els.addBtns;
-        btns.forEach(function (b) { b.disabled = true; });
-        fetch('/cart/add.js', {
+        showError('');
+        els.addBtns.forEach(function (b) { b.disabled = true; });
+
+        var addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add';
+        fetch(addUrl + '.js', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(body)
         }).then(function (r) {
-          if (!r.ok) throw new Error('add failed');
-          return fetch('/cart.js').then(function (cr) { return cr.json(); });
-        }).then(function (cart) {
-          document.querySelectorAll('.cart-count, [data-cart-count]').forEach(function (el) {
-            el.textContent = cart.item_count;
+          return r.json().catch(function () { return {}; }).then(function (payload) {
+            /* Shopify answers 4xx with {description} for sold out, quantity
+               limits, etc. Surface it — a native re-submit here would throw the
+               shopper onto an error page and read as "nothing happened". */
+            if (!r.ok) {
+              var err = new Error(payload.description || payload.message || 'add failed');
+              err.handled = true;
+              throw err;
+            }
+            return payload;
           });
-          btns.forEach(function (b) {
-            b.disabled = false;
-            var done = b.getAttribute('data-qps-added') || 'Added';
-            var prev = b.textContent;
-            b.textContent = done;
-            setTimeout(function () { b.textContent = prev; render(); }, 1600);
-          });
-          document.dispatchEvent(new CustomEvent('qps:cart:added', { detail: cart }));
-        }).catch(function () {
-          /* AJAX blocked — submit natively */
-          btns.forEach(function (b) { b.disabled = false; });
-          form.submit();
+        }).then(function (item) {
+          /* the item is in the cart from here on — nothing below may reach the
+             catch and re-post the form, or the shopper gets it twice */
+          flashAdded();
+          try { syncThemeCart(item); } catch (e) { /* drawer stays stale, add stands */ }
+        }).catch(function (err) {
+          els.addBtns.forEach(function (b) { b.disabled = false; });
+          if (err && err.handled) {
+            showError(err.message);
+            render();
+            return;
+          }
+          /* the request itself never landed (offline, blocked) — let the
+             browser post the form the old-fashioned way */
+          if (typeof form.submit === 'function') form.submit();
         });
       });
     }
 
-    /* sticky bar reveal once the buy box scrolls out of view */
+    /* clicking the sticky Add submits the main form */
     var sticky = document.querySelector('[data-qps-stickybar="' + root.getAttribute('data-qps-product') + '"]');
+    if (sticky && form) {
+      var stickyBtn = sticky.querySelector('[data-qps-sticky-add]');
+      if (stickyBtn) {
+        stickyBtn.addEventListener('click', function () {
+          if (typeof form.requestSubmit === 'function') form.requestSubmit();
+          else form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+        });
+      }
+    }
+
+    /* sticky bar reveal once the buy box scrolls out of view */
     var buybox = root.querySelector('[data-qps-buybox]');
     if (sticky && buybox && 'IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         sticky.hidden = entries[0].isIntersecting || entries[0].boundingClientRect.top > 0;
       }, { rootMargin: '0px 0px 0px 0px', threshold: 0 });
       io.observe(buybox);
-      /* clicking the sticky Add submits the main form */
-      var stickyBtn = sticky.querySelector('[data-qps-sticky-add]');
-      if (stickyBtn && form) {
-        stickyBtn.addEventListener('click', function () {
-          form.dispatchEvent(new Event('submit', { cancelable: true }));
-        });
-      }
     }
 
     render();
@@ -277,11 +411,24 @@
     });
   }
 
+  /* initAll also runs on shopify:section:load, which fires for one section but
+     hands us the whole document. Without this guard every already-initialised
+     section picks up a second set of listeners and a click adds twice. Reloaded
+     sections arrive as fresh nodes, so they still get initialised. */
+  function initEach(selector, key, fn) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (el.qpsInit && el.qpsInit[key]) return;
+      el.qpsInit = el.qpsInit || {};
+      el.qpsInit[key] = true;
+      fn(el);
+    });
+  }
+
   function initAll() {
-    document.querySelectorAll('[data-qps-product]').forEach(initProduct);
-    document.querySelectorAll('[data-qps-gallery]').forEach(initGallery);
-    document.querySelectorAll('[data-qps-tabs]').forEach(initTabs);
-    document.querySelectorAll('[data-qps-faq]').forEach(initFaq);
+    initEach('[data-qps-product]', 'product', initProduct);
+    initEach('[data-qps-gallery]', 'gallery', initGallery);
+    initEach('[data-qps-tabs]', 'tabs', initTabs);
+    initEach('[data-qps-faq]', 'faq', initFaq);
   }
 
   if (document.readyState === 'loading') {
