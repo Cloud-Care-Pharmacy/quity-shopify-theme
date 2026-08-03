@@ -1,0 +1,60 @@
+{%- comment -%}
+  Product Store - how it works
+  Three numbered paper cards (coral number, rule, title, body).
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps-how">
+    <div class="qps-head qps-how__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h2 class="qps-h2">{{ section.settings.title | escape }}</h2>
+    </div>
+    <div class="qps-how__grid">
+      {%- for block in section.blocks -%}
+        <div class="qps-how__card" {{ block.shopify_attributes }}>
+          <div class="qps-how__num">{{ block.settings.number | escape }}</div>
+          <div class="qps-how__rule"></div>
+          <h3 class="qps-how__title">{{ block.settings.title | escape }}</h3>
+          <p class="qps-how__body">{{ block.settings.body | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - steps",
+  "class": "index-section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it works" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Three steps to switch" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Apply for your script" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - steps",
+      "blocks": [
+        { "type": "step", "settings": { "number": "01", "title": "Apply for your script", "body": "Answer a short health questionnaire. An Australian-registered prescriber reviews it, usually within 24 hours." } },
+        { "type": "step", "settings": { "number": "02", "title": "Prime, fill & vape", "body": "Your kit arrives discreetly. Prime the coil, fill with your prescribed e-liquid, and make the switch." } },
+        { "type": "step", "settings": { "number": "03", "title": "Taper with support", "body": "Your pharmacist helps you step down and eventually off nicotine, at no extra cost." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,446 @@
+{%- comment -%}
+  Device Types — guided comparison section
+  ----------------------------------------
+  A decision tool comparing the three vape device architectures Quity
+  prescribes (Closed / Refillable / Hybrid): a spectrum axis
+  (simplest -> most flexible), one comparison card per device block
+  (photo, category pill, description, four attribute rows with an
+  upkeep dot meter), and a shared safety footnote.
+
+  Design: Quity "Device Types" handoff — scoped .qdt- classes styled
+  in assets/device-types.css. Fonts (Jost / JetBrains Mono) are loaded
+  in layout/theme.liquid. Static content, no JavaScript.
+{%- endcomment -%}
+
+{{ 'device-types.css' | asset_url | stylesheet_tag }}
+
+<section class="qdt{% if section.settings.style == 'guide' %} qdt--guide{% endif %} customstyle{{ section.id }}" data-aos="{{ section.settings.animation }}">
+  {%- render 'style-section' -%}
+  <div class="qdt__container">
+
+    {%- if section.settings.show_context -%}
+      <div class="qdt__context">
+        <div class="qdt__wordmark">{{ section.settings.context_title | escape }}</div>
+        {%- if section.settings.context_sub != blank -%}
+          <div class="qdt__context-sub">{{ section.settings.context_sub | escape }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="qdt__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="qdt__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="qdt__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lede != blank -%}
+        <p class="qdt__lede">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_axis and section.blocks.size > 1 -%}
+      <div class="qdt-axis">
+        <div class="qdt-axis__ends">
+          <span>{{ section.settings.axis_left | escape }}</span>
+          <span>{{ section.settings.axis_right | escape }}</span>
+        </div>
+        <div class="qdt-axis__track">
+          <div class="qdt-axis__line"></div>
+          {%- for block in section.blocks -%}
+            <div class="qdt-axis__node">
+              <div class="qdt-axis__dot"></div>
+              <span class="qdt-axis__label">{{ block.settings.axis_label | default: block.settings.title | escape }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="qdt-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign device_image = block.settings.image
+          if device_image == blank
+            assign device_image = block.settings.product.featured_image
+          endif
+        -%}
+        <div class="qdt-card" {{ block.shopify_attributes }}>
+          <div class="qdt-card__media">
+            {%- if device_image -%}
+              <img
+                src="{{ device_image | image_url: width: 900 }}"
+                srcset="{{ device_image | image_url: width: 400 }} 400w, {{ device_image | image_url: width: 650 }} 650w, {{ device_image | image_url: width: 900 }} 900w, {{ device_image | image_url: width: 1300 }} 1300w"
+                sizes="(max-width: 900px) calc(100vw - 108px), 322px"
+                width="{{ device_image.width }}"
+                height="{{ device_image.height }}"
+                loading="lazy"
+                alt="{{ device_image.alt | default: block.settings.title | escape }}">
+            {%- else -%}
+              {%- assign placeholder = 'product-' | append: forloop.index -%}
+              {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="qdt-card__body">
+            {%- if block.settings.pill != blank -%}
+              <span class="qdt-card__pill">{{ block.settings.pill | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="qdt-card__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="qdt-card__desc">{{ block.settings.description | escape }}</p>
+            {%- endif -%}
+
+            {%- liquid
+              assign has_specs = false
+              if block.settings.upkeep_word != blank or block.settings.upkeep_fill > 0 or block.settings.cost != blank or block.settings.draw != blank or block.settings.stage != blank
+                assign has_specs = true
+              endif
+            -%}
+            {%- if has_specs -%}
+            <div class="qdt-specs">
+              {%- if block.settings.upkeep_word != blank or block.settings.upkeep_fill > 0 -%}
+                <div class="qdt-spec qdt-spec--meter">
+                  <span class="qdt-spec__label">{{ section.settings.label_upkeep | escape }}</span>
+                  <span class="qdt-spec__value qdt-spec__value--meter">
+                    <span class="qdt-meter" aria-hidden="true">
+                      {%- for i in (1..3) -%}
+                        <span class="qdt-meter__dot{% if i <= block.settings.upkeep_fill %} qdt-meter__dot--on{% endif %}"></span>
+                      {%- endfor -%}
+                    </span>
+                    <span>{{ block.settings.upkeep_word | escape }}</span>
+                  </span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.cost != blank -%}
+                <div class="qdt-spec">
+                  <span class="qdt-spec__label">{{ section.settings.label_cost | escape }}</span>
+                  <span class="qdt-spec__value">{{ block.settings.cost | escape }}</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.draw != blank -%}
+                <div class="qdt-spec">
+                  <span class="qdt-spec__label">{{ section.settings.label_draw | escape }}</span>
+                  <span class="qdt-spec__value">{{ block.settings.draw | escape }}</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.stage != blank -%}
+                <div class="qdt-spec">
+                  <span class="qdt-spec__label">{{ section.settings.label_stage | escape }}</span>
+                  <span class="qdt-spec__value">{{ block.settings.stage | escape }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <div class="qdt-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F7A68" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+        <p>{{ section.settings.footnote | escape }}</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Device types",
+  "class": "index-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "default": "standalone",
+      "options": [
+        { "value": "standalone", "label": "Standalone (with axis & rows)" },
+        { "value": "guide", "label": "Guide chapter (compact)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade Up" },
+        { "value": "fade-down", "label": "Fade Down" },
+        { "value": "fade-left", "label": "Fade Left" },
+        { "value": "fade-right", "label": "Fade Right" }
+      ],
+      "default": "",
+      "label": "Select Animation"
+    },
+    {
+      "type": "text",
+      "id": "paddingsection",
+      "label": "Padding Section",
+      "default": "0px 0px 0px 0px",
+      "info": "Padding: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "paddingmobile",
+      "label": "Padding Section Mobile",
+      "default": "0px 0px 0px 0px",
+      "info": "Padding: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "marginsection",
+      "label": "Margin Section",
+      "default": "0px 0px 0px 0px",
+      "info": "Margin: Top Right Bottom Left"
+    },
+    {
+      "type": "text",
+      "id": "marginmobile",
+      "label": "Margin Mobile",
+      "default": "0px 0px 0px 0px",
+      "info": "Margin: Top Right Bottom Left"
+    },
+    {
+      "type": "color",
+      "id": "bgsection",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Context line"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_context",
+      "label": "Show context line",
+      "info": "Centered wordmark above the heading, for standalone pages without the site header.",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "context_title",
+      "label": "Context wordmark",
+      "default": "Quity"
+    },
+    {
+      "type": "text",
+      "id": "context_sub",
+      "label": "Context sub-label",
+      "default": "Device guide · exploration"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow pill",
+      "default": "Choosing a device"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Different device types"
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Sub-paragraph",
+      "default": "Three architectures, each suited to a different stage of quitting. Your prescriber helps you match one to where you're starting from - here's how they compare."
+    },
+    {
+      "type": "header",
+      "content": "Spectrum axis"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_axis",
+      "label": "Show spectrum axis",
+      "info": "Hidden automatically below 900px viewports.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "axis_left",
+      "label": "Left end label",
+      "default": "Simplest · lowest effort"
+    },
+    {
+      "type": "text",
+      "id": "axis_right",
+      "label": "Right end label",
+      "default": "Most flexibility"
+    },
+    {
+      "type": "header",
+      "content": "Comparison row labels"
+    },
+    {
+      "type": "text",
+      "id": "label_upkeep",
+      "label": "Upkeep row label",
+      "default": "Upkeep"
+    },
+    {
+      "type": "text",
+      "id": "label_cost",
+      "label": "Cost row label",
+      "default": "Cost per mL"
+    },
+    {
+      "type": "text",
+      "id": "label_draw",
+      "label": "Draw row label",
+      "default": "Draw"
+    },
+    {
+      "type": "text",
+      "id": "label_stage",
+      "label": "Stage row label",
+      "default": "Best stage"
+    },
+    {
+      "type": "header",
+      "content": "Safety footnote"
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote text",
+      "default": "Every Solo device is rechargeable over USB-C, TGA-notified, and ships with a child-resistant lock and a 12-month warranty. The differences above are about upkeep and flexibility - not safety."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "device",
+      "name": "Device",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Device photo"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Used for the photo when no image is chosen."
+        },
+        {
+          "type": "text",
+          "id": "axis_label",
+          "label": "Axis label",
+          "info": "Short label on the spectrum axis. Falls back to the title."
+        },
+        {
+          "type": "text",
+          "id": "pill",
+          "label": "Category pill"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Closed system"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "range",
+          "id": "upkeep_fill",
+          "label": "Upkeep meter (dots filled)",
+          "min": 0,
+          "max": 3,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "upkeep_word",
+          "label": "Upkeep value",
+          "default": "None"
+        },
+        {
+          "type": "text",
+          "id": "cost",
+          "label": "Cost per mL value",
+          "default": "Higher"
+        },
+        {
+          "type": "text",
+          "id": "draw",
+          "label": "Draw value",
+          "default": "Tight · MTL"
+        },
+        {
+          "type": "text",
+          "id": "stage",
+          "label": "Best stage value",
+          "default": "Just switched"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Device types",
+      "blocks": [
+        {
+          "type": "device",
+          "settings": {
+            "axis_label": "Closed",
+            "pill": "Sealed · prefilled",
+            "title": "Closed system",
+            "description": "Prefilled sealed pods - nothing to fill or maintain. The simplest first step off cigarettes and the lowest-effort option.",
+            "upkeep_fill": 1,
+            "upkeep_word": "None",
+            "cost": "Higher",
+            "draw": "Tight · MTL",
+            "stage": "Just switched"
+          }
+        },
+        {
+          "type": "device",
+          "settings": {
+            "axis_label": "Refillable",
+            "pill": "Fill your own",
+            "title": "Refillable system",
+            "description": "Filled with your prescribed e-liquid, cheaper per millilitre over time. Swap the coil when flavour fades. The Solo Plus is refillable.",
+            "upkeep_fill": 3,
+            "upkeep_word": "Refill + coil",
+            "cost": "Lowest",
+            "draw": "Tight to open",
+            "stage": "Settled routine"
+          }
+        },
+        {
+          "type": "device",
+          "settings": {
+            "axis_label": "Hybrid",
+            "pill": "Sealed or refill",
+            "title": "Hybrid system",
+            "description": "Accepts sealed or refillable pods, so you can step strength down as you taper. Built for pharmacist-guided weaning.",
+            "upkeep_fill": 2,
+            "upkeep_word": "Optional",
+            "cost": "Flexible",
+            "draw": "Adjustable",
+            "stage": "Weaning down"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

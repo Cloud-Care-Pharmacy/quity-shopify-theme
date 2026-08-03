@@ -1,0 +1,77 @@
+{%- comment -%}
+  Product Store - evidence
+  Big display figure + supporting copy with footnote on the left,
+  three bordered evidence cards on the right.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps-evidence">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow qps-evidence__eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <div class="qps-evidence__fig">{{ section.settings.figure | escape }}</div>
+      <p class="qps-evidence__copy">{{ section.settings.copy | escape }}<span class="qps-evidence__mark">*</span></p>
+      {%- if section.settings.footnote != blank -%}
+        <div class="qps-evidence__foot">* {{ section.settings.footnote | escape }}</div>
+      {%- endif -%}
+    </div>
+    <div class="qps-evidence__cards">
+      {%- for block in section.blocks -%}
+        <div class="qps-evidence__card" {{ block.shopify_attributes }}>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+          <div>
+            <div class="qps-evidence__card-title">{{ block.settings.title | escape }}</div>
+            <div class="qps-evidence__card-body">{{ block.settings.body | escape }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - evidence",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The evidence" },
+    { "type": "text", "id": "figure", "label": "Display figure", "default": "2×" },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Supporting copy",
+      "default": "more likely to quit successfully than with willpower alone, when vaping is combined with behavioural support."
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Illustrative of pooled cessation evidence. Individual results vary."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Evidence card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Support doubles your odds" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Combining a device with behavioural support outperforms going it alone." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - evidence",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Support doubles your odds", "body": "Combining a device with behavioural support outperforms going it alone." } },
+        { "type": "card", "settings": { "title": "Matched, then adjusted", "body": "Starting at the right strength keeps cravings down in the critical first weeks." } },
+        { "type": "card", "settings": { "title": "A plan to stop, not just switch", "body": "Every prescription comes with a structured path off nicotine." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,141 @@
+{%- comment -%}
+  Product Store - "Why Quity" tabs
+  Centered heading with an italic accent word, four pill tabs, and a
+  two-column panel (image + tag/title/body + three checkmark points)
+  whose content swaps per tab. Behavior: assets/product-store.js.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-store.js' | asset_url }}" defer></script>
+
+<section class="qps">
+  <div class="qps__wrap qps-tabs" data-qps-tabs>
+    <div class="qps-head qps-tabs__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qps-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      <h2 class="qps-h2">{{ section.settings.title | escape }}{% if section.settings.title_italic != blank %} <span class="qps-it">{{ section.settings.title_italic | escape }}</span>{% endif %}</h2>
+    </div>
+    <div class="qps-tabs__nav" role="tablist">
+      {%- for block in section.blocks -%}
+        <button type="button" class="qps-tabs__tab" role="tab" id="qps-tab-{{ block.id }}" aria-controls="qps-panel-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
+          <span class="qps-ring"></span>{{ block.settings.label | escape }}
+        </button>
+      {%- endfor -%}
+    </div>
+    {%- for block in section.blocks -%}
+      <div class="qps-tabs__panel" role="tabpanel" id="qps-panel-{{ block.id }}" aria-labelledby="qps-tab-{{ block.id }}" {% unless forloop.first %}hidden{% endunless %}>
+        <div class="qps-tabs__img">
+          {%- if block.settings.image -%}
+            <img src="{{ block.settings.image | image_url: width: 900 }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" loading="lazy" alt="{{ block.settings.image.alt | default: block.settings.title | escape }}">
+          {%- else -%}
+            {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div>
+          {%- if block.settings.tag != blank -%}
+            <div class="qps-tabs__tag">{{ block.settings.tag | escape }}</div>
+          {%- endif -%}
+          <h3 class="qps-tabs__title">{{ block.settings.title | escape }}</h3>
+          <p class="qps-tabs__body">{{ block.settings.body | escape }}</p>
+          <div class="qps-tabs__points">
+            {%- for i in (1..3) -%}
+              {%- assign key = 'point' | append: i -%}
+              {%- assign point = block.settings[key] -%}
+              {%- if point != blank -%}
+                <div class="qps-tabs__point">
+                  <span class="qps-tickring"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5F7A68" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
+                  <span>{{ point | escape }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - why tabs",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Quity" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "More than a device in a" },
+    { "type": "text", "id": "title_italic", "label": "Heading italic word", "default": "box" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tab label", "default": "Prescriber-matched" },
+        { "type": "image_picker", "id": "image", "label": "Panel image" },
+        { "type": "text", "id": "tag", "label": "Panel tag", "default": "Matched to your dependence" },
+        { "type": "text", "id": "title", "label": "Panel title", "default": "A strength that isn't a guess" },
+        { "type": "textarea", "id": "body", "label": "Panel body" },
+        { "type": "text", "id": "point1", "label": "Point 1" },
+        { "type": "text", "id": "point2", "label": "Point 2" },
+        { "type": "text", "id": "point3", "label": "Point 3" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - why tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Prescriber-matched",
+            "tag": "Matched to your dependence",
+            "title": "A strength that isn't a guess",
+            "body": "Your starting strength is set by an Australian-registered prescriber from how much you actually smoke, then adjusted at review, not left to chance.",
+            "point1": "Strength set from your real smoking history",
+            "point2": "Reviewed by an AHPRA-registered prescriber",
+            "point3": "Adjusted at every check-in, never fixed"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Refillable",
+            "tag": "Cheaper over time",
+            "title": "A refillable system, not a disposable",
+            "body": "Refill with your prescribed e-liquid and swap the coil when flavour fades. A fraction of the per-millilitre cost of disposables, with far less waste.",
+            "point1": "Refill for a fraction of disposable cost",
+            "point2": "Swap coils in seconds, no wasted device",
+            "point3": "Five 5mL pods included in your kit"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Pharmacist support",
+            "tag": "Included at no charge",
+            "title": "A pharmacist in your corner",
+            "body": "Every order includes access to our pharmacist team and a structured plan, real support when cravings hit, not just a device in a box.",
+            "point1": "Message our pharmacists any time",
+            "point2": "A structured quit plan, not just a device",
+            "point3": "Included with every order, no extra fee"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Built to taper",
+            "tag": "Designed to quit",
+            "title": "Built to step you down",
+            "body": "The Solo Plus is made to taper. Lower your strength over months and transition off nicotine entirely, the goal is to stop needing it.",
+            "point1": "Step your strength down month by month",
+            "point2": "Move to patches or lozenges when ready",
+            "point3": "The goal is to stop needing it at all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

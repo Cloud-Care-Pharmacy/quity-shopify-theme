@@ -1,0 +1,71 @@
+{%- comment -%}
+  Product Store - when to replace
+  Warm band. Six numbered sign cards in a three-column grid.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps qps-band--warm">
+  <div class="qps__wrap qps__wrap--1160 qps-replace">
+    <div class="qps-head qps-replace__head">
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-h2 qps-h2--lg">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.sub != blank -%}
+        <p class="qps-head__sub">{{ section.settings.sub | escape }}</p>
+      {%- endif -%}
+    </div>
+    <div class="qps-replace__grid">
+      {%- for block in section.blocks -%}
+        <div class="qps-replace__card" {{ block.shopify_attributes }}>
+          <span class="qps-replace__num">{{ block.settings.number | escape }}</span>
+          <h3 class="qps-replace__title">{{ block.settings.title | escape }}</h3>
+          <p class="qps-replace__body">{{ block.settings.body | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - replace",
+  "class": "index-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "Maintenance" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Knowing when to replace" },
+    {
+      "type": "textarea",
+      "id": "sub",
+      "label": "Sub-paragraph",
+      "default": "A coil is a consumable. Any one of these six signs means it's spent, replace it and prime a fresh one."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sign",
+      "name": "Sign",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Burnt taste" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - replace",
+      "blocks": [
+        { "type": "sign", "settings": { "number": "01", "title": "Burnt taste", "body": "A scorched, acrid flavour - the clearest sign the wick has run dry." } },
+        { "type": "sign", "settings": { "number": "02", "title": "Darkened cotton", "body": "If the wick looks dark or charred through the pod, the coil is spent." } },
+        { "type": "sign", "settings": { "number": "03", "title": "Leaking e-liquid", "body": "Liquid pooling around the pod points to a worn seal or tired coil." } },
+        { "type": "sign", "settings": { "number": "04", "title": "Weak vapour", "body": "Noticeably less vapour at the same setting means output is fading." } },
+        { "type": "sign", "settings": { "number": "05", "title": "Muted flavour", "body": "Flavour turns flat or muddy well before it should - time to change." } },
+        { "type": "sign", "settings": { "number": "06", "title": "Gurgling draw", "body": "A wet, bubbling draw signals flooding - fit and prime a fresh coil." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

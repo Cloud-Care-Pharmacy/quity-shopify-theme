@@ -1,0 +1,86 @@
+{%- comment -%}
+  Product Store - starting strengths
+  Two columns: copy + dependence chips on the left, a Low/High
+  strength table (raised card) on the right.
+{%- endcomment -%}
+
+{{ 'product-store.css' | asset_url | stylesheet_tag }}
+
+<section class="qps">
+  <div class="qps__wrap qps__wrap--1240 qps-strengths">
+    <div>
+      {%- if section.settings.pill != blank -%}
+        <span class="qps-pill">{{ section.settings.pill | escape }}</span>
+      {%- endif -%}
+      <h2 class="qps-strengths__title">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.copy != blank -%}
+        <p class="qps-strengths__copy">{{ section.settings.copy | escape }}</p>
+      {%- endif -%}
+      <div class="qps-strengths__chips">
+        {%- if section.settings.chip1 != blank -%}
+          <span class="qps-strengths__chip">{{ section.settings.chip1 | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.chip2 != blank -%}
+          <span class="qps-strengths__chip">{{ section.settings.chip2 | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="qps-strengths__table">
+      <div class="qps-strengths__row qps-strengths__row--head">
+        <div class="qps-strengths__th">{{ section.settings.col_product | escape }}</div>
+        <div class="qps-strengths__th">{{ section.settings.col_low | escape }}</div>
+        <div class="qps-strengths__th">{{ section.settings.col_high | escape }}</div>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="qps-strengths__row" {{ block.shopify_attributes }}>
+          <div class="qps-strengths__prod">{{ block.settings.product_name | escape }}</div>
+          <div class="qps-strengths__val">{{ block.settings.low | escape }}</div>
+          <div class="qps-strengths__val">{{ block.settings.high | escape }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product store - strengths",
+  "class": "index-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Eyebrow pill", "default": "Getting the dose right" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Starting strengths to quit" },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "The RACGP suggests matching your starting strength to how dependent you are, roughly, how soon after waking you reach for a cigarette and how many you smoke a day."
+    },
+    { "type": "text", "id": "chip1", "label": "Chip 1", "default": "Less dependent · under 10/day" },
+    { "type": "text", "id": "chip2", "label": "Chip 2", "default": "More dependent · vape within 30 min" },
+    { "type": "text", "id": "col_product", "label": "Product column label", "default": "Typical product" },
+    { "type": "text", "id": "col_low", "label": "Low column label", "default": "Low" },
+    { "type": "text", "id": "col_high", "label": "High column label", "default": "High" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Strength row",
+      "settings": [
+        { "type": "text", "id": "product_name", "label": "Product", "default": "Nicotine salt pods" },
+        { "type": "text", "id": "low", "label": "Low", "default": "8-12 mg/mL" },
+        { "type": "text", "id": "high", "label": "High", "default": "25-50 mg/mL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product store - strengths",
+      "blocks": [
+        { "type": "row", "settings": { "product_name": "Nicotine salt pods", "low": "8-12 mg/mL", "high": "25-50 mg/mL" } },
+        { "type": "row", "settings": { "product_name": "Freebase e-liquid", "low": "3-6 mg/mL", "high": "12-18 mg/mL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
