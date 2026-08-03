@@ -1,16 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-store-main",
       "blocks": {
-        "benefit-1": { "type": "benefit", "settings": { "text": "Prescriber-matched strength" } },
-        "benefit-2": { "type": "benefit", "settings": { "text": "Refillable & rechargeable" } },
-        "benefit-3": { "type": "benefit", "settings": { "text": "Pharmacist support included" } },
-        "benefit-4": { "type": "benefit", "settings": { "text": "Designed to step you down" } },
-        "guarantee-1": { "type": "guarantee", "settings": { "icon": "prescription", "text": "Prescription included" } },
-        "guarantee-2": { "type": "guarantee", "settings": { "icon": "shipping", "text": "Free express over $120" } },
-        "guarantee-3": { "type": "guarantee", "settings": { "icon": "support", "text": "Pharmacist support" } },
-        "guarantee-4": { "type": "guarantee", "settings": { "icon": "package", "text": "Plain, discreet packaging" } }
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Prescriber-matched strength"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Refillable & rechargeable"
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Pharmacist support included"
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Designed to step you down"
+          }
+        },
+        "guarantee-1": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "prescription",
+            "text": "Prescription included"
+          }
+        },
+        "guarantee-2": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "shipping",
+            "text": "Free express over $120"
+          }
+        },
+        "guarantee-3": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "support",
+            "text": "Pharmacist support"
+          }
+        },
+        "guarantee-4": {
+          "type": "guarantee",
+          "settings": {
+            "icon": "package",
+            "text": "Plain, discreet packaging"
+          }
+        }
       },
       "block_order": [
         "benefit-1",
@@ -45,12 +98,41 @@
     "stats": {
       "type": "product-store-stats",
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "value": "5 × 5mL", "key": "Refill pods" } },
-        "stat-2": { "type": "stat", "settings": { "value": "1100", "key": "mAh battery" } },
-        "stat-3": { "type": "stat", "settings": { "value": "0.4 Ω", "key": "Starter coil" } },
-        "stat-4": { "type": "stat", "settings": { "value": "24 hr", "key": "Script review" } }
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "value": "5 × 5mL",
+            "key": "Refill pods"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "value": "1100",
+            "key": "mAh battery"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "value": "0.4 Ω",
+            "key": "Starter coil"
+          }
+        },
+        "stat-4": {
+          "type": "stat",
+          "settings": {
+            "value": "24 hr",
+            "key": "Script review"
+          }
+        }
       },
-      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"],
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4"
+      ],
       "settings": {}
     },
     "why-tabs": {
@@ -109,7 +191,12 @@
           }
         }
       },
-      "block_order": ["tab-1", "tab-2", "tab-3", "tab-4"],
+      "block_order": [
+        "tab-1",
+        "tab-2",
+        "tab-3",
+        "tab-4"
+      ],
       "settings": {
         "eyebrow": "Why Quity",
         "title": "More than a device in a",
@@ -119,14 +206,69 @@
     "compare": {
       "type": "product-store-compare",
       "blocks": {
-        "row-1": { "type": "row", "settings": { "feature": "Prescriber-matched strength", "hero": true, "alt2": false, "alt3": true } },
-        "row-2": { "type": "row", "settings": { "feature": "Refillable, cheaper per mL", "hero": true, "alt2": false, "alt3": true } },
-        "row-3": { "type": "row", "settings": { "feature": "Pharmacist support included", "hero": true, "alt2": false, "alt3": false } },
-        "row-4": { "type": "row", "settings": { "feature": "Discreet home delivery", "hero": true, "alt2": false, "alt3": false } },
-        "row-5": { "type": "row", "settings": { "feature": "Structured weaning plan", "hero": true, "alt2": false, "alt3": false } },
-        "row-6": { "type": "row", "settings": { "feature": "TGA-notified device", "hero": true, "alt2": true, "alt3": true } }
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "feature": "Prescriber-matched strength",
+            "hero": true,
+            "alt2": false,
+            "alt3": true
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "feature": "Refillable, cheaper per mL",
+            "hero": true,
+            "alt2": false,
+            "alt3": true
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "feature": "Pharmacist support included",
+            "hero": true,
+            "alt2": false,
+            "alt3": false
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "feature": "Discreet home delivery",
+            "hero": true,
+            "alt2": false,
+            "alt3": false
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "feature": "Structured weaning plan",
+            "hero": true,
+            "alt2": false,
+            "alt3": false
+          }
+        },
+        "row-6": {
+          "type": "row",
+          "settings": {
+            "feature": "TGA-notified device",
+            "hero": true,
+            "alt2": true,
+            "alt3": true
+          }
+        }
       },
-      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5", "row-6"],
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6"
+      ],
       "settings": {
         "eyebrow": "Compare",
         "title": "Quity vs the alternatives",
@@ -138,11 +280,33 @@
     "evidence": {
       "type": "product-store-evidence",
       "blocks": {
-        "card-1": { "type": "card", "settings": { "title": "Support doubles your odds", "body": "Combining a device with behavioural support outperforms going it alone." } },
-        "card-2": { "type": "card", "settings": { "title": "Matched, then adjusted", "body": "Starting at the right strength keeps cravings down in the critical first weeks." } },
-        "card-3": { "type": "card", "settings": { "title": "A plan to stop, not just switch", "body": "Every prescription comes with a structured path off nicotine." } }
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "title": "Support doubles your odds",
+            "body": "Combining a device with behavioural support outperforms going it alone."
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "title": "Matched, then adjusted",
+            "body": "Starting at the right strength keeps cravings down in the critical first weeks."
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "title": "A plan to stop, not just switch",
+            "body": "Every prescription comes with a structured path off nicotine."
+          }
+        }
       },
-      "block_order": ["card-1", "card-2", "card-3"],
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
       "settings": {
         "eyebrow": "The evidence",
         "figure": "2×",
@@ -153,12 +317,45 @@
     "timeline": {
       "type": "product-store-timeline",
       "blocks": {
-        "tl-1": { "type": "step", "settings": { "when": "Week 1", "title": "Switch", "body": "Set up your device and switch fully from cigarettes at your prescribed strength." } },
-        "tl-2": { "type": "step", "settings": { "when": "Month 1", "title": "Settle", "body": "Cravings ease. Your pharmacist checks in and adjusts strength if needed." } },
-        "tl-3": { "type": "step", "settings": { "when": "Month 3", "title": "Reduce", "body": "Begin stepping strength down as your nicotine need falls." } },
-        "tl-4": { "type": "step", "settings": { "when": "Month 6+", "title": "Wean off", "body": "Transition toward patches or lozenges, and off nicotine entirely." } }
+        "tl-1": {
+          "type": "step",
+          "settings": {
+            "when": "Week 1",
+            "title": "Switch",
+            "body": "Set up your device and switch fully from cigarettes at your prescribed strength."
+          }
+        },
+        "tl-2": {
+          "type": "step",
+          "settings": {
+            "when": "Month 1",
+            "title": "Settle",
+            "body": "Cravings ease. Your pharmacist checks in and adjusts strength if needed."
+          }
+        },
+        "tl-3": {
+          "type": "step",
+          "settings": {
+            "when": "Month 3",
+            "title": "Reduce",
+            "body": "Begin stepping strength down as your nicotine need falls."
+          }
+        },
+        "tl-4": {
+          "type": "step",
+          "settings": {
+            "when": "Month 6+",
+            "title": "Wean off",
+            "body": "Transition toward patches or lozenges, and off nicotine entirely."
+          }
+        }
       },
-      "block_order": ["tl-1", "tl-2", "tl-3", "tl-4"],
+      "block_order": [
+        "tl-1",
+        "tl-2",
+        "tl-3",
+        "tl-4"
+      ],
       "settings": {
         "eyebrow": "What to expect",
         "title": "Your quit",
@@ -168,11 +365,36 @@
     "how-steps": {
       "type": "product-store-steps",
       "blocks": {
-        "how-1": { "type": "step", "settings": { "number": "01", "title": "Apply for your script", "body": "Answer a short health questionnaire. An Australian-registered prescriber reviews it, usually within 24 hours." } },
-        "how-2": { "type": "step", "settings": { "number": "02", "title": "Prime, fill & vape", "body": "Your kit arrives discreetly. Prime the coil, fill with your prescribed e-liquid, and make the switch." } },
-        "how-3": { "type": "step", "settings": { "number": "03", "title": "Taper with support", "body": "Your pharmacist helps you step down and eventually off nicotine, at no extra cost." } }
+        "how-1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Apply for your script",
+            "body": "Answer a short health questionnaire. An Australian-registered prescriber reviews it, usually within 24 hours."
+          }
+        },
+        "how-2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Prime, fill & vape",
+            "body": "Your kit arrives discreetly. Prime the coil, fill with your prescribed e-liquid, and make the switch."
+          }
+        },
+        "how-3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Taper with support",
+            "body": "Your pharmacist helps you step down and eventually off nicotine, at no extra cost."
+          }
+        }
       },
-      "block_order": ["how-1", "how-2", "how-3"],
+      "block_order": [
+        "how-1",
+        "how-2",
+        "how-3"
+      ],
       "settings": {
         "eyebrow": "How it works",
         "title": "Three steps to switch"
@@ -195,6 +417,7 @@
           "type": "device",
           "settings": {
             "image": "shopify://shop_images/OZ-POD-x-SMOK-Nord-6-Kit-with-box.png",
+            "product": "",
             "axis_label": "Closed",
             "pill": "Sealed, prefilled",
             "title": "Closed system",
@@ -210,6 +433,7 @@
           "type": "device",
           "settings": {
             "image": "shopify://shop_images/OZ-POD-Arco-Kit-3D-Picture_55da3cfc-3c45-4179-b935-ca4755fabe0f.png",
+            "product": "",
             "axis_label": "Refillable",
             "pill": "Fill your own",
             "title": "Refillable system",
@@ -225,6 +449,7 @@
           "type": "device",
           "settings": {
             "image": "shopify://shop_images/OZ-POD-x-SMOK-Nord-6-Refillable-Pods-3D.jpg",
+            "product": "",
             "axis_label": "Hybrid",
             "pill": "Sealed or refill",
             "title": "Hybrid system",
@@ -237,7 +462,11 @@
           }
         }
       },
-      "block_order": ["device-closed", "device-refillable", "device-hybrid"],
+      "block_order": [
+        "device-closed",
+        "device-refillable",
+        "device-hybrid"
+      ],
       "settings": {
         "style": "guide",
         "animation": "",
@@ -245,25 +474,74 @@
         "paddingmobile": "0px 0px 0px 0px",
         "marginsection": "0px 0px 0px 0px",
         "marginmobile": "0px 0px 0px 0px",
-        "bgsection": "#FFFFFF",
+        "bgsection": "#ffffff",
         "show_context": false,
+        "context_title": "Quity",
+        "context_sub": "Device guide · exploration",
         "eyebrow": "Choosing a device",
         "title": "Different device types",
         "lede": "Three architectures, each suited to a different stage of quitting, your prescriber helps you match one to where you're starting from.",
         "show_axis": false,
+        "axis_left": "Simplest · lowest effort",
+        "axis_right": "Most flexibility",
+        "label_upkeep": "Upkeep",
+        "label_cost": "Cost per mL",
+        "label_draw": "Draw",
+        "label_stage": "Best stage",
         "footnote": ""
       }
     },
     "nicotine-science": {
       "type": "product-store-vs",
       "blocks": {
-        "vs-1": { "type": "row", "settings": { "property": "Draw style", "left_value": "Tight - mouth to lung", "right_value": "Open - direct to lung" } },
-        "vs-2": { "type": "row", "settings": { "property": "Throat hit", "left_value": "Smooth at high strength", "right_value": "Harsh at high strength" } },
-        "vs-3": { "type": "row", "settings": { "property": "Strength", "left_value": "25-50 mg/mL", "right_value": "3-6 mg/mL" } },
-        "vs-4": { "type": "row", "settings": { "property": "Vapour", "left_value": "Cooler, discreet", "right_value": "Warmer, voluminous" } },
-        "vs-5": { "type": "row", "settings": { "property": "Suited to", "left_value": "Recent quitters", "right_value": "Lower nicotine need" } }
+        "vs-1": {
+          "type": "row",
+          "settings": {
+            "property": "Draw style",
+            "left_value": "Tight - mouth to lung",
+            "right_value": "Open - direct to lung"
+          }
+        },
+        "vs-2": {
+          "type": "row",
+          "settings": {
+            "property": "Throat hit",
+            "left_value": "Smooth at high strength",
+            "right_value": "Harsh at high strength"
+          }
+        },
+        "vs-3": {
+          "type": "row",
+          "settings": {
+            "property": "Strength",
+            "left_value": "25-50 mg/mL",
+            "right_value": "3-6 mg/mL"
+          }
+        },
+        "vs-4": {
+          "type": "row",
+          "settings": {
+            "property": "Vapour",
+            "left_value": "Cooler, discreet",
+            "right_value": "Warmer, voluminous"
+          }
+        },
+        "vs-5": {
+          "type": "row",
+          "settings": {
+            "property": "Suited to",
+            "left_value": "Recent quitters",
+            "right_value": "Lower nicotine need"
+          }
+        }
       },
-      "block_order": ["vs-1", "vs-2", "vs-3", "vs-4", "vs-5"],
+      "block_order": [
+        "vs-1",
+        "vs-2",
+        "vs-3",
+        "vs-4",
+        "vs-5"
+      ],
       "settings": {
         "pill": "The science",
         "title": "Nicotine salts vs.",
@@ -278,10 +556,27 @@
     "strengths": {
       "type": "product-store-strengths",
       "blocks": {
-        "sr-1": { "type": "row", "settings": { "product_name": "Nicotine salt pods", "low": "8-12 mg/mL", "high": "25-50 mg/mL" } },
-        "sr-2": { "type": "row", "settings": { "product_name": "Freebase e-liquid", "low": "3-6 mg/mL", "high": "12-18 mg/mL" } }
+        "sr-1": {
+          "type": "row",
+          "settings": {
+            "product_name": "Nicotine salt pods",
+            "low": "8-12 mg/mL",
+            "high": "25-50 mg/mL"
+          }
+        },
+        "sr-2": {
+          "type": "row",
+          "settings": {
+            "product_name": "Freebase e-liquid",
+            "low": "3-6 mg/mL",
+            "high": "12-18 mg/mL"
+          }
+        }
       },
-      "block_order": ["sr-1", "sr-2"],
+      "block_order": [
+        "sr-1",
+        "sr-2"
+      ],
       "settings": {
         "pill": "Getting the dose right",
         "title": "Starting strengths to quit",
@@ -331,7 +626,10 @@
           }
         }
       },
-      "block_order": ["coil-1", "coil-2"],
+      "block_order": [
+        "coil-1",
+        "coil-2"
+      ],
       "settings": {
         "pill": "Coils",
         "title": "Selecting the right resistance",
@@ -342,16 +640,58 @@
     "priming": {
       "type": "product-store-priming",
       "blocks": {
-        "prime-1": { "type": "step", "settings": { "number": "01", "text": "Remove the pod and open the fill port." } },
-        "prime-2": { "type": "step", "settings": { "number": "02", "text": "Add e-liquid slowly down the side, avoiding the centre tube." } },
-        "prime-3": { "type": "step", "settings": { "number": "03", "text": "Add a drop directly onto each exposed coil wick." } },
-        "prime-4": { "type": "step", "settings": { "number": "04", "text": "Reseat the pod firmly until it clicks." } },
-        "prime-5": { "type": "step", "settings": { "number": "05", "text": "Rest the filled pod 5-10 minutes before first use." } },
-        "prime-6": { "type": "step", "settings": { "number": "06", "text": "Start on low power with a few short primer draws." } }
+        "prime-1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "text": "Remove the pod and open the fill port."
+          }
+        },
+        "prime-2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "text": "Add e-liquid slowly down the side, avoiding the centre tube."
+          }
+        },
+        "prime-3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "text": "Add a drop directly onto each exposed coil wick."
+          }
+        },
+        "prime-4": {
+          "type": "step",
+          "settings": {
+            "number": "04",
+            "text": "Reseat the pod firmly until it clicks."
+          }
+        },
+        "prime-5": {
+          "type": "step",
+          "settings": {
+            "number": "05",
+            "text": "Rest the filled pod 5-10 minutes before first use."
+          }
+        },
+        "prime-6": {
+          "type": "step",
+          "settings": {
+            "number": "06",
+            "text": "Start on low power with a few short primer draws."
+          }
+        }
       },
-      "block_order": ["prime-1", "prime-2", "prime-3", "prime-4", "prime-5", "prime-6"],
+      "block_order": [
+        "prime-1",
+        "prime-2",
+        "prime-3",
+        "prime-4",
+        "prime-5",
+        "prime-6"
+      ],
       "settings": {
-        "image": "shopify://shop_images/OZ-Drip-Unflavoured-50mg-Advanced-Pharmacy-Supply-1.png",
         "pill": "Before first use",
         "title": "Priming your pod or coil",
         "copy": "Priming soaks the wick before power is applied. It takes two minutes and prevents a scorched first draw.",
@@ -361,14 +701,63 @@
     "replace-signs": {
       "type": "product-store-replace",
       "blocks": {
-        "sign-1": { "type": "sign", "settings": { "number": "01", "title": "Burnt taste", "body": "A scorched, acrid flavour - the clearest sign the wick has run dry." } },
-        "sign-2": { "type": "sign", "settings": { "number": "02", "title": "Darkened cotton", "body": "If the wick looks dark or charred through the pod, the coil is spent." } },
-        "sign-3": { "type": "sign", "settings": { "number": "03", "title": "Leaking e-liquid", "body": "Liquid pooling around the pod points to a worn seal or tired coil." } },
-        "sign-4": { "type": "sign", "settings": { "number": "04", "title": "Weak vapour", "body": "Noticeably less vapour at the same setting means output is fading." } },
-        "sign-5": { "type": "sign", "settings": { "number": "05", "title": "Muted flavour", "body": "Flavour turns flat or muddy well before it should - time to change." } },
-        "sign-6": { "type": "sign", "settings": { "number": "06", "title": "Gurgling draw", "body": "A wet, bubbling draw signals flooding - fit and prime a fresh coil." } }
+        "sign-1": {
+          "type": "sign",
+          "settings": {
+            "number": "01",
+            "title": "Burnt taste",
+            "body": "A scorched, acrid flavour - the clearest sign the wick has run dry."
+          }
+        },
+        "sign-2": {
+          "type": "sign",
+          "settings": {
+            "number": "02",
+            "title": "Darkened cotton",
+            "body": "If the wick looks dark or charred through the pod, the coil is spent."
+          }
+        },
+        "sign-3": {
+          "type": "sign",
+          "settings": {
+            "number": "03",
+            "title": "Leaking e-liquid",
+            "body": "Liquid pooling around the pod points to a worn seal or tired coil."
+          }
+        },
+        "sign-4": {
+          "type": "sign",
+          "settings": {
+            "number": "04",
+            "title": "Weak vapour",
+            "body": "Noticeably less vapour at the same setting means output is fading."
+          }
+        },
+        "sign-5": {
+          "type": "sign",
+          "settings": {
+            "number": "05",
+            "title": "Muted flavour",
+            "body": "Flavour turns flat or muddy well before it should - time to change."
+          }
+        },
+        "sign-6": {
+          "type": "sign",
+          "settings": {
+            "number": "06",
+            "title": "Gurgling draw",
+            "body": "A wet, bubbling draw signals flooding - fit and prime a fresh coil."
+          }
+        }
       },
-      "block_order": ["sign-1", "sign-2", "sign-3", "sign-4", "sign-5", "sign-6"],
+      "block_order": [
+        "sign-1",
+        "sign-2",
+        "sign-3",
+        "sign-4",
+        "sign-5",
+        "sign-6"
+      ],
       "settings": {
         "pill": "Maintenance",
         "title": "Knowing when to replace",
@@ -378,10 +767,27 @@
     "battery-mah": {
       "type": "product-store-mah",
       "blocks": {
-        "mah-1": { "type": "range", "settings": { "range": "400-600", "unit": "mAh", "use": "Closed / low-use devices" } },
-        "mah-2": { "type": "range", "settings": { "range": "800-1000", "unit": "mAh", "use": "All-day refillable devices" } }
+        "mah-1": {
+          "type": "range",
+          "settings": {
+            "range": "400-600",
+            "unit": "mAh",
+            "use": "Closed / low-use devices"
+          }
+        },
+        "mah-2": {
+          "type": "range",
+          "settings": {
+            "range": "800-1000",
+            "unit": "mAh",
+            "use": "All-day refillable devices"
+          }
+        }
       },
-      "block_order": ["mah-1", "mah-2"],
+      "block_order": [
+        "mah-1",
+        "mah-2"
+      ],
       "settings": {
         "pill": "Battery life",
         "title": "What is device",
@@ -394,19 +800,97 @@
     "included": {
       "type": "product-store-included",
       "blocks": {
-        "item-1": { "type": "item", "settings": { "name": "Solo Plus device", "qty": "×1" } },
-        "item-2": { "type": "item", "settings": { "name": "Refillable pods · 5mL", "qty": "×5" } },
-        "item-3": { "type": "item", "settings": { "name": "USB-C charging cable", "qty": "×1" } },
-        "item-4": { "type": "item", "settings": { "name": "Spare coil · 0.4Ω", "qty": "×1" } },
-        "item-5": { "type": "item", "settings": { "name": "Quick-start & weaning guide", "qty": "×1" } },
-        "spec-1": { "type": "spec", "settings": { "key": "Battery", "value": "1100 mAh" } },
-        "spec-2": { "type": "spec", "settings": { "key": "Coil", "value": "0.4 Ω refillable" } },
-        "spec-3": { "type": "spec", "settings": { "key": "Pods", "value": "5 × 5mL" } },
-        "spec-4": { "type": "spec", "settings": { "key": "Charging", "value": "USB-C" } },
-        "spec-5": { "type": "spec", "settings": { "key": "Registration", "value": "TGA-notified" } },
-        "spec-6": { "type": "spec", "settings": { "key": "Warranty", "value": "12 months" } }
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "name": "Solo Plus device",
+            "qty": "×1"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "name": "Refillable pods · 5mL",
+            "qty": "×5"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "name": "USB-C charging cable",
+            "qty": "×1"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "name": "Spare coil · 0.4Ω",
+            "qty": "×1"
+          }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": {
+            "name": "Quick-start & weaning guide",
+            "qty": "×1"
+          }
+        },
+        "spec-1": {
+          "type": "spec",
+          "settings": {
+            "key": "Battery",
+            "value": "1100 mAh"
+          }
+        },
+        "spec-2": {
+          "type": "spec",
+          "settings": {
+            "key": "Coil",
+            "value": "0.4 Ω refillable"
+          }
+        },
+        "spec-3": {
+          "type": "spec",
+          "settings": {
+            "key": "Pods",
+            "value": "5 × 5mL"
+          }
+        },
+        "spec-4": {
+          "type": "spec",
+          "settings": {
+            "key": "Charging",
+            "value": "USB-C"
+          }
+        },
+        "spec-5": {
+          "type": "spec",
+          "settings": {
+            "key": "Registration",
+            "value": "TGA-notified"
+          }
+        },
+        "spec-6": {
+          "type": "spec",
+          "settings": {
+            "key": "Warranty",
+            "value": "12 months"
+          }
+        }
       },
-      "block_order": ["item-1", "item-2", "item-3", "item-4", "item-5", "spec-1", "spec-2", "spec-3", "spec-4", "spec-5", "spec-6"],
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "spec-1",
+        "spec-2",
+        "spec-3",
+        "spec-4",
+        "spec-5",
+        "spec-6"
+      ],
       "settings": {
         "included_label": "What's included",
         "specs_label": "Specifications"
@@ -415,12 +899,50 @@
     "reviews": {
       "type": "product-store-reviews",
       "blocks": {
-        "review-1": { "type": "review", "settings": { "stars": 5, "quote": "Switched in a week and never looked back. The strength was spot on from day one.", "name": "Marcus T.", "meta": "Verified · Solo Plus" } },
-        "review-2": { "type": "review", "settings": { "stars": 5, "quote": "The pharmacist support made all the difference when the cravings hit hardest.", "name": "Priya N.", "meta": "Verified · Solo Plus" } },
-        "review-3": { "type": "review", "settings": { "stars": 5, "quote": "Discreet delivery, easy refills, and my script renews itself. Effortless.", "name": "Dan R.", "meta": "Verified · Subscriber" } },
-        "review-4": { "type": "review", "settings": { "stars": 4, "quote": "Took a couple of days to get the priming right, then it was perfect.", "name": "Sarah L.", "meta": "Verified · Solo Plus" } }
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Switched in a week and never looked back. The strength was spot on from day one.",
+            "name": "Marcus T.",
+            "meta": "Verified · Solo Plus"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "The pharmacist support made all the difference when the cravings hit hardest.",
+            "name": "Priya N.",
+            "meta": "Verified · Solo Plus"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "quote": "Discreet delivery, easy refills, and my script renews itself. Effortless.",
+            "name": "Dan R.",
+            "meta": "Verified · Subscriber"
+          }
+        },
+        "review-4": {
+          "type": "review",
+          "settings": {
+            "stars": 4,
+            "quote": "Took a couple of days to get the priming right, then it was perfect.",
+            "name": "Sarah L.",
+            "meta": "Verified · Solo Plus"
+          }
+        }
       },
-      "block_order": ["review-1", "review-2", "review-3", "review-4"],
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3",
+        "review-4"
+      ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Reviews",
         "score": "4.8",
@@ -436,16 +958,73 @@
     "faq": {
       "type": "product-store-faq",
       "blocks": {
-        "faq-1": { "type": "faq", "settings": { "question": "Do I need a prescription to buy?", "answer": "Yes. Nicotine vaping products are prescription-only in Australia. Apply through Quity and an Australian-registered prescriber reviews your details, usually within 24 hours." } },
-        "faq-2": { "type": "faq", "settings": { "question": "How long does delivery take?", "answer": "Orders ship within 1-2 business days and arrive in 2-5 days depending on your state. Express shipping is free over $120." } },
-        "faq-3": { "type": "faq", "settings": { "question": "Is the packaging discreet?", "answer": "Always. Everything ships in plain, unbranded packaging with no reference to the contents." } },
-        "faq-4": { "type": "faq", "settings": { "question": "How do I choose a strength?", "answer": "Your prescriber recommends a starting strength based on how much you smoke. You can adjust it at your next review." } },
-        "faq-5": { "type": "faq", "settings": { "question": "Can I subscribe and save?", "answer": "Yes. A subscription takes 10% off every repeat order, and you can pause or cancel anytime." } },
-        "faq-6": { "type": "faq", "settings": { "question": "How often do I replace the coil?", "answer": "Most coils last one to two weeks. Replace when the flavour fades or you notice a burnt taste." } },
-        "faq-7": { "type": "faq", "settings": { "question": "What if my prescription expires?", "answer": "We remind you before it lapses. Renewing takes a few minutes and keeps your repeats running." } },
-        "faq-8": { "type": "faq", "settings": { "question": "Do you help me quit for good?", "answer": "Every order includes pharmacist support and a structured weaning plan designed to step you off nicotine entirely." } }
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need a prescription to buy?",
+            "answer": "Yes. Nicotine vaping products are prescription-only in Australia. Apply through Quity and an Australian-registered prescriber reviews your details, usually within 24 hours."
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "Orders ship within 1-2 business days and arrive in 2-5 days depending on your state. Express shipping is free over $120."
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is the packaging discreet?",
+            "answer": "Always. Everything ships in plain, unbranded packaging with no reference to the contents."
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I choose a strength?",
+            "answer": "Your prescriber recommends a starting strength based on how much you smoke. You can adjust it at your next review."
+          }
+        },
+        "faq-5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I subscribe and save?",
+            "answer": "Yes. A subscription takes 10% off every repeat order, and you can pause or cancel anytime."
+          }
+        },
+        "faq-6": {
+          "type": "faq",
+          "settings": {
+            "question": "How often do I replace the coil?",
+            "answer": "Most coils last one to two weeks. Replace when the flavour fades or you notice a burnt taste."
+          }
+        },
+        "faq-7": {
+          "type": "faq",
+          "settings": {
+            "question": "What if my prescription expires?",
+            "answer": "We remind you before it lapses. Renewing takes a few minutes and keeps your repeats running."
+          }
+        },
+        "faq-8": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you help me quit for good?",
+            "answer": "Every order includes pharmacist support and a structured weaning plan designed to step you off nicotine entirely."
+          }
+        }
       },
-      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6", "faq-7", "faq-8"],
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "faq-6",
+        "faq-7",
+        "faq-8"
+      ],
       "settings": {
         "eyebrow": "Questions",
         "title": "Frequently asked"
