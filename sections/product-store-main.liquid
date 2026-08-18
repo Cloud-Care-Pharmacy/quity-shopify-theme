@@ -160,7 +160,7 @@
         <span class="qps-price__save" data-qps-price-save data-qps-save-label="{{ section.settings.save_label | default: 'Save' | escape }}" hidden></span>
       </div>
 
-      {%- form 'product', product, data-qps-form: '' -%}
+      {%- form 'product', product, data-qps-form: 'true' -%}
         <input type="hidden" name="id" value="{{ current_variant.id }}" data-qps-id-input>
         <input type="hidden" name="quantity" value="1" data-qps-qty-input>
         {%- if selling_plan -%}
@@ -181,6 +181,7 @@
             {{ section.settings.atc_label | escape }} {{ current_variant.price | money }}
           </button>
         </div>
+        <p class="qps-atc__error" data-qps-error role="alert" hidden></p>
       {%- endform -%}
 
       {%- if section.settings.stock_text != blank -%}
