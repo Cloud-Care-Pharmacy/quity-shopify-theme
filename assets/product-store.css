@@ -524,6 +524,13 @@
   background: #6E736F;
   cursor: not-allowed;
 }
+.qps-atc__error {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #C0392B;
+}
+.qps-atc__error[hidden] { display: none; }
 .qps-buy__stock {
   line-height: normal;
   font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
