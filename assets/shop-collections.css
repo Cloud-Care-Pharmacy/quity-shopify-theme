@@ -1,0 +1,719 @@
+/* ============================================================
+   Quity Shop / Collections — the browse-the-store landing page
+   ------------------------------------------------------------
+   Shared styles for the qsh- (Quity SHop) sections that build the
+   /collections page: search hero, spotlight product row, browse by
+   product type, browse by current usage, browse by knowledge level
+   and the brand wall. Scoped .qsh- classes, used by
+   sections/shop-*.liquid.
+
+   Same design language as assets/product-store.css and
+   assets/device-types.css: Jost for headings and copy, JetBrains
+   Mono for eyebrows and pills, Newsreader italic for the accent
+   word, ink #0F1110 on white or warm #FAF8F2, #E3E0D7 hairlines,
+   999px pills and 16/24px card radii. Fonts are loaded in
+   layout/theme.liquid; colours are hard-coded Quity tokens.
+   ============================================================ */
+
+/* --- Scope reset --- */
+.qsh,
+.qsh *,
+.qsh *::before,
+.qsh *::after { box-sizing: border-box; }
+
+.qsh {
+  background: #FFFFFF;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  color: #383D3A;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Re-assert Jost + normal line-height over the theme's element-level
+   `body, input, textarea, button, select, p { font-family: var(--g-font-2);
+   font-size: var(--g-font-size) }` and the body line-height rule. */
+.qsh p,
+.qsh input,
+.qsh select,
+.qsh button,
+.qsh textarea {
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  line-height: normal;
+}
+
+/* Stroke icons: opt out of the theme's global
+   `svg, .icon { width:16px; height:16px; fill: currentColor }`. */
+.qsh svg { width: auto; height: auto; fill: none; display: block; }
+.qsh svg[fill="currentColor"] { fill: currentColor; }
+
+.qsh a { text-decoration: none; color: inherit; }
+.qsh img { max-width: 100%; }
+.qsh [hidden] { display: none !important; }
+
+/* --- Container --- */
+.qsh__wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* --- Bands --- */
+.qsh-band { padding: 64px 0 12px; }
+.qsh-band--warm {
+  background: #FAF8F2;
+  border-top: 1px solid #E3E0D7;
+  border-bottom: 1px solid #E3E0D7;
+}
+
+/* --- Shared type --- */
+.qsh-eyebrow {
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6E736F;
+  margin-bottom: 14px;
+}
+.qsh-it {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-style: italic;
+  color: #E55B4F;
+}
+
+/* --- Band heading --- */
+.qsh-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.qsh-head__title {
+  margin: 0;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: #0F1110;
+}
+.qsh-head__link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6E736F;
+  transition: color 0.15s ease;
+}
+.qsh-head__link:hover { color: #0F1110; }
+.qsh-head__link svg { width: 15px; height: 15px; stroke: currentColor; }
+
+/* ============================================================
+   1. Hero — sections/shop-hero.liquid
+   ============================================================ */
+.qsh-hero {
+  background: #FAF8F2;
+  border-bottom: 1px solid #E3E0D7;
+  text-align: center;
+}
+.qsh-hero--plain {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E3E0D7;
+}
+.qsh-hero__inner {
+  padding: 64px 40px 68px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.qsh-hero__title {
+  margin: 0;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: #0F1110;
+}
+.qsh-hero__sub {
+  margin: 16px auto 0;
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #5B615E;
+}
+.qsh-hero__sub p { margin: 0; }
+.qsh-hero__sub a {
+  color: #0F1110;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.qsh-hero__sub a:hover { color: #E55B4F; }
+
+/* Search field */
+.qsh-search {
+  position: relative;
+  display: block;
+  max-width: 520px;
+  margin: 30px auto 0;
+}
+.qsh-search__input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #E3E0D7;
+  border-radius: 999px;
+  background: #FFFFFF;
+  padding: 0 62px 0 24px;
+  font-size: 15px;
+  color: #0F1110;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qsh-search__input::placeholder { color: #9A9F9B; }
+.qsh-search__input:focus {
+  outline: none;
+  border-color: #0F1110;
+}
+.qsh-search__submit {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: #0F1110;
+  color: #F4F2EC;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+.qsh-search__submit svg { width: 18px; height: 18px; stroke: currentColor; }
+.qsh-search__submit:hover { background: #E55B4F; }
+
+/* Popular searches */
+.qsh-hero__popular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.qsh-hero__popular-label {
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6E736F;
+  margin-right: 4px;
+}
+.qsh-chip {
+  display: inline-block;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5F7A68;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.qsh-chip:hover {
+  color: #0F1110;
+  border-color: #0F1110;
+}
+
+/* ============================================================
+   2. Spotlight — sections/shop-spotlight.liquid
+   ============================================================ */
+.qsh-spotlight__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.qsh-card { display: flex; flex-direction: column; }
+
+.qsh-card__media {
+  position: relative;
+  display: block;
+  border: 1px solid #E3E0D7;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #F4F2EC;
+  padding-top: 100%;
+  margin-bottom: 15px;
+}
+.qsh-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 18px;
+}
+.qsh-card__media .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* Corner flag, same shape as the product page's .qps-gallery__flag.
+   Sized to keep a shipping line on one row inside a six-up tile. */
+.qsh-card__ribbon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  max-width: calc(100% - 24px);
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0F1110;
+  background: #FFFFFF;
+  border: 1px solid #D6E0D6;
+  padding: 5px 9px;
+  border-radius: 999px;
+}
+.qsh-card__soldout {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #E55B4F;
+  background: #FBEAE8;
+  border: 1px solid #F5D3CE;
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.qsh-card__name {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #0F1110;
+  margin-bottom: 5px;
+  transition: color 0.15s ease;
+}
+.qsh-card__name:hover { color: #E55B4F; }
+.qsh-card__desc {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #5B615E;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 38px;
+}
+.qsh-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #0F1110;
+}
+.qsh-card__price del {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6E736F;
+}
+
+.qsh-card__form { margin-top: auto; }
+
+.qsh-card__select-wr { position: relative; margin-bottom: 9px; }
+.qsh-card__select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #E3E0D7;
+  border-radius: 10px;
+  background: #FFFFFF;
+  padding: 0 34px 0 14px;
+  font-size: 13.5px;
+  color: #0F1110;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qsh-card__select:focus {
+  outline: none;
+  border-color: #0F1110;
+}
+.qsh-card__select-wr::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -5px;
+  border-right: 1.4px solid #6E736F;
+  border-bottom: 1.4px solid #6E736F;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.qsh-qty {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  height: 44px;
+  border: 1px solid #E3E0D7;
+  border-radius: 999px;
+  margin-bottom: 9px;
+  padding: 0 4px;
+}
+.qsh-qty__btn {
+  height: 36px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  color: #0F1110;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+.qsh-qty__btn:hover { background: #F4F2EC; }
+.qsh-qty__num {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: #0F1110;
+}
+
+.qsh-btn {
+  display: block;
+  width: 100%;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: #0F1110;
+  color: #F4F2EC;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.qsh-btn:hover { background: #E55B4F; color: #F4F2EC; }
+.qsh-btn[disabled],
+.qsh-btn--muted {
+  background: #6E736F;
+  cursor: not-allowed;
+}
+.qsh-btn--muted:hover { background: #6E736F; }
+
+.qsh-card__error {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #C0392B;
+}
+
+/* ============================================================
+   3. Browse tiles — sections/shop-product-types.liquid
+   ============================================================ */
+.qsh-types__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+.qsh-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 138px;
+  padding: 26px 14px;
+  border: 1px solid #E3E0D7;
+  border-radius: 24px;
+  background: #FFFFFF;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.qsh-band--warm .qsh-type { background: #FFFFFF; }
+.qsh-type:hover {
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
+}
+.qsh-type__label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #0F1110;
+}
+
+/* Icon ring, shared by the type + knowledge tiles.
+   Same green-on-pale treatment as the product page's .qps-tickring. */
+.qsh-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  color: #5F7A68;
+  flex: 0 0 auto;
+}
+.qsh-icon svg {
+  width: 21px;
+  height: 21px;
+  stroke: currentColor;
+}
+.qsh-icon--lg { width: 56px; height: 56px; }
+.qsh-icon--lg svg { width: 24px; height: 24px; }
+
+/* ============================================================
+   4. Current usage — sections/shop-usage.liquid
+   ============================================================ */
+.qsh-usage__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-usage__card {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  padding-top: 76%;
+  background: #0F1110;
+  isolation: isolate;
+}
+.qsh-usage__card img,
+.qsh-usage__card .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.qsh-usage__card:hover img { transform: scale(1.04); }
+.qsh-usage__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 17, 16, 0.9) 0%, rgba(15, 17, 16, 0.45) 40%, rgba(15, 17, 16, 0) 72%);
+}
+.qsh-usage__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 18px;
+  color: #F4F2EC;
+}
+.qsh-usage__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.qsh-usage__title {
+  display: block;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: #F4F2EC;
+  text-transform: none;
+}
+/* `.qsh svg { width:auto; height:auto }` ties this on specificity and would
+   win on order, so the arrow is sized through its parent. */
+.qsh-usage__row .qsh-usage__arrow {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  stroke: #F4F2EC;
+  transition: transform 0.25s ease;
+}
+.qsh-usage__card:hover .qsh-usage__row .qsh-usage__arrow { transform: translateX(3px); }
+.qsh-usage__desc {
+  display: block;
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: rgba(244, 242, 236, 0.72);
+}
+
+/* ============================================================
+   5. Knowledge — sections/shop-knowledge.liquid
+   ============================================================ */
+.qsh-knowledge__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-knowledge__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 190px;
+  padding: 36px 26px 34px;
+  border: 1px solid #E3E0D7;
+  border-radius: 24px;
+  background: #FAF8F2;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.qsh-band--warm .qsh-knowledge__card { background: #FFFFFF; }
+.qsh-knowledge__card:hover {
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
+}
+.qsh-knowledge__title {
+  display: block;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #0F1110;
+  text-transform: none;
+}
+.qsh-knowledge__desc {
+  display: block;
+  margin: 9px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5B615E;
+}
+
+/* ============================================================
+   6. Brands — sections/shop-brands.liquid
+   ============================================================ */
+.qsh-brands__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 92px;
+  padding: 18px 22px;
+  border: 1px solid #E3E0D7;
+  border-radius: 16px;
+  background: #FFFFFF;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.qsh-brand:hover {
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
+}
+.qsh-brand img {
+  max-height: 46px;
+  width: auto;
+  object-fit: contain;
+}
+.qsh-brand__name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0F1110;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1200px) {
+  .qsh-spotlight__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .qsh-types__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1000px) {
+  .qsh__wrap { padding: 0 24px; }
+  .qsh-hero__inner { padding: 52px 24px 56px; }
+  .qsh-hero__title { font-size: 38px; }
+  .qsh-head__title { font-size: 29px; }
+  .qsh-spotlight__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .qsh-usage__grid,
+  .qsh-knowledge__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qsh-brands__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 749px) {
+  .qsh__wrap { padding: 0 18px; }
+  .qsh-band { padding: 44px 0 8px; }
+  .qsh-hero__inner { padding: 40px 18px 44px; }
+  .qsh-hero__title { font-size: 30px; letter-spacing: -0.02em; }
+  .qsh-hero__sub { font-size: 15px; }
+  .qsh-search__input { height: 50px; padding-right: 56px; }
+  .qsh-search__submit { width: 40px; height: 40px; top: 5px; right: 5px; }
+  .qsh-head {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-bottom: 20px;
+  }
+  .qsh-head__title { font-size: 25px; }
+  .qsh-spotlight__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .qsh-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-usage__grid,
+  .qsh-knowledge__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-usage__card { padding-top: 100%; }
+  .qsh-brands__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-card__name { font-size: 15px; }
+  .qsh-card__price { font-size: 16px; }
+  .qsh-card__ribbon { font-size: 8px; letter-spacing: 0.06em; padding: 5px 8px; }
+  .qsh-type { min-height: 118px; padding: 20px 12px; border-radius: 18px; }
+  .qsh-knowledge__card { padding: 26px 18px 24px; min-height: 0; border-radius: 18px; }
+  .qsh-usage__title { font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+  .qsh-hero__title { font-size: 27px; }
+  .qsh-brand { min-height: 74px; padding: 14px; }
+  .qsh-brand img { max-height: 36px; }
+  .qsh-brand__name { font-size: 13px; }
+}

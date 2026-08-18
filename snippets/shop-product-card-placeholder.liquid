@@ -1,0 +1,33 @@
+{%- comment -%}
+  Quity Shop — spotlight card placeholder.
+
+  Shown in the theme editor for a product block with no product picked
+  yet, and for a spotlight section with neither blocks nor a fallback
+  collection, so the row keeps its shape while it is being set up.
+
+  Params: index, ribbon, block_attributes.
+{%- endcomment -%}
+
+<div class="qsh-card" {{ block_attributes }}>
+  <div class="qsh-card__media">
+    {%- if ribbon != blank -%}
+      <span class="qsh-card__ribbon">{{ ribbon | escape }}</span>
+    {%- endif -%}
+    {%- liquid
+      assign ph_index = index | default: 1 | minus: 1 | modulo: 6 | plus: 1
+      assign placeholder = 'product-' | append: ph_index
+    -%}
+    {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+  <span class="qsh-card__name">{{ 'homepage.onboarding.product_title' | t }}</span>
+  <p class="qsh-card__desc">Pick a product for this block in the theme editor.</p>
+  <div class="qsh-card__price">{{ 1999 | money }}</div>
+  <div class="qsh-card__form">
+    <div class="qsh-qty">
+      <span class="qsh-qty__btn">&minus;</span>
+      <span class="qsh-qty__num">1</span>
+      <span class="qsh-qty__btn">+</span>
+    </div>
+    <span class="qsh-btn qsh-btn--muted">{{ 'products.product.add_to_cart' | t }}</span>
+  </div>
+</div>

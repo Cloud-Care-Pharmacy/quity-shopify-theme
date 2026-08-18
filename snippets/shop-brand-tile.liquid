@@ -1,0 +1,32 @@
+{%- comment -%}
+  Quity Shop — one brand tile.
+
+  Params:
+    name              vendor name, used for the wordmark and the fallback link
+    logo              optional logo image
+    link              optional link, defaults to the vendor filter
+    block_attributes  block.shopify_attributes when the tile came from a block
+{%- endcomment -%}
+
+{%- liquid
+  assign tile_url = link
+  if tile_url == blank and name != blank
+    assign tile_vendor = name | url_encode
+    assign tile_url = routes.all_products_collection_url | append: '?filter.p.vendor=' | append: tile_vendor
+  endif
+-%}
+
+<a class="qsh-brand" href="{{ tile_url | default: routes.all_products_collection_url }}" {{ block_attributes }}>
+  {%- if logo -%}
+    <img
+      src="{{ logo | image_url: width: 320 }}"
+      srcset="{{ logo | image_url: width: 160 }} 160w, {{ logo | image_url: width: 320 }} 320w"
+      sizes="160px"
+      width="{{ logo.width }}"
+      height="{{ logo.height }}"
+      loading="lazy"
+      alt="{{ logo.alt | default: name | escape }}">
+  {%- else -%}
+    <span class="qsh-brand__name">{{ name | escape }}</span>
+  {%- endif -%}
+</a>

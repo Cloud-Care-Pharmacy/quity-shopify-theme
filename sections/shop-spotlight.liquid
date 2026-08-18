@@ -1,0 +1,220 @@
+{%- comment -%}
+  Quity Shop — spotlight product row
+  ----------------------------------
+  The hand-picked row under the hero: shipping ribbon, product shot on
+  the pale tile, name, one-line description, price, variant select,
+  quantity stepper and add to cart.
+
+  Products come from product blocks when the merchant has picked any,
+  otherwise from the chosen collection. Commerce is wired to the live
+  product: the select lists real variants, price follows the selection
+  and the button posts a real product form (AJAX with native
+  fallback). Styles: assets/shop-collections.css (.qsh- scope).
+  Behavior: assets/shop-collections.js.
+{%- endcomment -%}
+
+{{ 'shop-collections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'shop-collections.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign use_blocks = false
+  if section.blocks.size > 0
+    assign use_blocks = true
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qsh-band {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .qsh-band {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qsh qsh-band qsh-spotlight{% if section.settings.band == 'warm' %} qsh-band--warm{% endif %}" data-aos="{{ section.settings.animation }}">
+  <div class="qsh__wrap">
+    {%- render 'shop-section-head',
+      title: section.settings.title,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url -%}
+
+    <div class="qsh-spotlight__grid">
+      {%- if use_blocks -%}
+        {%- for block in section.blocks -%}
+          {%- assign card_product = block.settings.product -%}
+          {%- if card_product != blank -%}
+            {%- render 'shop-product-card',
+              product: card_product,
+              subtitle: block.settings.subtitle,
+              ribbon: section.settings.ribbon_text,
+              show_currency: section.settings.show_currency_code,
+              desc_words: section.settings.desc_words,
+              added_text: section.settings.added_text,
+              block_attributes: block.shopify_attributes -%}
+          {%- else -%}
+            {%- render 'shop-product-card-placeholder',
+              index: forloop.index,
+              ribbon: section.settings.ribbon_text,
+              block_attributes: block.shopify_attributes -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- elsif section.settings.collection != blank -%}
+        {%- for card_product in section.settings.collection.products limit: section.settings.products_limit -%}
+          {%- render 'shop-product-card',
+            product: card_product,
+            ribbon: section.settings.ribbon_text,
+            show_currency: section.settings.show_currency_code,
+            desc_words: section.settings.desc_words,
+            added_text: section.settings.added_text -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..6) -%}
+          {%- render 'shop-product-card-placeholder', index: i, ribbon: section.settings.ribbon_text -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop - spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Spotlight"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Heading link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Heading link"
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add product blocks to hand-pick the row. With no blocks the section falls back to the collection below."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products from collection",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Card"
+    },
+    {
+      "type": "text",
+      "id": "ribbon_text",
+      "label": "Ribbon text",
+      "info": "Leave empty to hide the ribbon.",
+      "default": "Free express shipping"
+    },
+    {
+      "type": "range",
+      "id": "desc_words",
+      "label": "Description length",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "wd",
+      "default": 10,
+      "info": "Words from the product description. Set to 0 to hide it."
+    },
+    {
+      "type": "text",
+      "id": "added_text",
+      "label": "Added confirmation",
+      "info": "Flashed on the button after a successful add.",
+      "default": "Added"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_code",
+      "label": "Show currency code with price",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "band",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "warm", "label": "Warm" }
+      ],
+      "default": "white"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 40 },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade up" }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Description override",
+          "info": "Leave empty to use the product description."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Shop - spotlight",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}
