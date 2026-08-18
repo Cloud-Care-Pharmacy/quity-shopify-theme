@@ -1,0 +1,222 @@
+{%- comment -%}
+  Quity Shop — search hero
+  ------------------------
+  Opens the /collections page: pharmacy wordmark heading, support
+  line, the store search field and the popular-search chips. Chips
+  are blocks; a chip with no link searches for its own label.
+
+  Design: Quity "Shop" handoff — scoped .qsh- classes styled in
+  assets/shop-collections.css. Fonts (Jost / Newsreader) are loaded
+  in layout/theme.liquid. No JavaScript: the field is a plain GET
+  form onto the theme's search results page.
+{%- endcomment -%}
+
+{{ 'shop-collections.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qsh-hero {
+    background: radial-gradient(115% 130% at 50% 0%, {{ section.settings.bg_top }} 0%, {{ section.settings.bg_bottom }} 100%);
+  }
+  #shopify-section-{{ section.id }} .qsh-hero__inner {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .qsh-hero__inner {
+      padding-top: {{ section.settings.padding_top | times: 0.65 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.65 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qsh qsh-hero" data-aos="{{ section.settings.animation }}">
+  <div class="qsh-hero__inner">
+    {%- if section.settings.title != blank -%}
+      {%- if section.settings.title_tag == 'h1' -%}
+        <h1 class="qsh-hero__title">{{ section.settings.title | escape }}</h1>
+      {%- else -%}
+        <h2 class="qsh-hero__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <div class="qsh-hero__sub">{{ section.settings.subtext }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.show_search -%}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="qsh-search">
+        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="options[prefix]" value="last">
+        <label class="visually-hidden" for="qsh-search-{{ section.id }}">
+          {{ 'general.search.search' | t }}
+        </label>
+        <input
+          class="qsh-search__input"
+          id="qsh-search-{{ section.id }}"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ section.settings.search_placeholder | escape }}"
+          autocomplete="off">
+        <button type="submit" class="qsh-search__submit" aria-label="{{ 'general.search.submit' | t }}">
+          {%- render 'shop-icon', name: 'search' -%}
+        </button>
+      </form>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="qsh-hero__popular">
+        {%- if section.settings.popular_label != blank -%}
+          <span class="qsh-hero__popular-label">{{ section.settings.popular_label | escape }}</span>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign chip_url = block.settings.link
+            if chip_url == blank
+              assign chip_term = block.settings.label | url_encode
+              assign chip_url = routes.search_url | append: '?type=product&q=' | append: chip_term
+            endif
+          -%}
+          <a class="qsh-chip" href="{{ chip_url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop - hero search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Tabuu Pharmacy"
+    },
+    {
+      "type": "select",
+      "id": "title_tag",
+      "label": "Heading tag",
+      "info": "Use H1 when this is the first heading on the page.",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Sub text",
+      "default": "<p>Your smokefree journey starts here. If you need product assistance there is online support here or, contact our team.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search..."
+    },
+    {
+      "type": "text",
+      "id": "popular_label",
+      "label": "Popular search label",
+      "default": "Popular search:"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "bg_top",
+      "label": "Background (top)",
+      "default": "#62762F"
+    },
+    {
+      "type": "color",
+      "id": "bg_bottom",
+      "label": "Background (bottom)",
+      "default": "#465622"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 58
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "default": 62
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade up" }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Popular search",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Solo Plus"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Leave empty to search for the label."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Shop - hero search",
+      "blocks": [
+        { "type": "chip", "settings": { "label": "Solo Plus" } },
+        { "type": "chip", "settings": { "label": "Americana" } },
+        { "type": "chip", "settings": { "label": "alt" } },
+        { "type": "chip", "settings": { "label": "Lula" } },
+        { "type": "chip", "settings": { "label": "alt X" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

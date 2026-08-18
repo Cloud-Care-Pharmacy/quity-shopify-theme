@@ -1,0 +1,657 @@
+/* ============================================================
+   Quity Shop / Collections — the browse-the-store landing page
+   ------------------------------------------------------------
+   Shared styles for the qsh- (Quity SHop) sections that build the
+   /collections page: search hero, spotlight product row, browse by
+   product type, browse by current usage, browse by knowledge level
+   and the brand wall. Scoped .qsh- classes, used by
+   sections/shop-*.liquid.
+
+   Fonts (Jost / Newsreader) are loaded in layout/theme.liquid.
+   Headings are Newsreader (serif), everything else is Jost, the
+   same split as the Quity handoff. Colours are hard-coded Quity
+   tokens, the same approach as assets/product-store.css.
+   ============================================================ */
+
+/* --- Scope reset --- */
+.qsh,
+.qsh *,
+.qsh *::before,
+.qsh *::after { box-sizing: border-box; }
+
+.qsh {
+  --qsh-deep: #4E6027;
+  --qsh-deep-2: #3F4E1F;
+  --qsh-green: #6C8E2C;
+  --qsh-green-dark: #587324;
+  --qsh-lime: #8CC63E;
+  --qsh-tile: #DEE9C4;
+  --qsh-tile-soft: #E9F0D8;
+  --qsh-ink: #262B1E;
+  --qsh-body: #6A7160;
+  --qsh-line: #E4E7DC;
+  --qsh-line-strong: #D3D9C6;
+
+  background: #FFFFFF;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  color: var(--qsh-ink);
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Re-assert Jost + normal line-height over the theme's element-level
+   `body, input, textarea, button, select, p { font-family: var(--g-font-2);
+   font-size: var(--g-font-size) }` and the body line-height rule. */
+.qsh p,
+.qsh input,
+.qsh select,
+.qsh button,
+.qsh textarea {
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  line-height: normal;
+}
+
+/* Stroke icons: opt out of the theme's global
+   `svg, .icon { width:16px; height:16px; fill: currentColor }`. */
+.qsh svg { width: auto; height: auto; fill: none; display: block; }
+.qsh svg[fill="currentColor"] { fill: currentColor; }
+
+.qsh a { text-decoration: none; color: inherit; }
+.qsh img { max-width: 100%; }
+
+/* --- Container --- */
+.qsh__wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* --- Band heading (Spotlight / By Product Type / ...) --- */
+.qsh-band { padding: 56px 0 12px; }
+.qsh-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+.qsh-head__title {
+  margin: 0;
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--qsh-deep);
+  text-transform: none;
+}
+.qsh-head__link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--qsh-green);
+  transition: color 0.2s ease;
+}
+.qsh-head__link:hover { color: var(--qsh-deep); }
+.qsh-head__link svg { width: 16px; height: 16px; stroke: currentColor; }
+
+/* ============================================================
+   1. Hero — sections/shop-hero.liquid
+   ============================================================ */
+.qsh-hero {
+  background:
+    radial-gradient(115% 130% at 50% 0%, #62762F 0%, #55692A 45%, #465622 100%);
+  color: #FFFFFF;
+  text-align: center;
+}
+.qsh-hero__inner {
+  padding: 58px 40px 62px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.qsh-hero__title {
+  margin: 0;
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #FFFFFF;
+  text-transform: none;
+}
+.qsh-hero__sub {
+  margin: 14px auto 0;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+}
+.qsh-hero__sub a {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Search field */
+.qsh-search {
+  position: relative;
+  display: block;
+  max-width: 420px;
+  margin: 26px auto 0;
+}
+.qsh-search__input {
+  width: 100%;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: #FFFFFF;
+  padding: 0 48px 0 22px;
+  font-size: 14px;
+  color: var(--qsh-ink);
+  box-shadow: 0 2px 10px rgba(20, 30, 10, 0.12);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qsh-search__input::placeholder { color: #9AA192; }
+.qsh-search__input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 2px;
+}
+.qsh-search__submit {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--qsh-deep);
+  cursor: pointer;
+  padding: 0;
+}
+.qsh-search__submit svg { width: 18px; height: 18px; stroke: currentColor; }
+.qsh-search__submit:hover { color: var(--qsh-green); }
+
+/* Popular searches */
+.qsh-hero__popular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.qsh-hero__popular-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-right: 2px;
+}
+.qsh-chip {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 12px;
+  color: #FFFFFF;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.qsh-chip:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+}
+
+/* ============================================================
+   2. Spotlight — sections/shop-spotlight.liquid
+   ============================================================ */
+.qsh-spotlight__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.qsh-card { display: flex; flex-direction: column; }
+
+.qsh-card__media {
+  position: relative;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--qsh-tile);
+  padding-top: 100%;
+  margin-bottom: 14px;
+}
+.qsh-card__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 26px 16px 16px;
+}
+.qsh-card__media .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.qsh-card__ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: var(--qsh-green);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 5px 8px;
+  font-size: 9px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.qsh-card__soldout {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  background: #FFFFFF;
+  color: #A4462F;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.qsh-card__name {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--qsh-ink);
+  margin-bottom: 5px;
+}
+.qsh-card__name:hover { color: var(--qsh-green); }
+.qsh-card__desc {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--qsh-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 34px;
+}
+.qsh-card__price {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--qsh-ink);
+  margin-bottom: 12px;
+}
+.qsh-card__price del {
+  margin-left: 6px;
+  font-weight: 400;
+  color: #9AA192;
+}
+
+.qsh-card__form { margin-top: auto; }
+
+.qsh-card__select-wr { position: relative; margin-bottom: 8px; }
+.qsh-card__select {
+  width: 100%;
+  height: 34px;
+  border: 1px solid var(--qsh-line-strong);
+  border-radius: 6px;
+  background: #FFFFFF;
+  padding: 0 28px 0 12px;
+  font-size: 12px;
+  color: var(--qsh-ink);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.qsh-card__select:focus {
+  outline: none;
+  border-color: var(--qsh-green);
+}
+.qsh-card__select-wr::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -5px;
+  border-right: 1.5px solid var(--qsh-body);
+  border-bottom: 1.5px solid var(--qsh-body);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.qsh-qty {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  height: 34px;
+  border: 1px solid var(--qsh-line-strong);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.qsh-qty__btn {
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--qsh-body);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+.qsh-qty__btn:hover { color: var(--qsh-green); }
+.qsh-qty__num {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--qsh-ink);
+}
+
+.qsh-btn {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  background: var(--qsh-green);
+  color: #FFFFFF;
+  padding: 11px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.qsh-btn:hover { background: var(--qsh-green-dark); color: #FFFFFF; }
+.qsh-btn[disabled] { opacity: 0.55; cursor: default; }
+.qsh-btn--muted { background: #A8B295; }
+.qsh-btn--muted:hover { background: #A8B295; }
+
+.qsh [hidden] { display: none !important; }
+
+.qsh-card__error {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #A4462F;
+}
+
+/* ============================================================
+   3. Browse tiles — sections/shop-product-types.liquid
+   ============================================================ */
+.qsh-types__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+.qsh-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 122px;
+  padding: 24px 14px;
+  border-radius: 10px;
+  background: var(--qsh-tile-soft);
+  text-align: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.qsh-type:hover {
+  background: var(--qsh-tile);
+  transform: translateY(-2px);
+}
+.qsh-type__label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--qsh-ink);
+}
+
+/* Circular outline icon, shared by the type + knowledge tiles */
+.qsh-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--qsh-deep);
+  color: var(--qsh-deep);
+  flex: 0 0 auto;
+}
+.qsh-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+.qsh-icon--lg { width: 54px; height: 54px; }
+.qsh-icon--lg svg { width: 24px; height: 24px; }
+
+/* ============================================================
+   4. Current usage — sections/shop-usage.liquid
+   ============================================================ */
+.qsh-usage__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-usage__card {
+  position: relative;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  padding-top: 74%;
+  background: #33391F;
+  isolation: isolate;
+}
+.qsh-usage__card img,
+.qsh-usage__card .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.qsh-usage__card:hover img { transform: scale(1.04); }
+.qsh-usage__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 20, 8, 0.88) 0%, rgba(15, 20, 8, 0.42) 38%, rgba(15, 20, 8, 0) 68%);
+}
+.qsh-usage__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 16px 16px 15px;
+  color: #FFFFFF;
+}
+.qsh-usage__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.qsh-usage__title {
+  display: block;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FFFFFF;
+  text-transform: none;
+}
+/* `.qsh svg { width:auto; height:auto }` ties this on specificity and would
+   win on order, so the arrow is sized through its parent. */
+.qsh-usage__row .qsh-usage__arrow {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  stroke: #FFFFFF;
+  transition: transform 0.25s ease;
+}
+.qsh-usage__card:hover .qsh-usage__row .qsh-usage__arrow { transform: translateX(3px); }
+.qsh-usage__desc {
+  display: block;
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ============================================================
+   5. Knowledge — sections/shop-knowledge.liquid
+   ============================================================ */
+.qsh-knowledge__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-knowledge__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  min-height: 168px;
+  padding: 36px 26px 32px;
+  border-radius: 10px;
+  background: var(--qsh-tile);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.qsh-knowledge__card:hover { transform: translateY(-2px); }
+.qsh-knowledge__title {
+  display: block;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--qsh-ink);
+  text-transform: none;
+}
+.qsh-knowledge__desc {
+  display: block;
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #5F6853;
+}
+
+/* ============================================================
+   6. Brands — sections/shop-brands.liquid
+   ============================================================ */
+.qsh-brands__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.qsh-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 86px;
+  padding: 18px 22px;
+  border: 1px solid var(--qsh-line);
+  border-radius: 8px;
+  background: #FFFFFF;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.qsh-brand:hover {
+  border-color: var(--qsh-line-strong);
+  box-shadow: 0 4px 14px rgba(40, 50, 25, 0.07);
+}
+.qsh-brand img {
+  max-height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+.qsh-brand__name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--qsh-ink);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1200px) {
+  .qsh-spotlight__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .qsh-types__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1000px) {
+  .qsh__wrap { padding: 0 24px; }
+  .qsh-hero__inner { padding: 46px 24px 50px; }
+  .qsh-hero__title { font-size: 42px; }
+  .qsh-head__title { font-size: 28px; }
+  .qsh-spotlight__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .qsh-usage__grid,
+  .qsh-knowledge__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qsh-brands__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 749px) {
+  .qsh__wrap { padding: 0 18px; }
+  .qsh-band { padding: 40px 0 8px; }
+  .qsh-hero__inner { padding: 38px 18px 42px; }
+  .qsh-hero__title { font-size: 32px; }
+  .qsh-hero__sub { font-size: 14px; }
+  .qsh-head {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-bottom: 18px;
+  }
+  .qsh-head__title { font-size: 24px; }
+  .qsh-head__link { font-size: 11px; }
+  .qsh-spotlight__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .qsh-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-usage__grid,
+  .qsh-knowledge__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-usage__card { padding-top: 100%; }
+  .qsh-brands__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .qsh-card__name { font-size: 15px; }
+  .qsh-knowledge__card { padding: 26px 16px 24px; min-height: 0; }
+  .qsh-usage__title { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .qsh-hero__title { font-size: 28px; }
+  .qsh-brand { min-height: 70px; padding: 14px; }
+  .qsh-brand img { max-height: 34px; }
+  .qsh-brand__name { font-size: 14px; }
+}

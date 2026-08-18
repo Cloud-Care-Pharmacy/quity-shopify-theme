@@ -1,0 +1,137 @@
+{%- comment -%}
+  Quity Shop — brand wall
+  -----------------------
+  Bordered logo tiles, one per stocked brand, linking to that brand's
+  collection or vendor listing. A block with no logo falls back to its
+  name set as a wordmark, so the wall stays complete while artwork is
+  still being collected.
+
+  Design: Quity "Shop" handoff — scoped .qsh- classes styled in
+  assets/shop-collections.css. Static content, no JavaScript.
+{%- endcomment -%}
+
+{{ 'shop-collections.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qsh-band {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .qsh-band {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qsh qsh-band qsh-brands" data-aos="{{ section.settings.animation }}">
+  <div class="qsh__wrap">
+    {%- render 'shop-section-head',
+      title: section.settings.title,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url -%}
+
+    <div class="qsh-brands__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign brand_url = block.settings.link
+          if brand_url == blank and block.settings.name != blank
+            assign brand_vendor = block.settings.name | url_encode
+            assign brand_url = routes.all_products_collection_url | append: '?filter.p.vendor=' | append: brand_vendor
+          endif
+        -%}
+        <a class="qsh-brand" href="{{ brand_url | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.logo -%}
+            <img
+              src="{{ block.settings.logo | image_url: width: 320 }}"
+              srcset="{{ block.settings.logo | image_url: width: 160 }} 160w, {{ block.settings.logo | image_url: width: 320 }} 320w"
+              sizes="160px"
+              width="{{ block.settings.logo.width }}"
+              height="{{ block.settings.logo.height }}"
+              loading="lazy"
+              alt="{{ block.settings.logo.alt | default: block.settings.name | escape }}">
+          {%- else -%}
+            <span class="qsh-brand__name">{{ block.settings.name | escape }}</span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop - brands",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "By Brand" },
+    { "type": "text", "id": "link_text", "label": "Heading link text", "default": "Shop all products" },
+    { "type": "url", "id": "link_url", "label": "Heading link" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 76 },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade up" }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "text", "id": "name", "label": "Name", "info": "Shown when no logo is set, and used for the fallback vendor link." },
+        { "type": "url", "id": "link", "label": "Link", "info": "Leave empty to filter all products by this vendor name." }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Shop - brands",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "Airscream" } },
+        { "type": "brand", "settings": { "name": "alt." } },
+        { "type": "brand", "settings": { "name": "alt. X" } },
+        { "type": "brand", "settings": { "name": "Americana" } },
+        { "type": "brand", "settings": { "name": "Aspire" } },
+        { "type": "brand", "settings": { "name": "blu" } },
+        { "type": "brand", "settings": { "name": "Big5" } },
+        { "type": "brand", "settings": { "name": "Bion London" } },
+        { "type": "brand", "settings": { "name": "Britannia" } },
+        { "type": "brand", "settings": { "name": "Chosen" } },
+        { "type": "brand", "settings": { "name": "Hohmwrecker" } },
+        { "type": "brand", "settings": { "name": "Lanavape" } },
+        { "type": "brand", "settings": { "name": "Lula" } },
+        { "type": "brand", "settings": { "name": "MVape" } },
+        { "type": "brand", "settings": { "name": "Nicorette" } },
+        { "type": "brand", "settings": { "name": "OZ Blend" } },
+        { "type": "brand", "settings": { "name": "OZ Drip" } },
+        { "type": "brand", "settings": { "name": "OZ Pod" } },
+        { "type": "brand", "settings": { "name": "Phix" } },
+        { "type": "brand", "settings": { "name": "RB" } },
+        { "type": "brand", "settings": { "name": "Relx" } },
+        { "type": "brand", "settings": { "name": "Rift Pro" } },
+        { "type": "brand", "settings": { "name": "Simply" } },
+        { "type": "brand", "settings": { "name": "Smok" } },
+        { "type": "brand", "settings": { "name": "Solo Plus" } },
+        { "type": "brand", "settings": { "name": "Uwell" } },
+        { "type": "brand", "settings": { "name": "Vapo" } },
+        { "type": "brand", "settings": { "name": "Vaporesso" } },
+        { "type": "brand", "settings": { "name": "Vapure" } },
+        { "type": "brand", "settings": { "name": "Veev" } },
+        { "type": "brand", "settings": { "name": "Vsee" } },
+        { "type": "brand", "settings": { "name": "Wild" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

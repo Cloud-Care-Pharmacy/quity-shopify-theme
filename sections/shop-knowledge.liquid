@@ -1,0 +1,116 @@
+{%- comment -%}
+  Quity Shop — browse by knowledge level
+  --------------------------------------
+  Four pale tiles sorting the catalogue by how much the shopper already
+  knows, from first device to full catalogue: circled line icon, title
+  and a sentence on who the tile is for.
+
+  Design: Quity "Shop" handoff — scoped .qsh- classes styled in
+  assets/shop-collections.css. Static content, no JavaScript.
+{%- endcomment -%}
+
+{{ 'shop-collections.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qsh-band {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .qsh-band {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qsh qsh-band qsh-knowledge" data-aos="{{ section.settings.animation }}">
+  <div class="qsh__wrap">
+    {%- render 'shop-section-head',
+      title: section.settings.title,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url -%}
+
+    <div class="qsh-knowledge__grid">
+      {%- for block in section.blocks -%}
+        <a class="qsh-knowledge__card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          <span class="qsh-icon qsh-icon--lg">{%- render 'shop-icon', name: block.settings.icon -%}</span>
+          <span>
+            <span class="qsh-knowledge__title">{{ block.settings.title | escape }}</span>
+            {%- if block.settings.description != blank -%}
+              <span class="qsh-knowledge__desc">{{ block.settings.description | escape }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop - knowledge level",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "By Knowledge" },
+    { "type": "text", "id": "link_text", "label": "Heading link text", "default": "Shop all products" },
+    { "type": "url", "id": "link_url", "label": "Heading link" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 12 },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade up" }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "level",
+      "name": "Knowledge level",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "beginner", "label": "Beginner" },
+            { "value": "intermediate", "label": "Intermediate" },
+            { "value": "advanced", "label": "Advanced" },
+            { "value": "compass", "label": "Compass" },
+            { "value": "starter-kit", "label": "Starter kit" },
+            { "value": "device", "label": "Device" },
+            { "value": "pods", "label": "Pods & coils" },
+            { "value": "eliquid", "label": "E-liquid" },
+            { "value": "accessories", "label": "Accessories" },
+            { "value": "nrt", "label": "NRT" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "clock", "label": "Clock" }
+          ],
+          "default": "beginner"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Beginner" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "The simplest products to use, for people quitting smoking or illegal disposable products." },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Shop - knowledge level",
+      "blocks": [
+        { "type": "level", "settings": { "icon": "beginner", "title": "Beginner", "description": "The simplest products to use, for people quitting smoking or illegal disposable products." } },
+        { "type": "level", "settings": { "icon": "intermediate", "title": "Beginner to Intermediate", "description": "Simple products but also includes simple refillable products suited to nicotine salts, for people quitting smoking or illegal disposables." } },
+        { "type": "level", "settings": { "icon": "advanced", "title": "Intermediate to Advanced", "description": "Higher output refillable devices for freebase and nicotine salts, for patients with experience managing long term nicotine dependence." } },
+        { "type": "level", "settings": { "icon": "compass", "title": "All Products", "description": "Browse all products and use the available filters to narrow down your selection." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
