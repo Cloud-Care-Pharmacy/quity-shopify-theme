@@ -12,25 +12,25 @@
         "chip-2": {
           "type": "chip",
           "settings": {
-            "label": "Americana"
+            "label": "Starter kits"
           }
         },
         "chip-3": {
           "type": "chip",
           "settings": {
-            "label": "alt"
+            "label": "Pods"
           }
         },
         "chip-4": {
           "type": "chip",
           "settings": {
-            "label": "Lula"
+            "label": "E-liquid"
           }
         },
         "chip-5": {
           "type": "chip",
           "settings": {
-            "label": "alt X"
+            "label": "NRT"
           }
         }
       },
@@ -42,16 +42,18 @@
         "chip-5"
       ],
       "settings": {
-        "title": "Tabuu Pharmacy",
+        "eyebrow": "The catalogue",
+        "title_pre": "Shop",
+        "title_italic": "everything",
+        "title_post": "we stock",
         "title_tag": "h1",
-        "subtext": "<p>Your smokefree journey starts here. If you need product assistance there is online support <a href=\"/pages/contact\" title=\"Contact us\">here</a> or, contact our team.</p>",
+        "subtext": "<p>Your smokefree journey starts here. Browse by product, by where you are now, or by experience — and talk to our pharmacists whenever you need a hand choosing.</p>",
+        "band": "warm",
         "show_search": true,
-        "search_placeholder": "Search...",
-        "popular_label": "Popular search:",
-        "bg_top": "#62762F",
-        "bg_bottom": "#465622",
-        "padding_top": 58,
-        "padding_bottom": 62,
+        "search_placeholder": "Search products...",
+        "popular_label": "Popular search",
+        "padding_top": 64,
+        "padding_bottom": 68,
         "animation": ""
       }
     },
@@ -65,11 +67,12 @@
         "products_limit": 6,
         "ribbon_text": "Free express shipping",
         "desc_words": 10,
+        "added_text": "Added",
         "show_currency_code": true,
-        "padding_top": 56,
+        "band": "white",
+        "padding_top": 64,
         "padding_bottom": 28,
-        "animation": "",
-        "added_text": "Added"
+        "animation": ""
       }
     },
     "shop-product-types": {
@@ -79,7 +82,7 @@
           "type": "type",
           "settings": {
             "icon": "starter-kit",
-            "label": "Starter Kits",
+            "label": "Starter kits",
             "link": ""
           }
         },
@@ -87,7 +90,7 @@
           "type": "type",
           "settings": {
             "icon": "device",
-            "label": "Vape Devices",
+            "label": "Vape devices",
             "link": ""
           }
         },
@@ -95,7 +98,7 @@
           "type": "type",
           "settings": {
             "icon": "pods",
-            "label": "Pods & Coils",
+            "label": "Pods & coils",
             "link": ""
           }
         },
@@ -133,11 +136,12 @@
         "type-6"
       ],
       "settings": {
-        "title": "By Product Type",
+        "title": "By product type",
         "link_text": "Shop all products",
         "link_url": "",
-        "padding_top": 64,
-        "padding_bottom": 12,
+        "band": "white",
+        "padding_top": 36,
+        "padding_bottom": 76,
         "animation": ""
       }
     },
@@ -147,32 +151,32 @@
         "usage-1": {
           "type": "card",
           "settings": {
-            "title": "High Dependency",
-            "description": "Vaping heavily or smoking more than 20 cigarettes a day",
+            "title": "High dependency",
+            "description": "Vaping heavily, or smoking more than 20 cigarettes a day",
             "link": ""
           }
         },
         "usage-2": {
           "type": "card",
           "settings": {
-            "title": "More Dependent",
-            "description": "Smoking 10 or more cigarettes per day",
+            "title": "More dependent",
+            "description": "Smoking 10 or more cigarettes a day",
             "link": ""
           }
         },
         "usage-3": {
           "type": "card",
           "settings": {
-            "title": "Less Dependent",
-            "description": "Smoking less than 10 cigarettes per day",
+            "title": "Less dependent",
+            "description": "Smoking fewer than 10 cigarettes a day",
             "link": ""
           }
         },
         "usage-4": {
           "type": "card",
           "settings": {
-            "title": "Starter Kits",
-            "description": "All-in-one kits with everything you need to get started",
+            "title": "Just starting",
+            "description": "All-in-one kits with everything you need to make the switch",
             "link": ""
           }
         }
@@ -184,11 +188,12 @@
         "usage-4"
       ],
       "settings": {
-        "title": "By Current Usage",
+        "title": "By current usage",
         "link_text": "Shop all products",
         "link_url": "",
+        "band": "warm",
         "padding_top": 64,
-        "padding_bottom": 12,
+        "padding_bottom": 76,
         "animation": ""
       }
     },
@@ -200,7 +205,7 @@
           "settings": {
             "icon": "beginner",
             "title": "Beginner",
-            "description": "The simplest products to use, for people quitting smoking or illegal disposable products.",
+            "description": "The simplest products to use, for people quitting cigarettes or illegal disposables.",
             "link": ""
           }
         },
@@ -208,8 +213,8 @@
           "type": "level",
           "settings": {
             "icon": "intermediate",
-            "title": "Beginner to Intermediate",
-            "description": "Simple products but also includes simple refillable products suited to nicotine salts, for people quitting smoking or illegal disposables.",
+            "title": "Beginner to intermediate",
+            "description": "Simple products plus straightforward refillables suited to nicotine salts.",
             "link": ""
           }
         },
@@ -217,8 +222,8 @@
           "type": "level",
           "settings": {
             "icon": "advanced",
-            "title": "Intermediate to Advanced",
-            "description": "Higher output refillable devices for freebase and nicotine salts, for patients with experience managing long term nicotine dependence.",
+            "title": "Intermediate to advanced",
+            "description": "Higher output refillables for freebase and salts, for patients managing long term nicotine dependence.",
             "link": ""
           }
         },
@@ -226,8 +231,8 @@
           "type": "level",
           "settings": {
             "icon": "compass",
-            "title": "All Products",
-            "description": "Browse all products and use the available filters to narrow down your selection.",
+            "title": "All products",
+            "description": "Browse the full catalogue and narrow it down with the available filters.",
             "link": ""
           }
         }
@@ -239,11 +244,12 @@
         "level-4"
       ],
       "settings": {
-        "title": "By Knowledge",
+        "title": "By knowledge level",
         "link_text": "Shop all products",
         "link_url": "",
+        "band": "white",
         "padding_top": 64,
-        "padding_bottom": 12,
+        "padding_bottom": 76,
         "animation": ""
       }
     },
@@ -510,9 +516,10 @@
         "brand-32"
       ],
       "settings": {
-        "title": "By Brand",
+        "title": "By brand",
         "link_text": "Shop all products",
         "link_url": "",
+        "band": "warm",
         "padding_top": 64,
         "padding_bottom": 76,
         "animation": ""

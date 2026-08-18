@@ -24,7 +24,7 @@
   }
 {%- endstyle -%}
 
-<section class="qsh qsh-band qsh-knowledge" data-aos="{{ section.settings.animation }}">
+<section class="qsh qsh-band qsh-knowledge{% if section.settings.band == 'warm' %} qsh-band--warm{% endif %}" data-aos="{{ section.settings.animation }}">
   <div class="qsh__wrap">
     {%- render 'shop-section-head',
       title: section.settings.title,
@@ -51,12 +51,22 @@
 {
   "name": "Shop - knowledge level",
   "settings": [
-    { "type": "text", "id": "title", "label": "Heading", "default": "By Knowledge" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "By knowledge level" },
     { "type": "text", "id": "link_text", "label": "Heading link text", "default": "Shop all products" },
     { "type": "url", "id": "link_url", "label": "Heading link" },
+    {
+      "type": "select",
+      "id": "band",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "warm", "label": "Warm" }
+      ],
+      "default": "white"
+    },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 40 },
     {
       "type": "select",
       "id": "animation",

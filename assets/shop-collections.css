@@ -7,10 +7,12 @@
    and the brand wall. Scoped .qsh- classes, used by
    sections/shop-*.liquid.
 
-   Fonts (Jost / Newsreader) are loaded in layout/theme.liquid.
-   Headings are Newsreader (serif), everything else is Jost, the
-   same split as the Quity handoff. Colours are hard-coded Quity
-   tokens, the same approach as assets/product-store.css.
+   Same design language as assets/product-store.css and
+   assets/device-types.css: Jost for headings and copy, JetBrains
+   Mono for eyebrows and pills, Newsreader italic for the accent
+   word, ink #0F1110 on white or warm #FAF8F2, #E3E0D7 hairlines,
+   999px pills and 16/24px card radii. Fonts are loaded in
+   layout/theme.liquid; colours are hard-coded Quity tokens.
    ============================================================ */
 
 /* --- Scope reset --- */
@@ -20,21 +22,9 @@
 .qsh *::after { box-sizing: border-box; }
 
 .qsh {
-  --qsh-deep: #4E6027;
-  --qsh-deep-2: #3F4E1F;
-  --qsh-green: #6C8E2C;
-  --qsh-green-dark: #587324;
-  --qsh-lime: #8CC63E;
-  --qsh-tile: #DEE9C4;
-  --qsh-tile-soft: #E9F0D8;
-  --qsh-ink: #262B1E;
-  --qsh-body: #6A7160;
-  --qsh-line: #E4E7DC;
-  --qsh-line-strong: #D3D9C6;
-
   background: #FFFFFF;
   font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
-  color: var(--qsh-ink);
+  color: #383D3A;
   line-height: normal;
   -webkit-font-smoothing: antialiased;
 }
@@ -58,6 +48,7 @@
 
 .qsh a { text-decoration: none; color: inherit; }
 .qsh img { max-width: 100%; }
+.qsh [hidden] { display: none !important; }
 
 /* --- Container --- */
 .qsh__wrap {
@@ -66,121 +57,150 @@
   padding: 0 40px;
 }
 
-/* --- Band heading (Spotlight / By Product Type / ...) --- */
-.qsh-band { padding: 56px 0 12px; }
+/* --- Bands --- */
+.qsh-band { padding: 64px 0 12px; }
+.qsh-band--warm {
+  background: #FAF8F2;
+  border-top: 1px solid #E3E0D7;
+  border-bottom: 1px solid #E3E0D7;
+}
+
+/* --- Shared type --- */
+.qsh-eyebrow {
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6E736F;
+  margin-bottom: 14px;
+}
+.qsh-it {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  font-style: italic;
+  color: #E55B4F;
+}
+
+/* --- Band heading --- */
 .qsh-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 .qsh-head__title {
   margin: 0;
-  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-  font-weight: 600;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
   font-size: 34px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--qsh-deep);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   text-transform: none;
+  color: #0F1110;
 }
 .qsh-head__link {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.09em;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--qsh-green);
-  transition: color 0.2s ease;
+  color: #6E736F;
+  transition: color 0.15s ease;
 }
-.qsh-head__link:hover { color: var(--qsh-deep); }
-.qsh-head__link svg { width: 16px; height: 16px; stroke: currentColor; }
+.qsh-head__link:hover { color: #0F1110; }
+.qsh-head__link svg { width: 15px; height: 15px; stroke: currentColor; }
 
 /* ============================================================
    1. Hero — sections/shop-hero.liquid
    ============================================================ */
 .qsh-hero {
-  background:
-    radial-gradient(115% 130% at 50% 0%, #62762F 0%, #55692A 45%, #465622 100%);
-  color: #FFFFFF;
+  background: #FAF8F2;
+  border-bottom: 1px solid #E3E0D7;
   text-align: center;
 }
+.qsh-hero--plain {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E3E0D7;
+}
 .qsh-hero__inner {
-  padding: 58px 40px 62px;
+  padding: 64px 40px 68px;
   max-width: 1280px;
   margin: 0 auto;
 }
 .qsh-hero__title {
   margin: 0;
-  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
-  font-weight: 600;
-  font-size: 56px;
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  color: #FFFFFF;
+  font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   text-transform: none;
+  color: #0F1110;
 }
 .qsh-hero__sub {
-  margin: 14px auto 0;
-  max-width: 560px;
-  font-size: 15px;
+  margin: 16px auto 0;
+  max-width: 600px;
+  font-size: 17px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.82);
+  color: #5B615E;
 }
+.qsh-hero__sub p { margin: 0; }
 .qsh-hero__sub a {
-  color: #FFFFFF;
+  color: #0F1110;
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
+.qsh-hero__sub a:hover { color: #E55B4F; }
 
 /* Search field */
 .qsh-search {
   position: relative;
   display: block;
-  max-width: 420px;
-  margin: 26px auto 0;
+  max-width: 520px;
+  margin: 30px auto 0;
 }
 .qsh-search__input {
   width: 100%;
-  height: 46px;
-  border: 0;
+  height: 56px;
+  border: 1px solid #E3E0D7;
   border-radius: 999px;
   background: #FFFFFF;
-  padding: 0 48px 0 22px;
-  font-size: 14px;
-  color: var(--qsh-ink);
-  box-shadow: 0 2px 10px rgba(20, 30, 10, 0.12);
+  padding: 0 62px 0 24px;
+  font-size: 15px;
+  color: #0F1110;
   -webkit-appearance: none;
   appearance: none;
 }
-.qsh-search__input::placeholder { color: #9AA192; }
+.qsh-search__input::placeholder { color: #9A9F9B; }
 .qsh-search__input:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.75);
-  outline-offset: 2px;
+  outline: none;
+  border-color: #0F1110;
 }
 .qsh-search__submit {
   position: absolute;
-  top: 50%;
+  top: 6px;
   right: 6px;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--qsh-deep);
+  border-radius: 999px;
+  background: #0F1110;
+  color: #F4F2EC;
   cursor: pointer;
   padding: 0;
+  transition: background 0.15s ease;
 }
 .qsh-search__submit svg { width: 18px; height: 18px; stroke: currentColor; }
-.qsh-search__submit:hover { color: var(--qsh-green); }
+.qsh-search__submit:hover { background: #E55B4F; }
 
 /* Popular searches */
 .qsh-hero__popular {
@@ -189,27 +209,34 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 .qsh-hero__popular-label {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.72);
-  margin-right: 2px;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6E736F;
+  margin-right: 4px;
 }
 .qsh-chip {
   display: inline-block;
-  padding: 5px 14px;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5F7A68;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  font-size: 12px;
-  color: #FFFFFF;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 .qsh-chip:hover {
-  background: rgba(255, 255, 255, 0.26);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #FFFFFF;
+  color: #0F1110;
+  border-color: #0F1110;
 }
 
 /* ============================================================
@@ -226,11 +253,12 @@
 .qsh-card__media {
   position: relative;
   display: block;
-  border-radius: 10px;
+  border: 1px solid #E3E0D7;
+  border-radius: 16px;
   overflow: hidden;
-  background: var(--qsh-tile);
+  background: #F4F2EC;
   padding-top: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 .qsh-card__media img {
   position: absolute;
@@ -238,7 +266,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 26px 16px 16px;
+  padding: 18px;
 }
 .qsh-card__media .placeholder-svg {
   position: absolute;
@@ -246,158 +274,176 @@
   width: 100%;
   height: 100%;
 }
+/* Corner flag, same shape as the product page's .qps-gallery__flag.
+   Sized to keep a shipping line on one row inside a six-up tile. */
 .qsh-card__ribbon {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 12px;
+  left: 12px;
   z-index: 2;
-  background: var(--qsh-green);
-  color: #FFFFFF;
-  text-align: center;
-  padding: 5px 8px;
-  font-size: 9px;
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  max-width: calc(100% - 24px);
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0F1110;
+  background: #FFFFFF;
+  border: 1px solid #D6E0D6;
+  padding: 5px 9px;
+  border-radius: 999px;
 }
 .qsh-card__soldout {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: 12px;
+  bottom: 12px;
   z-index: 2;
-  background: #FFFFFF;
-  color: #A4462F;
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  line-height: normal;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: #E55B4F;
+  background: #FBEAE8;
+  border: 1px solid #F5D3CE;
+  padding: 5px 10px;
+  border-radius: 999px;
 }
 
 .qsh-card__name {
   display: block;
   font-size: 17px;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--qsh-ink);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #0F1110;
   margin-bottom: 5px;
+  transition: color 0.15s ease;
 }
-.qsh-card__name:hover { color: var(--qsh-green); }
+.qsh-card__name:hover { color: #E55B4F; }
 .qsh-card__desc {
-  margin: 0 0 8px;
-  font-size: 12px;
+  margin: 0 0 10px;
+  font-size: 13px;
   line-height: 1.45;
-  color: var(--qsh-body);
+  color: #5B615E;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 34px;
+  min-height: 38px;
 }
 .qsh-card__price {
-  font-size: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 18px;
   font-weight: 500;
-  color: var(--qsh-ink);
-  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  color: #0F1110;
 }
 .qsh-card__price del {
-  margin-left: 6px;
+  font-size: 14px;
   font-weight: 400;
-  color: #9AA192;
+  color: #6E736F;
 }
 
 .qsh-card__form { margin-top: auto; }
 
-.qsh-card__select-wr { position: relative; margin-bottom: 8px; }
+.qsh-card__select-wr { position: relative; margin-bottom: 9px; }
 .qsh-card__select {
   width: 100%;
-  height: 34px;
-  border: 1px solid var(--qsh-line-strong);
-  border-radius: 6px;
+  height: 44px;
+  border: 1px solid #E3E0D7;
+  border-radius: 10px;
   background: #FFFFFF;
-  padding: 0 28px 0 12px;
-  font-size: 12px;
-  color: var(--qsh-ink);
+  padding: 0 34px 0 14px;
+  font-size: 13.5px;
+  color: #0F1110;
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
 }
 .qsh-card__select:focus {
   outline: none;
-  border-color: var(--qsh-green);
+  border-color: #0F1110;
 }
 .qsh-card__select-wr::after {
   content: '';
   position: absolute;
-  right: 12px;
+  right: 15px;
   top: 50%;
   width: 7px;
   height: 7px;
   margin-top: -5px;
-  border-right: 1.5px solid var(--qsh-body);
-  border-bottom: 1.5px solid var(--qsh-body);
+  border-right: 1.4px solid #6E736F;
+  border-bottom: 1.4px solid #6E736F;
   transform: rotate(45deg);
   pointer-events: none;
 }
 
 .qsh-qty {
   display: grid;
-  grid-template-columns: 34px 1fr 34px;
+  grid-template-columns: 40px 1fr 40px;
   align-items: center;
-  height: 34px;
-  border: 1px solid var(--qsh-line-strong);
-  border-radius: 6px;
-  margin-bottom: 8px;
-  overflow: hidden;
+  height: 44px;
+  border: 1px solid #E3E0D7;
+  border-radius: 999px;
+  margin-bottom: 9px;
+  padding: 0 4px;
 }
 .qsh-qty__btn {
-  height: 100%;
+  height: 36px;
   border: 0;
   background: transparent;
-  color: var(--qsh-body);
+  border-radius: 999px;
+  color: #0F1110;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
   padding: 0;
+  transition: background 0.15s ease;
 }
-.qsh-qty__btn:hover { color: var(--qsh-green); }
+.qsh-qty__btn:hover { background: #F4F2EC; }
 .qsh-qty__num {
   text-align: center;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: var(--qsh-ink);
+  color: #0F1110;
 }
 
 .qsh-btn {
   display: block;
   width: 100%;
+  height: 46px;
   border: 0;
-  border-radius: 6px;
-  background: var(--qsh-green);
-  color: #FFFFFF;
-  padding: 11px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  border-radius: 999px;
+  background: #0F1110;
+  color: #F4F2EC;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease;
 }
-.qsh-btn:hover { background: var(--qsh-green-dark); color: #FFFFFF; }
-.qsh-btn[disabled] { opacity: 0.55; cursor: default; }
-.qsh-btn--muted { background: #A8B295; }
-.qsh-btn--muted:hover { background: #A8B295; }
-
-.qsh [hidden] { display: none !important; }
+.qsh-btn:hover { background: #E55B4F; color: #F4F2EC; }
+.qsh-btn[disabled],
+.qsh-btn--muted {
+  background: #6E736F;
+  cursor: not-allowed;
+}
+.qsh-btn--muted:hover { background: #6E736F; }
 
 .qsh-card__error {
-  margin: 6px 0 0;
-  font-size: 11px;
+  margin: 8px 0 0;
+  font-size: 12.5px;
   line-height: 1.4;
-  color: #A4462F;
+  color: #C0392B;
 }
 
 /* ============================================================
@@ -414,42 +460,47 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  min-height: 122px;
-  padding: 24px 14px;
-  border-radius: 10px;
-  background: var(--qsh-tile-soft);
+  min-height: 138px;
+  padding: 26px 14px;
+  border: 1px solid #E3E0D7;
+  border-radius: 24px;
+  background: #FFFFFF;
   text-align: center;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+.qsh-band--warm .qsh-type { background: #FFFFFF; }
 .qsh-type:hover {
-  background: var(--qsh-tile);
-  transform: translateY(-2px);
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
 }
 .qsh-type__label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.3;
-  color: var(--qsh-ink);
+  letter-spacing: -0.01em;
+  color: #0F1110;
 }
 
-/* Circular outline icon, shared by the type + knowledge tiles */
+/* Icon ring, shared by the type + knowledge tiles.
+   Same green-on-pale treatment as the product page's .qps-tickring. */
 .qsh-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--qsh-deep);
-  color: var(--qsh-deep);
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #EAEFEA;
+  border: 1px solid #D6E0D6;
+  color: #5F7A68;
   flex: 0 0 auto;
 }
 .qsh-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   stroke: currentColor;
 }
-.qsh-icon--lg { width: 54px; height: 54px; }
+.qsh-icon--lg { width: 56px; height: 56px; }
 .qsh-icon--lg svg { width: 24px; height: 24px; }
 
 /* ============================================================
@@ -463,10 +514,10 @@
 .qsh-usage__card {
   position: relative;
   display: block;
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
-  padding-top: 74%;
-  background: #33391F;
+  padding-top: 76%;
+  background: #0F1110;
   isolation: isolate;
 }
 .qsh-usage__card img,
@@ -483,7 +534,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(15, 20, 8, 0.88) 0%, rgba(15, 20, 8, 0.42) 38%, rgba(15, 20, 8, 0) 68%);
+  background: linear-gradient(to top, rgba(15, 17, 16, 0.9) 0%, rgba(15, 17, 16, 0.45) 40%, rgba(15, 17, 16, 0) 72%);
 }
 .qsh-usage__body {
   position: absolute;
@@ -491,8 +542,8 @@
   right: 0;
   bottom: 0;
   z-index: 1;
-  padding: 16px 16px 15px;
-  color: #FFFFFF;
+  padding: 18px;
+  color: #F4F2EC;
 }
 .qsh-usage__row {
   display: flex;
@@ -503,10 +554,11 @@
 .qsh-usage__title {
   display: block;
   margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: #F4F2EC;
   text-transform: none;
 }
 /* `.qsh svg { width:auto; height:auto }` ties this on specificity and would
@@ -515,16 +567,16 @@
   flex: 0 0 auto;
   width: 18px;
   height: 18px;
-  stroke: #FFFFFF;
+  stroke: #F4F2EC;
   transition: transform 0.25s ease;
 }
 .qsh-usage__card:hover .qsh-usage__row .qsh-usage__arrow { transform: translateX(3px); }
 .qsh-usage__desc {
   display: block;
-  margin: 5px 0 0;
-  font-size: 11px;
+  margin: 6px 0 0;
+  font-size: 12.5px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(244, 242, 236, 0.72);
 }
 
 /* ============================================================
@@ -540,30 +592,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 18px;
-  min-height: 168px;
-  padding: 36px 26px 32px;
-  border-radius: 10px;
-  background: var(--qsh-tile);
+  gap: 20px;
+  min-height: 190px;
+  padding: 36px 26px 34px;
+  border: 1px solid #E3E0D7;
+  border-radius: 24px;
+  background: #FAF8F2;
   text-align: center;
-  transition: transform 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.qsh-knowledge__card:hover { transform: translateY(-2px); }
+.qsh-band--warm .qsh-knowledge__card { background: #FFFFFF; }
+.qsh-knowledge__card:hover {
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
+}
 .qsh-knowledge__title {
   display: block;
   margin: 0;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--qsh-ink);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #0F1110;
   text-transform: none;
 }
 .qsh-knowledge__desc {
   display: block;
-  margin: 8px 0 0;
-  font-size: 11px;
+  margin: 9px 0 0;
+  font-size: 13px;
   line-height: 1.5;
-  color: #5F6853;
+  color: #5B615E;
 }
 
 /* ============================================================
@@ -578,28 +636,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 86px;
+  min-height: 92px;
   padding: 18px 22px;
-  border: 1px solid var(--qsh-line);
-  border-radius: 8px;
+  border: 1px solid #E3E0D7;
+  border-radius: 16px;
   background: #FFFFFF;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .qsh-brand:hover {
-  border-color: var(--qsh-line-strong);
-  box-shadow: 0 4px 14px rgba(40, 50, 25, 0.07);
+  border-color: #D6E0D6;
+  box-shadow: 0 4px 22px -14px rgba(15, 17, 16, 0.22);
 }
 .qsh-brand img {
-  max-height: 44px;
+  max-height: 46px;
   width: auto;
   object-fit: contain;
 }
 .qsh-brand__name {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--qsh-ink);
+  color: #0F1110;
   text-align: center;
   line-height: 1.2;
 }
@@ -614,9 +672,9 @@
 
 @media (max-width: 1000px) {
   .qsh__wrap { padding: 0 24px; }
-  .qsh-hero__inner { padding: 46px 24px 50px; }
-  .qsh-hero__title { font-size: 42px; }
-  .qsh-head__title { font-size: 28px; }
+  .qsh-hero__inner { padding: 52px 24px 56px; }
+  .qsh-hero__title { font-size: 38px; }
+  .qsh-head__title { font-size: 29px; }
   .qsh-spotlight__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .qsh-usage__grid,
   .qsh-knowledge__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -625,19 +683,20 @@
 
 @media (max-width: 749px) {
   .qsh__wrap { padding: 0 18px; }
-  .qsh-band { padding: 40px 0 8px; }
-  .qsh-hero__inner { padding: 38px 18px 42px; }
-  .qsh-hero__title { font-size: 32px; }
-  .qsh-hero__sub { font-size: 14px; }
+  .qsh-band { padding: 44px 0 8px; }
+  .qsh-hero__inner { padding: 40px 18px 44px; }
+  .qsh-hero__title { font-size: 30px; letter-spacing: -0.02em; }
+  .qsh-hero__sub { font-size: 15px; }
+  .qsh-search__input { height: 50px; padding-right: 56px; }
+  .qsh-search__submit { width: 40px; height: 40px; top: 5px; right: 5px; }
   .qsh-head {
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px 16px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
-  .qsh-head__title { font-size: 24px; }
-  .qsh-head__link { font-size: 11px; }
+  .qsh-head__title { font-size: 25px; }
   .qsh-spotlight__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .qsh-types__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .qsh-usage__grid,
@@ -645,13 +704,16 @@
   .qsh-usage__card { padding-top: 100%; }
   .qsh-brands__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .qsh-card__name { font-size: 15px; }
-  .qsh-knowledge__card { padding: 26px 16px 24px; min-height: 0; }
-  .qsh-usage__title { font-size: 14px; }
+  .qsh-card__price { font-size: 16px; }
+  .qsh-card__ribbon { font-size: 8px; letter-spacing: 0.06em; padding: 5px 8px; }
+  .qsh-type { min-height: 118px; padding: 20px 12px; border-radius: 18px; }
+  .qsh-knowledge__card { padding: 26px 18px 24px; min-height: 0; border-radius: 18px; }
+  .qsh-usage__title { font-size: 15px; }
 }
 
 @media (max-width: 480px) {
-  .qsh-hero__title { font-size: 28px; }
-  .qsh-brand { min-height: 70px; padding: 14px; }
-  .qsh-brand img { max-height: 34px; }
-  .qsh-brand__name { font-size: 14px; }
+  .qsh-hero__title { font-size: 27px; }
+  .qsh-brand { min-height: 74px; padding: 14px; }
+  .qsh-brand img { max-height: 36px; }
+  .qsh-brand__name { font-size: 13px; }
 }

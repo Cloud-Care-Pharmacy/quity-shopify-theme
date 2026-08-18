@@ -1,22 +1,21 @@
 {%- comment -%}
   Quity Shop — search hero
   ------------------------
-  Opens the /collections page: pharmacy wordmark heading, support
-  line, the store search field and the popular-search chips. Chips
-  are blocks; a chip with no link searches for its own label.
+  Opens the /collections page: eyebrow, headline with the Newsreader
+  italic accent word, support line, the store search field and the
+  popular-search chips. Chips are blocks; a chip with no link searches
+  for its own label.
 
-  Design: Quity "Shop" handoff — scoped .qsh- classes styled in
-  assets/shop-collections.css. Fonts (Jost / Newsreader) are loaded
-  in layout/theme.liquid. No JavaScript: the field is a plain GET
-  form onto the theme's search results page.
+  Design: the Quity system shared with assets/product-store.css —
+  scoped .qsh- classes styled in assets/shop-collections.css. Fonts
+  (Jost / JetBrains Mono / Newsreader) are loaded in
+  layout/theme.liquid. No JavaScript: the field is a plain GET form
+  onto the theme's search results page.
 {%- endcomment -%}
 
 {{ 'shop-collections.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  #shopify-section-{{ section.id }} .qsh-hero {
-    background: radial-gradient(115% 130% at 50% 0%, {{ section.settings.bg_top }} 0%, {{ section.settings.bg_bottom }} 100%);
-  }
   #shopify-section-{{ section.id }} .qsh-hero__inner {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -29,13 +28,23 @@
   }
 {%- endstyle -%}
 
-<section class="qsh qsh-hero" data-aos="{{ section.settings.animation }}">
+{%- capture hero_title -%}
+  {{- section.settings.title_pre | escape -}}
+  {%- if section.settings.title_italic != blank %} <span class="qsh-it">{{ section.settings.title_italic | escape }}</span>{% endif -%}
+  {%- if section.settings.title_post != blank %} {{ section.settings.title_post | escape }}{% endif -%}
+{%- endcapture -%}
+
+<section class="qsh qsh-hero{% if section.settings.band == 'white' %} qsh-hero--plain{% endif %}" data-aos="{{ section.settings.animation }}">
   <div class="qsh-hero__inner">
-    {%- if section.settings.title != blank -%}
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="qsh-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+    {%- endif -%}
+
+    {%- if hero_title != blank -%}
       {%- if section.settings.title_tag == 'h1' -%}
-        <h1 class="qsh-hero__title">{{ section.settings.title | escape }}</h1>
+        <h1 class="qsh-hero__title">{{ hero_title }}</h1>
       {%- else -%}
-        <h2 class="qsh-hero__title">{{ section.settings.title | escape }}</h2>
+        <h2 class="qsh-hero__title">{{ hero_title }}</h2>
       {%- endif -%}
     {%- endif -%}
 
@@ -90,9 +99,27 @@
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Tabuu Pharmacy"
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The catalogue"
+    },
+    {
+      "type": "text",
+      "id": "title_pre",
+      "label": "Heading (before italic)",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "title_italic",
+      "label": "Heading italic word",
+      "default": "everything"
+    },
+    {
+      "type": "text",
+      "id": "title_post",
+      "label": "Heading (after italic)",
+      "default": "we stock"
     },
     {
       "type": "select",
@@ -109,7 +136,17 @@
       "type": "richtext",
       "id": "subtext",
       "label": "Sub text",
-      "default": "<p>Your smokefree journey starts here. If you need product assistance there is online support here or, contact our team.</p>"
+      "default": "<p>Your smokefree journey starts here. Browse by product, by where you are now, or by experience — and talk to our pharmacists whenever you need a hand choosing.</p>"
+    },
+    {
+      "type": "select",
+      "id": "band",
+      "label": "Background",
+      "options": [
+        { "value": "warm", "label": "Warm" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "warm"
     },
     {
       "type": "header",
@@ -125,29 +162,13 @@
       "type": "text",
       "id": "search_placeholder",
       "label": "Search placeholder",
-      "default": "Search..."
+      "default": "Search products..."
     },
     {
       "type": "text",
       "id": "popular_label",
       "label": "Popular search label",
-      "default": "Popular search:"
-    },
-    {
-      "type": "header",
-      "content": "Colours"
-    },
-    {
-      "type": "color",
-      "id": "bg_top",
-      "label": "Background (top)",
-      "default": "#62762F"
-    },
-    {
-      "type": "color",
-      "id": "bg_bottom",
-      "label": "Background (bottom)",
-      "default": "#465622"
+      "default": "Popular search"
     },
     {
       "type": "header",
@@ -161,7 +182,7 @@
       "max": 140,
       "step": 2,
       "unit": "px",
-      "default": 58
+      "default": 64
     },
     {
       "type": "range",
@@ -171,7 +192,7 @@
       "max": 140,
       "step": 2,
       "unit": "px",
-      "default": 62
+      "default": 68
     },
     {
       "type": "select",
@@ -211,10 +232,10 @@
       "name": "Shop - hero search",
       "blocks": [
         { "type": "chip", "settings": { "label": "Solo Plus" } },
-        { "type": "chip", "settings": { "label": "Americana" } },
-        { "type": "chip", "settings": { "label": "alt" } },
-        { "type": "chip", "settings": { "label": "Lula" } },
-        { "type": "chip", "settings": { "label": "alt X" } }
+        { "type": "chip", "settings": { "label": "Starter kits" } },
+        { "type": "chip", "settings": { "label": "Pods" } },
+        { "type": "chip", "settings": { "label": "E-liquid" } },
+        { "type": "chip", "settings": { "label": "NRT" } }
       ]
     }
   ]
