@@ -1,0 +1,820 @@
+{%- comment -%}
+  Quity Hero Apply — homepage hero with an inline application card
+  ---------------------------------------------------------------
+  Full-bleed hero media (image or video) carrying the headline, with
+  an elevated card docked beneath it. The card is tabbed:
+
+    1. "Apply now"     — a real `create_customer` form so a visitor
+                         starts the application from the homepage
+                         instead of being sent to /account/register.
+    2. "Upload script" — the path for people who already hold a
+                         prescription: numbered steps plus CTAs.
+
+  When a customer is already signed in both panes collapse to a
+  "continue your application" state rather than showing a sign-up form.
+
+  Styles: assets/quity-hero-apply.css (.qha- scope). Behavior is the
+  inline script at the bottom of this file (tabs, password reveal,
+  inline validation).
+{%- endcomment -%}
+
+{{ 'quity-hero-apply.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign media_type = section.settings.media_type
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign bg_video = section.settings.bg_video
+
+  assign tab_apply_id = 'qha-tab-apply-' | append: section.id
+  assign tab_script_id = 'qha-tab-script-' | append: section.id
+  assign pane_apply_id = 'qha-pane-apply-' | append: section.id
+  assign pane_script_id = 'qha-pane-script-' | append: section.id
+  assign form_id = 'qha-form-' | append: section.id
+-%}
+
+<section class="qha" id="qha-{{ section.id }}" data-qha>
+  {%- comment -%} Background media {%- endcomment -%}
+  <div class="qha__media">
+    {%- case media_type -%}
+      {%- when 'video' -%}
+        {%- if bg_video != blank -%}
+          <video
+            src="{{ bg_video.sources[1].url | default: bg_video.sources[0].url }}"
+            poster="{% if image != blank %}{{ image | image_url: width: 1600 }}{% endif %}"
+            muted
+            autoplay
+            playsinline
+            loop
+            preload="metadata"></video>
+        {%- endif -%}
+      {%- when 'image' -%}
+        {%- if image != blank -%}
+          <img
+            class="qha__media--desktop"
+            src="{{ image | image_url: width: 1800 }}"
+            srcset="{{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1400 }} 1400w, {{ image | image_url: width: 1800 }} 1800w, {{ image | image_url: width: 2400 }} 2400w"
+            sizes="100vw"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt | escape }}"
+            loading="eager"
+            fetchpriority="high">
+        {%- endif -%}
+        {%- if image_mobile != blank -%}
+          <img
+            class="qha__media--mobile"
+            src="{{ image_mobile | image_url: width: 900 }}"
+            srcset="{{ image_mobile | image_url: width: 600 }} 600w, {{ image_mobile | image_url: width: 900 }} 900w, {{ image_mobile | image_url: width: 1200 }} 1200w"
+            sizes="100vw"
+            width="{{ image_mobile.width }}"
+            height="{{ image_mobile.height }}"
+            alt="{{ image_mobile.alt | escape }}"
+            loading="eager">
+        {%- endif -%}
+    {%- endcase -%}
+  </div>
+
+  <div class="qha__inner">
+    {%- comment -%} Headline {%- endcomment -%}
+    <div class="qha__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="qha__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="qha__h1">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.lead != blank -%}
+        <p class="qha__lead">{{ section.settings.lead | escape }}</p>
+      {%- endif -%}
+
+      {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
+      {%- if trust_blocks.size > 0 -%}
+        <ul class="qha__trust">
+          {%- for block in trust_blocks -%}
+            <li {{ block.shopify_attributes }}>
+              {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
+              {{ block.settings.text | escape }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Application card {%- endcomment -%}
+    <div class="qha__panel">
+      <div class="qha__tabs" role="tablist" aria-label="How to get started">
+        <button
+          type="button"
+          class="qha__tab"
+          id="{{ tab_apply_id }}"
+          role="tab"
+          aria-selected="true"
+          aria-controls="{{ pane_apply_id }}"
+          data-qha-tab>
+          {{ section.settings.tab_apply_label | escape }}
+          {%- if section.settings.tab_badge != blank -%}
+            <span class="qha__tab-badge">{{ section.settings.tab_badge | escape }}</span>
+          {%- endif -%}
+        </button>
+        <button
+          type="button"
+          class="qha__tab"
+          id="{{ tab_script_id }}"
+          role="tab"
+          aria-selected="false"
+          aria-controls="{{ pane_script_id }}"
+          tabindex="-1"
+          data-qha-tab>
+          {{ section.settings.tab_script_label | escape }}
+          {%- if section.settings.tab_badge != blank -%}
+            <span class="qha__tab-badge">{{ section.settings.tab_badge | escape }}</span>
+          {%- endif -%}
+        </button>
+      </div>
+
+      <div class="qha__card">
+        {%- comment -%} Pane 1 — apply {%- endcomment -%}
+        <div
+          class="qha__pane"
+          id="{{ pane_apply_id }}"
+          role="tabpanel"
+          aria-labelledby="{{ tab_apply_id }}"
+          data-qha-pane>
+          <div class="qha__pitch">
+            {%- liquid
+              assign pitch_heading = section.settings.apply_heading
+              assign pitch_sub = section.settings.apply_sub
+              if customer
+                assign pitch_heading = section.settings.signedin_heading
+                assign pitch_sub = section.settings.signedin_sub
+              endif
+            -%}
+            <h2 class="qha__pitch-h">{{ pitch_heading }}</h2>
+            {%- if pitch_sub != blank -%}
+              <p class="qha__pitch-sub">{{ pitch_sub | escape }}</p>
+            {%- endif -%}
+
+            {%- assign promise_blocks = section.blocks | where: 'type', 'promise' -%}
+            {%- if promise_blocks.size > 0 -%}
+              <div class="qha__rule"></div>
+              <ul class="qha__promise">
+                {%- for block in promise_blocks -%}
+                  <li {{ block.shopify_attributes }}>
+                    {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
+                    <span>{{ block.settings.text | escape }}</span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+
+          <div class="qha__form">
+            {%- if customer -%}
+              <div class="qha__signedin">
+                <a href="{{ section.settings.signedin_url }}" class="qha__submit">
+                  {{ section.settings.signedin_button | escape }}
+                  {%- render 'quity-hero-apply-icon', icon: 'arrow' -%}
+                </a>
+                {%- if section.settings.apply_note != blank -%}
+                  <p class="qha__note">
+                    {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                    {{ section.settings.apply_note | escape }}
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              {%- form 'create_customer', novalidate: 'novalidate', id: form_id -%}
+                <input type="hidden" name="return_to" value="{{ section.settings.return_to }}">
+                {{ form.errors | default_errors }}
+
+                <div class="qha__banner" data-qha-banner>Please check the highlighted fields below.</div>
+
+                <div class="qha__names">
+                  <div class="qha__field">
+                    <label class="visually-hidden" for="{{ form_id }}-first">First name</label>
+                    <input
+                      class="qha__input"
+                      type="text"
+                      id="{{ form_id }}-first"
+                      name="customer[first_name]"
+                      placeholder="First Name"
+                      autocomplete="given-name"
+                      data-qha-validate="required"
+                      data-qha-message="Please enter your first name."
+                      {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+                    <div class="qha__error" data-qha-error></div>
+                  </div>
+                  <div class="qha__field">
+                    <label class="visually-hidden" for="{{ form_id }}-last">Last name</label>
+                    <input
+                      class="qha__input"
+                      type="text"
+                      id="{{ form_id }}-last"
+                      name="customer[last_name]"
+                      placeholder="Last Name"
+                      autocomplete="family-name"
+                      data-qha-validate="required"
+                      data-qha-message="Please enter your last name."
+                      {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+                    <div class="qha__error" data-qha-error></div>
+                  </div>
+                </div>
+
+                <div class="qha__field">
+                  <label class="visually-hidden" for="{{ form_id }}-email">Email</label>
+                  <input
+                    class="qha__input"
+                    type="email"
+                    id="{{ form_id }}-email"
+                    name="customer[email]"
+                    placeholder="Email"
+                    autocomplete="email"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    data-qha-validate="email"
+                    data-qha-message="Please enter a valid email address."
+                    {% if form.email %}value="{{ form.email }}"{% endif %}>
+                  <div class="qha__error" data-qha-error></div>
+                </div>
+
+                <div class="qha__field">
+                  <label class="visually-hidden" for="{{ form_id }}-password">Password</label>
+                  <div class="qha__pw">
+                    <input
+                      class="qha__input"
+                      type="password"
+                      id="{{ form_id }}-password"
+                      name="customer[password]"
+                      placeholder="Password"
+                      autocomplete="new-password"
+                      data-qha-validate="password"
+                      data-qha-message="Please create a password with at least 5 characters.">
+                    <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
+                      {%- render 'quity-hero-apply-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                      {%- render 'quity-hero-apply-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                    </button>
+                  </div>
+                  <div class="qha__error" data-qha-error></div>
+                </div>
+
+                <div class="qha__field">
+                  <label class="visually-hidden" for="{{ form_id }}-confirm">Confirm password</label>
+                  <div class="qha__pw">
+                    {%- comment -%}
+                      Confirmation is a client-side check only, so it carries no
+                      `name` and is never posted to Shopify.
+                    {%- endcomment -%}
+                    <input
+                      class="qha__input"
+                      type="password"
+                      id="{{ form_id }}-confirm"
+                      placeholder="Confirm Password"
+                      autocomplete="new-password"
+                      data-qha-validate="confirm"
+                      data-qha-confirms="{{ form_id }}-password"
+                      data-qha-message="Passwords do not match.">
+                    <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
+                      {%- render 'quity-hero-apply-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                      {%- render 'quity-hero-apply-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                    </button>
+                  </div>
+                  <div class="qha__error" data-qha-error></div>
+                </div>
+
+                <button type="submit" class="qha__submit">{{ section.settings.apply_button | escape }}</button>
+
+                {%- if section.settings.apply_note != blank -%}
+                  <p class="qha__note">
+                    {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                    {{ section.settings.apply_note | escape }}
+                  </p>
+                {%- endif -%}
+              {%- endform -%}
+
+              <p class="qha__alt">
+                Already a member? <a href="/account/login">Log in</a>
+              </p>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%} Pane 2 — upload script {%- endcomment -%}
+        <div
+          class="qha__pane"
+          id="{{ pane_script_id }}"
+          role="tabpanel"
+          aria-labelledby="{{ tab_script_id }}"
+          data-qha-pane
+          hidden>
+          <div class="qha__pitch">
+            <h2 class="qha__pitch-h">{{ section.settings.script_heading }}</h2>
+            {%- if section.settings.script_sub != blank -%}
+              <p class="qha__pitch-sub">{{ section.settings.script_sub | escape }}</p>
+            {%- endif -%}
+
+            {%- assign script_promise_blocks = section.blocks | where: 'type', 'script_promise' -%}
+            {%- if script_promise_blocks.size > 0 -%}
+              <div class="qha__rule"></div>
+              <ul class="qha__promise">
+                {%- for block in script_promise_blocks -%}
+                  <li {{ block.shopify_attributes }}>
+                    {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
+                    <span>{{ block.settings.text | escape }}</span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+
+          <div class="qha__form">
+            {%- assign step_blocks = section.blocks | where: 'type', 'step' -%}
+            {%- if step_blocks.size > 0 -%}
+              <ul class="qha__steps">
+                {%- for block in step_blocks -%}
+                  <li {{ block.shopify_attributes }}>
+                    <span class="qha__step-idx">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                    <div>
+                      <div class="qha__step-title">{{ block.settings.title | escape }}</div>
+                      {%- if block.settings.body != blank -%}
+                        <p class="qha__step-sub">{{ block.settings.body | escape }}</p>
+                      {%- endif -%}
+                    </div>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if section.settings.script_button != blank -%}
+              <a href="{% if customer %}{{ section.settings.script_url_customer }}{% else %}{{ section.settings.script_url }}{% endif %}" class="qha__submit">
+                {{ section.settings.script_button | escape }}
+                {%- render 'quity-hero-apply-icon', icon: 'arrow' -%}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.script_button_alt != blank and customer == null -%}
+              <a href="{{ section.settings.script_url_alt }}" class="qha__submit qha__submit--ghost">
+                {{ section.settings.script_button_alt | escape }}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.script_note != blank -%}
+              <p class="qha__note">
+                {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                {{ section.settings.script_note | escape }}
+              </p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('qha-{{ section.id }}');
+    if (!root) return;
+
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    /* ---- Tabs ---- */
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-qha-tab]'));
+    var panes = Array.prototype.slice.call(root.querySelectorAll('[data-qha-pane]'));
+
+    function selectTab(index) {
+      tabs.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      panes.forEach(function (pane, i) {
+        if (i === index) { pane.removeAttribute('hidden'); }
+        else { pane.setAttribute('hidden', ''); }
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { selectTab(i); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        if (next === null) return;
+        e.preventDefault();
+        selectTab(next);
+        tabs[next].focus();
+      });
+    });
+
+    /* ---- Password reveal ---- */
+    Array.prototype.slice.call(root.querySelectorAll('[data-qha-eye]')).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = btn.parentNode.querySelector('input');
+        if (!input) return;
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+        btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+    });
+
+    /* ---- Inline validation ----
+       The form carries `novalidate`, so the native browser bubble never
+       shows. Mirrors the per-field error UX of customers/register.liquid. */
+    var form = document.getElementById('{{ form_id }}');
+    if (!form) return;
+    var banner = form.querySelector('[data-qha-banner]');
+    var fields = Array.prototype.slice.call(form.querySelectorAll('[data-qha-validate]'));
+
+    function errorFor(input) {
+      var field = input.closest('.qha__field');
+      return field ? field.querySelector('[data-qha-error]') : null;
+    }
+
+    function validate(input) {
+      var rule = input.getAttribute('data-qha-validate');
+      var value = input.value || '';
+      if (rule === 'required') {
+        return value.trim() ? null : input.getAttribute('data-qha-message');
+      }
+      if (rule === 'email') {
+        value = value.trim();
+        if (!value) return 'Please enter your email address.';
+        return EMAIL_RE.test(value) ? null : input.getAttribute('data-qha-message');
+      }
+      if (rule === 'password') {
+        if (!value) return 'Please create a password.';
+        return value.length >= 5 ? null : input.getAttribute('data-qha-message');
+      }
+      if (rule === 'confirm') {
+        var source = document.getElementById(input.getAttribute('data-qha-confirms'));
+        if (!value) return 'Please confirm your password.';
+        return source && source.value === value ? null : input.getAttribute('data-qha-message');
+      }
+      return null;
+    }
+
+    function setError(input, message) {
+      var el = errorFor(input);
+      input.classList.add('qha__input--error');
+      if (el) { el.textContent = message; el.classList.add('show'); }
+    }
+
+    function clearError(input) {
+      var el = errorFor(input);
+      input.classList.remove('qha__input--error');
+      if (el) el.classList.remove('show');
+    }
+
+    form.addEventListener('submit', function (e) {
+      var firstInvalid = null;
+      fields.forEach(function (input) {
+        var message = validate(input);
+        if (message) {
+          setError(input, message);
+          if (!firstInvalid) firstInvalid = input;
+        } else {
+          clearError(input);
+        }
+      });
+      if (firstInvalid) {
+        e.preventDefault();
+        if (banner) banner.classList.add('show');
+        firstInvalid.focus();
+      } else if (banner) {
+        banner.classList.remove('show');
+      }
+    });
+
+    fields.forEach(function (input) {
+      input.addEventListener('input', function () {
+        if (validate(input)) return;
+        clearError(input);
+        if (banner && !form.querySelector('.qha__input--error')) banner.classList.remove('show');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Quity hero apply",
+  "class": "index-section qha-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Background type",
+      "default": "image",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Also used as the video poster."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image (mobile)"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Background video"
+    },
+    {
+      "type": "header",
+      "content": "Headline"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Australia's leading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (HTML)",
+      "info": "Wrap words in <em> for the italic serif accent.",
+      "default": "Quit Smoking &amp; <em>Nicotine Vaping</em> Clinic."
+    },
+    {
+      "type": "text",
+      "id": "lead",
+      "label": "Sub-heading",
+      "default": "Your journey starts here, from the comfort of your home."
+    },
+    {
+      "type": "header",
+      "content": "Tabs"
+    },
+    {
+      "type": "text",
+      "id": "tab_apply_label",
+      "label": "First tab label",
+      "default": "Apply now"
+    },
+    {
+      "type": "text",
+      "id": "tab_script_label",
+      "label": "Second tab label",
+      "default": "Upload script"
+    },
+    {
+      "type": "text",
+      "id": "tab_badge",
+      "label": "Tab badge",
+      "default": "Free"
+    },
+    {
+      "type": "header",
+      "content": "Apply tab"
+    },
+    {
+      "type": "textarea",
+      "id": "apply_heading",
+      "label": "Heading (HTML)",
+      "default": "Apply for <em>no cost</em> from home"
+    },
+    {
+      "type": "text",
+      "id": "apply_sub",
+      "label": "Sub-heading",
+      "default": "Create your account and start online intake."
+    },
+    {
+      "type": "text",
+      "id": "apply_button",
+      "label": "Button label",
+      "default": "Apply for free"
+    },
+    {
+      "type": "text",
+      "id": "apply_note",
+      "label": "Note under the button",
+      "default": "Free to apply. No charge until a doctor approves."
+    },
+    {
+      "type": "text",
+      "id": "return_to",
+      "label": "Redirect after sign-up",
+      "default": "/account"
+    },
+    {
+      "type": "header",
+      "content": "Upload script tab"
+    },
+    {
+      "type": "textarea",
+      "id": "script_heading",
+      "label": "Heading (HTML)",
+      "default": "Already have a <em>prescription</em>?"
+    },
+    {
+      "type": "text",
+      "id": "script_sub",
+      "label": "Sub-heading",
+      "default": "Send us your script and our pharmacy dispenses it."
+    },
+    {
+      "type": "text",
+      "id": "script_button",
+      "label": "Button label",
+      "default": "Create account & upload"
+    },
+    {
+      "type": "url",
+      "id": "script_url",
+      "label": "Button link"
+    },
+    {
+      "type": "url",
+      "id": "script_url_customer",
+      "label": "Button link (signed-in customers)"
+    },
+    {
+      "type": "text",
+      "id": "script_button_alt",
+      "label": "Secondary button label",
+      "default": "Log in to upload"
+    },
+    {
+      "type": "url",
+      "id": "script_url_alt",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "script_note",
+      "label": "Note under the buttons",
+      "default": "Scripts are checked by an Australian-registered pharmacist."
+    },
+    {
+      "type": "header",
+      "content": "Signed-in customers"
+    },
+    {
+      "type": "textarea",
+      "id": "signedin_heading",
+      "label": "Heading (HTML)",
+      "default": "You're <em>signed in</em>"
+    },
+    {
+      "type": "text",
+      "id": "signedin_sub",
+      "label": "Sub-heading",
+      "default": "Pick up your application where you left off."
+    },
+    {
+      "type": "text",
+      "id": "signedin_button",
+      "label": "Button label",
+      "default": "Continue application"
+    },
+    {
+      "type": "url",
+      "id": "signedin_url",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust pill",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "shield",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "check", "label": "Check" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "star", "label": "Star" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "upload", "label": "Upload" },
+            { "value": "script", "label": "Script" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Australian certified"
+        }
+      ]
+    },
+    {
+      "type": "promise",
+      "name": "Apply tab — promise",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "clock",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "check", "label": "Check" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "star", "label": "Star" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "upload", "label": "Upload" },
+            { "value": "script", "label": "Script" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Doctor reviewed within 24 hours"
+        }
+      ]
+    },
+    {
+      "type": "script_promise",
+      "name": "Script tab — promise",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "script",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "check", "label": "Check" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "target", "label": "Target" },
+            { "value": "star", "label": "Star" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "upload", "label": "Upload" },
+            { "value": "script", "label": "Script" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Any valid Australian script accepted"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Script tab — step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Create your account"
+        },
+        {
+          "type": "text",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quity hero apply",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "shield", "text": "Australian certified" } },
+        { "type": "trust", "settings": { "icon": "heart", "text": "Free to apply" } },
+        { "type": "trust", "settings": { "icon": "target", "text": "Quick approval" } },
+        { "type": "promise", "settings": { "icon": "clock", "text": "Doctor reviewed within 24 hours" } },
+        { "type": "promise", "settings": { "icon": "truck", "text": "If approved, free express shipping on first order" } },
+        { "type": "script_promise", "settings": { "icon": "script", "text": "Any valid Australian script accepted" } },
+        { "type": "script_promise", "settings": { "icon": "truck", "text": "Free express shipping on your first order" } },
+        { "type": "step", "settings": { "title": "Create your account", "body": "Takes about a minute — no cost to sign up." } },
+        { "type": "step", "settings": { "title": "Upload your script", "body": "Attach a photo or PDF of your prescription." } },
+        { "type": "step", "settings": { "title": "We dispense and ship", "body": "Our pharmacists check it and send your order." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
