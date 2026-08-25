@@ -1,14 +1,18 @@
 /* ============================================================
-   Quity Hero Apply — homepage hero with inline application card
+   Quity Apply Card — the tabbed application card
    ------------------------------------------------------------
-   Full-bleed hero media + headline, with an elevated tabbed card
-   docked beneath it: "Apply now" (account creation) and
-   "Upload script". Scoped .qha- classes, used by
-   sections/quity-hero-apply.liquid.
+   Sits under the homepage hero and docks into it. Renders no
+   background media and no headline of its own — the hero above
+   owns both. Scoped .qha- classes, used by
+   sections/quity-apply-card.liquid.
 
    Fonts (Jost / JetBrains Mono / Newsreader) are loaded in
    layout/theme.liquid. Colours are hard-coded Quity tokens, the
    same approach as assets/product-store.css.
+
+   The tab chips sit on whatever the hero renders behind them, so
+   they are painted in opaque paper tones rather than translucent
+   white — they must stay legible over a light or a dark hero.
    ============================================================ */
 
 .qha {
@@ -20,10 +24,9 @@
   --qha-coral: #E55B4F;
 
   position: relative;
-  isolation: isolate;
-  background: var(--qha-ink);
+  z-index: 2;
   font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
-  color: #F4F2EC;
+  color: var(--qha-ink);
   line-height: normal;
   -webkit-font-smoothing: antialiased;
 }
@@ -52,99 +55,22 @@
    `svg { fill: currentColor; width:16px; height:16px }` sizing */
 .qha svg { width: auto; height: auto; fill: none; }
 
-/* --- Background media --- */
-.qha__media {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-}
-.qha__media img,
-.qha__media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.qha__media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(15, 17, 16, 0.62) 0%, rgba(15, 17, 16, 0.40) 42%, rgba(15, 17, 16, 0.72) 100%);
-}
-.qha__media--mobile { display: none; }
-
 /* --- Shell --- */
 .qha__inner {
   position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 56px 40px 64px;
+  /* Mirrors ss-hero-pro's container: that section's `width: page` resolves
+     to no max-width (its --page-width var is never defined), so the hero is
+     full-bleed with its horizontal padding alone. Matching it here is what
+     lines the card's left edge up with the hero headline. */
+  padding: 0 var(--qha-pad-x-mobile, 1.5rem) var(--qha-pad-bottom, 64px);
+  /* pulled up over the hero above; the section's own stacking context
+     (z-index: 2) keeps the card over the hero's media */
+  margin-top: calc(var(--qha-overlap-mobile, 24px) * -1);
 }
-
-/* --- Headline block --- */
-.qha__copy { max-width: 760px; }
-
-.qha__eyebrow {
-  margin: 0 0 16px;
-  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(244, 242, 236, 0.72);
-}
-
-.qha__h1 {
-  margin: 0;
-  font-weight: 400;
-  font-size: clamp(38px, 4.6vw, 60px);
-  line-height: 1.04;
-  color: #FFFFFF;
-}
-.qha__h1 em {
-  font-family: 'Newsreader', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  color: #F2A79E;
-}
-
-.qha__lead {
-  margin: 18px 0 0;
-  max-width: 560px;
-  font-size: 19px;
-  font-weight: 300;
-  line-height: 1.5;
-  color: rgba(244, 242, 236, 0.86);
-}
-
-.qha__trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 26px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.qha__trust li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.92);
-}
-.qha__trust svg { width: 15px; height: 15px; flex: none; }
 
 /* --- Tabs --- */
 .qha__panel {
-  margin-top: 44px;
-  max-width: 1140px;
+  max-width: var(--qha-panel-width, 1140px);
 }
 
 .qha__tabs {
@@ -164,18 +90,16 @@
   margin-bottom: -14px;
   border: 0;
   border-radius: 16px 16px 0 0;
-  background: rgba(255, 255, 255, 0.13);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #E8E4D9;
   font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(15, 17, 16, 0.62);
   cursor: pointer;
   transition: background 0.18s ease, color 0.18s ease;
 }
-.qha__tab:hover { background: rgba(255, 255, 255, 0.2); }
+.qha__tab:hover { background: #EFECE3; color: var(--qha-ink); }
 .qha__tab[aria-selected='true'] {
   background: var(--qha-paper);
   color: var(--qha-ink);
@@ -473,11 +397,12 @@
    Responsive
    ============================================================ */
 
-/* The transparent header is absolutely positioned over the hero on
-   desktop only (see snippets/header-oncss.liquid), so the extra top
-   padding is scoped to the same breakpoint. */
 @media (min-width: 992px) {
-  .qha__inner { padding-top: 150px; }
+  .qha__inner {
+    margin-top: calc(var(--qha-overlap, 56px) * -1);
+    padding-left: var(--qha-pad-x, 5rem);
+    padding-right: var(--qha-pad-x, 5rem);
+  }
 }
 
 @media (max-width: 1100px) {
@@ -485,10 +410,6 @@
 }
 
 @media (max-width: 900px) {
-  .qha__inner { padding: 44px 20px 52px; }
-  .qha__lead { font-size: 17px; }
-
-  .qha__panel { margin-top: 34px; }
   .qha__tabs {
     padding-left: 4px;
     overflow-x: auto;
@@ -526,11 +447,6 @@
   }
   .qha__tab-badge { padding: 3px 7px; font-size: 9px; letter-spacing: 0.06em; }
 
-  .qha__media--desktop { display: none; }
-  .qha__media--mobile { display: block; }
-  .qha__h1 { font-size: clamp(32px, 8.6vw, 40px); }
-  .qha__trust { gap: 8px; }
-  .qha__trust li { font-size: 12px; padding: 6px 12px; }
   .qha__names { grid-template-columns: 1fr; }
   .qha__names .qha__field + .qha__field { margin-top: 12px; }
 }

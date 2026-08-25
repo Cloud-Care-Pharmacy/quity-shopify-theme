@@ -1,31 +1,31 @@
 {%- comment -%}
-  Quity Hero Apply — homepage hero with an inline application card
-  ---------------------------------------------------------------
-  Full-bleed hero media (image or video) carrying the headline, with
-  an elevated card docked beneath it. The card is tabbed:
+  Quity Apply Card — the tabbed application card
+  ----------------------------------------------
+  Sits directly under the homepage hero (sections/ss-hero-pro.liquid)
+  and docks into it, so the first step of an application happens on the
+  homepage instead of behind a click through to /account/register.
 
-    1. "Apply now"     — a real `create_customer` form so a visitor
-                         starts the application from the homepage
-                         instead of being sent to /account/register.
+  This section deliberately renders NO background media and NO headline
+  — the hero above owns both. `overlap` pulls the card up over the
+  hero's bottom edge; keep it small enough to clear the hero's own
+  buttons.
+
+  Two tabs:
+    1. "Apply now"     — a real `create_customer` form.
     2. "Upload script" — the path for people who already hold a
                          prescription: numbered steps plus CTAs.
 
-  When a customer is already signed in both panes collapse to a
-  "continue your application" state rather than showing a sign-up form.
+  Signed-in customers get a "continue application" CTA on both panes
+  rather than a sign-up form.
 
-  Styles: assets/quity-hero-apply.css (.qha- scope). Behavior is the
+  Styles: assets/quity-apply-card.css (.qha- scope). Behavior is the
   inline script at the bottom of this file (tabs, password reveal,
   inline validation).
 {%- endcomment -%}
 
-{{ 'quity-hero-apply.css' | asset_url | stylesheet_tag }}
+{{ 'quity-apply-card.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign media_type = section.settings.media_type
-  assign image = section.settings.image
-  assign image_mobile = section.settings.image_mobile
-  assign bg_video = section.settings.bg_video
-
   assign tab_apply_id = 'qha-tab-apply-' | append: section.id
   assign tab_script_id = 'qha-tab-script-' | append: section.id
   assign pane_apply_id = 'qha-pane-apply-' | append: section.id
@@ -33,76 +33,19 @@
   assign form_id = 'qha-form-' | append: section.id
 -%}
 
+{%- style -%}
+  #qha-{{ section.id }} {
+    --qha-overlap: {{ section.settings.overlap }}px;
+    --qha-overlap-mobile: {{ section.settings.overlap_mobile }}px;
+    --qha-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --qha-pad-x: {{ section.settings.padding_horizontal }}rem;
+    --qha-pad-x-mobile: {{ section.settings.padding_horizontal_mobile }}rem;
+    --qha-panel-width: {{ section.settings.panel_max_width }}px;
+  }
+{%- endstyle -%}
+
 <section class="qha" id="qha-{{ section.id }}" data-qha>
-  {%- comment -%} Background media {%- endcomment -%}
-  <div class="qha__media">
-    {%- case media_type -%}
-      {%- when 'video' -%}
-        {%- if bg_video != blank -%}
-          <video
-            src="{{ bg_video.sources[1].url | default: bg_video.sources[0].url }}"
-            poster="{% if image != blank %}{{ image | image_url: width: 1600 }}{% endif %}"
-            muted
-            autoplay
-            playsinline
-            loop
-            preload="metadata"></video>
-        {%- endif -%}
-      {%- when 'image' -%}
-        {%- if image != blank -%}
-          <img
-            class="qha__media--desktop"
-            src="{{ image | image_url: width: 1800 }}"
-            srcset="{{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1400 }} 1400w, {{ image | image_url: width: 1800 }} 1800w, {{ image | image_url: width: 2400 }} 2400w"
-            sizes="100vw"
-            width="{{ image.width }}"
-            height="{{ image.height }}"
-            alt="{{ image.alt | escape }}"
-            loading="eager"
-            fetchpriority="high">
-        {%- endif -%}
-        {%- if image_mobile != blank -%}
-          <img
-            class="qha__media--mobile"
-            src="{{ image_mobile | image_url: width: 900 }}"
-            srcset="{{ image_mobile | image_url: width: 600 }} 600w, {{ image_mobile | image_url: width: 900 }} 900w, {{ image_mobile | image_url: width: 1200 }} 1200w"
-            sizes="100vw"
-            width="{{ image_mobile.width }}"
-            height="{{ image_mobile.height }}"
-            alt="{{ image_mobile.alt | escape }}"
-            loading="eager">
-        {%- endif -%}
-    {%- endcase -%}
-  </div>
-
   <div class="qha__inner">
-    {%- comment -%} Headline {%- endcomment -%}
-    <div class="qha__copy">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="qha__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
-
-      {%- if section.settings.heading != blank -%}
-        <h1 class="qha__h1">{{ section.settings.heading }}</h1>
-      {%- endif -%}
-
-      {%- if section.settings.lead != blank -%}
-        <p class="qha__lead">{{ section.settings.lead | escape }}</p>
-      {%- endif -%}
-
-      {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
-      {%- if trust_blocks.size > 0 -%}
-        <ul class="qha__trust">
-          {%- for block in trust_blocks -%}
-            <li {{ block.shopify_attributes }}>
-              {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
-              {{ block.settings.text | escape }}
-            </li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-    </div>
-
     {%- comment -%} Application card {%- endcomment -%}
     <div class="qha__panel">
       <div class="qha__tabs" role="tablist" aria-label="How to get started">
@@ -163,7 +106,7 @@
               <ul class="qha__promise">
                 {%- for block in promise_blocks -%}
                   <li {{ block.shopify_attributes }}>
-                    {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
+                    {%- render 'quity-apply-card-icon', icon: block.settings.icon -%}
                     <span>{{ block.settings.text | escape }}</span>
                   </li>
                 {%- endfor -%}
@@ -176,11 +119,11 @@
               <div class="qha__signedin">
                 <a href="{{ section.settings.signedin_url }}" class="qha__submit">
                   {{ section.settings.signedin_button | escape }}
-                  {%- render 'quity-hero-apply-icon', icon: 'arrow' -%}
+                  {%- render 'quity-apply-card-icon', icon: 'arrow' -%}
                 </a>
                 {%- if section.settings.apply_note != blank -%}
                   <p class="qha__note">
-                    {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                    {%- render 'quity-apply-card-icon', icon: 'lock' -%}
                     {{ section.settings.apply_note | escape }}
                   </p>
                 {%- endif -%}
@@ -253,8 +196,8 @@
                       data-qha-validate="password"
                       data-qha-message="Please create a password with at least 5 characters.">
                     <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
-                      {%- render 'quity-hero-apply-icon', icon: 'eye', class: 'qha__eye-on' -%}
-                      {%- render 'quity-hero-apply-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                      {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                      {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
                     </button>
                   </div>
                   <div class="qha__error" data-qha-error></div>
@@ -277,8 +220,8 @@
                       data-qha-confirms="{{ form_id }}-password"
                       data-qha-message="Passwords do not match.">
                     <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
-                      {%- render 'quity-hero-apply-icon', icon: 'eye', class: 'qha__eye-on' -%}
-                      {%- render 'quity-hero-apply-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                      {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                      {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
                     </button>
                   </div>
                   <div class="qha__error" data-qha-error></div>
@@ -288,7 +231,7 @@
 
                 {%- if section.settings.apply_note != blank -%}
                   <p class="qha__note">
-                    {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                    {%- render 'quity-apply-card-icon', icon: 'lock' -%}
                     {{ section.settings.apply_note | escape }}
                   </p>
                 {%- endif -%}
@@ -321,7 +264,7 @@
               <ul class="qha__promise">
                 {%- for block in script_promise_blocks -%}
                   <li {{ block.shopify_attributes }}>
-                    {%- render 'quity-hero-apply-icon', icon: block.settings.icon -%}
+                    {%- render 'quity-apply-card-icon', icon: block.settings.icon -%}
                     <span>{{ block.settings.text | escape }}</span>
                   </li>
                 {%- endfor -%}
@@ -350,7 +293,7 @@
             {%- if section.settings.script_button != blank -%}
               <a href="{% if customer %}{{ section.settings.script_url_customer }}{% else %}{{ section.settings.script_url }}{% endif %}" class="qha__submit">
                 {{ section.settings.script_button | escape }}
-                {%- render 'quity-hero-apply-icon', icon: 'arrow' -%}
+                {%- render 'quity-apply-card-icon', icon: 'arrow' -%}
               </a>
             {%- endif -%}
 
@@ -362,7 +305,7 @@
 
             {%- if section.settings.script_note != blank -%}
               <p class="qha__note">
-                {%- render 'quity-hero-apply-icon', icon: 'lock' -%}
+                {%- render 'quity-apply-card-icon', icon: 'lock' -%}
                 {{ section.settings.script_note | escape }}
               </p>
             {%- endif -%}
@@ -501,61 +444,74 @@
 
 {% schema %}
 {
-  "name": "Quity hero apply",
+  "name": "Quity apply card",
   "class": "index-section qha-section",
   "settings": [
     {
       "type": "header",
-      "content": "Background"
+      "content": "Layout"
     },
     {
-      "type": "select",
-      "id": "media_type",
-      "label": "Background type",
-      "default": "image",
-      "options": [
-        { "value": "image", "label": "Image" },
-        { "value": "video", "label": "Video" }
-      ]
+      "type": "range",
+      "id": "overlap",
+      "label": "Overlap into the hero above",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 56,
+      "info": "How far the card is pulled up over the hero. Keep it clear of the hero's own buttons."
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background image",
-      "info": "Also used as the video poster."
+      "type": "range",
+      "id": "overlap_mobile",
+      "label": "Overlap into the hero (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
     },
     {
-      "type": "image_picker",
-      "id": "image_mobile",
-      "label": "Background image (mobile)"
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     },
     {
-      "type": "video",
-      "id": "bg_video",
-      "label": "Background video"
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 5,
+      "info": "Match the hero above so the card's left edge lines up with the headline."
     },
     {
-      "type": "header",
-      "content": "Headline"
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "label": "Horizontal padding (mobile)",
+      "min": 0,
+      "max": 6,
+      "step": 0.5,
+      "unit": "rem",
+      "default": 1.5
     },
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Australia's leading"
-    },
-    {
-      "type": "textarea",
-      "id": "heading",
-      "label": "Heading (HTML)",
-      "info": "Wrap words in <em> for the italic serif accent.",
-      "default": "Quit Smoking &amp; <em>Nicotine Vaping</em> Clinic."
-    },
-    {
-      "type": "text",
-      "id": "lead",
-      "label": "Sub-heading",
-      "default": "Your journey starts here, from the comfort of your home."
+      "type": "range",
+      "id": "panel_max_width",
+      "label": "Card width",
+      "min": 700,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1140
     },
     {
       "type": "header",
@@ -692,36 +648,6 @@
   ],
   "blocks": [
     {
-      "type": "trust",
-      "name": "Trust pill",
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "default": "shield",
-          "options": [
-            { "value": "shield", "label": "Shield" },
-            { "value": "check", "label": "Check" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "truck", "label": "Delivery" },
-            { "value": "heart", "label": "Heart" },
-            { "value": "target", "label": "Target" },
-            { "value": "star", "label": "Star" },
-            { "value": "lock", "label": "Lock" },
-            { "value": "upload", "label": "Upload" },
-            { "value": "script", "label": "Script" }
-          ]
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Australian certified"
-        }
-      ]
-    },
-    {
       "type": "promise",
       "name": "Apply tab — promise",
       "settings": [
@@ -731,16 +657,46 @@
           "label": "Icon",
           "default": "clock",
           "options": [
-            { "value": "shield", "label": "Shield" },
-            { "value": "check", "label": "Check" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "truck", "label": "Delivery" },
-            { "value": "heart", "label": "Heart" },
-            { "value": "target", "label": "Target" },
-            { "value": "star", "label": "Star" },
-            { "value": "lock", "label": "Lock" },
-            { "value": "upload", "label": "Upload" },
-            { "value": "script", "label": "Script" }
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "upload",
+              "label": "Upload"
+            },
+            {
+              "value": "script",
+              "label": "Script"
+            }
           ]
         },
         {
@@ -761,16 +717,46 @@
           "label": "Icon",
           "default": "script",
           "options": [
-            { "value": "shield", "label": "Shield" },
-            { "value": "check", "label": "Check" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "truck", "label": "Delivery" },
-            { "value": "heart", "label": "Heart" },
-            { "value": "target", "label": "Target" },
-            { "value": "star", "label": "Star" },
-            { "value": "lock", "label": "Lock" },
-            { "value": "upload", "label": "Upload" },
-            { "value": "script", "label": "Script" }
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "upload",
+              "label": "Upload"
+            },
+            {
+              "value": "script",
+              "label": "Script"
+            }
           ]
         },
         {
@@ -801,18 +787,57 @@
   ],
   "presets": [
     {
-      "name": "Quity hero apply",
+      "name": "Quity apply card",
       "blocks": [
-        { "type": "trust", "settings": { "icon": "shield", "text": "Australian certified" } },
-        { "type": "trust", "settings": { "icon": "heart", "text": "Free to apply" } },
-        { "type": "trust", "settings": { "icon": "target", "text": "Quick approval" } },
-        { "type": "promise", "settings": { "icon": "clock", "text": "Doctor reviewed within 24 hours" } },
-        { "type": "promise", "settings": { "icon": "truck", "text": "If approved, free express shipping on first order" } },
-        { "type": "script_promise", "settings": { "icon": "script", "text": "Any valid Australian script accepted" } },
-        { "type": "script_promise", "settings": { "icon": "truck", "text": "Free express shipping on your first order" } },
-        { "type": "step", "settings": { "title": "Create your account", "body": "Takes about a minute — no cost to sign up." } },
-        { "type": "step", "settings": { "title": "Upload your script", "body": "Attach a photo or PDF of your prescription." } },
-        { "type": "step", "settings": { "title": "We dispense and ship", "body": "Our pharmacists check it and send your order." } }
+        {
+          "type": "promise",
+          "settings": {
+            "icon": "clock",
+            "text": "Doctor reviewed within 24 hours"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "icon": "truck",
+            "text": "If approved, free express shipping on first order"
+          }
+        },
+        {
+          "type": "script_promise",
+          "settings": {
+            "icon": "script",
+            "text": "Any valid Australian script accepted"
+          }
+        },
+        {
+          "type": "script_promise",
+          "settings": {
+            "icon": "truck",
+            "text": "Free express shipping on your first order"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Create your account",
+            "body": "Takes about a minute — no cost to sign up."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Upload your script",
+            "body": "Attach a photo or PDF of your prescription."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "We dispense and ship",
+            "body": "Our pharmacists check it and send your order."
+          }
+        }
       ]
     }
   ]

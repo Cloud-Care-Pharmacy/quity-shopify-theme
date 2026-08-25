@@ -278,8 +278,7 @@
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": false
-      },
-      "disabled": true
+      }
     },
     "ss_image_with_text_24_c3iyWm": {
       "type": "ss-image-with-text-24",
@@ -1123,30 +1122,9 @@
         "marginmobile": "0px 0px 0px 0px"
       }
     },
-    "quity_hero_apply": {
-      "type": "quity-hero-apply",
+    "quity_apply_card": {
+      "type": "quity-apply-card",
       "blocks": {
-        "trust_certified": {
-          "type": "trust",
-          "settings": {
-            "icon": "shield",
-            "text": "Australian certified"
-          }
-        },
-        "trust_free": {
-          "type": "trust",
-          "settings": {
-            "icon": "heart",
-            "text": "Free to apply"
-          }
-        },
-        "trust_approval": {
-          "type": "trust",
-          "settings": {
-            "icon": "target",
-            "text": "Quick approval"
-          }
-        },
         "promise_review": {
           "type": "promise",
           "settings": {
@@ -1198,9 +1176,6 @@
         }
       },
       "block_order": [
-        "trust_certified",
-        "trust_free",
-        "trust_approval",
         "promise_review",
         "promise_shipping",
         "script_promise_accepted",
@@ -1210,11 +1185,9 @@
         "step_dispense"
       ],
       "settings": {
-        "media_type": "video",
-        "bg_video": "shopify://files/videos/shutterstock_1097870525.mov",
-        "eyebrow": "Australia’s leading",
-        "heading": "Quit Smoking &amp; <em>Nicotine Vaping</em> Clinic.",
-        "lead": "Your journey starts here, from the comfort of your home.",
+        "overlap": 56,
+        "overlap_mobile": 24,
+        "padding_bottom": 64,
         "tab_apply_label": "Apply now",
         "tab_script_label": "Upload script",
         "tab_badge": "Free",
@@ -1239,8 +1212,8 @@
     }
   },
   "order": [
-    "quity_hero_apply",
     "ss_hero_pro_h4mnMh",
+    "quity_apply_card",
     "ss_image_with_text_24_c3iyWm",
     "line_ADUkzH",
     "service_3a8Uqf",
