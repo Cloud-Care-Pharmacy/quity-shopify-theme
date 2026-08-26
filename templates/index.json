@@ -55,39 +55,6 @@
             "heading_accent_color": "#343a40"
           }
         },
-        "review_8p7gmR": {
-          "type": "review",
-          "settings": {
-            "stars_count": 4.5,
-            "stars_size": 16,
-            "stars_size_mobile": 14,
-            "stars_gap": 2,
-            "review": "<p>Rated 4.8/5 by 100+ reviews</p>",
-            "review_custom": false,
-            "review_font": "josefin_sans_n4",
-            "review_size": 14,
-            "review_size_mobile": 12,
-            "review_advanced": true,
-            "review_height": 130,
-            "review_mt": 16,
-            "review_mt_mobile": 0,
-            "background": true,
-            "review_bg_opacity": 0.3,
-            "enable_blur": true,
-            "review_radius": 10,
-            "review_border_thickness": 1,
-            "review_padding_horizontal": 12,
-            "review_padding_horizontal_mobile": 12,
-            "review_padding_vertical": 8,
-            "review_padding_vertical_mobile": 8,
-            "review_color": "#7d8618",
-            "review_bg_color": "#ffffff",
-            "review_border_color": "rgba(0,0,0,0)",
-            "stars_color": "#ffffff",
-            "stars_bg_color": "#00b67a",
-            "stars_bg_half_color": "#dddddd"
-          }
-        },
         "text_DC9pfW": {
           "type": "text",
           "settings": {
@@ -107,7 +74,6 @@
       "block_order": [
         "caption_EdALxA",
         "heading_4AQxW4",
-        "review_8p7gmR",
         "text_DC9pfW"
       ],
       "name": "Hero",
@@ -1075,8 +1041,8 @@
         "step_dispense"
       ],
       "settings": {
-        "overlap": 190,
-        "overlap_mobile": 88,
+        "overlap": 224,
+        "overlap_mobile": 113,
         "padding_bottom": 64,
         "tab_apply_label": "Apply now",
         "tab_script_label": "Upload script",
