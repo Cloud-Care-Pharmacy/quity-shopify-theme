@@ -79,8 +79,8 @@
       "name": "Hero",
       "settings": {
         "hero_height": "fixed_height",
-        "hero_fixed_height": 800,
-        "hero_fixed_height_mobile": 600,
+        "hero_fixed_height": 480,
+        "hero_fixed_height_mobile": 400,
         "content_max_width": 60,
         "enable_split_layout": false,
         "content_align": "left",
@@ -1041,8 +1041,8 @@
         "step_dispense"
       ],
       "settings": {
-        "overlap": 224,
-        "overlap_mobile": 113,
+        "overlap": 84,
+        "overlap_mobile": 38,
         "padding_bottom": 64,
         "tab_apply_label": "Apply now",
         "tab_script_label": "Upload script",

@@ -183,48 +183,50 @@
                   <div class="qha__error" data-qha-error></div>
                 </div>
 
-                <div class="qha__field">
-                  <label class="visually-hidden" for="{{ form_id }}-password">Password</label>
-                  <div class="qha__pw">
-                    <input
-                      class="qha__input"
-                      type="password"
-                      id="{{ form_id }}-password"
-                      name="customer[password]"
-                      placeholder="Password"
-                      autocomplete="new-password"
-                      data-qha-validate="password"
-                      data-qha-message="Please create a password with at least 5 characters.">
-                    <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
-                      {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
-                      {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
-                    </button>
+                <div class="qha__pws">
+                  <div class="qha__field">
+                    <label class="visually-hidden" for="{{ form_id }}-password">Password</label>
+                    <div class="qha__pw">
+                      <input
+                        class="qha__input"
+                        type="password"
+                        id="{{ form_id }}-password"
+                        name="customer[password]"
+                        placeholder="Password"
+                        autocomplete="new-password"
+                        data-qha-validate="password"
+                        data-qha-message="Please create a password with at least 5 characters.">
+                      <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
+                        {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                        {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                      </button>
+                    </div>
+                    <div class="qha__error" data-qha-error></div>
                   </div>
-                  <div class="qha__error" data-qha-error></div>
-                </div>
 
-                <div class="qha__field">
-                  <label class="visually-hidden" for="{{ form_id }}-confirm">Confirm password</label>
-                  <div class="qha__pw">
-                    {%- comment -%}
-                      Confirmation is a client-side check only, so it carries no
-                      `name` and is never posted to Shopify.
-                    {%- endcomment -%}
-                    <input
-                      class="qha__input"
-                      type="password"
-                      id="{{ form_id }}-confirm"
-                      placeholder="Confirm Password"
-                      autocomplete="new-password"
-                      data-qha-validate="confirm"
-                      data-qha-confirms="{{ form_id }}-password"
-                      data-qha-message="Passwords do not match.">
-                    <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
-                      {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
-                      {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
-                    </button>
+                  <div class="qha__field">
+                    <label class="visually-hidden" for="{{ form_id }}-confirm">Confirm password</label>
+                    <div class="qha__pw">
+                      {%- comment -%}
+                        Confirmation is a client-side check only, so it carries no
+                        `name` and is never posted to Shopify.
+                      {%- endcomment -%}
+                      <input
+                        class="qha__input"
+                        type="password"
+                        id="{{ form_id }}-confirm"
+                        placeholder="Confirm Password"
+                        autocomplete="new-password"
+                        data-qha-validate="confirm"
+                        data-qha-confirms="{{ form_id }}-password"
+                        data-qha-message="Passwords do not match.">
+                      <button type="button" class="qha__eye" aria-pressed="false" aria-label="Show password" data-qha-eye>
+                        {%- render 'quity-apply-card-icon', icon: 'eye', class: 'qha__eye-on' -%}
+                        {%- render 'quity-apply-card-icon', icon: 'eye_off', class: 'qha__eye-off' -%}
+                      </button>
+                    </div>
+                    <div class="qha__error" data-qha-error></div>
                   </div>
-                  <div class="qha__error" data-qha-error></div>
                 </div>
 
                 <button type="submit" class="qha__submit">{{ section.settings.apply_button | escape }}</button>
@@ -459,7 +461,7 @@
       "max": 360,
       "step": 4,
       "unit": "px",
-      "default": 224,
+      "default": 84,
       "info": "How far the card is pulled up over the hero. The hero's content is vertically centred, so this fills the space below it."
     },
     {
@@ -470,7 +472,7 @@
       "max": 240,
       "step": 4,
       "unit": "px",
-      "default": 113
+      "default": 38
     },
     {
       "type": "range",

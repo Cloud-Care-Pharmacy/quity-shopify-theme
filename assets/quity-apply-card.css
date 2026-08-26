@@ -86,8 +86,8 @@
   align-items: center;
   gap: 10px;
   margin: 0;
-  padding: 15px 26px 27px;
-  margin-bottom: -14px;
+  padding: 11px 22px 23px;
+  margin-bottom: -12px;
   border: 0;
   border-radius: 16px 16px 0 0;
   background: #E8E4D9;
@@ -132,8 +132,8 @@
 .qha__pane {
   display: grid;
   grid-template-columns: 0.88fr 1.12fr;
-  gap: 48px;
-  padding: 44px 48px;
+  gap: 34px;
+  padding: 26px 34px;
 }
 .qha__pane[hidden] { display: none; }
 
@@ -143,8 +143,8 @@
 .qha__pitch-h {
   margin: 0;
   font-weight: 400;
-  font-size: clamp(26px, 2.4vw, 34px);
-  line-height: 1.12;
+  font-size: clamp(21px, 1.85vw, 26px);
+  line-height: 1.14;
   color: var(--qha-ink);
 }
 .qha__pitch-h em {
@@ -155,15 +155,15 @@
 }
 
 .qha__pitch-sub {
-  margin: 14px 0 0;
-  font-size: 16px;
-  line-height: 1.5;
+  margin: 9px 0 0;
+  font-size: 14.5px;
+  line-height: 1.45;
   color: var(--qha-body);
 }
 
 .qha__rule {
   height: 1px;
-  margin: 26px 0 6px;
+  margin: 16px 0 2px;
   background: var(--qha-line);
 }
 
@@ -175,17 +175,17 @@
 .qha__promise li {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 2px;
+  gap: 12px;
+  padding: 9px 2px;
   border-bottom: 1px solid var(--qha-line);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--qha-ink);
 }
 .qha__promise li:last-child { border-bottom: 0; }
 .qha__promise svg {
-  width: 22px;
-  height: 22px;
+  width: 19px;
+  height: 19px;
   flex: none;
   color: var(--qha-ink);
 }
@@ -193,23 +193,25 @@
 /* --- Right: form --- */
 .qha__form { min-width: 0; }
 
-.qha__names {
+.qha__names,
+.qha__pws {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 8px;
 }
 
-.qha__field { margin-top: 12px; }
-.qha__names .qha__field { margin-top: 0; }
+.qha__field { margin-top: 8px; }
+.qha__names .qha__field,
+.qha__pws .qha__field { margin-top: 0; }
 
 .qha__input {
   width: 100%;
-  height: 58px;
-  padding: 0 18px;
+  height: 46px;
+  padding: 0 15px;
   border: 1px solid var(--qha-line);
-  border-radius: 12px;
+  border-radius: 10px;
   background: #FFFFFF;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--qha-ink);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -225,11 +227,11 @@
 }
 
 .qha__pw { position: relative; }
-.qha__pw .qha__input { padding-right: 52px; }
+.qha__pw .qha__input { padding-right: 44px; }
 .qha__eye {
   position: absolute;
   top: 50%;
-  right: 14px;
+  right: 11px;
   transform: translateY(-50%);
   display: grid;
   place-items: center;
@@ -242,23 +244,23 @@
   cursor: pointer;
 }
 .qha__eye:hover { color: var(--qha-ink); }
-.qha__eye svg { width: 20px; height: 20px; }
+.qha__eye svg { width: 18px; height: 18px; }
 .qha__eye .qha__eye-off { display: none; }
 .qha__eye[aria-pressed='true'] .qha__eye-on { display: none; }
 .qha__eye[aria-pressed='true'] .qha__eye-off { display: block; }
 
 .qha__error {
   display: none;
-  margin: 6px 2px 0;
-  font-size: 13px;
+  margin: 4px 2px 0;
+  font-size: 12px;
   color: var(--qha-coral);
 }
 .qha__error.show { display: block; }
 
 .qha__banner {
   display: none;
-  margin: 0 0 14px;
-  padding: 11px 14px;
+  margin: 0 0 10px;
+  padding: 9px 12px;
   border: 1px solid rgba(229, 91, 79, 0.32);
   border-radius: 10px;
   background: rgba(229, 91, 79, 0.08);
@@ -270,8 +272,8 @@
 /* Shopify's `form.errors | default_errors` output */
 .qha__form .errors,
 .qha__form .form-message {
-  margin: 0 0 14px;
-  padding: 11px 14px;
+  margin: 0 0 10px;
+  padding: 9px 12px;
   border: 1px solid rgba(229, 91, 79, 0.32);
   border-radius: 10px;
   background: rgba(229, 91, 79, 0.08);
@@ -286,8 +288,8 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  height: 62px;
-  margin-top: 20px;
+  height: 50px;
+  margin-top: 14px;
   border: 1px solid var(--qha-coral);
   border-radius: 100px;
   background: var(--qha-coral);
@@ -311,7 +313,7 @@
   background: transparent;
   border-color: var(--qha-line);
   color: var(--qha-ink);
-  height: 56px;
+  height: 46px;
 }
 .qha__submit--ghost:hover {
   background: var(--qha-ink);
@@ -324,18 +326,18 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 14px 0 0;
-  font-size: 13px;
+  margin: 10px 0 0;
+  font-size: 12.5px;
   color: var(--qha-body);
 }
 .qha__note svg { width: 14px; height: 14px; flex: none; }
 
 .qha__alt {
-  margin: 16px 0 0;
-  padding-top: 16px;
+  margin: 12px 0 0;
+  padding-top: 12px;
   border-top: 1px solid var(--qha-line);
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--qha-body);
 }
 .qha__alt a {
@@ -355,16 +357,16 @@
 }
 .qha__steps li {
   display: flex;
-  gap: 16px;
-  padding: 0 0 20px;
+  gap: 14px;
+  padding: 0 0 14px;
 }
 .qha__steps li:last-child { padding-bottom: 4px; }
 .qha__step-idx {
   flex: none;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border: 1px solid var(--qha-line);
   border-radius: 100px;
   background: #FFFFFF;
@@ -374,14 +376,14 @@
   color: var(--qha-ink);
 }
 .qha__step-title {
-  font-size: 16px;
-  line-height: 1.35;
+  font-size: 15px;
+  line-height: 1.3;
   color: var(--qha-ink);
 }
 .qha__step-sub {
-  margin: 4px 0 0;
-  font-size: 14px;
-  line-height: 1.45;
+  margin: 3px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
   color: var(--qha-body);
 }
 
@@ -406,7 +408,7 @@
 }
 
 @media (max-width: 1100px) {
-  .qha__pane { gap: 34px; padding: 38px 34px; }
+  .qha__pane { gap: 26px; padding: 24px 26px; }
 }
 
 @media (max-width: 900px) {
@@ -426,12 +428,15 @@
 
   .qha__pane {
     grid-template-columns: 1fr;
-    gap: 26px;
-    padding: 28px 22px;
+    gap: 20px;
+    padding: 22px 18px;
   }
-  .qha__rule { margin: 20px 0 4px; }
-  .qha__input { height: 54px; }
-  .qha__submit { height: 58px; }
+  .qha__rule { margin: 14px 0 2px; }
+  /* touch targets stay comfortable on a phone even though the card is tight */
+  .qha__input { height: 50px; }
+  .qha__submit { height: 52px; }
+  .qha__pws { grid-template-columns: 1fr; }
+  .qha__pws .qha__field + .qha__field { margin-top: 8px; }
 }
 
 @media (max-width: 560px) {
@@ -448,5 +453,5 @@
   .qha__tab-badge { padding: 3px 7px; font-size: 9px; letter-spacing: 0.06em; }
 
   .qha__names { grid-template-columns: 1fr; }
-  .qha__names .qha__field + .qha__field { margin-top: 12px; }
+  .qha__names .qha__field + .qha__field { margin-top: 8px; }
 }
