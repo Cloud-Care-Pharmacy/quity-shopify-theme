@@ -32,7 +32,7 @@
       ],
       "settings": {
         "eyebrow": "Australia’s leading",
-        "show_rating": true,
+        "show_rating": false,
         "rating_text": "Rated 4.6/5 by 100+ reviews",
         "heading": "Quit smoking &\nnicotine vaping\nclinic.",
         "heading_tag": "h1",
