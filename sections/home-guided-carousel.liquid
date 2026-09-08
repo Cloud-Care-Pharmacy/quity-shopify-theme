@@ -1,0 +1,151 @@
+{%- comment -%}
+  Quity Home — guided carousel ("Your first six weeks")
+  -----------------------------------------------------
+  Centred header, then a photo on the left and, on the right, the stage
+  badge, heading, body, a coral button and the dots. Stages are blocks.
+  Dots only — no arrows, no autoplay. Every slide's text, button and
+  photo is rendered with its index; assets/home-page.js shows one.
+
+  Design: "Quity Homepage" handoff, section 10 — scoped .qhm- classes in
+  assets/home-page.css.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap">
+    {%- render 'home-section-head',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      sub: section.settings.sub,
+      max: 640 -%}
+
+    <div class="qhm-guided__grid" data-qhm-carousel data-qhm-start="0" aria-roledescription="carousel" aria-label="{{ section.settings.title | escape }}">
+      <div class="qhm-guided__media">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign fallback = blank
+            if forloop.index <= 3
+              assign fallback = 'home-placeholder-guided-' | append: forloop.index | append: '.jpg'
+            endif
+          -%}
+          <div class="qhm-guided__slide-media" data-qhm-slide-index="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+            {%- render 'home-image',
+              image: block.settings.image,
+              fallback: fallback,
+              alt: block.settings.image_alt,
+              class: 'qhm-guided__img',
+              sizes: '(max-width: 1024px) calc(100vw - 48px), 590px',
+              widths: '590, 885, 1180, 1400' -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div>
+        <div class="qhm-guided__texts" aria-live="polite">
+          {%- for block in section.blocks -%}
+            <div class="qhm-guided__text" data-qhm-slide-index="{{ forloop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+              {%- if block.settings.tag != blank -%}
+                <span class="qhm-badge qhm-badge--sage">{{ block.settings.tag | escape }}</span>
+              {%- endif -%}
+              <h3 class="qhm-guided__title">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.body != blank -%}
+                <p class="qhm-body qhm-guided__body">{{ block.settings.body | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="qhm-guided__foot">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.cta_label != blank -%}
+              <a class="qhm-btn qhm-btn--coral" href="{{ block.settings.cta_url | default: '#apply' }}" data-qhm-slide-index="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+                {{ block.settings.cta_label | escape }}
+                {%- render 'home-icon', name: 'arrow-right', size: 17 -%}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if section.blocks.size > 1 -%}
+            <div class="qhm-dots" role="group" aria-label="Choose a stage">
+              {%- for block in section.blocks -%}
+                <button type="button" class="qhm-dot" data-qhm-dot="{{ forloop.index0 }}" data-on="{% if forloop.first %}1{% else %}0{% endif %}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ block.settings.tag | default: forloop.index | escape }}"></button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Home - guided carousel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your first six weeks" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Guided from day one" },
+    { "type": "textarea", "id": "sub", "label": "Sub text" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "paper", "label": "Paper" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper-2"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Badge", "default": "Getting started" },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Make the first step easy and risk free." },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "cta_label", "label": "Button", "default": "Apply today" },
+        { "type": "url", "id": "cta_url", "label": "Button link", "info": "Defaults to the application card (#apply)." },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Falls back to a bundled placeholder photo." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Home - guided carousel",
+      "blocks": [
+        { "type": "stage", "settings": { "tag": "Getting started", "title": "Make the first step easy and risk free.", "body": "Applying takes about five minutes and costs nothing. An Australian-registered doctor reviews your history and, if therapy is appropriate, sends the script straight to our partner pharmacy.", "cta_label": "Apply today", "image_alt": "Doctor with medication and a chart" } },
+        { "type": "stage", "settings": { "tag": "Week two", "title": "A check-in before the hardest part passes.", "body": "Cravings peak between days three and ten. Your doctor reviews the dose at week two and adjusts it if the plan is not holding. Follow-ups are included, not billed separately.", "cta_label": "See the plan", "image_alt": "Doctor writing up notes" } },
+        { "type": "stage", "settings": { "tag": "Ongoing", "title": "Refills that arrive before you run out.", "body": "Your script sits in your account for twelve months. Reorder in a few taps and it ships the same business day, in plain packaging, anywhere in Australia.", "cta_label": "Shop chemist", "image_alt": "Pharmacist in the dispensary" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

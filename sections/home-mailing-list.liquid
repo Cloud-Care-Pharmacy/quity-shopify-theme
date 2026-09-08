@@ -1,0 +1,163 @@
+{%- comment -%}
+  Quity Home — mailing list
+  -------------------------
+  One white panel: heading, text and a 2×2 benefits list on the left; a
+  Shopify customer (newsletter) form on the right — first and last name,
+  email, a static +61 prefix chip beside the mobile field, and the
+  coral "Join now" button. Fields sit on paper so they read against the
+  white panel (the panel was changed from coral-tint to white on client
+  feedback — keep coral on the button only).
+
+  Validation happens in assets/home-page.js (email required and
+  format-checked; mobile optional, 04xx xxx xxx or +61 4xx xxx xxx,
+  normalised to +614… on submit; names optional). Shopify's own errors
+  render inline, and a successful post replaces the form with the
+  confirmation in the same panel.
+
+  Design: "Quity Homepage" handoff, section 11 — scoped .qhm- classes in
+  assets/home-page.css.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec--s {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec--s {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec--s qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap">
+    <div class="qhm-mail__panel">
+      <div>
+        {%- if section.settings.title != blank -%}
+          <h3 class="qhm-mail__title">{{ section.settings.title | escape }}</h3>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="qhm-body qhm-mail__text">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="qhm-mail__benefits" style="list-style:none;margin:26px 0 0;padding:0">
+            {%- for block in section.blocks -%}
+              <li class="qhm-mail__benefit" {{ block.shopify_attributes }}>
+                {%- render 'home-icon', name: 'check', size: 15 -%}
+                {{ block.settings.text | escape }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div>
+        {%- form 'customer', id: 'QhmMailForm', class: 'qhm-mail__form', novalidate: 'novalidate', data-qhm-mail-form: 'true' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="qhm-mail__success" role="status">
+              <span class="qhm-iconbox qhm-iconbox--sage">{%- render 'home-icon', name: 'check', size: 22 -%}</span>
+              <div>
+                <h4 class="qhm-mail__success-title">{{ section.settings.success_title | escape }}</h4>
+                {%- if section.settings.success_text != blank -%}
+                  <p class="qhm-body qhm-mail__success-text">{{ section.settings.success_text | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- else -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {%- if form.errors -%}
+              <div class="qhm-form-errors" role="alert">{{ form.errors | default_errors }}</div>
+            {%- endif -%}
+            <div class="qhm-form2">
+              <div class="qhm-fieldwrap">
+                <label class="qhm-visually-hidden" for="QhmMailFirst-{{ section.id }}">First name</label>
+                <input class="qhm-field qhm-field--paper" type="text" name="contact[first_name]" id="QhmMailFirst-{{ section.id }}" placeholder="First name" autocomplete="given-name">
+              </div>
+              <div class="qhm-fieldwrap">
+                <label class="qhm-visually-hidden" for="QhmMailLast-{{ section.id }}">Last name</label>
+                <input class="qhm-field qhm-field--paper" type="text" name="contact[last_name]" id="QhmMailLast-{{ section.id }}" placeholder="Last name" autocomplete="family-name">
+              </div>
+              <div class="qhm-fieldwrap qhm-form2__full">
+                <label class="qhm-visually-hidden" for="QhmMailEmail-{{ section.id }}">Email address</label>
+                <input class="qhm-field qhm-field--paper" type="email" name="contact[email]" id="QhmMailEmail-{{ section.id }}" placeholder="Email address" autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" value="{% if customer %}{{ customer.email | escape }}{% endif %}" required>
+                <span class="qhm-field-error" data-qhm-error-for="contact[email]" hidden></span>
+              </div>
+              {%- if section.settings.show_phone -%}
+                <div class="qhm-mail__phone qhm-form2__full">
+                  <span class="qhm-field qhm-field--paper qhm-mail__prefix" aria-hidden="true">{{ section.settings.phone_prefix | escape }}</span>
+                  <div class="qhm-fieldwrap">
+                    <label class="qhm-visually-hidden" for="QhmMailPhone-{{ section.id }}">Mobile number</label>
+                    <input class="qhm-field qhm-field--paper" type="tel" name="contact[phone]" id="QhmMailPhone-{{ section.id }}" placeholder="Mobile number" autocomplete="tel-national" inputmode="tel">
+                    <span class="qhm-field-error" data-qhm-error-for="contact[phone]" hidden></span>
+                  </div>
+                </div>
+              {%- endif -%}
+              <button type="submit" class="qhm-btn qhm-btn--coral qhm-btn--block qhm-form2__full qhm-mail__submit" data-qhm-busy-label="{{ section.settings.submit_busy_label | escape }}">{{ section.settings.submit_label | escape }}</button>
+              {%- if section.settings.consent != blank -%}
+                <div class="qhm-mail__consent qhm-form2__full">{{ section.settings.consent }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - mailing list",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Join our mailing list" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Plain-English guidance from an Australian prescription-based service. No more than twice a month, and nothing about a “journey”." },
+    { "type": "header", "content": "Form" },
+    { "type": "checkbox", "id": "show_phone", "label": "Ask for a mobile number", "default": true },
+    { "type": "text", "id": "phone_prefix", "label": "Mobile prefix chip", "default": "+61" },
+    { "type": "text", "id": "submit_label", "label": "Button", "default": "Join now" },
+    { "type": "text", "id": "submit_busy_label", "label": "Button while sending", "default": "Joining…" },
+    { "type": "richtext", "id": "consent", "label": "Consent line", "info": "Add whatever your marketing platform requires.", "default": "<p>By joining you agree to receive emails from Quity. Unsubscribe any time.</p>" },
+    { "type": "text", "id": "success_title", "label": "Success heading", "default": "You’re on the list" },
+    { "type": "textarea", "id": "success_text", "label": "Success text", "default": "Thanks for joining. Look out for the first email — no more than twice a month." },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Quit-day guides" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Home - mailing list",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Quit-day guides" } },
+        { "type": "benefit", "settings": { "text": "Product updates" } },
+        { "type": "benefit", "settings": { "text": "Health education" } },
+        { "type": "benefit", "settings": { "text": "Pharmacy news" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

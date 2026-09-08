@@ -1,0 +1,156 @@
+{%- comment -%}
+  Quity Home — savings calculator
+  -------------------------------
+  Ink band. Left: eyebrow, two-line heading, lead, Newsreader pull-quote.
+  Right: bordered panel with the cigarettes-a-day slider and three
+  live figures (day / week / year) in Newsreader italic.
+
+  perDay = count × cost per cigarette; week × 7; year × 365, formatted
+  en-AU with two decimals. The cost per cigarette is a setting because
+  Australian excise rises twice a year. The initial figures are rendered
+  in Liquid so the panel reads correctly before assets/home-page.js
+  takes over the slider.
+
+  Design: "Quity Homepage" handoff, section 7 — scoped .qhm- classes in
+  assets/home-page.css.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign per_cig = section.settings.per_cigarette | plus: 0.0
+  if per_cig <= 0
+    assign per_cig = 2.5
+  endif
+  assign min = section.settings.min | default: 1
+  assign max = section.settings.max | default: 40
+  assign start = section.settings.start | default: 12
+  if start < min
+    assign start = min
+  elsif start > max
+    assign start = max
+  endif
+  assign day_cents = start | times: per_cig | times: 100 | round
+  assign week_cents = day_cents | times: 7
+  assign year_cents = day_cents | times: 365
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec qhm-sec--ink">
+  <div class="qhm__wrap qhm-sav__grid">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="qhm-sav__title">{{ section.settings.title | escape | newline_to_br }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="qhm-sav__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.quote != blank -%}
+        <p class="qhm-serif-i qhm-sav__quote">{{ section.settings.quote | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="qhm-sav__panel" data-qhm-savings data-qhm-per-cig="{{ per_cig }}" data-qhm-locale="en-AU">
+      <label class="qhm-sav__label" for="QhmRange-{{ section.id }}">
+        <span>{{ section.settings.label | escape }}</span>
+        <span class="qhm-mono qhm-sav__value" data-qhm-count>{{ start }}</span>
+      </label>
+      <input
+        class="qhm-range qhm-sav__range"
+        id="QhmRange-{{ section.id }}"
+        type="range"
+        min="{{ min }}"
+        max="{{ max }}"
+        step="1"
+        value="{{ start }}"
+        data-qhm-range
+        aria-valuemin="{{ min }}"
+        aria-valuemax="{{ max }}"
+        aria-valuenow="{{ start }}">
+      <div class="qhm-sav__scale" aria-hidden="true">
+        <span class="qhm-mono">{{ section.settings.scale_left | escape }}</span>
+        <span class="qhm-mono">{{ section.settings.scale_right | escape }}</span>
+      </div>
+
+      <div class="qhm-sav__results" aria-live="polite" aria-atomic="true">
+        <div class="qhm-sav__cell">
+          <div class="qhm-mono qhm-sav__cell-label">{{ section.settings.label_day | escape }}</div>
+          <div class="qhm-sav__figure" data-qhm-day>${{ day_cents | money_without_currency }}</div>
+        </div>
+        <div class="qhm-sav__cell">
+          <div class="qhm-mono qhm-sav__cell-label">{{ section.settings.label_week | escape }}</div>
+          <div class="qhm-sav__figure" data-qhm-week>${{ week_cents | money_without_currency }}</div>
+        </div>
+        <div class="qhm-sav__cell">
+          <div class="qhm-mono qhm-sav__cell-label">{{ section.settings.label_year | escape }}</div>
+          <div class="qhm-sav__figure qhm-sav__figure--year" data-qhm-year>${{ year_cents | money_without_currency }}</div>
+        </div>
+      </div>
+
+      {%- if section.settings.cta_label != blank or section.settings.note != blank -%}
+        <div class="qhm-sav__foot">
+          {%- if section.settings.cta_label != blank -%}
+            <a class="qhm-btn qhm-btn--coral" href="{{ section.settings.cta_url | default: '#apply' }}">{{ section.settings.cta_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.note != blank -%}
+            <span class="qhm-sav__note">{{ section.settings.note | escape }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - savings calculator",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The other cost" },
+    { "type": "textarea", "id": "title", "label": "Heading", "info": "One line per row.", "default": "Start quitting,\nstart saving" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Smoking costs more than health. Australian tobacco excise is the highest in the world and it rises twice a year. Move the slider to see what a year of smoking costs you." },
+    { "type": "text", "id": "quote", "label": "Pull quote", "default": "Most patients cover the cost of therapy in the first fortnight." },
+    { "type": "header", "content": "Calculator" },
+    { "type": "text", "id": "per_cigarette", "label": "Cost per cigarette (AUD)", "info": "Excise rises in March and September; update this and the footnote together.", "default": "2.50" },
+    { "type": "text", "id": "label", "label": "Slider label", "default": "How many cigarettes do you smoke a day?" },
+    { "type": "range", "id": "min", "label": "Minimum", "min": 1, "max": 20, "step": 1, "default": 1 },
+    { "type": "range", "id": "max", "label": "Maximum", "min": 20, "max": 100, "step": 5, "default": 40 },
+    { "type": "range", "id": "start", "label": "Starting value", "min": 1, "max": 100, "step": 1, "default": 12 },
+    { "type": "text", "id": "scale_left", "label": "Scale label (left)", "default": "1" },
+    { "type": "text", "id": "scale_right", "label": "Scale label (right)", "default": "40 / two packs" },
+    { "type": "text", "id": "label_day", "label": "Day label", "default": "Each day" },
+    { "type": "text", "id": "label_week", "label": "Week label", "default": "Each week" },
+    { "type": "text", "id": "label_year", "label": "Year label", "default": "Each year" },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "Apply for free" },
+    { "type": "url", "id": "cta_url", "label": "Button link", "info": "Defaults to the application card (#apply)." },
+    { "type": "text", "id": "note", "label": "Footnote", "default": "Based on $2.50 per cigarette — about $50 a pack." },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "presets": [
+    { "name": "Home - savings calculator" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{%- comment -%}
+  Quity Home — support grid ("Why Quity")
+  ---------------------------------------
+  Centred header and a 2×2 grid of lifting image + text cards: photo on
+  the left (clipped by the card), coral icon box, heading and body on
+  the right. Cards are blocks; a card without an image uses the bundled
+  placeholder photo for its position.
+
+  Design: "Quity Homepage" handoff, section 8 — scoped .qhm- classes in
+  assets/home-page.css. Static, no JavaScript.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap">
+    {%- render 'home-section-head',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      sub: section.settings.sub,
+      max: 760 -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="qhm-sup__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign fallback = blank
+            if forloop.index <= 4
+              assign fallback = 'home-placeholder-support-' | append: forloop.index | append: '.jpg'
+            endif
+          -%}
+          <div class="qhm-card qhm-lift qhm-sup__card" {{ block.shopify_attributes }}>
+            <div class="qhm-sup__media{% if block.settings.image == blank and forloop.index == 2 %} qhm-sup__media--mid{% endif %}">
+              {%- render 'home-image',
+                image: block.settings.image,
+                fallback: fallback,
+                alt: block.settings.image_alt,
+                class: 'qhm-sup__img',
+                sizes: '(max-width: 720px) calc(100vw - 40px), 190px',
+                widths: '380, 570, 760' -%}
+            </div>
+            <div class="qhm-sup__body">
+              <span class="qhm-iconbox qhm-iconbox--coral qhm-iconbox--s">{%- render 'home-icon', name: block.settings.icon, size: 20 -%}</span>
+              <h4 class="qhm-sup__title">{{ block.settings.title | escape }}</h4>
+              {%- if block.settings.body != blank -%}
+                <p class="qhm-body qhm-sup__text">{{ block.settings.body | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - support grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Quity" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Support that makes quitting convenient, discreet and compliant" },
+    { "type": "textarea", "id": "sub", "label": "Sub text" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Falls back to a bundled placeholder photo." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "chat", "label": "Chat" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "script", "label": "Script" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "doctor", "label": "Doctor" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "chat"
+        },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Judgement-free support" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Home - support grid",
+      "blocks": [
+        { "type": "card", "settings": { "icon": "chat", "title": "Judgement-free support", "body": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice.", "image_alt": "Doctor on a telehealth call" } },
+        { "type": "card", "settings": { "icon": "shield", "title": "Legal and regulated", "body": "TGA-approved nicotine therapy dispensed by a registered Australian pharmacy, shipped anywhere in the country.", "image_alt": "Pharmacy shelves of dispensed medicines" } },
+        { "type": "card", "settings": { "icon": "lock", "title": "Private and convenient", "body": "Consultations happen by phone or video, at a time that suits you. Deliveries arrive in plain packaging.", "image_alt": "Telehealth consultation" } },
+        { "type": "card", "settings": { "icon": "script", "title": "Effortless refills", "body": "Your script lives in your account. Reorder in a few taps and it ships the same business day.", "image_alt": "Pharmacist at the dispensing computer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

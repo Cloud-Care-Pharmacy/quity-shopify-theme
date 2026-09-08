@@ -1,0 +1,22 @@
+{%- comment -%}
+  Quity Home — centred section header: eyebrow, h2, optional sub line.
+
+  Params: eyebrow, title, sub, max (px, default 640).
+  Renders nothing when all three texts are empty.
+{%- endcomment -%}
+{%- liquid
+  assign head_max = max | default: 640
+-%}
+{%- if eyebrow != blank or title != blank or sub != blank -%}
+  <div class="qhm-head" style="max-width:{{ head_max }}px">
+    {%- if eyebrow != blank -%}
+      <div class="qhm-eyebrow">{{ eyebrow | escape }}</div>
+    {%- endif -%}
+    {%- if title != blank -%}
+      <h2 class="qhm-head__title">{{ title | escape }}</h2>
+    {%- endif -%}
+    {%- if sub != blank -%}
+      <p class="qhm-head__sub">{{ sub | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}

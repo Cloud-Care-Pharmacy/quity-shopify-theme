@@ -1,0 +1,132 @@
+{%- comment -%}
+  Quity Home — FAQ
+  ----------------
+  Header row (eyebrow, heading, intro on the left; "View all" on the
+  right) above a two-column accordion. Questions are blocks, split
+  first half / second half across the columns (rows rendered by
+  snippets/home-faq-item.liquid). One question is open at
+  a time page-wide; clicking the open one closes it. Buttons carry
+  aria-expanded / aria-controls; behaviour in assets/home-page.js.
+
+  Design: "Quity Homepage" handoff, section 12 — scoped .qhm- classes in
+  assets/home-page.css.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign half = section.blocks.size | plus: 1 | divided_by: 2
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <div class="qhm__wrap">
+    <div class="qhm-faq__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="qhm-faq__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <p class="qhm-body qhm-faq__intro">{{ section.settings.intro | escape }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.view_all_label != blank -%}
+        <a class="qhm-btn qhm-btn--line" href="{{ section.settings.view_all_url | default: '/pages/faqs' }}">{{ section.settings.view_all_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="qhm-faq__grid" data-qhm-faq>
+        <div class="qhm-faq__col">
+          {%- for block in section.blocks limit: half -%}
+            {%- render 'home-faq-item', block: block, open: forloop.first, open_first: section.settings.open_first -%}
+          {%- endfor -%}
+        </div>
+        <div class="qhm-faq__col">
+          {%- for block in section.blocks offset: half -%}
+            {%- render 'home-faq-item', block: block, open: false, open_first: section.settings.open_first -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your questions answered" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "What the service covers, how approval works, what things cost, and how quickly your order arrives." },
+    { "type": "text", "id": "view_all_label", "label": "View all button", "default": "View all" },
+    { "type": "url", "id": "view_all_url", "label": "View all link", "info": "Defaults to /pages/faqs." },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question on load", "default": true },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "faq" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What’s the first step to begin?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Create an account and complete the online assessment. It takes about five minutes and costs nothing.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Home - FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What’s the first step to begin?", "answer": "<p>Create an account and complete the online assessment. It takes about five minutes and costs nothing. A registered Australian doctor reviews it and emails you the outcome, usually within 24 hours.</p>" } },
+        { "type": "question", "settings": { "question": "Can I submit an existing prescription?", "answer": "<p>Yes. Upload a valid e-script with its QR code or token number. Our pharmacist verifies it, then dispenses and ships from our partner pharmacy.</p>" } },
+        { "type": "question", "settings": { "question": "What if I’m not approved for a prescription?", "answer": "<p>You pay nothing. If a doctor decides nicotine therapy is not appropriate for you, they will explain why and suggest alternatives.</p>" } },
+        { "type": "question", "settings": { "question": "How quickly can I receive my prescription?", "answer": "<p>Most assessments are reviewed within 24 hours. Approved orders leave the pharmacy the same business day, with express delivery reaching most of Australia the next.</p>" } },
+        { "type": "question", "settings": { "question": "Who determines if I qualify for nicotine therapy?", "answer": "<p>An AHPRA-registered Australian doctor. They review your smoking and medical history against TGA prescribing guidelines before writing anything.</p>" } },
+        { "type": "question", "settings": { "question": "What are the shipping costs?", "answer": "<p>Free on orders over $150. Below that, standard shipping is a flat rate and express is available at checkout. Everything ships in plain packaging.</p>" } },
+        { "type": "question", "settings": { "question": "What is your returns and refunds policy?", "answer": "<p>Prescription medicines cannot be returned once dispensed, under Australian law. If an order arrives damaged or incorrect, contact support and we will replace it.</p>" } },
+        { "type": "question", "settings": { "question": "Do you accept prescriptions with a QR code?", "answer": "<p>Yes. QR-coded e-scripts and token numbers are both accepted through the upload form.</p>" } },
+        { "type": "question", "settings": { "question": "What is the price range for prescribed products?", "answer": "<p>Most patients spend between $25 and $60 a week on therapy, depending on the plan. There is no subscription and no consultation fee.</p>" } },
+        { "type": "question", "settings": { "question": "Am I eligible if I currently vape?", "answer": "<p>Yes. Nicotine dependence is treated the same whether it comes from cigarettes or vaping. Tell the doctor what you currently use and how often.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

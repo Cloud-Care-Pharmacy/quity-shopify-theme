@@ -1,0 +1,141 @@
+{%- comment -%}
+  Quity Home — after quitting
+  ---------------------------
+  Centred header and a hairline-divided timeline card: one cell per
+  milestone (sage icon box, mono timing label, heading, body), with the
+  1px grid gap doing the divider lines. Milestones are blocks.
+
+  Design: "Quity Homepage" handoff, section 4 — scoped .qhm- classes in
+  assets/home-page.css. Static, no JavaScript.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cols = section.blocks.size
+  if cols > 4
+    assign cols = 4
+  elsif cols < 1
+    assign cols = 1
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .qhm-after__grid { grid-template-columns: repeat({{ cols }}, 1fr); }
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap">
+    {%- render 'home-section-head',
+      eyebrow: section.settings.eyebrow,
+      title: section.settings.title,
+      sub: section.settings.sub,
+      max: 640 -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="qhm-card qhm-after__card">
+        <div class="qhm-after__grid">
+          {%- for block in section.blocks -%}
+            <div class="qhm-after__cell" {{ block.shopify_attributes }}>
+              <span class="qhm-iconbox qhm-iconbox--sage">{%- render 'home-icon', name: block.settings.icon, size: 22 -%}</span>
+              {%- if block.settings.timing != blank -%}
+                <div class="qhm-mono qhm-after__tag">{{ block.settings.timing | escape }}</div>
+              {%- endif -%}
+              <h4 class="qhm-after__title">{{ block.settings.title | escape }}</h4>
+              {%- if block.settings.body != blank -%}
+                <p class="qhm-body qhm-after__body">{{ block.settings.body | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.note != blank -%}
+      <p class="qhm-after__note">{{ section.settings.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - after quitting",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Life after quitting" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "What happens after you stop" },
+    { "type": "textarea", "id": "sub", "label": "Sub text", "default": "The body starts repairing itself within the hour. These are the milestones most people reach." },
+    { "type": "text", "id": "note", "label": "Footnote", "default": "Timeline based on published quit-smoking health guidance. Individual results vary." },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper", "label": "Paper" },
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        { "type": "text", "id": "timing", "label": "Timing", "default": "20 minutes" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "pulse", "label": "Pulse" },
+            { "value": "lungs", "label": "Lungs" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "check", "label": "Check" },
+            { "value": "savings", "label": "Savings" }
+          ],
+          "default": "pulse"
+        },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Heart rate settles" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Pulse and blood pressure begin returning to a normal range." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Home - after quitting",
+      "blocks": [
+        { "type": "milestone", "settings": { "timing": "20 minutes", "icon": "pulse", "title": "Heart rate settles", "body": "Pulse and blood pressure begin returning to a normal range." } },
+        { "type": "milestone", "settings": { "timing": "12 hours", "icon": "lungs", "title": "Carbon monoxide clears", "body": "Oxygen in the blood returns to a normal level." } },
+        { "type": "milestone", "settings": { "timing": "2–12 weeks", "icon": "leaf", "title": "Breathing gets easier", "body": "Circulation improves and lung function measurably rises." } },
+        { "type": "milestone", "settings": { "timing": "12 months", "icon": "heart", "title": "Heart risk halves", "body": "Coronary heart disease risk falls to about half that of a smoker." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

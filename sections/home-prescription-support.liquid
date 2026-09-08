@@ -1,0 +1,141 @@
+{%- comment -%}
+  Quity Home — prescription support
+  ---------------------------------
+  Editorial two-column: eyebrow, heading, copy and two buttons on the
+  left; a 520px photo on the right with the "reviewed in under 24 hours"
+  stat card overhanging its left edge (the -28px overhang is deliberate;
+  on tablet/mobile the card sits inside the photo).
+
+  The photo falls back to the client-supplied clinic image bundled as
+  assets/home-prescription-support.webp.
+
+  Design: "Quity Homepage" handoff, section 5 — scoped .qhm- classes in
+  assets/home-page.css. Static, no JavaScript.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap qhm-ps__grid">
+    <div class="qhm-ps__copy-col">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="qhm-ps__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank or section.settings.highlight != blank -%}
+        <div class="qhm-ps__copy">
+          {{ section.settings.text }}
+          {%- if section.settings.highlight != blank -%}
+            <p class="qhm-ps__highlight">{{ section.settings.highlight | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.button_primary_label != blank or section.settings.button_secondary_label != blank -%}
+        <div class="qhm-ps__actions">
+          {%- if section.settings.button_primary_label != blank -%}
+            <a class="qhm-btn qhm-btn--ink" href="{{ section.settings.button_primary_url | default: '#apply' }}">{{ section.settings.button_primary_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_secondary_label != blank -%}
+            <a class="qhm-btn qhm-btn--line" href="{{ section.settings.button_secondary_url | default: '#how' }}">{{ section.settings.button_secondary_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="qhm-ps__media">
+      <div class="qhm-ps__figure">
+        {%- render 'home-image',
+          image: section.settings.image,
+          fallback: 'home-prescription-support.webp',
+          alt: section.settings.image_alt,
+          class: 'qhm-ps__img',
+          sizes: '(max-width: 1024px) calc(100vw - 48px), 600px' -%}
+      </div>
+      {%- if section.settings.show_stat and section.settings.stat_title != blank -%}
+        <div class="qhm-card qhm-ps__stat">
+          <span class="qhm-iconbox qhm-iconbox--coral">{%- render 'home-icon', name: section.settings.stat_icon, size: 22 -%}</span>
+          <div>
+            <div class="qhm-ps__stat-title">{{ section.settings.stat_title | escape }}</div>
+            {%- if section.settings.stat_sub != blank -%}
+              <div class="qhm-ps__stat-sub">{{ section.settings.stat_sub | escape }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - medical support",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why we do this" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Prescription support for nicotine dependence" },
+    { "type": "richtext", "id": "text", "label": "Copy", "default": "<p>Most people make two or three attempts before it sticks. That is normal, not a failure. What changes the odds is medical support: the right therapy, the right dose, and someone checking in.</p><p>Quity pairs a consultation with an Australian-registered doctor with TGA-approved nicotine therapy, dispensed by a registered pharmacy and shipped to your door in plain packaging. No waiting room, no subscription, no cost to apply.</p>" },
+    { "type": "text", "id": "highlight", "label": "Closing line", "default": "Take the first step today and quit for good." },
+    { "type": "text", "id": "button_primary_label", "label": "Primary button", "default": "Apply for prescription" },
+    { "type": "url", "id": "button_primary_url", "label": "Primary button link", "info": "Defaults to the application card (#apply)." },
+    { "type": "text", "id": "button_secondary_label", "label": "Secondary button", "default": "Learn more" },
+    { "type": "url", "id": "button_secondary_url", "label": "Secondary button link", "info": "Defaults to the How it works section (#how)." },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Falls back to the client-supplied clinic photo." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Doctor in a modern clinic" },
+    { "type": "header", "content": "Stat card" },
+    { "type": "checkbox", "id": "show_stat", "label": "Show stat card", "default": true },
+    {
+      "type": "select",
+      "id": "stat_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "doctor", "label": "Doctor" },
+        { "value": "clock", "label": "Clock" },
+        { "value": "shield", "label": "Shield" },
+        { "value": "check", "label": "Check" },
+        { "value": "script", "label": "Script" }
+      ],
+      "default": "doctor"
+    },
+    { "type": "text", "id": "stat_title", "label": "Title", "default": "Reviewed in under 24 hours" },
+    { "type": "text", "id": "stat_sub", "label": "Sub text", "default": "7 days a week, AHPRA registered" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "paper", "label": "Paper" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "paper-2"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "presets": [
+    { "name": "Home - medical support" }
+  ]
+}
+{% endschema %}

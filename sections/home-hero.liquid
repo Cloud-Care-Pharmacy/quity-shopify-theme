@@ -1,0 +1,313 @@
+{%- comment -%}
+  Quity Home — hero
+  -----------------
+  Full-bleed looping video under a uniform legibility veil, the
+  headline, rating and trust row, and the application card: a real
+  Shopify create_customer form (first name, last name, email, password,
+  confirm password) that creates the patient account and, via return_to,
+  lands the new customer on the questionnaire page. Signed-in visitors
+  see a "continue your application" card instead.
+
+  Video: pick one in the editor (Shopify serves 480/720/1080p renditions;
+  the ≤720p one is used) or leave the fallback URL. The poster still is
+  shown to visitors who prefer reduced motion or reduced data — the
+  source is only attached by assets/home-page.js when neither applies.
+
+  Design: "Quity Homepage" handoff, section 3 — scoped .qhm- classes in
+  assets/home-page.css. Fonts are loaded in layout/theme.liquid.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign video_src = section.settings.video_url
+  assign video_type = 'video/mp4'
+  if section.settings.video != blank
+    assign best = nil
+    for source in section.settings.video.sources
+      if source.format != 'mp4'
+        continue
+      endif
+      if best == nil
+        assign best = source
+      elsif source.height <= 720
+        if best.height > 720 or source.height > best.height
+          assign best = source
+        endif
+      elsif best.height > 720 and source.height < best.height
+        assign best = source
+      endif
+    endfor
+    if best != nil
+      assign video_src = best.url
+      assign video_type = best.mime_type
+    endif
+  endif
+
+  if section.settings.poster != blank
+    assign poster_url = section.settings.poster | image_url: width: 1920
+    assign poster_w = section.settings.poster.width
+    assign poster_h = section.settings.poster.height
+  elsif section.settings.video != blank and section.settings.video.preview_image != blank
+    assign poster_url = section.settings.video.preview_image | image_url: width: 1920
+    assign poster_w = section.settings.video.preview_image.width
+    assign poster_h = section.settings.video.preview_image.height
+  else
+    assign poster_url = 'home-placeholder-hero.jpg' | asset_url
+    assign poster_w = 1400
+    assign poster_h = 933
+  endif
+
+  assign veil = section.settings.veil_opacity | divided_by: 100.0
+  assign return_to = section.settings.return_to | default: '/pages/questionnaire'
+  assign trust_blocks = section.blocks | where: 'type', 'trust'
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-hero__wrap {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .qhm-hero__veil { background: rgba(15, 17, 16, {{ veil }}); }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-hero__wrap {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.78 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qhm qhm-hero">
+  <div class="qhm-hero__media" aria-hidden="true">
+    <img class="qhm-hero__poster" src="{{ poster_url }}" width="{{ poster_w }}" height="{{ poster_h }}" alt="" loading="eager" fetchpriority="high">
+    {%- if video_src != blank -%}
+      <video
+        class="qhm-hero__video"
+        data-qhm-hero-video
+        data-qhm-video-src="{{ video_src }}"
+        data-qhm-video-type="{{ video_type }}"
+        poster="{{ poster_url }}"
+        autoplay muted loop playsinline preload="none" tabindex="-1"></video>
+    {%- endif -%}
+    <div class="qhm-hero__veil"></div>
+  </div>
+
+  <div class="qhm__wrap qhm-hero__wrap">
+    <div class="qhm-hero__copy">
+      {%- if section.settings.eyebrow != blank or section.settings.show_rating -%}
+        <div class="qhm-hero__top">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.show_rating -%}
+            <div class="qhm-rating">
+              <span class="qhm-rating__stars" aria-hidden="true">
+                {%- for i in (1..5) -%}{%- render 'home-icon', name: 'star', size: 13 -%}{%- endfor -%}
+              </span>
+              {%- if section.settings.rating_text != blank -%}
+                <span class="qhm-rating__text">{{ section.settings.rating_text | escape }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        {%- if section.settings.heading_tag == 'h2' -%}
+          <h2 class="qhm-hero__title">{{ section.settings.heading | escape | newline_to_br }}</h2>
+        {%- else -%}
+          <h1 class="qhm-hero__title">{{ section.settings.heading | escape | newline_to_br }}</h1>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.lead != blank -%}
+        <p class="qhm-lead qhm-hero__lead">{{ section.settings.lead | escape }}</p>
+      {%- endif -%}
+
+      {%- if trust_blocks.size > 0 -%}
+        <div class="qhm-hero__trust">
+          {%- for block in trust_blocks -%}
+            <span class="qhm-hero__trust-item" {{ block.shopify_attributes }}>
+              {%- render 'home-icon', name: block.settings.icon, size: 16 -%}
+              {{ block.settings.text | escape }}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="qhm-hero__apply">
+        <div class="qhm-card qhm-apply" id="apply">
+          <div class="qhm-apply__inner">
+            {%- if customer -%}
+              <h3 class="qhm-apply__title">
+                {{- section.settings.signed_in_title | escape -}}
+                {%- if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif -%}
+              </h3>
+              {%- if section.settings.signed_in_text != blank -%}
+                <p class="qhm-apply__signed">{{ section.settings.signed_in_text | escape }}</p>
+              {%- endif -%}
+              <a class="qhm-btn qhm-btn--coral qhm-btn--block" href="{{ return_to }}">
+                {{ section.settings.signed_in_button | escape }}
+                {%- render 'home-icon', name: 'arrow-right', size: 17 -%}
+              </a>
+              <span class="qhm-apply__logout">Not you? <a href="{{ routes.account_logout_url }}">Log out</a></span>
+            {%- else -%}
+              <h3 class="qhm-apply__title">{{ section.settings.card_title | escape }}</h3>
+              {%- if section.settings.card_text != blank -%}
+                <p class="qhm-body qhm-apply__text">{{ section.settings.card_text | escape }}</p>
+              {%- endif -%}
+
+              {%- form 'create_customer', novalidate: 'novalidate', id: 'QhmApplyForm', class: 'qhm-apply__form', data-qhm-apply-form: 'true', data-qhm-password-min: '5' -%}
+                <input type="hidden" name="return_to" value="{{ return_to }}">
+                {%- if form.errors -%}
+                  <div class="qhm-form-errors" role="alert">{{ form.errors | default_errors }}</div>
+                {%- endif -%}
+
+                <div class="qhm-form2">
+                  <div class="qhm-fieldwrap">
+                    <label class="qhm-visually-hidden" for="QhmFirstName-{{ section.id }}">First name</label>
+                    <input class="qhm-field" type="text" name="customer[first_name]" id="QhmFirstName-{{ section.id }}" placeholder="First name" autocomplete="given-name" {% if form.first_name %}value="{{ form.first_name | escape }}"{% endif %}>
+                    <span class="qhm-field-error" data-qhm-error-for="customer[first_name]" hidden></span>
+                  </div>
+                  <div class="qhm-fieldwrap">
+                    <label class="qhm-visually-hidden" for="QhmLastName-{{ section.id }}">Last name</label>
+                    <input class="qhm-field" type="text" name="customer[last_name]" id="QhmLastName-{{ section.id }}" placeholder="Last name" autocomplete="family-name" {% if form.last_name %}value="{{ form.last_name | escape }}"{% endif %}>
+                    <span class="qhm-field-error" data-qhm-error-for="customer[last_name]" hidden></span>
+                  </div>
+                  <div class="qhm-fieldwrap qhm-form2__full">
+                    <label class="qhm-visually-hidden" for="QhmEmail-{{ section.id }}">Email address</label>
+                    <input class="qhm-field" type="email" name="customer[email]" id="QhmEmail-{{ section.id }}" placeholder="Email address" autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" {% if form.email %}value="{{ form.email | escape }}"{% endif %}>
+                    <span class="qhm-field-error" data-qhm-error-for="customer[email]" hidden></span>
+                  </div>
+                  <div class="qhm-fieldwrap">
+                    <label class="qhm-visually-hidden" for="QhmPassword-{{ section.id }}">Password</label>
+                    <input class="qhm-field" type="password" name="customer[password]" id="QhmPassword-{{ section.id }}" placeholder="Password" autocomplete="new-password" minlength="5">
+                    <span class="qhm-field-error" data-qhm-error-for="customer[password]" hidden></span>
+                  </div>
+                  <div class="qhm-fieldwrap">
+                    <label class="qhm-visually-hidden" for="QhmPasswordConfirm-{{ section.id }}">Confirm password</label>
+                    <input class="qhm-field" type="password" name="customer[password_confirmation]" id="QhmPasswordConfirm-{{ section.id }}" placeholder="Confirm password" autocomplete="new-password" minlength="5">
+                    <span class="qhm-field-error" data-qhm-error-for="customer[password_confirmation]" hidden></span>
+                  </div>
+                </div>
+
+                <button type="submit" class="qhm-btn qhm-btn--coral qhm-btn--block qhm-apply__submit" data-qhm-busy-label="{{ section.settings.submit_busy_label | escape }}">
+                  {{ section.settings.submit_label | escape }}
+                  {%- render 'home-icon', name: 'arrow-right', size: 17 -%}
+                </button>
+
+                {%- if section.settings.consent != blank -%}
+                  <div class="qhm-apply__consent">{{ section.settings.consent }}</div>
+                {%- endif -%}
+
+                {%- if section.settings.meta_1 != blank or section.settings.meta_2 != blank -%}
+                  <div class="qhm-apply__meta">
+                    {%- if section.settings.meta_1 != blank -%}
+                      <span class="qhm-apply__meta-item">{%- render 'home-icon', name: 'check', size: 14 -%}{{ section.settings.meta_1 | escape }}</span>
+                    {%- endif -%}
+                    {%- if section.settings.meta_2 != blank -%}
+                      <span class="qhm-apply__meta-item">{%- render 'home-icon', name: 'check', size: 14 -%}{{ section.settings.meta_2 | escape }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              {%- endform -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      {%- if section.settings.licence_text != blank -%}
+        <div class="qhm-hero__licence">
+          {%- render 'home-icon', name: 'shield', size: 15 -%}
+          <span>{{ section.settings.licence_text | escape }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home - hero",
+  "settings": [
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Australia’s leading" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "text", "id": "rating_text", "label": "Rating text", "default": "Rated 4.6/5 by 100+ reviews" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "info": "One line per row.", "default": "Quit smoking &\nnicotine vaping\nclinic." },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" }
+      ],
+      "default": "h1"
+    },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Quity helps adult Australians quit smoking with legal, regulated nicotine products, reviewed by a doctor, dispensed by a pharmacy." },
+    { "type": "text", "id": "licence_text", "label": "Licence line", "default": "Licensed under TGA regulations" },
+    { "type": "header", "content": "Background video" },
+    { "type": "video", "id": "video", "label": "Video", "info": "Uploaded videos get 480p/720p/1080p renditions; the 720p one is used. Leave empty to use the video URL below." },
+    { "type": "text", "id": "video_url", "label": "Video URL (fallback)", "info": "MP4. Used when no video is picked.", "default": "https://quity.com.au/cdn/shop/videos/c/vp/f1f8d278ed094e8084d4a81cec736085/f1f8d278ed094e8084d4a81cec736085.HD-1080p-7.2Mbps-67903455.mp4" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown before the video plays, and instead of it for visitors who prefer reduced motion or reduced data. Falls back to the video’s preview image, then to the bundled placeholder." },
+    { "type": "range", "id": "veil_opacity", "label": "Veil opacity", "min": 0, "max": 80, "step": 2, "unit": "%", "default": 46, "info": "Uniform across the whole frame, by design." },
+    { "type": "header", "content": "Application card" },
+    { "type": "text", "id": "card_title", "label": "Card heading", "default": "Apply For No Cost From Home" },
+    { "type": "textarea", "id": "card_text", "label": "Card text", "default": "Create an account and answer a few questions. A registered Australian doctor reviews it within 24 hours." },
+    { "type": "text", "id": "submit_label", "label": "Submit button", "default": "Apply for free" },
+    { "type": "text", "id": "submit_busy_label", "label": "Submit button while sending", "default": "Creating your account…" },
+    { "type": "url", "id": "return_to", "label": "After sign-up, go to", "info": "Where the new patient lands after the account is created. Leave empty for the questionnaire page (/pages/questionnaire)." },
+    { "type": "richtext", "id": "consent", "label": "Consent line", "info": "Shown under the button. Regulatory wording needs sign-off from whoever owns compliance.", "default": "<p>By creating an account you agree to Quity’s <a href=\"/policies/terms-of-service\">Terms & Conditions</a> and <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>" },
+    { "type": "text", "id": "meta_1", "label": "Reassurance 1", "default": "No cost to apply" },
+    { "type": "text", "id": "meta_2", "label": "Reassurance 2", "default": "AES-256 in transit" },
+    { "type": "header", "content": "Signed-in visitors" },
+    { "type": "text", "id": "signed_in_title", "label": "Heading", "default": "Welcome back" },
+    { "type": "textarea", "id": "signed_in_text", "label": "Text", "default": "You already have a Quity account. Pick up your application where you left off." },
+    { "type": "text", "id": "signed_in_button", "label": "Button", "default": "Continue your application" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 68 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "savings", "label": "Savings" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "check", "label": "Check" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "doctor", "label": "Doctor" },
+            { "value": "script", "label": "Script" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "chat", "label": "Chat" }
+          ],
+          "default": "shield"
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Australian certified" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Home - hero",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "shield", "text": "Australian certified" } },
+        { "type": "trust", "settings": { "icon": "savings", "text": "Free to apply" } },
+        { "type": "trust", "settings": { "icon": "clock", "text": "24-hour response" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
