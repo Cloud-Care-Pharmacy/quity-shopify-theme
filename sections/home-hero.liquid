@@ -70,6 +70,7 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
   #shopify-section-{{ section.id }} .qhm-hero__veil { background: rgba(15, 17, 16, {{ veil }}); }
+  #shopify-section-{{ section.id }} .qhm-hero__lead { font-size: {{ section.settings.lead_size | default: 16 }}px; }
   @media (max-width: 720px) {
     #shopify-section-{{ section.id }} .qhm-hero__wrap {
       padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
@@ -247,6 +248,7 @@
       "default": "h1"
     },
     { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Quity helps adult Australians quit smoking with legal, regulated nicotine products, reviewed by a doctor, dispensed by a pharmacy." },
+    { "type": "range", "id": "lead_size", "label": "Lead text size", "min": 14, "max": 22, "step": 1, "unit": "px", "default": 16 },
     { "type": "text", "id": "licence_text", "label": "Licence line", "info": "Optional line under the card. Leave empty to hide it." },
     { "type": "header", "content": "Background video" },
     { "type": "video", "id": "video", "label": "Video", "info": "Uploaded videos get 480p/720p/1080p renditions; the 720p one is used. Leave empty to use the video URL below." },
