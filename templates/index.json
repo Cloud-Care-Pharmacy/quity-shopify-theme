@@ -133,6 +133,7 @@
         "button_primary_url": "",
         "button_secondary_label": "Learn more",
         "button_secondary_url": "",
+        "image": "shopify://shop_images/home-1.png",
         "image_alt": "Doctor in a modern clinic",
         "show_stat": true,
         "stat_icon": "doctor",
