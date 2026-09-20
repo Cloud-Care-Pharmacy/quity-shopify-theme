@@ -12,13 +12,6 @@
     "shop-hero": {
       "type": "shop-hero",
       "blocks": {
-        "chip-1": {
-          "type": "chip",
-          "settings": {
-            "label": "Solo Plus",
-            "link": ""
-          }
-        },
         "chip-2": {
           "type": "chip",
           "settings": {
@@ -49,7 +42,6 @@
         }
       },
       "block_order": [
-        "chip-1",
         "chip-2",
         "chip-3",
         "chip-4",
