@@ -10239,6 +10239,12 @@ a.text-primary:active {
   text-transform: uppercase;
   margin-bottom: 45px;
 }
+/* 16px is the smallest size iOS Safari will focus without zooming the page. */
+@media (max-width: 767.98px) {
+  .footer-email .form-control {
+    font-size: 16px;
+  }
+}
 .footer-email .form-control {
   border-radius: var(--g-input-radius) !important;
   background: transparent;
