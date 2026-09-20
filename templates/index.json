@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "home-hero": {
@@ -35,17 +44,18 @@
         "rating_text": "Rated 4.6/5 by 100+ reviews",
         "heading": "Quit smoking &\nnicotine vaping\nclinic.",
         "heading_tag": "h1",
-        "lead": "Quity helps adult Australians quit smoking with legal, regulated nicotine products, reviewed by a doctor, dispensed by a pharmacy.",
+        "lead": "Regulated nicotine therapy for Australian adults, doctor-assessed online and pharmacy-dispensed.",
         "lead_size": 16,
-        "video_url": "https://quity.com.au/cdn/shop/videos/c/vp/f1f8d278ed094e8084d4a81cec736085/f1f8d278ed094e8084d4a81cec736085.HD-1080p-7.2Mbps-67903455.mp4",
-        "veil_opacity": 46,
-        "card_title": "Apply For No Cost From Home",
-        "card_text": "Create an account and answer a few questions. A registered Australian doctor reviews it within 24 hours.",
-        "submit_label": "Apply for free",
+        "licence_text": "",
+        "video_url": "",
+        "poster": "shopify://shop_images/quity-hero.png",
+        "veil_opacity": 20,
+        "card_title": "Your free online assessment",
+        "card_text": "Create an account and answer a short questionnaire. An AHPRA-registered doctor reviews it, usually within 24 hours.",
+        "submit_label": "Start free assessment",
         "submit_busy_label": "Creating your account…",
+        "return_to": "",
         "consent": "<p>By creating an account you agree to Quity’s <a href=\"/pages/terms-of-service\">Terms & Conditions</a> and <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>",
-        "meta_1": "No cost to apply",
-        "meta_2": "Licensed under TGA regulations",
         "signed_in_title": "Welcome back",
         "signed_in_text": "You already have a Quity account. Pick up your application where you left off.",
         "signed_in_button": "Continue your application",
@@ -88,8 +98,8 @@
           "settings": {
             "timing": "12 months",
             "icon": "heart",
-            "title": "Heart risk halves",
-            "body": "Coronary heart disease risk falls to about half that of a smoker."
+            "title": "Heart risk cut in half",
+            "body": "Coronary heart disease risk is about half that of someone who kept smoking."
           }
         }
       },
@@ -100,8 +110,7 @@
         "milestone-4"
       ],
       "settings": {
-        "eyebrow": "Life after quitting",
-        "title": "What happens after you stop",
+        "title": "How quickly your body bounces back",
         "sub": "The body starts repairing itself within the hour. These are the milestones most people reach.",
         "note": "Timeline based on published quit-smoking health guidance. Individual results vary.",
         "background": "paper",
@@ -112,17 +121,19 @@
     "home-prescription-support": {
       "type": "home-prescription-support",
       "settings": {
-        "eyebrow": "Why we do this",
-        "title": "Prescription support for nicotine dependence",
-        "text": "<p>Most people make two or three attempts before it sticks. That is normal, not a failure. What changes the odds is medical support: the right therapy, the right dose, and someone checking in.</p><p>Quity pairs a consultation with an Australian-registered doctor with TGA-approved nicotine therapy, dispensed by a registered pharmacy and shipped to your door in plain packaging. No waiting room, no subscription, no cost to apply.</p>",
-        "highlight": "Take the first step today and quit for good.",
+        "title": "A doctor-led way to quit nicotine",
+        "text": "<p>Nicotine dependence is a medical condition, and it responds to medical treatment. The right therapy at the right dose, with a doctor checking how you are going, gives you far better odds than going it alone.</p><p>Quity brings the pieces together online. An Australian-registered doctor assesses you, a registered pharmacy dispenses TGA-approved nicotine therapy, and it arrives in plain packaging. No waiting room, no subscription and no fee to apply.</p>",
+        "highlight": "Make this attempt the one that lasts.",
         "button_primary_label": "Apply for prescription",
-        "button_secondary_label": "Learn more",
+        "button_primary_url": "",
+        "button_secondary_label": "See how it works",
+        "button_secondary_url": "",
+        "image": "shopify://shop_images/home-1.png",
         "image_alt": "Doctor in a modern clinic",
         "show_stat": true,
         "stat_icon": "doctor",
-        "stat_title": "Reviewed in under 24 hours",
-        "stat_sub": "7 days a week, AHPRA registered",
+        "stat_title": "Assessed within one day",
+        "stat_sub": "Seven days a week, AHPRA-registered",
         "background": "paper-2",
         "padding_top": 96,
         "padding_bottom": 96
@@ -151,8 +162,8 @@
           "type": "step",
           "settings": {
             "icon": "bell",
-            "title": "Get notified",
-            "body": "Our medical team reviews your assessment and emails you the outcome."
+            "title": "Hear from the doctor",
+            "body": "A doctor reviews your answers and emails you the decision, usually within a day."
           }
         },
         "step-4": {
@@ -160,7 +171,7 @@
           "settings": {
             "icon": "truck",
             "title": "Express delivery",
-            "body": "Order through the pharmacy portal. Delivered Australia-wide."
+            "body": "Once approved, order through the pharmacy portal and it ships express, Australia-wide."
           }
         }
       },
@@ -171,11 +182,11 @@
         "step-4"
       ],
       "settings": {
-        "eyebrow": "The process",
         "title": "How Quity works",
-        "sub": "Four steps from first click to a package at the door. Nothing to pay until a doctor approves your therapy.",
+        "sub": "Four steps from first click to delivery. Nothing to pay until a doctor approves your therapy.",
         "step_label": "Step",
-        "cta_label": "Get started",
+        "cta_label": "Begin step one",
+        "cta_url": "",
         "anchor": "how",
         "background": "paper",
         "padding_top": 96,
@@ -185,22 +196,22 @@
     "home-savings-calculator": {
       "type": "home-savings-calculator",
       "settings": {
-        "eyebrow": "The other cost",
-        "title": "Start quitting,\nstart saving",
-        "text": "Smoking costs more than health. Australian tobacco excise is the highest in the world and it rises twice a year. Move the slider to see what a year of smoking costs you.",
+        "title": "What smoking\nreally costs you",
+        "text": "Australia has the highest tobacco excise in the world, and it goes up again every March and September. Drag the slider to see what your habit costs over a day, a week and a year.",
         "quote": "Most patients cover the cost of therapy in the first fortnight.",
         "per_cigarette": "2.50",
-        "label": "How many cigarettes do you smoke a day?",
+        "label": "Cigarettes smoked per day",
         "min": 1,
         "max": 40,
         "start": 12,
         "scale_left": "1",
         "scale_right": "40 / two packs",
-        "label_day": "Each day",
-        "label_week": "Each week",
-        "label_year": "Each year",
-        "cta_label": "Apply for free",
-        "note": "Based on $2.50 per cigarette — about $50 a pack.",
+        "label_day": "Daily",
+        "label_week": "Weekly",
+        "label_year": "Yearly",
+        "cta_label": "Start free assessment",
+        "cta_url": "",
+        "note": "Based on $2.50 per cigarette - about $50 a pack.",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -211,37 +222,36 @@
         "card-1": {
           "type": "card",
           "settings": {
-            "icon": "chat",
-            "title": "Judgement-free support",
-            "body": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice.",
-            "image_alt": "Doctor on a telehealth call"
+            "image": "shopify://shop_images/home-8.png",
+            "image_alt": "Doctor on a telehealth call",
+            "title": "Doctors who don’t judge",
+            "body": "An Australian-registered doctor reads your application and treats it as a medical matter, not a moral one. You explain yourself once, in your own time."
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
-            "icon": "shield",
-            "title": "Legal and regulated",
-            "body": "TGA-approved nicotine therapy dispensed by a registered Australian pharmacy, shipped anywhere in the country.",
-            "image_alt": "Pharmacy shelves of dispensed medicines"
+            "image": "shopify://shop_images/home-7.png",
+            "image_alt": "Pharmacy shelves of dispensed medicines",
+            "title": "Dispensed by a pharmacy",
+            "body": "TGA-approved nicotine therapy, dispensed by a registered Australian pharmacy and posted to any address in the country."
           }
         },
         "card-3": {
           "type": "card",
           "settings": {
-            "icon": "lock",
-            "title": "Private and convenient",
-            "body": "Consultations happen by phone or video, at a time that suits you. Deliveries arrive in plain packaging.",
-            "image_alt": "Telehealth consultation"
+            "image": "shopify://shop_images/home-3.png",
+            "image_alt": "Telehealth consultation",
+            "title": "Discreet at every step",
+            "body": "Consult by phone or video from wherever you are. Orders arrive in plain packaging with nothing on the outside to give them away."
           }
         },
         "card-4": {
           "type": "card",
           "settings": {
-            "icon": "script",
-            "title": "Effortless refills",
-            "body": "Your script lives in your account. Reorder in a few taps and it ships the same business day.",
-            "image_alt": "Pharmacist at the dispensing computer"
+            "image_alt": "Pharmacist at the dispensing computer",
+            "title": "Reorders in a few taps",
+            "body": "Your script is saved to your account, so a repeat order takes a minute and leaves the pharmacy the same business day."
           }
         }
       },
@@ -252,8 +262,8 @@
         "card-4"
       ],
       "settings": {
-        "eyebrow": "Why Quity",
-        "title": "Support that makes quitting convenient, discreet and compliant",
+        "title": "Private, legal and easy to stick with",
+        "sub": "",
         "background": "paper",
         "padding_top": 96,
         "padding_bottom": 96
@@ -265,30 +275,36 @@
         "fact-1": {
           "type": "fact",
           "settings": {
-            "tag": "Fact 01",
-            "title": "Smoking and vaping rates in Australia",
-            "link_label": "Read more",
-            "body": "Around one in ten Australian adults still smokes daily, and most of them say they want to stop. Vaping has grown fastest among people under 30, many of whom never smoked cigarettes at all. Both carry dependence on the same drug, and both respond to the same clinical approach: a measured dose, a taper, and a plan.",
+            "tag": "The numbers",
+            "title": "Who still smokes, and who now vapes",
+            "body": "Roughly one Australian adult in ten smokes every day, and most say they would rather not. Vaping has risen fastest among people under 30, many of whom never touched a cigarette. Both deliver the same drug, so the treatment is the same: a measured dose, a gradual taper and a plan for the hard days.",
+            "link_label": "Read the detail",
+            "link_url": "",
+            "image": "shopify://shop_images/home-2.png",
             "image_alt": "Clinician in a bright clinical setting"
           }
         },
         "fact-2": {
           "type": "fact",
           "settings": {
-            "tag": "Fact 02",
+            "tag": "The odds",
             "title": "Why willpower alone has poor odds",
-            "link_label": "Read more",
             "body": "Unassisted quit attempts succeed a small fraction of the time. Combining behavioural support with nicotine replacement therapy roughly doubles the chance of stopping for good — which is why every Quity plan pairs medication with a scheduled check-in rather than sending you off with a box.",
+            "link_label": "Read the detail",
+            "link_url": "",
+            "image": "shopify://shop_images/home-4.png",
             "image_alt": "Medication in a practitioner’s hands"
           }
         },
         "fact-3": {
           "type": "fact",
           "settings": {
-            "tag": "Fact 03",
+            "tag": "The timeline",
             "title": "The first fortnight is the hardest",
-            "link_label": "Read more",
             "body": "Cravings peak between days three and ten, then fall sharply. Knowing that in advance is half the battle; having the right dose on hand for the peak is the other half. Your doctor reviews the plan at week two and again at week four.",
+            "link_label": "Read the detail",
+            "link_url": "",
+            "image": "shopify://shop_images/home-3.png",
             "image_alt": "Doctor on the phone"
           }
         }
@@ -312,9 +328,11 @@
           "type": "stage",
           "settings": {
             "tag": "Getting started",
-            "title": "Make the first step easy and risk free.",
-            "cta_label": "Apply today",
-            "body": "Applying takes about five minutes and costs nothing. An Australian-registered doctor reviews your history and, if therapy is appropriate, sends the script straight to our partner pharmacy.",
+            "title": "Starting costs you nothing but five minutes.",
+            "body": "Fill in the online questionnaire at your own pace. An Australian-registered doctor reads it and, if nicotine therapy suits you, writes the script and sends it straight to the dispensing pharmacy.",
+            "cta_label": "Start now",
+            "cta_url": "",
+            "image": "shopify://shop_images/home-5.png",
             "image_alt": "Doctor with medication and a chart"
           }
         },
@@ -323,8 +341,10 @@
           "settings": {
             "tag": "Week two",
             "title": "A check-in before the hardest part passes.",
-            "cta_label": "See the plan",
             "body": "Cravings peak between days three and ten. Your doctor reviews the dose at week two and adjusts it if the plan is not holding. Follow-ups are included, not billed separately.",
+            "cta_label": "See the plan",
+            "cta_url": "",
+            "image": "shopify://shop_images/home-7.png",
             "image_alt": "Doctor writing up notes"
           }
         },
@@ -333,8 +353,10 @@
           "settings": {
             "tag": "Ongoing",
             "title": "Refills that arrive before you run out.",
+            "body": "Your script sits in your account for twelve months. Reorder in a few taps and it ships the same business day, in plain packaging, wherever you are in Australia.",
             "cta_label": "Shop chemist",
-            "body": "Your script sits in your account for twelve months. Reorder in a few taps and it ships the same business day, in plain packaging, anywhere in Australia.",
+            "cta_url": "",
+            "image": "shopify://shop_images/home-6.png",
             "image_alt": "Pharmacist in the dispensary"
           }
         }
@@ -345,8 +367,8 @@
         "stage-3"
       ],
       "settings": {
-        "eyebrow": "Your first six weeks",
-        "title": "Guided from day one",
+        "title": "Someone in your corner the whole way",
+        "sub": "",
         "background": "paper-2",
         "padding_top": 96,
         "padding_bottom": 96
@@ -370,7 +392,7 @@
         "benefit-3": {
           "type": "benefit",
           "settings": {
-            "text": "Health education"
+            "text": "Health explainers"
           }
         },
         "benefit-4": {
@@ -387,8 +409,8 @@
         "benefit-4"
       ],
       "settings": {
-        "title": "Join our mailing list",
-        "text": "Plain-English guidance from an Australian prescription-based service. No more than twice a month, and nothing about a “journey”.",
+        "title": "Quit tips, by email",
+        "text": "Practical, plain-English advice from our doctors and pharmacists: what to expect in week one, how to ride out cravings, and what new rules mean for you. Two emails a month at most.",
         "show_phone": true,
         "phone_prefix": "+61",
         "submit_label": "Join now",
@@ -407,71 +429,78 @@
         "question-1": {
           "type": "question",
           "settings": {
-            "question": "What’s the first step to begin?",
-            "answer": "<p>Create an account and complete the online assessment. It takes about five minutes and costs nothing. A registered Australian doctor reviews it and emails you the outcome, usually within 24 hours.</p>"
+            "question": "What does the assessment involve?",
+            "answer": "<p>A short online questionnaire about your smoking or vaping, your general health and any medicines you take. It takes about five minutes and costs nothing. A registered Australian doctor then reviews your answers and emails you the outcome, usually within 24 hours.</p>"
           }
         },
         "question-2": {
           "type": "question",
           "settings": {
-            "question": "Can I submit an existing prescription?",
-            "answer": "<p>Yes. Upload a valid e-script with its QR code or token number. Our pharmacist verifies it, then dispenses and ships from our partner pharmacy.</p>"
+            "question": "Do I need to see a doctor in person?",
+            "answer": "<p>No. The whole process is online. You complete the questionnaire in your own time, the doctor reviews it remotely, and any follow-up happens by phone or video.</p>"
           }
         },
         "question-3": {
           "type": "question",
           "settings": {
-            "question": "What if I’m not approved for a prescription?",
-            "answer": "<p>You pay nothing. If a doctor decides nicotine therapy is not appropriate for you, they will explain why and suggest alternatives.</p>"
+            "question": "Who decides whether nicotine therapy is right for me?",
+            "answer": "<p>An AHPRA-registered Australian doctor. They weigh your smoking and medical history against TGA prescribing guidelines before writing anything.</p>"
           }
         },
         "question-4": {
           "type": "question",
           "settings": {
-            "question": "How quickly can I receive my prescription?",
-            "answer": "<p>Most assessments are reviewed within 24 hours. Approved orders leave the pharmacy the same business day, with express delivery reaching most of Australia the next.</p>"
+            "question": "What happens if the doctor says no?",
+            "answer": "<p>You pay nothing. If nicotine therapy is not appropriate for you, the doctor will explain why and point you towards other options.</p>"
           }
         },
         "question-5": {
           "type": "question",
           "settings": {
-            "question": "Who determines if I qualify for nicotine therapy?",
-            "answer": "<p>An AHPRA-registered Australian doctor. They review your smoking and medical history against TGA prescribing guidelines before writing anything.</p>"
+            "question": "Can I use an e-script from another doctor?",
+            "answer": "<p>Yes. Upload it through your account. A QR code or a token number both work. Our pharmacist checks the script, then dispenses and posts your order from the partner pharmacy.</p>"
           }
         },
         "question-6": {
           "type": "question",
           "settings": {
-            "question": "What are the shipping costs?",
-            "answer": "<p>Free on orders over $150. Below that, standard shipping is a flat rate and express is available at checkout. Everything ships in plain packaging.</p>"
+            "question": "How soon will my order arrive?",
+            "answer": "<p>Most assessments come back within 24 hours. Approved orders leave the pharmacy the same business day, and express post reaches most of Australia the following day.</p>"
           }
         },
         "question-7": {
           "type": "question",
           "settings": {
-            "question": "What is your returns and refunds policy?",
-            "answer": "<p>Prescription medicines cannot be returned once dispensed, under Australian law. If an order arrives damaged or incorrect, contact support and we will replace it.</p>"
+            "question": "How much does the therapy cost?",
+            "answer": "<p>Most patients spend between $25 and $60 a week, depending on the plan. There is no consultation fee and no subscription.</p>"
           }
         },
         "question-8": {
           "type": "question",
           "settings": {
-            "question": "Do you accept prescriptions with a QR code?",
-            "answer": "<p>Yes. QR-coded e-scripts and token numbers are both accepted through the upload form.</p>"
+            "question": "Is shipping free?",
+            "answer": "<p>Yes, on orders over $150. Under that, standard post is a flat rate and express is offered at checkout. Every parcel goes out in plain packaging.</p>"
           }
         },
         "question-9": {
           "type": "question",
           "settings": {
-            "question": "What is the price range for prescribed products?",
-            "answer": "<p>Most patients spend between $25 and $60 a week on therapy, depending on the plan. There is no subscription and no consultation fee.</p>"
+            "question": "How long does my script last?",
+            "answer": "<p>Twelve months. It stays on your account, so repeat orders take a minute and ship the same business day.</p>"
           }
         },
         "question-10": {
           "type": "question",
           "settings": {
-            "question": "Am I eligible if I currently vape?",
-            "answer": "<p>Yes. Nicotine dependence is treated the same whether it comes from cigarettes or vaping. Tell the doctor what you currently use and how often.</p>"
+            "question": "Can I return an order?",
+            "answer": "<p>Australian law does not allow prescription medicines to be returned once dispensed. If something arrives damaged or wrong, contact support and we will replace it.</p>"
+          }
+        },
+        "question-11": {
+          "type": "question",
+          "settings": {
+            "question": "I vape rather than smoke. Can I still apply?",
+            "answer": "<p>Yes. Nicotine dependence is treated the same whether it comes from cigarettes or vapes. Tell the doctor what you use and how often.</p>"
           }
         }
       },
@@ -485,14 +514,15 @@
         "question-7",
         "question-8",
         "question-9",
-        "question-10"
+        "question-10",
+        "question-11"
       ],
       "settings": {
-        "eyebrow": "Your questions answered",
         "title": "Frequently asked questions",
         "intro": "What the service covers, how approval works, what things cost, and how quickly your order arrives.",
         "view_all_label": "View all",
-        "open_first": true,
+        "view_all_url": "",
+        "open_first": false,
         "anchor": "faq",
         "background": "paper",
         "padding_top": 96,

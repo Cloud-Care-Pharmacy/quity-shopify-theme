@@ -2,7 +2,7 @@
   Quity Home — how it works
   -------------------------
   Centred header, four lifting step cards (icon box + "Step 01" badge,
-  heading, body) joined by hairline arrows on desktop, and a centred
+  h3, body) joined by hairline arrows on desktop, and a centred
   "Get started" button. Steps are blocks; the badge numbers itself.
   The section carries the #how anchor the "Learn more" buttons target.
 
@@ -46,7 +46,6 @@
 <section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
   <div class="qhm__wrap">
     {%- render 'home-section-head',
-      eyebrow: section.settings.eyebrow,
       title: section.settings.title,
       sub: section.settings.sub,
       max: 640 -%}
@@ -60,7 +59,7 @@
                 <span class="qhm-iconbox">{%- render 'home-icon', name: block.settings.icon, size: 24 -%}</span>
                 <span class="qhm-badge qhm-badge--coral">{{ section.settings.step_label | escape }} {{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
               </div>
-              <h4 class="qhm-step__title">{{ block.settings.title | escape }}</h4>
+              <h3 class="qhm-step__title">{{ block.settings.title | escape }}</h3>
               {%- if block.settings.body != blank -%}
                 <p class="qhm-body qhm-step__body">{{ block.settings.body | escape }}</p>
               {%- endif -%}
@@ -88,11 +87,10 @@
 {
   "name": "Home - how it works",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The process" },
     { "type": "text", "id": "title", "label": "Heading", "default": "How Quity works" },
-    { "type": "textarea", "id": "sub", "label": "Sub text", "default": "Four steps from first click to a package at the door. Nothing to pay until a doctor approves your therapy." },
+    { "type": "textarea", "id": "sub", "label": "Sub text", "default": "Four steps from first click to delivery. Nothing to pay until a doctor approves your therapy." },
     { "type": "text", "id": "step_label", "label": "Step badge label", "default": "Step" },
-    { "type": "text", "id": "cta_label", "label": "Button", "default": "Get started" },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "Begin step one" },
     { "type": "url", "id": "cta_url", "label": "Button link", "info": "Defaults to the application card (#apply)." },
     { "type": "text", "id": "anchor", "label": "Anchor ID", "info": "In-page links such as “Learn more” point here.", "default": "how" },
     {
@@ -145,8 +143,8 @@
       "blocks": [
         { "type": "step", "settings": { "icon": "user", "title": "Create your account", "body": "Register your patient account. It takes about two minutes." } },
         { "type": "step", "settings": { "icon": "tablet", "title": "Online assessment", "body": "Answer a few questions about your smoking and medical history." } },
-        { "type": "step", "settings": { "icon": "bell", "title": "Get notified", "body": "Our medical team reviews your assessment and emails you the outcome." } },
-        { "type": "step", "settings": { "icon": "truck", "title": "Express delivery", "body": "Order through the pharmacy portal. Delivered Australia-wide." } }
+        { "type": "step", "settings": { "icon": "bell", "title": "Hear from the doctor", "body": "A doctor reviews your answers and emails you the decision, usually within a day." } },
+        { "type": "step", "settings": { "icon": "truck", "title": "Express delivery", "body": "Once approved, order through the pharmacy portal and it ships express, Australia-wide." } }
       ]
     }
   ]

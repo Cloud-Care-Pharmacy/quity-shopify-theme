@@ -2,9 +2,10 @@
   Quity Home — support grid ("Why Quity")
   ---------------------------------------
   Centred header and a 2×2 grid of lifting image + text cards: photo on
-  the left (clipped by the card), coral icon box, heading and body on
-  the right. Cards are blocks; a card without an image uses the bundled
-  placeholder photo for its position.
+  the left (clipped by the card), h3 and body on the right. The photo is
+  the card's only graphic — no icon tile above the heading. Cards are
+  blocks; a card without an image uses the bundled placeholder photo for
+  its position.
 
   Design: "Quity Homepage" handoff, section 8 — scoped .qhm- classes in
   assets/home-page.css. Static, no JavaScript.
@@ -34,7 +35,6 @@
 <section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
   <div class="qhm__wrap">
     {%- render 'home-section-head',
-      eyebrow: section.settings.eyebrow,
       title: section.settings.title,
       sub: section.settings.sub,
       max: 760 -%}
@@ -59,8 +59,7 @@
                 widths: '380, 570, 760' -%}
             </div>
             <div class="qhm-sup__body">
-              <span class="qhm-iconbox qhm-iconbox--coral qhm-iconbox--s">{%- render 'home-icon', name: block.settings.icon, size: 20 -%}</span>
-              <h4 class="qhm-sup__title">{{ block.settings.title | escape }}</h4>
+              <h3 class="qhm-sup__title">{{ block.settings.title | escape }}</h3>
               {%- if block.settings.body != blank -%}
                 <p class="qhm-body qhm-sup__text">{{ block.settings.body | escape }}</p>
               {%- endif -%}
@@ -76,8 +75,7 @@
 {
   "name": "Home - support grid",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Quity" },
-    { "type": "text", "id": "title", "label": "Heading", "default": "Support that makes quitting convenient, discreet and compliant" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Private, legal and easy to stick with" },
     { "type": "textarea", "id": "sub", "label": "Sub text" },
     {
       "type": "select",
@@ -101,25 +99,8 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image", "info": "Falls back to a bundled placeholder photo." },
         { "type": "text", "id": "image_alt", "label": "Image alt text" },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "chat", "label": "Chat" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "lock", "label": "Lock" },
-            { "value": "script", "label": "Script" },
-            { "value": "truck", "label": "Truck" },
-            { "value": "doctor", "label": "Doctor" },
-            { "value": "heart", "label": "Heart" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "check", "label": "Check" }
-          ],
-          "default": "chat"
-        },
-        { "type": "text", "id": "title", "label": "Heading", "default": "Judgement-free support" },
-        { "type": "textarea", "id": "body", "label": "Body", "default": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice." }
+        { "type": "text", "id": "title", "label": "Heading", "default": "Doctors who don’t judge" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "An Australian-registered doctor reads your application and treats it as a medical matter, not a moral one. You explain yourself once, in your own time." }
       ]
     }
   ],
@@ -128,10 +109,10 @@
     {
       "name": "Home - support grid",
       "blocks": [
-        { "type": "card", "settings": { "icon": "chat", "title": "Judgement-free support", "body": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice.", "image_alt": "Doctor on a telehealth call" } },
-        { "type": "card", "settings": { "icon": "shield", "title": "Legal and regulated", "body": "TGA-approved nicotine therapy dispensed by a registered Australian pharmacy, shipped anywhere in the country.", "image_alt": "Pharmacy shelves of dispensed medicines" } },
-        { "type": "card", "settings": { "icon": "lock", "title": "Private and convenient", "body": "Consultations happen by phone or video, at a time that suits you. Deliveries arrive in plain packaging.", "image_alt": "Telehealth consultation" } },
-        { "type": "card", "settings": { "icon": "script", "title": "Effortless refills", "body": "Your script lives in your account. Reorder in a few taps and it ships the same business day.", "image_alt": "Pharmacist at the dispensing computer" } }
+        { "type": "card", "settings": { "title": "Doctors who don’t judge", "body": "An Australian-registered doctor reads your application and treats it as a medical matter, not a moral one. You explain yourself once, in your own time.", "image_alt": "Doctor on a telehealth call" } },
+        { "type": "card", "settings": { "title": "Dispensed by a pharmacy", "body": "TGA-approved nicotine therapy, dispensed by a registered Australian pharmacy and posted to any address in the country.", "image_alt": "Pharmacy shelves of dispensed medicines" } },
+        { "type": "card", "settings": { "title": "Discreet at every step", "body": "Consult by phone or video from wherever you are. Orders arrive in plain packaging with nothing on the outside to give them away.", "image_alt": "Telehealth consultation" } },
+        { "type": "card", "settings": { "title": "Reorders in a few taps", "body": "Your script is saved to your account, so a repeat order takes a minute and leaves the pharmacy the same business day.", "image_alt": "Pharmacist at the dispensing computer" } }
       ]
     }
   ]

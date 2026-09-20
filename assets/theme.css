@@ -8542,6 +8542,10 @@ body.video-playing {
 .mini-cart-content .js-free-shipping .progress-bar {
   -webkit-animation: none;
   animation: none;
+  /* the fill is set to its width, not tweened: width is a layout property */
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .mini-cart-content .js-free-shipping-text {
   font-size: calc(var(--g-font-size) - 2px);
@@ -10238,6 +10242,12 @@ a.text-primary:active {
 .site-footer .site-footer__section-title {
   text-transform: uppercase;
   margin-bottom: 45px;
+}
+/* 16px is the smallest size iOS Safari will focus without zooming the page. */
+@media (max-width: 767.98px) {
+  .footer-email .form-control {
+    font-size: 16px;
+  }
 }
 .footer-email .form-control {
   border-radius: var(--g-input-radius) !important;

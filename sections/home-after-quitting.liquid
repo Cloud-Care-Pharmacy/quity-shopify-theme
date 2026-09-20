@@ -2,7 +2,7 @@
   Quity Home — after quitting
   ---------------------------
   Centred header and a hairline-divided timeline card: one cell per
-  milestone (sage icon box, mono timing label, heading, body), with the
+  milestone (sage icon box, mono timing label, h3, body), with the
   1px grid gap doing the divider lines. Milestones are blocks.
 
   Design: "Quity Homepage" handoff, section 4 — scoped .qhm- classes in
@@ -45,7 +45,6 @@
 <section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
   <div class="qhm__wrap">
     {%- render 'home-section-head',
-      eyebrow: section.settings.eyebrow,
       title: section.settings.title,
       sub: section.settings.sub,
       max: 640 -%}
@@ -59,7 +58,7 @@
               {%- if block.settings.timing != blank -%}
                 <div class="qhm-mono qhm-after__tag">{{ block.settings.timing | escape }}</div>
               {%- endif -%}
-              <h4 class="qhm-after__title">{{ block.settings.title | escape }}</h4>
+              <h3 class="qhm-after__title">{{ block.settings.title | escape }}</h3>
               {%- if block.settings.body != blank -%}
                 <p class="qhm-body qhm-after__body">{{ block.settings.body | escape }}</p>
               {%- endif -%}
@@ -79,8 +78,7 @@
 {
   "name": "Home - after quitting",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Life after quitting" },
-    { "type": "text", "id": "title", "label": "Heading", "default": "What happens after you stop" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "How quickly your body bounces back" },
     { "type": "textarea", "id": "sub", "label": "Sub text", "default": "The body starts repairing itself within the hour. These are the milestones most people reach." },
     { "type": "text", "id": "note", "label": "Footnote", "default": "Timeline based on published quit-smoking health guidance. Individual results vary." },
     {
@@ -133,7 +131,7 @@
         { "type": "milestone", "settings": { "timing": "20 minutes", "icon": "pulse", "title": "Heart rate settles", "body": "Pulse and blood pressure begin returning to a normal range." } },
         { "type": "milestone", "settings": { "timing": "12 hours", "icon": "lungs", "title": "Carbon monoxide clears", "body": "Oxygen in the blood returns to a normal level." } },
         { "type": "milestone", "settings": { "timing": "2–12 weeks", "icon": "leaf", "title": "Breathing gets easier", "body": "Circulation improves and lung function measurably rises." } },
-        { "type": "milestone", "settings": { "timing": "12 months", "icon": "heart", "title": "Heart risk halves", "body": "Coronary heart disease risk falls to about half that of a smoker." } }
+        { "type": "milestone", "settings": { "timing": "12 months", "icon": "heart", "title": "Heart risk cut in half", "body": "Coronary heart disease risk is about half that of someone who kept smoking." } }
       ]
     }
   ]

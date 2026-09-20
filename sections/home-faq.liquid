@@ -1,7 +1,7 @@
 {%- comment -%}
   Quity Home — FAQ
   ----------------
-  Header row (eyebrow, heading, intro on the left; "View all" on the
+  Header row (heading and intro on the left; "View all" on the
   right) above a two-column accordion. Questions are blocks, split
   first half / second half across the columns (rows rendered by
   snippets/home-faq-item.liquid). One question is open at
@@ -42,9 +42,6 @@
   <div class="qhm__wrap">
     <div class="qhm-faq__head">
       <div>
-        {%- if section.settings.eyebrow != blank -%}
-          <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
-        {%- endif -%}
         {%- if section.settings.title != blank -%}
           <h2 class="qhm-faq__title">{{ section.settings.title | escape }}</h2>
         {%- endif -%}
@@ -78,7 +75,6 @@
 {
   "name": "Home - FAQ",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your questions answered" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Frequently asked questions" },
     { "type": "textarea", "id": "intro", "label": "Intro", "default": "What the service covers, how approval works, what things cost, and how quickly your order arrives." },
     { "type": "text", "id": "view_all_label", "label": "View all button", "default": "View all" },
@@ -105,8 +101,8 @@
       "type": "question",
       "name": "Question",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "What’s the first step to begin?" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Create an account and complete the online assessment. It takes about five minutes and costs nothing.</p>" }
+        { "type": "text", "id": "question", "label": "Question", "default": "What does the assessment involve?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>A short online questionnaire about your smoking or vaping, your general health and any medicines you take. It takes about five minutes and costs nothing.</p>" }
       ]
     }
   ],
@@ -115,16 +111,17 @@
     {
       "name": "Home - FAQ",
       "blocks": [
-        { "type": "question", "settings": { "question": "What’s the first step to begin?", "answer": "<p>Create an account and complete the online assessment. It takes about five minutes and costs nothing. A registered Australian doctor reviews it and emails you the outcome, usually within 24 hours.</p>" } },
-        { "type": "question", "settings": { "question": "Can I submit an existing prescription?", "answer": "<p>Yes. Upload a valid e-script with its QR code or token number. Our pharmacist verifies it, then dispenses and ships from our partner pharmacy.</p>" } },
-        { "type": "question", "settings": { "question": "What if I’m not approved for a prescription?", "answer": "<p>You pay nothing. If a doctor decides nicotine therapy is not appropriate for you, they will explain why and suggest alternatives.</p>" } },
-        { "type": "question", "settings": { "question": "How quickly can I receive my prescription?", "answer": "<p>Most assessments are reviewed within 24 hours. Approved orders leave the pharmacy the same business day, with express delivery reaching most of Australia the next.</p>" } },
-        { "type": "question", "settings": { "question": "Who determines if I qualify for nicotine therapy?", "answer": "<p>An AHPRA-registered Australian doctor. They review your smoking and medical history against TGA prescribing guidelines before writing anything.</p>" } },
-        { "type": "question", "settings": { "question": "What are the shipping costs?", "answer": "<p>Free on orders over $150. Below that, standard shipping is a flat rate and express is available at checkout. Everything ships in plain packaging.</p>" } },
-        { "type": "question", "settings": { "question": "What is your returns and refunds policy?", "answer": "<p>Prescription medicines cannot be returned once dispensed, under Australian law. If an order arrives damaged or incorrect, contact support and we will replace it.</p>" } },
-        { "type": "question", "settings": { "question": "Do you accept prescriptions with a QR code?", "answer": "<p>Yes. QR-coded e-scripts and token numbers are both accepted through the upload form.</p>" } },
-        { "type": "question", "settings": { "question": "What is the price range for prescribed products?", "answer": "<p>Most patients spend between $25 and $60 a week on therapy, depending on the plan. There is no subscription and no consultation fee.</p>" } },
-        { "type": "question", "settings": { "question": "Am I eligible if I currently vape?", "answer": "<p>Yes. Nicotine dependence is treated the same whether it comes from cigarettes or vaping. Tell the doctor what you currently use and how often.</p>" } }
+        { "type": "question", "settings": { "question": "What does the assessment involve?", "answer": "<p>A short online questionnaire about your smoking or vaping, your general health and any medicines you take. It takes about five minutes and costs nothing. A registered Australian doctor then reviews your answers and emails you the outcome, usually within 24 hours.</p>" } },
+        { "type": "question", "settings": { "question": "Do I need to see a doctor in person?", "answer": "<p>No. The whole process is online. You complete the questionnaire in your own time, the doctor reviews it remotely, and any follow-up happens by phone or video.</p>" } },
+        { "type": "question", "settings": { "question": "Who decides whether nicotine therapy is right for me?", "answer": "<p>An AHPRA-registered Australian doctor. They weigh your smoking and medical history against TGA prescribing guidelines before writing anything.</p>" } },
+        { "type": "question", "settings": { "question": "What happens if the doctor says no?", "answer": "<p>You pay nothing. If nicotine therapy is not appropriate for you, the doctor will explain why and point you towards other options.</p>" } },
+        { "type": "question", "settings": { "question": "Can I use an e-script from another doctor?", "answer": "<p>Yes. Upload it through your account. A QR code or a token number both work. Our pharmacist checks the script, then dispenses and posts your order from the partner pharmacy.</p>" } },
+        { "type": "question", "settings": { "question": "How soon will my order arrive?", "answer": "<p>Most assessments come back within 24 hours. Approved orders leave the pharmacy the same business day, and express post reaches most of Australia the following day.</p>" } },
+        { "type": "question", "settings": { "question": "How much does the therapy cost?", "answer": "<p>Most patients spend between $25 and $60 a week, depending on the plan. There is no consultation fee and no subscription.</p>" } },
+        { "type": "question", "settings": { "question": "Is shipping free?", "answer": "<p>Yes, on orders over $150. Under that, standard post is a flat rate and express is offered at checkout. Every parcel goes out in plain packaging.</p>" } },
+        { "type": "question", "settings": { "question": "How long does my script last?", "answer": "<p>Twelve months. It stays on your account, so repeat orders take a minute and ship the same business day.</p>" } },
+        { "type": "question", "settings": { "question": "Can I return an order?", "answer": "<p>Australian law does not allow prescription medicines to be returned once dispensed. If something arrives damaged or wrong, contact support and we will replace it.</p>" } },
+        { "type": "question", "settings": { "question": "I vape rather than smoke. Can I still apply?", "answer": "<p>Yes. Nicotine dependence is treated the same whether it comes from cigarettes or vapes. Tell the doctor what you use and how often.</p>" } }
       ]
     }
   ]

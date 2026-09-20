@@ -16,6 +16,11 @@
     .announcement-slide #HeaderLanguageForm .localization-form__select{
       color :{{ section.settings.text }};
     }
+  /* Swiper's autoHeight tweens the wrapper height between slides; every
+     announcement is one line, so only the slide transform animates. */
+  .announcement-swiper.swiper-container-autoheight .swiper-wrapper{
+    transition-property: transform;
+  }
   .announcement-swiper{
     margin-left: auto;
     margin-right: auto;

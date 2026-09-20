@@ -13,8 +13,16 @@
    Newsreader / JetBrains Mono) are loaded in layout/theme.liquid
    for the index template. Behaviour: assets/home-page.js.
 
+   Coral: --qhm-coral (#E55B4F) is the accent for icons, dots, the
+   range thumb and focus rings. It only reaches 3.5:1 against white
+   and 3.2:1 against paper, so anything read as text — coral
+   headings, links, error copy and the white-on-coral button — uses
+   --qhm-coral-deep (#C8483D, 4.7:1 on white) with --qhm-coral-ink
+   as its hover. Small mono labels stay at 11px or above.
+
    Breakpoints follow the handoff: 1160px (hero h1), 1024px
-   (tablet: two-column grids collapse), 720px (mobile).
+   (tablet: two-column grids collapse), 720px (mobile), plus a
+   360px step for the narrowest phones.
    ============================================================ */
 
 /* --- Tokens --- */
@@ -27,6 +35,7 @@
   --qhm-white: #FFFFFF;
   --qhm-coral: #E55B4F;
   --qhm-coral-deep: #C8483D;
+  --qhm-coral-ink: #B23D33;
   --qhm-coral-tint: #F8D7D3;
   --qhm-sage: #6F9072;
   --qhm-sage-tint: #E4EBE4;
@@ -140,14 +149,6 @@
 .qhm-col { display: flex; flex-direction: column; }
 
 /* --- Shared type --- */
-.qhm .qhm-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--qhm-coral);
-  line-height: 1.4;
-}
 .qhm .qhm-mono {
   font-family: var(--qhm-mono);
   font-size: 11px;
@@ -174,7 +175,7 @@
 
 /* Section header */
 .qhm-head { text-align: center; margin: 0 auto; }
-.qhm .qhm-head__title { font-size: 42px; margin-top: 14px; }
+.qhm .qhm-head__title { font-size: 42px; }
 .qhm .qhm-head__sub { font-size: 17px; line-height: 1.6; color: var(--qhm-slate); margin-top: 14px; }
 
 /* --- Button --- */
@@ -202,8 +203,8 @@
   transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.18s;
 }
 .qhm .qhm-btn:hover { transform: translateY(-1px); }
-.qhm .qhm-btn--coral { background: var(--qhm-coral); color: #FFFFFF; }
-.qhm .qhm-btn--coral:hover { background: var(--qhm-coral-deep); color: #FFFFFF; }
+.qhm .qhm-btn--coral { background: var(--qhm-coral-deep); color: #FFFFFF; }
+.qhm .qhm-btn--coral:hover { background: var(--qhm-coral-ink); color: #FFFFFF; }
 .qhm .qhm-btn--ink { background: var(--qhm-ink); color: var(--qhm-paper); }
 .qhm .qhm-btn--ink:hover { background: var(--qhm-ink-2); color: var(--qhm-paper); }
 .qhm .qhm-btn--line { background: transparent; color: var(--qhm-ink); border-color: var(--qhm-line-2); }
@@ -293,7 +294,7 @@
   margin-top: 6px;
   font-size: 12.5px;
   line-height: 1.4;
-  color: var(--qhm-coral);
+  color: var(--qhm-coral-deep);
 }
 .qhm .qhm-fieldwrap { min-width: 0; }
 
@@ -403,11 +404,16 @@
   color: var(--qhm-paper);
 }
 .qhm-hero__media { position: absolute; inset: 0; z-index: 0; }
-.qhm-hero__poster,
-.qhm-hero__video {
+.qhm-hero__media picture { display: block; }
+/* `.qhm img` above sets height:auto with higher specificity than a lone
+   class, so the poster needs the .qhm prefix or it stops covering the frame
+   and leaves a band of ink under the photo on phones and tablets. */
+.qhm .qhm-hero__poster,
+.qhm .qhm-hero__video {
   position: absolute;
   inset: 0;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -438,6 +444,8 @@
   color: #FFFFFF;
 }
 .qhm .qhm-hero__lead { color: rgba(255, 255, 255, 0.94); margin-top: 22px; max-width: 470px; }
+.qhm-hero__apply { margin-top: 36px; }
+/* trust row sits under the application card, above the optional licence line */
 .qhm-hero__trust { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
 .qhm .qhm-hero__trust-item {
   display: inline-flex;
@@ -448,7 +456,6 @@
   color: #FFFFFF;
 }
 .qhm-hero__trust-item svg { color: var(--qhm-coral); }
-.qhm-hero__apply { margin-top: 36px; }
 .qhm .qhm-hero__licence {
   display: flex;
   align-items: center;
@@ -458,26 +465,19 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Application card */
+/* Application card — the shadow lifts it off the video, so it carries
+   no hairline border (a 1px line under a 60px shadow reads as a template). */
 .qhm-apply {
   padding: 8px;
   max-width: 540px;
   color: var(--qhm-ink);
+  border: 0;
   box-shadow: 0 24px 60px -30px rgba(15, 17, 16, 0.55);
 }
 .qhm-apply__inner { padding: 24px 20px 20px; }
-.qhm .qhm-apply__title { font-size: 21px; color: var(--qhm-coral); }
+.qhm .qhm-apply__title { font-size: 21px; color: var(--qhm-coral-deep); }
 .qhm .qhm-apply__text { font-size: 14.5px; margin: 8px 0 20px; }
 .qhm-apply__submit { margin-top: 16px; }
-.qhm-apply__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 16px; }
-.qhm .qhm-apply__meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: var(--qhm-slate);
-}
-.qhm-apply__meta-item svg { color: var(--qhm-sage); }
 .qhm .qhm-apply__signed {
   font-size: 14.5px;
   line-height: 1.6;
@@ -486,10 +486,10 @@
 }
 .qhm .qhm-apply__signed strong { font-weight: 500; color: var(--qhm-ink); }
 .qhm .qhm-apply__logout { display: block; margin-top: 12px; font-size: 12.5px; color: var(--qhm-slate); }
-.qhm .qhm-apply__logout a { color: var(--qhm-coral); }
-.qhm .qhm-apply__logout a:hover { color: var(--qhm-coral-deep); }
+.qhm .qhm-apply__logout a { color: var(--qhm-coral-deep); }
+.qhm .qhm-apply__logout a:hover { color: var(--qhm-coral-ink); }
 .qhm .qhm-apply__consent { font-size: 12.5px; line-height: 1.5; color: var(--qhm-slate); margin-top: 12px; }
-.qhm .qhm-apply__consent a { color: var(--qhm-coral); }
+.qhm .qhm-apply__consent a { color: var(--qhm-coral-deep); }
 .qhm .qhm-apply__consent p { margin: 0; }
 .qhm-visually-hidden {
   position: absolute !important;
@@ -514,10 +514,10 @@
   background: var(--qhm-line);
 }
 .qhm-after__cell { background: var(--qhm-white); padding: 32px 28px; }
-.qhm .qhm-after__tag { color: var(--qhm-slate); margin-top: 20px; font-size: 10.5px; }
+.qhm .qhm-after__tag { color: var(--qhm-slate); margin-top: 20px; font-size: 12px; }
 .qhm .qhm-after__title { font-size: 19px; margin-top: 8px; }
 .qhm .qhm-after__body { font-size: 14.5px; margin-top: 10px; }
-.qhm .qhm-after__note { font-size: 12.5px; color: var(--qhm-slate); margin-top: 16px; text-align: center; }
+.qhm .qhm-after__note { font-size: 12.5px; color: var(--qhm-slate); max-width: 60ch; margin: 16px auto 0; text-align: center; }
 
 /* ============================================================
    3. Prescription support — sections/home-prescription-support.liquid
@@ -528,7 +528,7 @@
   gap: 72px;
   align-items: center;
 }
-.qhm .qhm-ps__title { font-size: 44px; margin-top: 14px; max-width: 460px; }
+.qhm .qhm-ps__title { font-size: 44px; max-width: 460px; }
 .qhm-ps__copy { display: flex; flex-direction: column; gap: 18px; margin-top: 24px; max-width: 480px; }
 .qhm .qhm-ps__copy p { font-size: 16px; line-height: 1.6; color: var(--qhm-slate); }
 .qhm .qhm-ps__copy p + p { margin-top: 0; }
@@ -583,7 +583,7 @@
   gap: 80px;
   align-items: center;
 }
-.qhm .qhm-sav__title { font-size: 44px; margin-top: 14px; }
+.qhm .qhm-sav__title { font-size: 44px; }
 .qhm .qhm-sav__text {
   font-size: 17px;
   line-height: 1.6;
@@ -608,9 +608,11 @@
   margin: 0;
 }
 .qhm .qhm-sav__value { font-size: 15px; color: var(--qhm-paper); letter-spacing: 0.02em; }
-.qhm-sav__range { margin-top: 22px; }
+/* .qhm .qhm-range zeroes margin; match its specificity or the 22px is dropped
+   and the 22px thumb overlaps the label. */
+.qhm .qhm-sav__range { margin-top: 22px; }
 .qhm-sav__scale { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
-.qhm .qhm-sav__scale span { font-size: 10px; color: rgba(244, 242, 236, 0.4); }
+.qhm .qhm-sav__scale span { font-size: 11px; color: rgba(244, 242, 236, 0.4); }
 .qhm-sav__results {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -622,7 +624,7 @@
   margin-top: 32px;
 }
 .qhm-sav__cell { background: var(--qhm-ink); padding: 22px 20px; }
-.qhm .qhm-sav__cell-label { font-size: 10px; color: var(--qhm-onink-50); }
+.qhm .qhm-sav__cell-label { font-size: 12px; color: var(--qhm-onink-50); }
 .qhm .qhm-sav__figure {
   font-family: var(--qhm-serif);
   font-style: italic;
@@ -668,7 +670,7 @@
 }
 .qhm-sup__media--mid .qhm-sup__img { object-position: center 40%; }
 .qhm-sup__body { padding: 28px; }
-.qhm .qhm-sup__title { font-size: 20px; margin-top: 18px; }
+.qhm .qhm-sup__title { font-size: 20px; }
 .qhm .qhm-sup__text { font-size: 14.5px; margin-top: 10px; }
 
 /* ============================================================
@@ -773,7 +775,7 @@
 .qhm-mail__submit { margin-top: 4px; }
 .qhm .qhm-mail__consent { font-size: 12.5px; line-height: 1.5; color: var(--qhm-slate); }
 .qhm .qhm-mail__consent p { margin: 0; }
-.qhm .qhm-mail__consent a { color: var(--qhm-coral); }
+.qhm .qhm-mail__consent a { color: var(--qhm-coral-deep); }
 .qhm-mail__success { display: flex; align-items: flex-start; gap: 14px; }
 .qhm .qhm-mail__success-title { font-size: 21px; }
 .qhm .qhm-mail__success-text { font-size: 15px; margin-top: 8px; }
@@ -788,7 +790,7 @@
   flex-wrap: wrap;
   gap: 40px;
 }
-.qhm .qhm-faq__title { font-size: 42px; margin-top: 14px; }
+.qhm .qhm-faq__title { font-size: 42px; }
 .qhm .qhm-faq__intro { font-size: 16.5px; margin-top: 14px; max-width: 520px; }
 .qhm-faq__grid {
   display: grid;
@@ -821,7 +823,7 @@
   appearance: none;
   transition: color 0.18s;
 }
-.qhm .qhm-acc__q:hover { color: var(--qhm-coral); }
+.qhm .qhm-acc__q:hover { color: var(--qhm-coral-deep); }
 .qhm-acc__icon { flex: none; color: var(--qhm-slate); line-height: 0; }
 .qhm-acc__q[aria-expanded="true"] .qhm-acc__icon { color: var(--qhm-coral); }
 .qhm-acc__q[aria-expanded="true"] .qhm-acc__plus { display: none; }
@@ -829,7 +831,7 @@
 .qhm .qhm-acc__a { font-size: 15px; padding-bottom: 22px; padding-right: 40px; }
 .qhm .qhm-acc__a p { margin: 0; }
 .qhm .qhm-acc__a p + p { margin-top: 10px; }
-.qhm .qhm-acc__a a { color: var(--qhm-coral); }
+.qhm .qhm-acc__a a { color: var(--qhm-coral-deep); }
 
 /* ============================================================
    Responsive
@@ -854,7 +856,9 @@
   .qhm-faq__grid { grid-template-columns: 1fr; }
   .qhm-step__arrow { display: none; }
   .qhm-mail__panel { padding: 36px; }
-  .qhm-ps__stat { left: 16px; bottom: 16px; right: 16px; }
+  /* The stat card moves inside the photo and hugs its text; pinning both
+     edges stretched it across the whole frame on tablets. */
+  .qhm-ps__stat { left: 16px; bottom: 16px; max-width: calc(100% - 32px); }
   .qhm-ps__figure { height: 440px; }
   .qhm-guided__media { height: 400px; }
 }
@@ -862,23 +866,52 @@
 @media (max-width: 720px) {
   .qhm-sec { padding: 56px 0; }
   .qhm__wrap { padding: 0 20px; }
+  /* the mobile header is taller (two rows) than the desktop one */
+  .qhm [id] { scroll-margin-top: 120px; }
+  /* Long labels wrap inside the button instead of pushing it past its box. */
+  .qhm .qhm-btn { white-space: normal; text-align: center; }
+  /* 16px is the smallest size iOS Safari will focus without zooming the page. */
+  .qhm input.qhm-field { font-size: 16px; }
   .qhm-hero__wrap { padding-top: 48px; padding-bottom: 56px; }
-  .qhm .qhm-hero__title { font-size: 42px; }
+  .qhm .qhm-hero__title { font-size: clamp(36px, 11vw, 42px); }
+  /* Phones show a narrow slice of the cover photo behind the copy; darken it
+     towards the bottom so the lead and trust row stay legible on any crop. */
+  .qhm-hero__veil::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 17, 16, 0.08) 0%, rgba(15, 17, 16, 0.4) 55%, rgba(15, 17, 16, 0.5) 100%);
+  }
+  .qhm-hero__trust { gap: 12px 20px; }
+  .qhm-apply__inner { padding: 22px 18px 18px; }
   .qhm-after__grid,
   .qhm-steps,
   .qhm-form2,
   .qhm-sup__card,
   .qhm-mail__benefits { grid-template-columns: 1fr; }
+  .qhm-after__cell { padding: 24px 20px; }
+  .qhm-step__card { padding: 24px 20px; }
   .qhm-sup__media { min-height: 200px; }
-  .qhm-facts__pane { padding: 32px 24px 28px; }
+  .qhm-sup__body { padding: 24px 20px; }
+  .qhm-facts__pane { padding: 28px 20px 24px; }
   .qhm-facts__media { min-height: 260px; }
-  .qhm-sav__panel { padding: 24px 20px; }
+  .qhm-sav__panel { padding: 24px 18px; }
+  /* One figure per row with the label beside the amount: the three
+     stacked cells were taller than the copy above them. */
   .qhm-sav__results { grid-template-columns: 1fr; }
-  .qhm .qhm-sav__figure { font-size: 28px; }
-  .qhm .qhm-sav__figure--year { font-size: 30px; }
+  .qhm-sav__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+  .qhm .qhm-sav__figure { font-size: 26px; margin-top: 0; }
+  .qhm .qhm-sav__figure--year { font-size: 28px; }
   .qhm-ps__figure { height: 360px; }
   .qhm-guided__media { height: 320px; }
-  .qhm-mail__panel { padding: 28px 22px; }
+  .qhm-mail__panel { padding: 28px 20px; }
+  .qhm-mail__phone { gap: 8px; }
   .qhm .qhm-mail__title,
   .qhm .qhm-guided__title,
   .qhm .qhm-facts__title { font-size: 28px; }
@@ -886,10 +919,28 @@
   .qhm .qhm-faq__title,
   .qhm .qhm-ps__title,
   .qhm .qhm-sav__title { font-size: 34px; }
-  /* touch targets: 44px on mobile */
+  .qhm-faq__head { gap: 20px; }
+  /* touch targets: 44px controls, dots at least 24px wide including the
+     invisible hit area (neighbours meet at the edge, never overlap) */
   .qhm .qhm-circle-btn { width: 44px; height: 44px; }
-  .qhm .qhm-dot::before { inset: -18px -4px; }
+  .qhm .qhm-dot { width: 10px; height: 10px; }
+  .qhm .qhm-dot[data-on="1"] { width: 26px; border-radius: 5px; }
+  .qhm-dots { gap: 14px; }
+  .qhm .qhm-dot::before { inset: -17px -7px; }
+  .qhm .qhm-acc__q { padding: 18px 0; }
   .qhm .qhm-acc__a { padding-right: 24px; }
+}
+
+/* 320–360px phones: tighter gutters and button padding so single-line
+   labels and the two-part mobile field still fit. */
+@media (max-width: 360px) {
+  .qhm__wrap { padding: 0 16px; }
+  .qhm .qhm-btn { padding-left: 20px; padding-right: 20px; }
+  .qhm .qhm-btn--lg { padding-left: 24px; padding-right: 24px; }
+  .qhm .qhm-mail__prefix { width: 72px; padding-left: 8px; padding-right: 8px; }
+  .qhm-after__cell,
+  .qhm-step__card,
+  .qhm-sup__body { padding: 22px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

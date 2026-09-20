@@ -1672,7 +1672,7 @@
           "a00daf6f-fb1c-4351-80dc-24e405bf630e": {
             "type": "Item",
             "settings": {
-              "code": "<span style=\"font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#E55B4F;margin-right:10px;\">AU</span>Free shipping on orders over $150 · Express delivery Australia-wide",
+              "code": "Free shipping on orders over $150 · Express delivery Australia-wide",
               "button_text": "",
               "button_link": ""
             }
@@ -2426,7 +2426,7 @@
           "border-copryright": "#e1e1e1",
           "text": "#ffffff",
           "text_hover": "#e35353",
-          "title": "#e35353",
+          "title": "#E86060",
           "footer_align_title": "left",
           "enable_border": false,
           "footer_font_family": "--g-font-2",

@@ -49,7 +49,7 @@
         <div class="drawer-crossell pt-2">
           <div class="drawer-crossell-inner">
           {%- if settings.title_upsell != blank -%}
-            <h5 class="text-left mb-4">{{ settings.title_upsell }}</h5>
+            <h2 class="h5 text-left mb-4">{{ settings.title_upsell }}</h2>
           {%- endif -%}
           <div class="flex-row d-flex drawer-crossell-product flex-nowrap mb-0">
             {%- for product in settings.product_list limit: 8 -%}
@@ -187,8 +187,8 @@
             {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
           </div>
           <div class="mini-cart-btns mt-4 d-flex">
-            <a class="btn btn-outline js-cart-btn-cart w-50 mr-2" href="{{ routes.cart_url }}">{{ 'cart.general.view' | t }}</a>
-            <a class="ml-2 btn gradient-theme js-cart-btn-checkout btn-theme w-50 d-flex align-items-center justify-content-center {% if cart.item_count == 0 %} disabled{% endif %}" href="/checkout"> {{ 'cart.general.checkout' | t }}</a>
+            <a class="btn btn-outline js-cart-btn-cart" href="{{ routes.cart_url }}">{{ 'cart.general.view' | t }}</a>
+            <a class="btn gradient-theme js-cart-btn-checkout btn-theme d-flex align-items-center justify-content-center {% if cart.item_count == 0 %} disabled{% endif %}" href="/checkout"> {{ 'cart.general.checkout' | t }}</a>
           </div>
   
           {%- if settings.safe_checkout_pcart != blank -%}
@@ -241,8 +241,8 @@
         {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
       </div>
       <div class="mini-cart-btns mt-4 d-flex">
-        <a class="btn btn-outline js-cart-btn-cart w-50 mr-2" href="{{ routes.cart_url }}">{{ 'cart.general.view' | t }}</a>
-        <a class="ml-2 btn gradient-theme js-cart-btn-checkout btn-theme w-50 {% if cart.item_count == 0 %} disabled{% endif %}" href="/checkout">{{ 'cart.general.checkout' | t }}</a>
+        <a class="btn btn-outline js-cart-btn-cart" href="{{ routes.cart_url }}">{{ 'cart.general.view' | t }}</a>
+        <a class="btn gradient-theme js-cart-btn-checkout btn-theme {% if cart.item_count == 0 %} disabled{% endif %}" href="/checkout">{{ 'cart.general.checkout' | t }}</a>
       </div>
   
       {%- if settings.safe_checkout_pcart != blank -%}
