@@ -73,6 +73,42 @@
     },
     "shop-spotlight": {
       "type": "shop-spotlight",
+      "blocks": {
+        "product_L6Tawy": {
+          "type": "product",
+          "settings": {
+            "product": "alt-x-nicotine-vaping-device-grey-copy",
+            "subtitle": ""
+          }
+        },
+        "product_xmHT3b": {
+          "type": "product",
+          "settings": {
+            "product": "alt-x-pods",
+            "subtitle": ""
+          }
+        },
+        "product_y3tWkH": {
+          "type": "product",
+          "settings": {
+            "product": "col-prefilled-pods-2x2ml",
+            "subtitle": ""
+          }
+        },
+        "product_iFPGWx": {
+          "type": "product",
+          "settings": {
+            "product": "alt-device",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_L6Tawy",
+        "product_xmHT3b",
+        "product_y3tWkH",
+        "product_iFPGWx"
+      ],
       "settings": {
         "title": "Spotlight",
         "link_text": "",
