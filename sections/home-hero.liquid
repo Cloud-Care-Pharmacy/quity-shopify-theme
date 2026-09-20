@@ -2,11 +2,11 @@
   Quity Home — hero
   -----------------
   Full-bleed looping video under a uniform legibility veil, the
-  headline, rating and trust row, and the application card: a real
-  Shopify create_customer form (first name, last name, email, password,
-  confirm password) that creates the patient account and, via return_to,
-  lands the new customer on the questionnaire page. Signed-in visitors
-  see a "continue your application" card instead.
+  headline and rating, the application card, and the trust row beneath
+  the card. The card is a real Shopify create_customer form (first name,
+  last name, email, password, confirm password) that creates the patient
+  account and, via return_to, lands the new customer on the questionnaire
+  page. Signed-in visitors see a "continue your application" card instead.
 
   Video: pick one in the editor (Shopify serves 480/720/1080p renditions;
   the ≤720p one is used) or leave the fallback URL. The poster still is
@@ -146,17 +146,6 @@
         <p class="qhm-lead qhm-hero__lead">{{ section.settings.lead | escape }}</p>
       {%- endif -%}
 
-      {%- if trust_blocks.size > 0 -%}
-        <div class="qhm-hero__trust">
-          {%- for block in trust_blocks -%}
-            <span class="qhm-hero__trust-item" {{ block.shopify_attributes }}>
-              {%- render 'home-icon', name: block.settings.icon, size: 16 -%}
-              {{ block.settings.text | escape }}
-            </span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
       <div class="qhm-hero__apply">
         <div class="qhm-card qhm-apply" id="apply">
           <div class="qhm-apply__inner">
@@ -227,6 +216,17 @@
           </div>
         </div>
       </div>
+
+      {%- if trust_blocks.size > 0 -%}
+        <div class="qhm-hero__trust">
+          {%- for block in trust_blocks -%}
+            <span class="qhm-hero__trust-item" {{ block.shopify_attributes }}>
+              {%- render 'home-icon', name: block.settings.icon, size: 16 -%}
+              {{ block.settings.text | escape }}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
 
       {%- if section.settings.licence_text != blank -%}
         <div class="qhm-hero__licence">

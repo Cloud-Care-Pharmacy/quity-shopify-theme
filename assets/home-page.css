@@ -444,6 +444,8 @@
   color: #FFFFFF;
 }
 .qhm .qhm-hero__lead { color: rgba(255, 255, 255, 0.94); margin-top: 22px; max-width: 470px; }
+.qhm-hero__apply { margin-top: 36px; }
+/* trust row sits under the application card, above the optional licence line */
 .qhm-hero__trust { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
 .qhm .qhm-hero__trust-item {
   display: inline-flex;
@@ -454,7 +456,6 @@
   color: #FFFFFF;
 }
 .qhm-hero__trust-item svg { color: var(--qhm-coral); }
-.qhm-hero__apply { margin-top: 36px; }
 .qhm .qhm-hero__licence {
   display: flex;
   align-items: center;
