@@ -15,31 +15,36 @@
         "chip-1": {
           "type": "chip",
           "settings": {
-            "label": "Solo Plus"
+            "label": "Solo Plus",
+            "link": ""
           }
         },
         "chip-2": {
           "type": "chip",
           "settings": {
-            "label": "Starter kits"
+            "label": "Starter kits",
+            "link": ""
           }
         },
         "chip-3": {
           "type": "chip",
           "settings": {
-            "label": "Pods"
+            "label": "Pods",
+            "link": ""
           }
         },
         "chip-4": {
           "type": "chip",
           "settings": {
-            "label": "E-liquid"
+            "label": "E-liquid",
+            "link": ""
           }
         },
         "chip-5": {
           "type": "chip",
           "settings": {
-            "label": "NRT"
+            "label": "NRT",
+            "link": ""
           }
         }
       },
@@ -160,6 +165,7 @@
         "usage-1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/high.png",
             "title": "High dependency",
             "description": "Vaping heavily, or smoking more than 20 cigarettes a day",
             "link": ""
@@ -168,6 +174,7 @@
         "usage-2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/more.png",
             "title": "More dependent",
             "description": "Smoking 10 or more cigarettes a day",
             "link": ""
@@ -176,6 +183,7 @@
         "usage-3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/less.png",
             "title": "Less dependent",
             "description": "Smoking fewer than 10 cigarettes a day",
             "link": ""
@@ -184,6 +192,7 @@
         "usage-4": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/kit.png",
             "title": "Just starting",
             "description": "All-in-one kits with everything you need to make the switch",
             "link": ""
@@ -268,13 +277,13 @@
         "title": "By brand",
         "link_text": "Shop all products",
         "link_url": "",
+        "source": "auto",
+        "collection": "",
+        "exclude": "",
         "band": "warm",
         "padding_top": 64,
         "padding_bottom": 76,
-        "animation": "",
-        "source": "auto",
-        "collection": "",
-        "exclude": ""
+        "animation": ""
       }
     },
     "main": {
@@ -290,12 +299,12 @@
       "block_order": [
         "54d3153c-e00a-438c-a1b9-f2c68e68fce1"
       ],
+      "disabled": true,
       "settings": {
         "display_type": "all",
         "layout": "grid",
         "sort": "alphabetical"
-      },
-      "disabled": true
+      }
     }
   },
   "order": [
