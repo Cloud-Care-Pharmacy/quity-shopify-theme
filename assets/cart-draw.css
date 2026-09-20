@@ -25,6 +25,18 @@
 .mini-cart-meta p{
   font-size: 14px;
 }
+/* "View cart" / "Check out" share the row equally. The buttons used to be
+   w-50 plus 8px margins each, so their 34px side padding pushed the labels
+   past the box and overflow:hidden clipped them in the 320px drawer. */
+.mini-cart-btns{
+  gap: 12px;
+}
+.mini-cart-btns .btn{
+  flex: 1 1 0;
+  min-width: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 .mini-cart-item{
   position: relative;
 }
@@ -210,6 +222,7 @@ position: relative;
   left:auto;
 }
 .card-coupon{
+  padding: 4px 0;
   border-top: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
 }

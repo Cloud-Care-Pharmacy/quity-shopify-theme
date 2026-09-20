@@ -36,7 +36,6 @@
 <section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
   <div class="qhm__wrap">
     {%- render 'home-section-head',
-      eyebrow: section.settings.eyebrow,
       title: section.settings.title,
       sub: section.settings.sub,
       max: 640 -%}
@@ -103,7 +102,6 @@
 {
   "name": "Home - guided carousel",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your first six weeks" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Someone in your corner the whole way" },
     { "type": "textarea", "id": "sub", "label": "Sub text" },
     {

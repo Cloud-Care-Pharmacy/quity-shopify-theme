@@ -1,7 +1,7 @@
 {%- comment -%}
   Quity Home — savings calculator
   -------------------------------
-  Ink band. Left: eyebrow, two-line heading, lead, Newsreader pull-quote.
+  Ink band. Left: two-line heading, lead, Newsreader pull-quote.
   Right: bordered panel with the cigarettes-a-day slider and three
   live figures (day / week / year) in Newsreader italic.
 
@@ -58,9 +58,6 @@
 <section class="qhm qhm-sec qhm-sec--ink">
   <div class="qhm__wrap qhm-sav__grid">
     <div>
-      {%- if section.settings.eyebrow != blank -%}
-        <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
-      {%- endif -%}
       {%- if section.settings.title != blank -%}
         <h2 class="qhm-sav__title">{{ section.settings.title | escape | newline_to_br }}</h2>
       {%- endif -%}
@@ -127,7 +124,6 @@
 {
   "name": "Home - savings calculator",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The other cost" },
     { "type": "textarea", "id": "title", "label": "Heading", "info": "One line per row.", "default": "What smoking\nreally costs you" },
     { "type": "textarea", "id": "text", "label": "Text", "default": "Australia has the highest tobacco excise in the world, and it goes up again every March and September. Drag the slider to see what your habit costs over a day, a week and a year." },
     { "type": "text", "id": "quote", "label": "Pull quote", "default": "Most patients cover the cost of therapy in the first fortnight." },

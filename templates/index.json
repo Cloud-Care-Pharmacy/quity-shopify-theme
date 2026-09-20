@@ -40,7 +40,6 @@
         "trust-3"
       ],
       "settings": {
-        "eyebrow": "",
         "show_rating": false,
         "rating_text": "Rated 4.6/5 by 100+ reviews",
         "heading": "Quit smoking &\nnicotine vaping\nclinic.",
@@ -111,7 +110,6 @@
         "milestone-4"
       ],
       "settings": {
-        "eyebrow": "The recovery timeline",
         "title": "How quickly your body bounces back",
         "sub": "The body starts repairing itself within the hour. These are the milestones most people reach.",
         "note": "Timeline based on published quit-smoking health guidance. Individual results vary.",
@@ -123,7 +121,6 @@
     "home-prescription-support": {
       "type": "home-prescription-support",
       "settings": {
-        "eyebrow": "Our approach",
         "title": "A doctor-led way to quit nicotine",
         "text": "<p>Nicotine dependence is a medical condition, and it responds to medical treatment. The right therapy at the right dose, with a doctor checking how you are going, gives you far better odds than going it alone.</p><p>Quity brings the pieces together online. An Australian-registered doctor assesses you, a registered pharmacy dispenses TGA-approved nicotine therapy, and it arrives in plain packaging. No waiting room, no subscription and no fee to apply.</p>",
         "highlight": "Make this attempt the one that lasts.",
@@ -185,7 +182,6 @@
         "step-4"
       ],
       "settings": {
-        "eyebrow": "The process",
         "title": "How Quity works",
         "sub": "Four steps from first click to delivery. Nothing to pay until a doctor approves your therapy.",
         "step_label": "Step",
@@ -200,7 +196,6 @@
     "home-savings-calculator": {
       "type": "home-savings-calculator",
       "settings": {
-        "eyebrow": "The other cost",
         "title": "What smoking\nreally costs you",
         "text": "Australia has the highest tobacco excise in the world, and it goes up again every March and September. Drag the slider to see what your habit costs over a day, a week and a year.",
         "quote": "Most patients cover the cost of therapy in the first fortnight.",
@@ -229,7 +224,6 @@
           "settings": {
             "image": "shopify://shop_images/home-8.png",
             "image_alt": "Doctor on a telehealth call",
-            "icon": "chat",
             "title": "Doctors who don’t judge",
             "body": "An Australian-registered doctor reads your application and treats it as a medical matter, not a moral one. You explain yourself once, in your own time."
           }
@@ -239,7 +233,6 @@
           "settings": {
             "image": "shopify://shop_images/home-7.png",
             "image_alt": "Pharmacy shelves of dispensed medicines",
-            "icon": "shield",
             "title": "Dispensed by a pharmacy",
             "body": "TGA-approved nicotine therapy, dispensed by a registered Australian pharmacy and posted to any address in the country."
           }
@@ -249,7 +242,6 @@
           "settings": {
             "image": "shopify://shop_images/home-3.png",
             "image_alt": "Telehealth consultation",
-            "icon": "lock",
             "title": "Discreet at every step",
             "body": "Consult by phone or video from wherever you are. Orders arrive in plain packaging with nothing on the outside to give them away."
           }
@@ -258,7 +250,6 @@
           "type": "card",
           "settings": {
             "image_alt": "Pharmacist at the dispensing computer",
-            "icon": "script",
             "title": "Reorders in a few taps",
             "body": "Your script is saved to your account, so a repeat order takes a minute and leaves the pharmacy the same business day."
           }
@@ -271,7 +262,6 @@
         "card-4"
       ],
       "settings": {
-        "eyebrow": "What you get",
         "title": "Private, legal and easy to stick with",
         "sub": "",
         "background": "paper",
@@ -377,7 +367,6 @@
         "stage-3"
       ],
       "settings": {
-        "eyebrow": "Your first six weeks",
         "title": "Someone in your corner the whole way",
         "sub": "",
         "background": "paper-2",
@@ -529,7 +518,6 @@
         "question-11"
       ],
       "settings": {
-        "eyebrow": "Your questions answered",
         "title": "Frequently asked questions",
         "intro": "What the service covers, how approval works, what things cost, and how quickly your order arrives.",
         "view_all_label": "View all",

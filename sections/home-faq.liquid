@@ -1,7 +1,7 @@
 {%- comment -%}
   Quity Home — FAQ
   ----------------
-  Header row (eyebrow, heading, intro on the left; "View all" on the
+  Header row (heading and intro on the left; "View all" on the
   right) above a two-column accordion. Questions are blocks, split
   first half / second half across the columns (rows rendered by
   snippets/home-faq-item.liquid). One question is open at
@@ -42,9 +42,6 @@
   <div class="qhm__wrap">
     <div class="qhm-faq__head">
       <div>
-        {%- if section.settings.eyebrow != blank -%}
-          <div class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</div>
-        {%- endif -%}
         {%- if section.settings.title != blank -%}
           <h2 class="qhm-faq__title">{{ section.settings.title | escape }}</h2>
         {%- endif -%}
@@ -78,7 +75,6 @@
 {
   "name": "Home - FAQ",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your questions answered" },
     { "type": "text", "id": "title", "label": "Heading", "default": "Frequently asked questions" },
     { "type": "textarea", "id": "intro", "label": "Intro", "default": "What the service covers, how approval works, what things cost, and how quickly your order arrives." },
     { "type": "text", "id": "view_all_label", "label": "View all button", "default": "View all" },

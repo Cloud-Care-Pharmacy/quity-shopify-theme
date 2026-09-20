@@ -8542,6 +8542,10 @@ body.video-playing {
 .mini-cart-content .js-free-shipping .progress-bar {
   -webkit-animation: none;
   animation: none;
+  /* the fill is set to its width, not tweened: width is a layout property */
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .mini-cart-content .js-free-shipping-text {
   font-size: calc(var(--g-font-size) - 2px);

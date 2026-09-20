@@ -116,21 +116,16 @@
 
   <div class="qhm__wrap qhm-hero__wrap">
     <div class="qhm-hero__copy">
-      {%- if section.settings.eyebrow != blank or section.settings.show_rating -%}
+      {%- if section.settings.show_rating -%}
         <div class="qhm-hero__top">
-          {%- if section.settings.eyebrow != blank -%}
-            <span class="qhm-eyebrow">{{ section.settings.eyebrow | escape }}</span>
-          {%- endif -%}
-          {%- if section.settings.show_rating -%}
-            <div class="qhm-rating">
-              <span class="qhm-rating__stars" aria-hidden="true">
-                {%- for i in (1..5) -%}{%- render 'home-icon', name: 'star', size: 13 -%}{%- endfor -%}
-              </span>
-              {%- if section.settings.rating_text != blank -%}
-                <span class="qhm-rating__text">{{ section.settings.rating_text | escape }}</span>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+          <div class="qhm-rating">
+            <span class="qhm-rating__stars" aria-hidden="true">
+              {%- for i in (1..5) -%}{%- render 'home-icon', name: 'star', size: 13 -%}{%- endfor -%}
+            </span>
+            {%- if section.settings.rating_text != blank -%}
+              <span class="qhm-rating__text">{{ section.settings.rating_text | escape }}</span>
+            {%- endif -%}
+          </div>
         </div>
       {%- endif -%}
 
@@ -150,10 +145,10 @@
         <div class="qhm-card qhm-apply" id="apply">
           <div class="qhm-apply__inner">
             {%- if customer -%}
-              <h3 class="qhm-apply__title">
+              <h2 class="qhm-apply__title">
                 {{- section.settings.signed_in_title | escape -}}
                 {%- if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif -%}
-              </h3>
+              </h2>
               {%- if section.settings.signed_in_text != blank -%}
                 <p class="qhm-apply__signed">{{ section.settings.signed_in_text | escape }}</p>
               {%- endif -%}
@@ -163,7 +158,7 @@
               </a>
               <span class="qhm-apply__logout">Not you? <a href="{{ routes.account_logout_url }}">Log out</a></span>
             {%- else -%}
-              <h3 class="qhm-apply__title">{{ section.settings.card_title | escape }}</h3>
+              <h2 class="qhm-apply__title">{{ section.settings.card_title | escape }}</h2>
               {%- if section.settings.card_text != blank -%}
                 <p class="qhm-body qhm-apply__text">{{ section.settings.card_text | escape }}</p>
               {%- endif -%}
@@ -243,7 +238,6 @@
   "name": "Home - hero",
   "settings": [
     { "type": "header", "content": "Copy" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "Optional small coral label above the heading." },
     { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": false },
     { "type": "text", "id": "rating_text", "label": "Rating text", "default": "Rated 4.6/5 by 100+ reviews" },
     { "type": "textarea", "id": "heading", "label": "Heading", "info": "One line per row.", "default": "Quit smoking &\nnicotine vaping\nclinic." },
