@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "home-hero": {
@@ -31,18 +40,22 @@
         "trust-3"
       ],
       "settings": {
+        "eyebrow": "",
         "show_rating": false,
         "rating_text": "Rated 4.6/5 by 100+ reviews",
         "heading": "Quit smoking &\nnicotine vaping\nclinic.",
         "heading_tag": "h1",
         "lead": "Quity helps adult Australians quit smoking with legal, regulated nicotine products, reviewed by a doctor, dispensed by a pharmacy.",
         "lead_size": 16,
-        "video_url": "https://quity.com.au/cdn/shop/videos/c/vp/f1f8d278ed094e8084d4a81cec736085/f1f8d278ed094e8084d4a81cec736085.HD-1080p-7.2Mbps-67903455.mp4",
+        "licence_text": "",
+        "video_url": "",
+        "poster": "shopify://shop_images/quity-hero.png",
         "veil_opacity": 46,
         "card_title": "Apply For No Cost From Home",
         "card_text": "Create an account and answer a few questions. A registered Australian doctor reviews it within 24 hours.",
         "submit_label": "Apply for free",
         "submit_busy_label": "Creating your account…",
+        "return_to": "",
         "consent": "<p>By creating an account you agree to Quity’s <a href=\"/pages/terms-of-service\">Terms & Conditions</a> and <a href=\"/pages/privacy-policy\">Privacy Policy</a>.</p>",
         "meta_1": "No cost to apply",
         "meta_2": "Licensed under TGA regulations",
@@ -117,7 +130,9 @@
         "text": "<p>Most people make two or three attempts before it sticks. That is normal, not a failure. What changes the odds is medical support: the right therapy, the right dose, and someone checking in.</p><p>Quity pairs a consultation with an Australian-registered doctor with TGA-approved nicotine therapy, dispensed by a registered pharmacy and shipped to your door in plain packaging. No waiting room, no subscription, no cost to apply.</p>",
         "highlight": "Take the first step today and quit for good.",
         "button_primary_label": "Apply for prescription",
+        "button_primary_url": "",
         "button_secondary_label": "Learn more",
+        "button_secondary_url": "",
         "image_alt": "Doctor in a modern clinic",
         "show_stat": true,
         "stat_icon": "doctor",
@@ -176,6 +191,7 @@
         "sub": "Four steps from first click to a package at the door. Nothing to pay until a doctor approves your therapy.",
         "step_label": "Step",
         "cta_label": "Get started",
+        "cta_url": "",
         "anchor": "how",
         "background": "paper",
         "padding_top": 96,
@@ -200,6 +216,7 @@
         "label_week": "Each week",
         "label_year": "Each year",
         "cta_label": "Apply for free",
+        "cta_url": "",
         "note": "Based on $2.50 per cigarette — about $50 a pack.",
         "padding_top": 96,
         "padding_bottom": 96
@@ -211,37 +228,37 @@
         "card-1": {
           "type": "card",
           "settings": {
+            "image_alt": "Doctor on a telehealth call",
             "icon": "chat",
             "title": "Judgement-free support",
-            "body": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice.",
-            "image_alt": "Doctor on a telehealth call"
+            "body": "Every application is read by an Australian-registered doctor. No lectures, no waiting room, no explaining yourself twice."
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
+            "image_alt": "Pharmacy shelves of dispensed medicines",
             "icon": "shield",
             "title": "Legal and regulated",
-            "body": "TGA-approved nicotine therapy dispensed by a registered Australian pharmacy, shipped anywhere in the country.",
-            "image_alt": "Pharmacy shelves of dispensed medicines"
+            "body": "TGA-approved nicotine therapy dispensed by a registered Australian pharmacy, shipped anywhere in the country."
           }
         },
         "card-3": {
           "type": "card",
           "settings": {
+            "image_alt": "Telehealth consultation",
             "icon": "lock",
             "title": "Private and convenient",
-            "body": "Consultations happen by phone or video, at a time that suits you. Deliveries arrive in plain packaging.",
-            "image_alt": "Telehealth consultation"
+            "body": "Consultations happen by phone or video, at a time that suits you. Deliveries arrive in plain packaging."
           }
         },
         "card-4": {
           "type": "card",
           "settings": {
+            "image_alt": "Pharmacist at the dispensing computer",
             "icon": "script",
             "title": "Effortless refills",
-            "body": "Your script lives in your account. Reorder in a few taps and it ships the same business day.",
-            "image_alt": "Pharmacist at the dispensing computer"
+            "body": "Your script lives in your account. Reorder in a few taps and it ships the same business day."
           }
         }
       },
@@ -254,6 +271,7 @@
       "settings": {
         "eyebrow": "Why Quity",
         "title": "Support that makes quitting convenient, discreet and compliant",
+        "sub": "",
         "background": "paper",
         "padding_top": 96,
         "padding_bottom": 96
@@ -267,8 +285,9 @@
           "settings": {
             "tag": "Fact 01",
             "title": "Smoking and vaping rates in Australia",
-            "link_label": "Read more",
             "body": "Around one in ten Australian adults still smokes daily, and most of them say they want to stop. Vaping has grown fastest among people under 30, many of whom never smoked cigarettes at all. Both carry dependence on the same drug, and both respond to the same clinical approach: a measured dose, a taper, and a plan.",
+            "link_label": "Read more",
+            "link_url": "",
             "image_alt": "Clinician in a bright clinical setting"
           }
         },
@@ -277,8 +296,9 @@
           "settings": {
             "tag": "Fact 02",
             "title": "Why willpower alone has poor odds",
-            "link_label": "Read more",
             "body": "Unassisted quit attempts succeed a small fraction of the time. Combining behavioural support with nicotine replacement therapy roughly doubles the chance of stopping for good — which is why every Quity plan pairs medication with a scheduled check-in rather than sending you off with a box.",
+            "link_label": "Read more",
+            "link_url": "",
             "image_alt": "Medication in a practitioner’s hands"
           }
         },
@@ -287,8 +307,9 @@
           "settings": {
             "tag": "Fact 03",
             "title": "The first fortnight is the hardest",
-            "link_label": "Read more",
             "body": "Cravings peak between days three and ten, then fall sharply. Knowing that in advance is half the battle; having the right dose on hand for the peak is the other half. Your doctor reviews the plan at week two and again at week four.",
+            "link_label": "Read more",
+            "link_url": "",
             "image_alt": "Doctor on the phone"
           }
         }
@@ -313,8 +334,9 @@
           "settings": {
             "tag": "Getting started",
             "title": "Make the first step easy and risk free.",
-            "cta_label": "Apply today",
             "body": "Applying takes about five minutes and costs nothing. An Australian-registered doctor reviews your history and, if therapy is appropriate, sends the script straight to our partner pharmacy.",
+            "cta_label": "Apply today",
+            "cta_url": "",
             "image_alt": "Doctor with medication and a chart"
           }
         },
@@ -323,8 +345,9 @@
           "settings": {
             "tag": "Week two",
             "title": "A check-in before the hardest part passes.",
-            "cta_label": "See the plan",
             "body": "Cravings peak between days three and ten. Your doctor reviews the dose at week two and adjusts it if the plan is not holding. Follow-ups are included, not billed separately.",
+            "cta_label": "See the plan",
+            "cta_url": "",
             "image_alt": "Doctor writing up notes"
           }
         },
@@ -333,8 +356,9 @@
           "settings": {
             "tag": "Ongoing",
             "title": "Refills that arrive before you run out.",
-            "cta_label": "Shop chemist",
             "body": "Your script sits in your account for twelve months. Reorder in a few taps and it ships the same business day, in plain packaging, anywhere in Australia.",
+            "cta_label": "Shop chemist",
+            "cta_url": "",
             "image_alt": "Pharmacist in the dispensary"
           }
         }
@@ -347,6 +371,7 @@
       "settings": {
         "eyebrow": "Your first six weeks",
         "title": "Guided from day one",
+        "sub": "",
         "background": "paper-2",
         "padding_top": 96,
         "padding_bottom": 96
@@ -492,6 +517,7 @@
         "title": "Frequently asked questions",
         "intro": "What the service covers, how approval works, what things cost, and how quickly your order arrives.",
         "view_all_label": "View all",
+        "view_all_url": "",
         "open_first": true,
         "anchor": "faq",
         "background": "paper",
