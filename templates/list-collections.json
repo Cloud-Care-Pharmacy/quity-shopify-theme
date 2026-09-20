@@ -74,6 +74,20 @@
     "shop-spotlight": {
       "type": "shop-spotlight",
       "blocks": {
+        "product_dnXFac": {
+          "type": "product",
+          "settings": {
+            "product": "nicopod-device-2ml",
+            "subtitle": ""
+          }
+        },
+        "product_HbGh6d": {
+          "type": "product",
+          "settings": {
+            "product": "mixology-salts-60ml",
+            "subtitle": ""
+          }
+        },
         "product_L6Tawy": {
           "type": "product",
           "settings": {
@@ -104,6 +118,8 @@
         }
       },
       "block_order": [
+        "product_dnXFac",
+        "product_HbGh6d",
         "product_L6Tawy",
         "product_xmHT3b",
         "product_y3tWkH",
