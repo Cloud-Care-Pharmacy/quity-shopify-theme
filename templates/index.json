@@ -301,6 +301,7 @@
             "body": "Unassisted quit attempts succeed a small fraction of the time. Combining behavioural support with nicotine replacement therapy roughly doubles the chance of stopping for good — which is why every Quity plan pairs medication with a scheduled check-in rather than sending you off with a box.",
             "link_label": "Read the detail",
             "link_url": "",
+            "image": "shopify://shop_images/home-4.png",
             "image_alt": "Medication in a practitioner’s hands"
           }
         },
@@ -312,6 +313,7 @@
             "body": "Cravings peak between days three and ten, then fall sharply. Knowing that in advance is half the battle; having the right dose on hand for the peak is the other half. Your doctor reviews the plan at week two and again at week four.",
             "link_label": "Read the detail",
             "link_url": "",
+            "image": "shopify://shop_images/home-3.png",
             "image_alt": "Doctor on the phone"
           }
         }
@@ -339,6 +341,7 @@
             "body": "Fill in the online questionnaire at your own pace. An Australian-registered doctor reads it and, if nicotine therapy suits you, writes the script and sends it straight to the dispensing pharmacy.",
             "cta_label": "Start now",
             "cta_url": "",
+            "image": "shopify://shop_images/home-5.png",
             "image_alt": "Doctor with medication and a chart"
           }
         },
@@ -350,6 +353,7 @@
             "body": "Cravings peak between days three and ten. Your doctor reviews the dose at week two and adjusts it if the plan is not holding. Follow-ups are included, not billed separately.",
             "cta_label": "See the plan",
             "cta_url": "",
+            "image": "shopify://shop_images/home-7.png",
             "image_alt": "Doctor writing up notes"
           }
         },
@@ -361,6 +365,7 @@
             "body": "Your script sits in your account for twelve months. Reorder in a few taps and it ships the same business day, in plain packaging, wherever you are in Australia.",
             "cta_label": "Shop chemist",
             "cta_url": "",
+            "image": "shopify://shop_images/home-6.png",
             "image_alt": "Pharmacist in the dispensary"
           }
         }
