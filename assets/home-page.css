@@ -608,7 +608,9 @@
   margin: 0;
 }
 .qhm .qhm-sav__value { font-size: 15px; color: var(--qhm-paper); letter-spacing: 0.02em; }
-.qhm-sav__range { margin-top: 22px; }
+/* .qhm .qhm-range zeroes margin; match its specificity or the 22px is dropped
+   and the 22px thumb overlaps the label. */
+.qhm .qhm-sav__range { margin-top: 22px; }
 .qhm-sav__scale { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
 .qhm .qhm-sav__scale span { font-size: 10px; color: rgba(244, 242, 236, 0.4); }
 .qhm-sav__results {
