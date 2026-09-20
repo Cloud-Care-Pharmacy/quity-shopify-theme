@@ -189,7 +189,7 @@
         "title": "By product type",
         "link_text": "Shop all products",
         "link_url": "",
-        "band": "white",
+        "band": "warm",
         "padding_top": 36,
         "padding_bottom": 76,
         "animation": ""
@@ -245,7 +245,7 @@
         "title": "By current usage",
         "link_text": "Shop all products",
         "link_url": "",
-        "band": "warm",
+        "band": "white",
         "padding_top": 64,
         "padding_bottom": 76,
         "animation": ""
@@ -301,7 +301,7 @@
         "title": "By knowledge level",
         "link_text": "Shop all products",
         "link_url": "",
-        "band": "white",
+        "band": "warm",
         "padding_top": 64,
         "padding_bottom": 76,
         "animation": ""
@@ -316,7 +316,7 @@
         "source": "auto",
         "collection": "",
         "exclude": "",
-        "band": "warm",
+        "band": "white",
         "padding_top": 64,
         "padding_bottom": 76,
         "animation": ""
