@@ -1,0 +1,28 @@
+{%- comment -%}
+  Quity Home — one FAQ accordion row for sections/home-faq.liquid.
+
+  Params: block (question block), open (true for the row that should
+  start open), open_first (the section's "open the first question"
+  setting). The button carries aria-expanded / aria-controls; the answer
+  panel is a labelled region hidden until opened.
+{%- endcomment -%}
+{%- liquid
+  assign is_open = false
+  if open and open_first
+    assign is_open = true
+  endif
+-%}
+<div class="qhm-acc" data-qhm-faq-item {{ block.shopify_attributes }}>
+  <h3 class="qhm-acc__h">
+    <button type="button" class="qhm-acc__q" id="QhmFaqQ-{{ block.id }}" aria-expanded="{% if is_open %}true{% else %}false{% endif %}" aria-controls="QhmFaqA-{{ block.id }}">
+      <span>{{ block.settings.question | escape }}</span>
+      <span class="qhm-acc__icon" aria-hidden="true">
+        <span class="qhm-acc__plus">{%- render 'home-icon', name: 'plus', size: 18 -%}</span>
+        <span class="qhm-acc__minus">{%- render 'home-icon', name: 'minus', size: 18 -%}</span>
+      </span>
+    </button>
+  </h3>
+  <div class="qhm-body qhm-acc__a" id="QhmFaqA-{{ block.id }}" role="region" aria-labelledby="QhmFaqQ-{{ block.id }}"{% unless is_open %} hidden{% endunless %}>
+    {{ block.settings.answer }}
+  </div>
+</div>

@@ -1,1 +1,301 @@
-{"sections":{"main":{"type":"list-collections-template","blocks":{"54d3153c-e00a-438c-a1b9-f2c68e68fce1":{"type":"collection","settings":{"collection":"accessories"}}},"block_order":["54d3153c-e00a-438c-a1b9-f2c68e68fce1"],"settings":{"display_type":"all","layout":"grid","sort":"alphabetical"}},"16634028377c76965e":{"type":"line","disabled":true,"settings":{"animation":"fade","paddingsection":"0px 0px 0px 0px","marginsection":"0px 0px 0px 0px","bgsection":"#ffffff","setwidth":"container","bgborder":"#dddddd","wborder":"1px"}},"166340498714830ffb":{"type":"parallax-banner","blocks":{"449c4ba1-609f-49f7-9e5e-c85be12f11c2":{"type":"sub_title","settings":{"subtitle":"LIMITED EDITIONS"}},"aa316a40-0fd3-4aee-9b8f-94f9ce188d6c":{"type":"heading","settings":{"title":"Style Heroes","size_text":"h2"}},"4ca26696-8c69-457b-b768-8f4ea309d003":{"type":"paragraph","settings":{"subtext":"Discover more about our products."}},"b86a326b-4e5c-4ff4-8312-15fa764d2fdb":{"type":"button","settings":{"button":"discover now","link":"shopify:\/\/collections\/all","style_btn":"btn-theme"}}},"block_order":["449c4ba1-609f-49f7-9e5e-c85be12f11c2","aa316a40-0fd3-4aee-9b8f-94f9ce188d6c","4ca26696-8c69-457b-b768-8f4ea309d003","b86a326b-4e5c-4ff4-8312-15fa764d2fdb"],"settings":{"animation":"fade-up","setwidth":"full","bgsection":"#ffffff","parrallax_enable":true,"image":"shopify:\/\/shop_images\/Mask_group_2.png","height_section":"550","height_section_mobile":"450","align":"left","position_text":"mid-left","bg_box":"#ffffff","opacity_bgbox":1,"title_color":"#000000","bg_overlay":"#000000","gradient_bg":"","opacity_bg_overlay":0.1,"paddingsection":"0px 0px 0px 0px","marginsection":"0px 0px 0px 0px"}},"166340581364695c71":{"type":"product-list-swiper","settings":{"animation":"fade-up","setwidth":"container","bgsection":"#ffffff","title_top":"Best Women","title":"Lookbook Style","des":"","align-heading":"center","collection":"decorative-trays","limit":8,"perviewDesktop":4,"spaceBetween":30,"nowrap":true,"arrows":true,"scrollbar":false,"paddingsection":"60px 0px 30px 0px","paddingmobile":"40px 0px 40px 0px","marginsection":"0px 0px 0px 0px","marginmobile":"0px 0px 0px 0px"}}},"order":["main","16634028377c76965e","166340498714830ffb","166340581364695c71"]}
+{
+  "sections": {
+    "shop-hero": {
+      "type": "shop-hero",
+      "blocks": {
+        "chip-1": {
+          "type": "chip",
+          "settings": {
+            "label": "Solo Plus"
+          }
+        },
+        "chip-2": {
+          "type": "chip",
+          "settings": {
+            "label": "Starter kits"
+          }
+        },
+        "chip-3": {
+          "type": "chip",
+          "settings": {
+            "label": "Pods"
+          }
+        },
+        "chip-4": {
+          "type": "chip",
+          "settings": {
+            "label": "E-liquid"
+          }
+        },
+        "chip-5": {
+          "type": "chip",
+          "settings": {
+            "label": "NRT"
+          }
+        }
+      },
+      "block_order": [
+        "chip-1",
+        "chip-2",
+        "chip-3",
+        "chip-4",
+        "chip-5"
+      ],
+      "settings": {
+        "eyebrow": "The catalogue",
+        "title_pre": "Shop",
+        "title_italic": "everything",
+        "title_post": "we stock",
+        "title_tag": "h1",
+        "subtext": "<p>Your smokefree journey starts here. Browse by product, by where you are now, or by experience — and talk to our pharmacists whenever you need a hand choosing.</p>",
+        "band": "warm",
+        "show_search": true,
+        "search_placeholder": "Search products...",
+        "popular_label": "Popular search",
+        "padding_top": 64,
+        "padding_bottom": 68,
+        "animation": ""
+      }
+    },
+    "shop-spotlight": {
+      "type": "shop-spotlight",
+      "settings": {
+        "title": "Spotlight",
+        "link_text": "",
+        "link_url": "",
+        "collection": "frontpage",
+        "products_limit": 6,
+        "ribbon_text": "Free express shipping",
+        "desc_words": 10,
+        "added_text": "Added",
+        "show_currency_code": true,
+        "band": "white",
+        "padding_top": 64,
+        "padding_bottom": 28,
+        "animation": ""
+      }
+    },
+    "shop-product-types": {
+      "type": "shop-product-types",
+      "blocks": {
+        "type-1": {
+          "type": "type",
+          "settings": {
+            "icon": "starter-kit",
+            "label": "Starter kits",
+            "link": ""
+          }
+        },
+        "type-2": {
+          "type": "type",
+          "settings": {
+            "icon": "device",
+            "label": "Vape devices",
+            "link": ""
+          }
+        },
+        "type-3": {
+          "type": "type",
+          "settings": {
+            "icon": "pods",
+            "label": "Pods & coils",
+            "link": ""
+          }
+        },
+        "type-4": {
+          "type": "type",
+          "settings": {
+            "icon": "eliquid",
+            "label": "E-liquids",
+            "link": ""
+          }
+        },
+        "type-5": {
+          "type": "type",
+          "settings": {
+            "icon": "accessories",
+            "label": "Accessories",
+            "link": ""
+          }
+        },
+        "type-6": {
+          "type": "type",
+          "settings": {
+            "icon": "nrt",
+            "label": "NRT",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "type-1",
+        "type-2",
+        "type-3",
+        "type-4",
+        "type-5",
+        "type-6"
+      ],
+      "settings": {
+        "title": "By product type",
+        "link_text": "Shop all products",
+        "link_url": "",
+        "band": "white",
+        "padding_top": 36,
+        "padding_bottom": 76,
+        "animation": ""
+      }
+    },
+    "shop-usage": {
+      "type": "shop-usage",
+      "blocks": {
+        "usage-1": {
+          "type": "card",
+          "settings": {
+            "title": "High dependency",
+            "description": "Vaping heavily, or smoking more than 20 cigarettes a day",
+            "link": ""
+          }
+        },
+        "usage-2": {
+          "type": "card",
+          "settings": {
+            "title": "More dependent",
+            "description": "Smoking 10 or more cigarettes a day",
+            "link": ""
+          }
+        },
+        "usage-3": {
+          "type": "card",
+          "settings": {
+            "title": "Less dependent",
+            "description": "Smoking fewer than 10 cigarettes a day",
+            "link": ""
+          }
+        },
+        "usage-4": {
+          "type": "card",
+          "settings": {
+            "title": "Just starting",
+            "description": "All-in-one kits with everything you need to make the switch",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "usage-1",
+        "usage-2",
+        "usage-3",
+        "usage-4"
+      ],
+      "settings": {
+        "title": "By current usage",
+        "link_text": "Shop all products",
+        "link_url": "",
+        "band": "warm",
+        "padding_top": 64,
+        "padding_bottom": 76,
+        "animation": ""
+      }
+    },
+    "shop-knowledge": {
+      "type": "shop-knowledge",
+      "blocks": {
+        "level-1": {
+          "type": "level",
+          "settings": {
+            "icon": "beginner",
+            "title": "Beginner",
+            "description": "The simplest products to use, for people quitting cigarettes or illegal disposables.",
+            "link": ""
+          }
+        },
+        "level-2": {
+          "type": "level",
+          "settings": {
+            "icon": "intermediate",
+            "title": "Beginner to intermediate",
+            "description": "Simple products plus straightforward refillables suited to nicotine salts.",
+            "link": ""
+          }
+        },
+        "level-3": {
+          "type": "level",
+          "settings": {
+            "icon": "advanced",
+            "title": "Intermediate to advanced",
+            "description": "Higher output refillables for freebase and salts, for patients managing long term nicotine dependence.",
+            "link": ""
+          }
+        },
+        "level-4": {
+          "type": "level",
+          "settings": {
+            "icon": "compass",
+            "title": "All products",
+            "description": "Browse the full catalogue and narrow it down with the available filters.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "level-1",
+        "level-2",
+        "level-3",
+        "level-4"
+      ],
+      "settings": {
+        "title": "By knowledge level",
+        "link_text": "Shop all products",
+        "link_url": "",
+        "band": "white",
+        "padding_top": 64,
+        "padding_bottom": 76,
+        "animation": ""
+      }
+    },
+    "shop-brands": {
+      "type": "shop-brands",
+      "settings": {
+        "title": "By brand",
+        "link_text": "Shop all products",
+        "link_url": "",
+        "band": "warm",
+        "padding_top": 64,
+        "padding_bottom": 76,
+        "animation": "",
+        "source": "auto",
+        "collection": "",
+        "exclude": ""
+      }
+    },
+    "main": {
+      "type": "list-collections-template",
+      "blocks": {
+        "54d3153c-e00a-438c-a1b9-f2c68e68fce1": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories"
+          }
+        }
+      },
+      "block_order": [
+        "54d3153c-e00a-438c-a1b9-f2c68e68fce1"
+      ],
+      "settings": {
+        "display_type": "all",
+        "layout": "grid",
+        "sort": "alphabetical"
+      },
+      "disabled": true
+    }
+  },
+  "order": [
+    "shop-hero",
+    "shop-spotlight",
+    "shop-product-types",
+    "shop-usage",
+    "shop-knowledge",
+    "shop-brands",
+    "main"
+  ]
+}

@@ -1,0 +1,151 @@
+{%- comment -%}
+  Quity Home — facts carousel
+  ---------------------------
+  Sage-tint band holding one paper card split into a text pane (fact
+  badge, heading, body, "Read more" and the dots) and a photo pane with
+  the circular prev/next controls. Facts are blocks. Dots jump straight
+  to a fact, arrows step with wraparound, nothing autoplays.
+
+  Every slide's text, link and photo is rendered and tagged with its
+  index; assets/home-page.js shows one index at a time. The dots and
+  arrows are shared so focus never lands inside a hidden slide.
+
+  Design: "Quity Homepage" handoff, section 9 — scoped .qhm- classes in
+  assets/home-page.css.
+{%- endcomment -%}
+
+{{ 'home-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'home-page.js' | asset_url }}" defer></script>
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qhm-sec {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+    }
+  }
+  @media (max-width: 720px) {
+    #shopify-section-{{ section.id }} .qhm-sec {
+      padding-top: {{ section.settings.padding_top | times: 0.58 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.58 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+<section class="qhm qhm-sec qhm-sec--{{ section.settings.background }}">
+  <div class="qhm__wrap">
+    <div class="qhm-card qhm-facts__card" data-qhm-carousel data-qhm-start="0" aria-roledescription="carousel" aria-label="{{ section.settings.aria_label | escape }}">
+      <div class="qhm-facts__pane">
+        <div class="qhm-facts__texts" aria-live="polite">
+          {%- for block in section.blocks -%}
+            <div class="qhm-facts__text" data-qhm-slide-index="{{ forloop.index0 }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+              {%- if block.settings.tag != blank -%}
+                <span class="qhm-badge qhm-badge--coral">{{ block.settings.tag | escape }}</span>
+              {%- endif -%}
+              <h3 class="qhm-facts__title">{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.body != blank -%}
+                <p class="qhm-body qhm-facts__body">{{ block.settings.body | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="qhm-facts__foot">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.link_label != blank -%}
+              <a class="qhm-btn qhm-btn--ink qhm-btn--sm" href="{{ block.settings.link_url | default: '#' }}" data-qhm-slide-index="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>{{ block.settings.link_label | escape }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if section.blocks.size > 1 -%}
+            <div class="qhm-dots" role="group" aria-label="Choose a fact">
+              {%- for block in section.blocks -%}
+                <button type="button" class="qhm-dot" data-qhm-dot="{{ forloop.index0 }}" data-on="{% if forloop.first %}1{% else %}0{% endif %}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ block.settings.tag | default: forloop.index | escape }}"></button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="qhm-facts__media">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign fallback = blank
+            if forloop.index <= 3
+              assign fallback = 'home-placeholder-fact-' | append: forloop.index | append: '.jpg'
+            endif
+          -%}
+          <div class="qhm-facts__slide-media{% if block.settings.image == blank and forloop.index == 2 %} qhm-facts__media--mid{% endif %}" data-qhm-slide-index="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+            {%- render 'home-image',
+              image: block.settings.image,
+              fallback: fallback,
+              alt: block.settings.image_alt,
+              class: 'qhm-facts__img',
+              sizes: '(max-width: 1024px) calc(100vw - 48px), 540px',
+              widths: '540, 810, 1080, 1400' -%}
+          </div>
+        {%- endfor -%}
+        {%- if section.blocks.size > 1 -%}
+          <div class="qhm-facts__nav">
+            <button type="button" class="qhm-circle-btn" data-qhm-prev aria-label="Previous fact">{%- render 'home-icon', name: 'arrow-left', size: 18 -%}</button>
+            <button type="button" class="qhm-circle-btn" data-qhm-next aria-label="Next fact">{%- render 'home-icon', name: 'arrow-right', size: 18 -%}</button>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Home - facts carousel",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Carousel name (screen readers)", "default": "Facts about quitting" },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "sage-tint", "label": "Sage tint" },
+        { "value": "paper", "label": "Paper" },
+        { "value": "paper-2", "label": "Paper (darker)" },
+        { "value": "white", "label": "White" }
+      ],
+      "default": "sage-tint"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Badge", "default": "Fact 01" },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Smoking and vaping rates in Australia" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "text", "id": "link_label", "label": "Link text", "default": "Read more" },
+        { "type": "url", "id": "link_url", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Falls back to a bundled placeholder photo." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Home - facts carousel",
+      "blocks": [
+        { "type": "fact", "settings": { "tag": "Fact 01", "title": "Smoking and vaping rates in Australia", "body": "Around one in ten Australian adults still smokes daily, and most of them say they want to stop. Vaping has grown fastest among people under 30, many of whom never smoked cigarettes at all. Both carry dependence on the same drug, and both respond to the same clinical approach: a measured dose, a taper, and a plan.", "link_label": "Read more", "image_alt": "Clinician in a bright clinical setting" } },
+        { "type": "fact", "settings": { "tag": "Fact 02", "title": "Why willpower alone has poor odds", "body": "Unassisted quit attempts succeed a small fraction of the time. Combining behavioural support with nicotine replacement therapy roughly doubles the chance of stopping for good — which is why every Quity plan pairs medication with a scheduled check-in rather than sending you off with a box.", "link_label": "Read more", "image_alt": "Medication in a practitioner’s hands" } },
+        { "type": "fact", "settings": { "tag": "Fact 03", "title": "The first fortnight is the hardest", "body": "Cravings peak between days three and ten, then fall sharply. Knowing that in advance is half the battle; having the right dose on hand for the peak is the other half. Your doctor reviews the plan at week two and again at week four.", "link_label": "Read more", "image_alt": "Doctor on the phone" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

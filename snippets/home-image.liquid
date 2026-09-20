@@ -1,0 +1,51 @@
+{%- comment -%}
+  Quity Home — image slot with a bundled placeholder.
+
+  Usage:
+    {%- render 'home-image',
+      image: section.settings.image,
+      fallback: 'home-placeholder-hero.jpg',
+      alt: 'Doctor on a video call',
+      class: 'qhm-ps__img',
+      sizes: '(max-width: 1024px) 100vw, 600px',
+      loading: 'lazy' -%}
+
+  A picked image renders through image_tag with a responsive srcset.
+  With no image picked the slot falls back to the bundled placeholder
+  photo in assets/ (Pexels stock from the design handoff — swap for
+  Quity's own photography before launch), and with no fallback given
+  to the theme's placeholder SVG. The placeholder dimensions below are
+  the bundled files' real sizes, for width/height attributes.
+{%- endcomment -%}
+{%- liquid
+  assign img_loading = loading | default: 'lazy'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_widths = widths | default: '480, 720, 960, 1200, 1600'
+  assign img_alt = alt | default: ''
+  assign fb_w = 1400
+  assign fb_h = 2100
+  case fallback
+    when 'home-placeholder-hero.jpg'
+      assign fb_w = 1400
+      assign fb_h = 933
+    when 'home-prescription-support.webp'
+      assign fb_w = 750
+      assign fb_h = 500
+    when 'home-placeholder-support-1.jpg', 'home-placeholder-support-2.jpg'
+      assign fb_w = 900
+      assign fb_h = 600
+    when 'home-placeholder-support-3.jpg'
+      assign fb_w = 900
+      assign fb_h = 1350
+    when 'home-placeholder-support-4.jpg'
+      assign fb_w = 900
+      assign fb_h = 1200
+  endcase
+-%}
+{%- if image != blank -%}
+  {{- image | image_url: width: 1600 | image_tag: class: class, sizes: img_sizes, widths: img_widths, loading: img_loading, alt: img_alt -}}
+{%- elsif fallback != blank -%}
+  <img class="{{ class }}" src="{{ fallback | asset_url }}" width="{{ fb_w }}" height="{{ fb_h }}" alt="{{ img_alt | escape }}" loading="{{ img_loading }}">
+{%- else -%}
+  {{- 'lifestyle-1' | placeholder_svg_tag: class -}}
+{%- endif -%}

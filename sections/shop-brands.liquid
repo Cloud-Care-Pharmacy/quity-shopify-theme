@@ -1,0 +1,204 @@
+{%- comment -%}
+  Quity Shop — brand wall
+  -----------------------
+  Bordered logo tiles, one per brand, linking to that brand's products.
+
+  Source "Automatic" builds the wall from the vendors that actually have
+  published products, so it can never advertise a brand the store no
+  longer stocks. Blocks are then optional artwork: a block whose name
+  matches a vendor lends that tile its logo and link, and a block that
+  matches nothing is ignored. Source "Manual" renders the blocks alone,
+  in the order they are arranged.
+
+  A tile with no logo falls back to its name set as a wordmark, so the
+  wall stays complete while artwork is still being collected.
+
+  Design: the Quity system shared with assets/product-store.css —
+  scoped .qsh- classes styled in assets/shop-collections.css. Static
+  content, no JavaScript.
+{%- endcomment -%}
+
+{{ 'shop-collections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign auto = false
+  if section.settings.source == 'auto'
+    assign auto = true
+  endif
+
+  assign vendors = ''
+  if auto
+    if section.settings.collection != blank
+      assign vendors = section.settings.collection.all_vendors
+    else
+      assign vendors = collections.all.all_vendors
+    endif
+    if vendors == blank or vendors.size == 0
+      assign vendors = shop.vendors
+    endif
+  endif
+
+  assign excluded = section.settings.exclude | downcase | split: ','
+
+  assign has_tiles = false
+  if auto
+    if vendors.size > 0
+      assign has_tiles = true
+    endif
+  else
+    if section.blocks.size > 0
+      assign has_tiles = true
+    endif
+  endif
+-%}
+
+{%- if has_tiles -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .qsh-band {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .qsh-band {
+      padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.7 | round }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="qsh qsh-band qsh-brands{% if section.settings.band == 'warm' %} qsh-band--warm{% endif %}" data-aos="{{ section.settings.animation }}">
+  <div class="qsh__wrap">
+    {%- render 'shop-section-head',
+      title: section.settings.title,
+      link_text: section.settings.link_text,
+      link_url: section.settings.link_url -%}
+
+    <div class="qsh-brands__grid">
+      {%- if auto -%}
+        {%- for vendor in vendors -%}
+          {%- liquid
+            assign vendor_key = vendor | downcase | strip
+
+            assign skip = false
+            for excluded_name in excluded
+              assign excluded_key = excluded_name | strip
+              if excluded_key != '' and excluded_key == vendor_key
+                assign skip = true
+                break
+              endif
+            endfor
+
+            assign has_art = false
+            for block in section.blocks
+              assign block_key = block.settings.name | downcase | strip
+              if block_key != '' and block_key == vendor_key
+                assign art = block
+                assign has_art = true
+                break
+              endif
+            endfor
+          -%}
+          {%- unless skip -%}
+            {%- if has_art -%}
+              {%- render 'shop-brand-tile', name: vendor, logo: art.settings.logo, link: art.settings.link, block_attributes: art.shopify_attributes -%}
+            {%- else -%}
+              {%- render 'shop-brand-tile', name: vendor -%}
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- render 'shop-brand-tile',
+            name: block.settings.name,
+            logo: block.settings.logo,
+            link: block.settings.link,
+            block_attributes: block.shopify_attributes -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Shop - brands",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "By brand" },
+    { "type": "text", "id": "link_text", "label": "Heading link text", "default": "Shop all products" },
+    { "type": "url", "id": "link_url", "label": "Heading link" },
+    {
+      "type": "header",
+      "content": "Which brands"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Source",
+      "options": [
+        { "value": "auto", "label": "Automatic (vendors in the store)" },
+        { "value": "manual", "label": "Manual (blocks only)" }
+      ],
+      "default": "auto",
+      "info": "Automatic lists every vendor that has published products, so the wall always matches the catalogue. Blocks then only supply logos and links."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Limit to collection",
+      "info": "Automatic only. Leave empty to use every published product."
+    },
+    {
+      "type": "textarea",
+      "id": "exclude",
+      "label": "Hide these vendors",
+      "info": "Automatic only. Comma separated, e.g. a house vendor name used for products with no real brand."
+    },
+    {
+      "type": "select",
+      "id": "band",
+      "label": "Background",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "warm", "label": "Warm" }
+      ],
+      "default": "warm"
+    },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "default": 40 },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "Animation",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "fade-up", "label": "Fade up" }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Vendor name",
+          "info": "On Automatic, this must match the product vendor exactly for the logo to attach."
+        },
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Leave empty to filter all products by this vendor." }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    { "name": "Shop - brands" }
+  ]
+}
+{% endschema %}

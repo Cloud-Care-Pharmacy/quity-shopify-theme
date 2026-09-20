@@ -1,0 +1,20 @@
+{%- comment -%}
+  Quity Shop — band heading with the optional "shop all" link.
+
+  Params: title, link_text, link_url.
+  Renders nothing when both the title and the link text are empty.
+{%- endcomment -%}
+
+{%- if title != blank or link_text != blank -%}
+  <div class="qsh-head">
+    {%- if title != blank -%}
+      <h2 class="qsh-head__title">{{ title | escape }}</h2>
+    {%- endif -%}
+    {%- if link_text != blank -%}
+      <a class="qsh-head__link" href="{{ link_url | default: routes.all_products_collection_url }}">
+        {{ link_text | escape }}
+        {%- render 'shop-icon', name: 'arrow-right' -%}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

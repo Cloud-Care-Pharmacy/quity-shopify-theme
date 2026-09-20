@@ -1,0 +1,130 @@
+{%- comment -%}
+  Quity Shop — spotlight product card.
+
+  Params:
+    product           (required) the product object
+    subtitle          optional text that replaces the description line
+    ribbon            optional ribbon text across the top of the tile
+    show_currency     true to print prices with the currency code
+    added_text        label flashed on the button after a successful add
+    desc_words        words kept from the description (0 hides it)
+    block_attributes  block.shopify_attributes when rendered from a block
+
+  The card owns a real product form. assets/shop-collections.js keeps
+  the hidden id/quantity inputs, the price and the button in step with
+  the variant select and posts the add over AJAX.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign words = desc_words | default: 10
+
+  assign card_desc = subtitle
+  if card_desc == blank and words > 0
+    assign card_desc = product.description | strip_html | truncatewords: words
+  endif
+
+  if show_currency
+    assign price_html = current_variant.price | money_with_currency
+    assign compare_html = current_variant.compare_at_price | money_with_currency
+    assign money_format = shop.money_with_currency_format
+  else
+    assign price_html = current_variant.price | money
+    assign compare_html = current_variant.compare_at_price | money
+    assign money_format = shop.money_format
+  endif
+-%}
+
+<div class="qsh-card" data-qsh-card {{ block_attributes }}>
+  <a class="qsh-card__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+    {%- if ribbon != blank -%}
+      <span class="qsh-card__ribbon">{{ ribbon | escape }}</span>
+    {%- endif -%}
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 600 }} 600w"
+        sizes="(max-width: 749px) 45vw, 210px"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+        loading="lazy"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    {%- unless product.available -%}
+      <span class="qsh-card__soldout">{{ 'products.product.sold_out' | t }}</span>
+    {%- endunless -%}
+  </a>
+
+  <a class="qsh-card__name" href="{{ product.url }}">{{ product.title | escape }}</a>
+
+  {%- if card_desc != blank -%}
+    <p class="qsh-card__desc">{{ card_desc | escape }}</p>
+  {%- endif -%}
+
+  <div class="qsh-card__price">
+    <span data-qsh-price>{{ price_html }}</span>
+    <del data-qsh-compare {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>{{ compare_html }}</del>
+  </div>
+
+  <div class="qsh-card__form">
+    {%- form 'product', product, data-qsh-form: 'true' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}" data-qsh-id-input>
+      <input type="hidden" name="quantity" value="1" data-qsh-qty-input>
+
+      {%- unless product.has_only_default_variant -%}
+        <div class="qsh-card__select-wr">
+          <select class="qsh-card__select" data-qsh-variant aria-label="{{ product.title | escape }} — Options">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {% if variant.id == current_variant.id %}selected{% endif %}>
+                {{- variant.title }}{% unless variant.available %} — {{ 'products.product.sold_out' | t }}{% endunless -%}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endunless -%}
+
+      <div class="qsh-qty">
+        <button type="button" class="qsh-qty__btn" data-qsh-qty="dec" aria-label="Decrease quantity">&minus;</button>
+        <span class="qsh-qty__num" data-qsh-qty-num aria-live="polite">1</span>
+        <button type="button" class="qsh-qty__btn" data-qsh-qty="inc" aria-label="Increase quantity">+</button>
+      </div>
+
+      <button
+        type="submit"
+        class="qsh-btn{% unless product.available %} qsh-btn--muted{% endunless %}"
+        data-qsh-add
+        data-qsh-add-label="{{ 'products.product.add_to_cart' | t | escape }}"
+        data-qsh-soldout-label="{{ 'products.product.sold_out' | t | escape }}"
+        data-qsh-added-label="{{ added_text | default: 'Added' | escape }}"
+        {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </button>
+
+      <p class="qsh-card__error" data-qsh-error hidden></p>
+    {%- endform -%}
+
+    <script type="application/json" data-qsh-data>
+      {
+        "moneyFormat": {{ money_format | json }},
+        "initialVariant": {{ current_variant.id | json }},
+        "variants": [
+          {%- for variant in product.variants -%}
+            {
+              "id": {{ variant.id | json }},
+              "title": {{ variant.title | json }},
+              "price": {{ variant.price | json }},
+              "compare_at_price": {{ variant.compare_at_price | default: 0 | json }},
+              "available": {{ variant.available | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  </div>
+</div>

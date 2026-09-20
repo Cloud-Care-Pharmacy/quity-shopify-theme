@@ -1,0 +1,72 @@
+{%- comment -%}
+  Quity Home — line icon set for the qhm- homepage sections.
+
+  Usage: {%- render 'home-icon', name: 'shield', size: 16 -%}
+
+  The 24 icons from the "Quity Homepage" design handoff (home/chrome.jsx),
+  path data copied verbatim: the 1.5px round stroke on a 24x24 box is a
+  brand signature, so don't swap these for an icon library. `star` is the
+  only filled icon. Size is written as an inline style because the theme's
+  global `svg { width: 16px; height: 16px }` rule (assets/theme.css) beats
+  the width/height attributes.
+
+  Names: search, user, cart, check, shield, heart, lungs, pulse, leaf, lock,
+  truck, doctor, script, bell, tablet, savings, clock, chat, plus, minus,
+  arrow-right, arrow-left, star.
+{%- endcomment -%}
+{%- liquid
+  assign icon = name | default: 'check'
+  assign px = size | default: 24
+-%}
+{%- if icon == 'star' -%}
+<svg class="qhm-icon qhm-icon--star" width="{{ px }}" height="{{ px }}" style="width:{{ px }}px;height:{{ px }}px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.6l2.8 6.4 7 .6-5.3 4.6 1.6 6.8L12 17.4 5.9 21l1.6-6.8L2.2 9.6l7-.6z"/></svg>
+{%- else -%}
+<svg class="qhm-icon" width="{{ px }}" height="{{ px }}" style="width:{{ px }}px;height:{{ px }}px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {%- case icon -%}
+    {%- when 'search' -%}
+      <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>
+    {%- when 'user' -%}
+      <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c0-3.6 3.2-6.2 7.2-6.2s7.2 2.6 7.2 6.2"/>
+    {%- when 'cart' -%}
+      <path d="M3 4h2.2l2.4 10.4h9.6L19 7.4H6.2"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>
+    {%- when 'shield' -%}
+      <path d="M12 3.2l7.2 2.6v6c0 4.5-3 7.6-7.2 9-4.2-1.4-7.2-4.5-7.2-9v-6L12 3.2z"/><path d="M9.2 12l2 2 3.6-3.8"/>
+    {%- when 'heart' -%}
+      <path d="M12 20s-6.6-4.1-8.6-8.2A4.9 4.9 0 0112 7.2a4.9 4.9 0 018.6 4.6C18.6 15.9 12 20 12 20z"/>
+    {%- when 'lungs' -%}
+      <path d="M12 3.5v9"/><path d="M12 12.5c0 4-1.9 6.8-4.7 6.8-1.8 0-2.8-1-2.8-2.8 0-4.6 2.7-8.4 7.5-9.6"/><path d="M12 12.5c0 4 1.9 6.8 4.7 6.8 1.8 0 2.8-1 2.8-2.8 0-4.6-2.7-8.4-7.5-9.6"/>
+    {%- when 'pulse' -%}
+      <path d="M3 12h3.6l2-5 3.2 10.4 2.4-6.8 1.6 3.2h5.2"/>
+    {%- when 'leaf' -%}
+      <path d="M19.5 4.5c-8.4 0-14.6 4.6-14.6 11.8 0 1.5 1.2 2.7 2.7 2.7 7.2 0 11.9-6.2 11.9-14.5z"/><path d="M5 19.5c3.4-6.3 8-9.9 14-11"/>
+    {%- when 'lock' -%}
+      <rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7.2a4 4 0 018 0v3.3"/>
+    {%- when 'truck' -%}
+      <path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 10h4.2l2.8 3v3h-7z"/><circle cx="6.4" cy="18.6" r="1.6"/><circle cx="17" cy="18.6" r="1.6"/>
+    {%- when 'doctor' -%}
+      <circle cx="12" cy="7.6" r="3.4"/><path d="M5.4 20.4c0-3.6 2.9-6.4 6.6-6.4s6.6 2.8 6.6 6.4"/><path d="M12 15v3M10.5 16.5h3"/>
+    {%- when 'script' -%}
+      <path d="M6 3.5h9l3.5 3.5v13.5H6z"/><path d="M14.6 3.5V7.4h3.9"/><path d="M9 12h6M9 15.5h4"/>
+    {%- when 'bell' -%}
+      <path d="M6.4 9.2a5.6 5.6 0 0111.2 0v4.6l1.8 2.8H4.6l1.8-2.8z"/><path d="M10.2 19.4a1.9 1.9 0 003.6 0"/>
+    {%- when 'tablet' -%}
+      <rect x="6" y="2.8" width="12" height="18.4" rx="2.4"/><path d="M10.6 18.4h2.8"/><path d="M9.4 8.2h5.2M9.4 11.6h5.2"/>
+    {%- when 'savings' -%}
+      <circle cx="12" cy="12" r="8.4"/><path d="M14.4 9.2c-.5-.9-1.4-1.4-2.5-1.4-1.5 0-2.5.8-2.5 2s1 1.7 2.6 2.1c1.7.4 2.7 1 2.7 2.2s-1.1 2.1-2.7 2.1c-1.2 0-2.2-.5-2.7-1.5"/><path d="M12 6.2v11.6"/>
+    {%- when 'clock' -%}
+      <circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.8"/>
+    {%- when 'chat' -%}
+      <path d="M20 15.4a2 2 0 01-2 2H8l-4 3.2V6.6a2 2 0 012-2h12a2 2 0 012 2z"/>
+    {%- when 'plus' -%}
+      <path d="M12 5.5v13M5.5 12h13"/>
+    {%- when 'minus' -%}
+      <path d="M5.5 12h13"/>
+    {%- when 'arrow-right' -%}
+      <path d="M4.5 12h15M13.5 6l6 6-6 6"/>
+    {%- when 'arrow-left' -%}
+      <path d="M19.5 12h-15M10.5 6l-6 6 6 6"/>
+    {%- else -%}
+      <path d="M4.5 12.5l4.5 4.5L19.5 6.5"/>
+  {%- endcase -%}
+</svg>
+{%- endif -%}
