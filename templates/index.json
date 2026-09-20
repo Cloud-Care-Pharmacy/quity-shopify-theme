@@ -229,6 +229,7 @@
         "card-1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/home-8.png",
             "image_alt": "Doctor on a telehealth call",
             "icon": "chat",
             "title": "Doctors who don’t judge",
@@ -238,6 +239,7 @@
         "card-2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/home-7.png",
             "image_alt": "Pharmacy shelves of dispensed medicines",
             "icon": "shield",
             "title": "Dispensed by a pharmacy",
@@ -247,6 +249,7 @@
         "card-3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/home-6_ba7bea9a-64a4-4100-a569-214a46574de7.png",
             "image_alt": "Telehealth consultation",
             "icon": "lock",
             "title": "Discreet at every step",
