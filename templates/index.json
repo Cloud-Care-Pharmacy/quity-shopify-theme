@@ -536,7 +536,7 @@
         "intro": "What the service covers, how approval works, what things cost, and how quickly your order arrives.",
         "view_all_label": "View all",
         "view_all_url": "",
-        "open_first": true,
+        "open_first": false,
         "anchor": "faq",
         "background": "paper",
         "padding_top": 96,
