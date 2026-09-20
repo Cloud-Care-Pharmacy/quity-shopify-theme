@@ -14,7 +14,8 @@
    for the index template. Behaviour: assets/home-page.js.
 
    Breakpoints follow the handoff: 1160px (hero h1), 1024px
-   (tablet: two-column grids collapse), 720px (mobile).
+   (tablet: two-column grids collapse), 720px (mobile), plus a
+   360px step for the narrowest phones.
    ============================================================ */
 
 /* --- Tokens --- */
@@ -403,11 +404,16 @@
   color: var(--qhm-paper);
 }
 .qhm-hero__media { position: absolute; inset: 0; z-index: 0; }
-.qhm-hero__poster,
-.qhm-hero__video {
+.qhm-hero__media picture { display: block; }
+/* `.qhm img` above sets height:auto with higher specificity than a lone
+   class, so the poster needs the .qhm prefix or it stops covering the frame
+   and leaves a band of ink under the photo on phones and tablets. */
+.qhm .qhm-hero__poster,
+.qhm .qhm-hero__video {
   position: absolute;
   inset: 0;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -856,7 +862,9 @@
   .qhm-faq__grid { grid-template-columns: 1fr; }
   .qhm-step__arrow { display: none; }
   .qhm-mail__panel { padding: 36px; }
-  .qhm-ps__stat { left: 16px; bottom: 16px; right: 16px; }
+  /* The stat card moves inside the photo and hugs its text; pinning both
+     edges stretched it across the whole frame on tablets. */
+  .qhm-ps__stat { left: 16px; bottom: 16px; max-width: calc(100% - 32px); }
   .qhm-ps__figure { height: 440px; }
   .qhm-guided__media { height: 400px; }
 }
@@ -864,23 +872,52 @@
 @media (max-width: 720px) {
   .qhm-sec { padding: 56px 0; }
   .qhm__wrap { padding: 0 20px; }
+  /* the mobile header is taller (two rows) than the desktop one */
+  .qhm [id] { scroll-margin-top: 120px; }
+  /* Long labels wrap inside the button instead of pushing it past its box. */
+  .qhm .qhm-btn { white-space: normal; text-align: center; }
+  /* 16px is the smallest size iOS Safari will focus without zooming the page. */
+  .qhm input.qhm-field { font-size: 16px; }
   .qhm-hero__wrap { padding-top: 48px; padding-bottom: 56px; }
-  .qhm .qhm-hero__title { font-size: 42px; }
+  .qhm .qhm-hero__title { font-size: clamp(36px, 11vw, 42px); }
+  /* Phones show a narrow slice of the cover photo behind the copy; darken it
+     towards the bottom so the lead and trust row stay legible on any crop. */
+  .qhm-hero__veil::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 17, 16, 0.08) 0%, rgba(15, 17, 16, 0.4) 55%, rgba(15, 17, 16, 0.5) 100%);
+  }
+  .qhm-hero__trust { gap: 12px 20px; }
+  .qhm-apply__inner { padding: 22px 18px 18px; }
   .qhm-after__grid,
   .qhm-steps,
   .qhm-form2,
   .qhm-sup__card,
   .qhm-mail__benefits { grid-template-columns: 1fr; }
+  .qhm-after__cell { padding: 24px 20px; }
+  .qhm-step__card { padding: 24px 20px; }
   .qhm-sup__media { min-height: 200px; }
-  .qhm-facts__pane { padding: 32px 24px 28px; }
+  .qhm-sup__body { padding: 24px 20px; }
+  .qhm-facts__pane { padding: 28px 20px 24px; }
   .qhm-facts__media { min-height: 260px; }
-  .qhm-sav__panel { padding: 24px 20px; }
+  .qhm-sav__panel { padding: 24px 18px; }
+  /* One figure per row with the label beside the amount: the three
+     stacked cells were taller than the copy above them. */
   .qhm-sav__results { grid-template-columns: 1fr; }
-  .qhm .qhm-sav__figure { font-size: 28px; }
-  .qhm .qhm-sav__figure--year { font-size: 30px; }
+  .qhm-sav__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+  .qhm .qhm-sav__figure { font-size: 26px; margin-top: 0; }
+  .qhm .qhm-sav__figure--year { font-size: 28px; }
   .qhm-ps__figure { height: 360px; }
   .qhm-guided__media { height: 320px; }
-  .qhm-mail__panel { padding: 28px 22px; }
+  .qhm-mail__panel { padding: 28px 20px; }
+  .qhm-mail__phone { gap: 8px; }
   .qhm .qhm-mail__title,
   .qhm .qhm-guided__title,
   .qhm .qhm-facts__title { font-size: 28px; }
@@ -888,10 +925,28 @@
   .qhm .qhm-faq__title,
   .qhm .qhm-ps__title,
   .qhm .qhm-sav__title { font-size: 34px; }
-  /* touch targets: 44px on mobile */
+  .qhm-faq__head { gap: 20px; }
+  /* touch targets: 44px controls, dots at least 24px wide including the
+     invisible hit area (neighbours meet at the edge, never overlap) */
   .qhm .qhm-circle-btn { width: 44px; height: 44px; }
-  .qhm .qhm-dot::before { inset: -18px -4px; }
+  .qhm .qhm-dot { width: 10px; height: 10px; }
+  .qhm .qhm-dot[data-on="1"] { width: 26px; border-radius: 5px; }
+  .qhm-dots { gap: 14px; }
+  .qhm .qhm-dot::before { inset: -17px -7px; }
+  .qhm .qhm-acc__q { padding: 18px 0; }
   .qhm .qhm-acc__a { padding-right: 24px; }
+}
+
+/* 320–360px phones: tighter gutters and button padding so single-line
+   labels and the two-part mobile field still fit. */
+@media (max-width: 360px) {
+  .qhm__wrap { padding: 0 16px; }
+  .qhm .qhm-btn { padding-left: 20px; padding-right: 20px; }
+  .qhm .qhm-btn--lg { padding-left: 24px; padding-right: 24px; }
+  .qhm .qhm-mail__prefix { width: 72px; padding-left: 8px; padding-right: 8px; }
+  .qhm-after__cell,
+  .qhm-step__card,
+  .qhm-sup__body { padding: 22px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

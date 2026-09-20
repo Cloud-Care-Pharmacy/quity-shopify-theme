@@ -45,19 +45,18 @@
     endif
   endif
 
+  assign poster_image = nil
   if section.settings.poster != blank
-    assign poster_url = section.settings.poster | image_url: width: 1920
-    assign poster_w = section.settings.poster.width
-    assign poster_h = section.settings.poster.height
+    assign poster_image = section.settings.poster
   elsif section.settings.video != blank and section.settings.video.preview_image != blank
-    assign poster_url = section.settings.video.preview_image | image_url: width: 1920
-    assign poster_w = section.settings.video.preview_image.width
-    assign poster_h = section.settings.video.preview_image.height
+    assign poster_image = section.settings.video.preview_image
+  endif
+  if poster_image != blank
+    assign poster_url = poster_image | image_url: width: 1920
   else
     assign poster_url = 'home-placeholder-hero.jpg' | asset_url
-    assign poster_w = 1400
-    assign poster_h = 933
   endif
+  assign poster_mobile = section.settings.poster_mobile
 
   assign veil = section.settings.veil_opacity | divided_by: 100.0
   assign return_to = section.settings.return_to | default: '/pages/questionnaire'
@@ -76,12 +75,33 @@
       padding-top: {{ section.settings.padding_top | times: 0.7 | round }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.78 | round }}px;
     }
+    {%- if poster_mobile != blank %}
+    #shopify-section-{{ section.id }} .qhm-hero__poster { object-position: {{ poster_mobile.presentation.focal_point }} !important; }
+    {%- endif %}
   }
 {%- endstyle -%}
 
 <section class="qhm qhm-hero">
   <div class="qhm-hero__media" aria-hidden="true">
-    <img class="qhm-hero__poster" src="{{ poster_url }}" width="{{ poster_w }}" height="{{ poster_h }}" alt="" loading="eager" fetchpriority="high">
+    {%- comment -%}
+      The poster covers the whole hero at every width (object-fit: cover), so
+      phones only ever see a slice of a landscape picture. image_tag applies
+      the focal point set in the admin as object-position, and an optional
+      portrait poster takes over below 720px.
+    {%- endcomment -%}
+    <picture>
+      {%- if poster_mobile != blank -%}
+        <source
+          media="(max-width: 720px)"
+          sizes="100vw"
+          srcset="{{ poster_mobile | image_url: width: 480 }} 480w, {{ poster_mobile | image_url: width: 720 }} 720w, {{ poster_mobile | image_url: width: 960 }} 960w, {{ poster_mobile | image_url: width: 1200 }} 1200w">
+      {%- endif -%}
+      {%- if poster_image != blank -%}
+        {{ poster_image | image_url: width: 1920 | image_tag: class: 'qhm-hero__poster', widths: '640, 960, 1280, 1600, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: '' }}
+      {%- else -%}
+        <img class="qhm-hero__poster" src="{{ poster_url }}" width="1400" height="933" alt="" loading="eager" fetchpriority="high">
+      {%- endif -%}
+    </picture>
     {%- if video_src != blank -%}
       <video
         class="qhm-hero__video"
@@ -253,7 +273,8 @@
     { "type": "header", "content": "Background video" },
     { "type": "video", "id": "video", "label": "Video", "info": "Uploaded videos get 480p/720p/1080p renditions; the 720p one is used. Leave empty to use the video URL below." },
     { "type": "text", "id": "video_url", "label": "Video URL (fallback)", "info": "MP4. Used when no video is picked.", "default": "https://quity.com.au/cdn/shop/videos/c/vp/f1f8d278ed094e8084d4a81cec736085/f1f8d278ed094e8084d4a81cec736085.HD-1080p-7.2Mbps-67903455.mp4" },
-    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown before the video plays, and instead of it for visitors who prefer reduced motion or reduced data. Falls back to the video’s preview image, then to the bundled placeholder." },
+    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown before the video plays, and instead of it for visitors who prefer reduced motion or reduced data. Falls back to the video’s preview image, then to the bundled placeholder. Set a focal point on the image to choose what stays in frame when it is cropped." },
+    { "type": "image_picker", "id": "poster_mobile", "label": "Poster image (phones)", "info": "Optional portrait crop shown on screens up to 720px wide instead of the poster above." },
     { "type": "range", "id": "veil_opacity", "label": "Veil opacity", "min": 0, "max": 80, "step": 2, "unit": "%", "default": 46, "info": "Uniform across the whole frame, by design." },
     { "type": "header", "content": "Application card" },
     { "type": "text", "id": "card_title", "label": "Card heading", "default": "Your free online assessment" },
