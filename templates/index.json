@@ -247,7 +247,7 @@
         "card-3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/home-3.png",
+            "image": "shopify://shop_images/home-4.png",
             "image_alt": "Telehealth consultation",
             "icon": "lock",
             "title": "Discreet at every step",
@@ -342,7 +342,7 @@
             "body": "Fill in the online questionnaire at your own pace. An Australian-registered doctor reads it and, if nicotine therapy suits you, writes the script and sends it straight to the dispensing pharmacy.",
             "cta_label": "Start now",
             "cta_url": "",
-            "image": "shopify://shop_images/home-5.png",
+            "image": "shopify://shop_images/home-10.png",
             "image_alt": "Doctor with medication and a chart"
           }
         },
